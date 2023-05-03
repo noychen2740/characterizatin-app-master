@@ -1,0 +1,59 @@
+.create-episode {
+  padding: 0 30px;
+}
+
+.input-container {
+  width: fit-content;
+  /* margin-bottom: 15px; */
+  display: flex;
+  /* margin-left: 15px; */
+  padding: 10px;
+  color: black;
+  direction: rtl;
+  text-align: right;
+  margin: auto;
+}
+
+.css-wb57ya-MuiFormControl-root-MuiTextField-root{
+max-width: 200px;
+}
+
+.imginput{
+  margin: auto;
+}
+.input-container input {
+   margin-left: 15px; 
+  padding: 5px;
+}
+
+ label {
+  margin-left: 15px;
+  margin-top: 5px;
+} 
+
+#fullWidth {
+  padding: 20px;
+  width: 90%;
+  direction: rtl;
+}
+
+#fullWidthName {
+  padding: 20px; 
+  direction: rtl;
+}
+
+.title {
+  padding: 10px;
+  padding-bottom: 10px;
+  direction: rtl;
+}
+
+@media (max-width: 360px) {
+  form {
+    width: 100%;
+  }
+}
+
+p{
+  color: black;
+}
