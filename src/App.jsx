@@ -14,6 +14,7 @@ import Signup from './components/Signup';
 import Episodes from './components/Episodes/Episodes';
 import CreateEpisode from './components/CreateEpisode/CreateEpisode';
 import EpisodePage from './components/EpisodePage/EpisodePage';
+import CreateFeedback from './components/CreateFeedback/CreateFeedback';
 
 function App() {
   const [userInApp, setUserInApp] = useState('');// בתאכלס, משתמש ישלח כבר מעטר, עד החיבור מביא אותו בגט לפי מיקום
@@ -114,6 +115,7 @@ useEffect(()=>{
   <Route path='create-episode/:NameOfChapter' element={<CreateEpisode/>} />
   <Route path='create-episode' element={<CreateEpisode />} />
   <Route path='episode/:NameOfChapter' element={<EpisodePage />} />
+  <Route path='CreateFeedback' element={<CreateFeedback />} />
 
 </Routes>
 
