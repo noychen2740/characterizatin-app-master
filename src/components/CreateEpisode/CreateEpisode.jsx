@@ -46,9 +46,6 @@ function CreateEpisode() {
     <div className='create-episode' >
       <TopOfAplication label='יצירה-עדכון פרק'  />
       <div className='container center'>
-      <br></br>
-      <br></br>
-      <br></br>
         <form onSubmit={submit} >
           <div className='input-container'>
             <label>כותרת</label>
@@ -83,11 +80,13 @@ function CreateEpisode() {
               rows='3' onInput={handleChange}
               value={form?.ChapterDescription} />
           </div>
-          <p>הוסף תמונה</p>
           <div className='input-container'>
+          
             <br></br>
             <input className='imginput' type='file'></input>
           </div>
+        </form>
+        <div className='input-container-button'>
           <Button
             className='btn btn-create'
             variant='contained'
@@ -96,12 +95,9 @@ function CreateEpisode() {
           >
              שמור פרק
           </Button>
-          <br></br>
-          <br></br>
-          <br></br>
-        </form>
-        
+          </div>
       </div>
+      <br></br>
       <Navigation></Navigation>
     </div>
     

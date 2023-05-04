@@ -97,17 +97,16 @@ function CreateFeedback() {
               rows='10' onInput={handleChange}
               value={form?.FeedbackLatitude} />
           </div>
-
-
+          <div className='input-container-button'>
           <Button
             className='btn btn-create'
             variant='contained'
+            style={{backgroundColor:'#598e89'}}
             onClick={submit}
           >
             שמור פידבק
           </Button>
-          <br></br>
-          <br></br>
+          </div>
           <br></br>
           <br></br>
         </form>

@@ -10,8 +10,9 @@
   padding: 10px;
   color: black;
   direction: rtl;
-  text-align: center;
+  text-align: right;
   margin: auto;
+  float: right;
 }
 
 .css-wb57ya-MuiFormControl-root-MuiTextField-root{
@@ -56,4 +57,9 @@ max-width: 200px;
 
 p{
   color: black;
+}
+.input-container-button{
+  align-items: flex-end;
+  text-align: center;
+  margin: auto;
 }
