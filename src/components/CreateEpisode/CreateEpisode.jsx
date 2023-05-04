@@ -44,8 +44,8 @@ function CreateEpisode() {
   };
   return ( //היצירה של הפרק מבחינה ויזואלית
     <div className='create-episode' >
-      <TopOfAplication label='יצירה-עדכון פרק'  />
       <div className='container center'>
+      <TopOfAplication label='יצירה-עדכון פרק'  />
       <br></br>
       <br></br>
       <br></br>
@@ -103,7 +103,7 @@ function CreateEpisode() {
           <br></br>
         </form>
       </div>
-      <Navigation/>
+      <Navigation></Navigation>
     </div>
     
   );
