@@ -49,7 +49,6 @@ function CreateEpisode() {
       <br></br>
       <br></br>
       <br></br>
-      <br></br>
         <form onSubmit={submit} >
           <div className='input-container'>
             <label>כותרת</label>
@@ -100,10 +99,10 @@ function CreateEpisode() {
           <br></br>
           <br></br>
           <br></br>
-          <br></br>
         </form>
+        
       </div>
-      <Navigation/>
+      <Navigation></Navigation>
     </div>
     
   );
