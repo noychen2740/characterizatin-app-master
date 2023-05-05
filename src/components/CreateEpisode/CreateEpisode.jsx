@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './CreateEpisode.css';
-import { Button, Paper } from '@mui/material';
+import { Button, FormControl, InputLabel, OutlinedInput } from '@mui/material';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useParams } from 'react-router-dom';
 import { chapterService } from '../../services/chapter.service';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +9,9 @@ import { TextField } from '@mui/material';
 import { Card } from '@mui/material';
 import TopOfAplication from '../TopOfAplication';
 import Navigation from '../Navigation';
+import { TimePicker } from '@mui/x-date-pickers';
+
+
 
 function CreateEpisode() {
   const [form, setForm] = useState();
@@ -16,8 +20,8 @@ function CreateEpisode() {
 
   const submit = async (ev) => { //ממיר את התאריך לפורמט המתאים בדאטה בייס
     ev.preventDefault();
-    console.log({ form });
     form.ChapterDate = new Date(form.ChapterDate).toLocaleDateString('en-us')
+    form.ChapterTime =formatAMPM(new Date(form.ChapterTime))
     if (NameOfChapter) {
       const res = await chapterService.update(form);
     } else {
@@ -26,6 +30,19 @@ function CreateEpisode() {
     navigate('/episodes');
   };
 
+
+  function formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    console.log({ hours, minutes });
+    // var ampm = hours >= 12 ? 'pm' : 'am';
+    // hours = hours % 12;
+    // hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    hours = hours < 10 ? '0' + hours : hours;
+    var strTime = hours + ':' + minutes;
+    return strTime;
+  }
   const handleChange = (ev) => { //לוקח את הפרמטרים ש/מזינים בפורם
     let { name, value } = ev.target;
 
@@ -44,44 +61,43 @@ function CreateEpisode() {
   };
   return ( //היצירה של הפרק מבחינה ויזואלית
     <div className='create-episode' >
-      <TopOfAplication label='יצירה-עדכון פרק'  />
+      <TopOfAplication label='יצירה-עדכון פרק' />
       <div className='container center'>
         <form onSubmit={submit} >
-          <div className='input-container'>
-            <label>כותרת</label>
-            <TextField fullWidth  name='NameOfChapter' id="fullWidthName" cols='50'
-              rows='10' onInput={handleChange}
-              value={form?.NameOfChapter} />
-          </div>
-
-          <div className='input-container'>
-            <label>תאריך</label>
-            <input
-              type='date'
-              name='ChapterDate'
-              onChange={handleChange}
-              value={form?.ChapterDate}
+          <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
+            <InputLabel htmlFor="outlined-adornment-email">Title</InputLabel>
+            <OutlinedInput
+              onInput={handleChange}
+              name='NameOfChapter'
+              id="outlined-adornment-email"
+              label="Title"
             />
-          </div>
-          <div className='input-container'>
-
-            <label>שעה</label>
-            <input
-              type='time'
-              name='ChapterTime'
-              onChange={handleChange}
+          </FormControl>
+          <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
+            <DatePicker
+              label="Controlled picker"
+              value={form?.ChapterDate||''}
+              onChange={(ChapterDate) => setForm({ ...form, ChapterDate })}
+            />
+          </FormControl>
+          <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
+            <TimePicker
+              label="Controlled picker"
+              onChange={(ChapterTime) => setForm({ ...form, ChapterTime })}
               value={form?.ChapterTime}
             />
-          </div>
+          </FormControl>
+          <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
+            <InputLabel htmlFor="outlined-adornment-email">ChapterDescription</InputLabel>
+            <OutlinedInput
+              onInput={handleChange}
+              name='ChapterDescription'
+              id="outlined-adornment-email"
+              label="Title"
+              value={form?.ChapterDescription || ''}
+            />
+          </FormControl>
           <div className='input-container'>
-            <label>תיאור</label>
-            <br></br>
-            <TextField name='ChapterDescription' fullWidth  id="fullWidth" cols='50'  multiline={true} 
-              rows='3' onInput={handleChange}
-              value={form?.ChapterDescription} />
-          </div>
-          <div className='input-container'>
-          
             <br></br>
             <input className='imginput' type='file'></input>
           </div>
@@ -91,16 +107,16 @@ function CreateEpisode() {
             className='btn btn-create'
             variant='contained'
             onClick={submit}
-            style={{backgroundColor:'#598e89'}}
+            style={{ backgroundColor: '#598e89' }}
           >
-             שמור פרק
+            שמור פרק
           </Button>
-          </div>
+        </div>
       </div>
-      <br></br>
+   
       <Navigation></Navigation>
     </div>
-    
+
   );
 }
 
