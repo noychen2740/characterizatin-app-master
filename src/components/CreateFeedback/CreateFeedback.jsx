@@ -17,7 +17,7 @@ function CreateFeedback() {
   const submit = async (ev) => { //לאחר ההוספה של הפרק העמוד מובל לעמוד תודה למשתמש
     ev.preventDefault();
     const res = await feedbackService.createfromuser(form);
-    navigate('/thanks');
+    navigate('/ThanksPage');
   };
 
   const handleChange = (ev) => { //לוקח את הפרמטרים מהטופס לדאטה בייס

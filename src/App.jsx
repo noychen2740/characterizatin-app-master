@@ -18,6 +18,7 @@ import CreateFeedback from './components/CreateFeedback/CreateFeedback';
 import Feedbacks from './components/Feedbacks/Feedbacks';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import ThanksPage from './components/ThanksPage/ThanksPage';
 
 function App() {
   const [userInApp, setUserInApp] = useState('');// בתאכלס, משתמש ישלח כבר מעטר, עד החיבור מביא אותו בגט לפי מיקום
@@ -121,7 +122,8 @@ function App() {
             <Route path='episode/:NameOfChapter' element={<EpisodePage />} />
             <Route path='CreateFeedback' element={<CreateFeedback />} />
             <Route path='Feedbacks' element={<Feedbacks />} />
-
+            <Route path='ThanksPage' element={<ThanksPage />} />
+            
           </Routes>
 
 
