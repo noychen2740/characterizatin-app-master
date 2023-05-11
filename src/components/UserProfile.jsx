@@ -219,7 +219,7 @@ export default function UserProfile(props) {
   marginTop:'20px', marginBottom:'15px'
   }}>
           <Avatar>
-            <FavoriteIcon/>
+            <FavoriteIcon onClick={()=>{nav('/Favorites')}} />
           </Avatar>
         </ListItemAvatar>
         <ListItemText

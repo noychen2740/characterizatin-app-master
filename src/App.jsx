@@ -10,6 +10,7 @@ import { Route, Routes } from 'react-router-dom';
 import ExpensesAnalysis from './components/ExpensesAnalysis';
 import Map from './components/Map';
 import Login from './components/Login';
+import Favorites from './components/Favorites/Favorites';
 import Signup from './components/Signup';
 import Episodes from './components/Episodes/Episodes';
 import CreateEpisode from './components/CreateEpisode/CreateEpisode';
@@ -117,6 +118,8 @@ function App() {
             <Route path="Analysis" element={<ExpensesAnalysis />} />
             <Route path="map" element={<Map />} />
             <Route path='episodes' element={<Episodes />} />
+            <Route path='favorites' element={<Favorites />} />
+            {/* <Route path='favorite/:id' element={<FavoritePage />} /> */}
             <Route path='create-episode/:NameOfChapter' element={<CreateEpisode />} />
             <Route path='create-episode' element={<CreateEpisode />} />
             <Route path='episode/:NameOfChapter' element={<EpisodePage />} />

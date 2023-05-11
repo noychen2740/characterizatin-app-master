@@ -10,18 +10,21 @@ import { Card } from '@mui/material';
 import TopOfAplication from '../TopOfAplication';
 import Navigation from '../Navigation';
 import { TimePicker } from '@mui/x-date-pickers';
+import dayjs from 'dayjs';
 
 
 
 function CreateEpisode() {
   const [form, setForm] = useState();
+  const [time, setTime] = useState();
+  const [init, setInit] = useState(true);
   const { NameOfChapter } = useParams();
   const navigate = useNavigate();
 
   const submit = async (ev) => { //ממיר את התאריך לפורמט המתאים בדאטה בייס
     ev.preventDefault();
     form.ChapterDate = new Date(form.ChapterDate).toLocaleDateString('en-us')
-    form.ChapterTime =formatAMPM(new Date(form.ChapterTime))
+    form.ChapterTime = formatAMPM(new Date(form.ChapterTime))
     if (NameOfChapter) {
       const res = await chapterService.update(form);
     } else {
@@ -50,10 +53,25 @@ function CreateEpisode() {
   };
 
   useEffect(() => { //טוען את הפרק לאחר ההוספה
+
     if (NameOfChapter) {
+
       loadEpisode();
     }
   }, []);
+
+  useEffect(() => {
+    if (form) {
+      if (init) {
+        const now = new Date()
+        now.setHours(form.ChapterTime.split(':')[0])
+        now.setMinutes(form.ChapterTime.split(':')[1])
+        setTime(dayjs(now))
+        setInit(false)
+
+      }
+    }
+  }, [form])
 
   const loadEpisode = async () => {
     const data = await chapterService.getById(NameOfChapter);
@@ -71,12 +89,13 @@ function CreateEpisode() {
               name='NameOfChapter'
               id="outlined-adornment-email"
               label="Title"
+              value={form?.NameOfChapter||''}
             />
           </FormControl>
           <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
             <DatePicker
               label="Controlled picker"
-              value={form?.ChapterDate||''}
+              value={dayjs(form?.ChapterDate)}
               onChange={(ChapterDate) => setForm({ ...form, ChapterDate })}
             />
           </FormControl>
@@ -84,7 +103,7 @@ function CreateEpisode() {
             <TimePicker
               label="Controlled picker"
               onChange={(ChapterTime) => setForm({ ...form, ChapterTime })}
-              value={form?.ChapterTime}
+              value={time}
             />
           </FormControl>
           <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
@@ -113,7 +132,7 @@ function CreateEpisode() {
           </Button>
         </div>
       </div>
-   
+
       <Navigation></Navigation>
     </div>
 

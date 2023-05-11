@@ -19,6 +19,10 @@
 max-width: 200px;
 }
 
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+direction: rtl;
+}
+
 .imginput{
   margin: auto;
 }
