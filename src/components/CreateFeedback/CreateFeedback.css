@@ -10,6 +10,7 @@
   margin-bottom: 15px;
   display: flex;
   margin-left: 15px;
+
 }
 
 
@@ -29,3 +30,7 @@ label {
 .Feedback-title{
   font-size: 10px;
 }
+.btn-create{
+  background-color: #598e89;
+}
+

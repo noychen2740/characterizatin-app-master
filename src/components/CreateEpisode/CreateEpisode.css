@@ -12,10 +12,15 @@
   direction: rtl;
   text-align: right;
   margin: auto;
+  float: right;
 }
 
 .css-wb57ya-MuiFormControl-root-MuiTextField-root{
 max-width: 200px;
+}
+
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+direction: rtl;
 }
 
 .imginput{
@@ -56,4 +61,9 @@ max-width: 200px;
 
 p{
   color: black;
+}
+.input-container-button{
+  align-items: flex-end;
+  text-align: center;
+  margin: auto;
 }

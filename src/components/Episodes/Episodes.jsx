@@ -54,7 +54,7 @@ function Episodes() {
             <div className='episode'>
               <Card sx={{ maxWidth: 345 }}>
               <div className='episode-time'>
-                <div className='episode-date'> {new Date(e.ChapterDate).toLocaleDateString('en-us')} </div>
+                <div className='episode-date'> {new Date(e.ChapterDate).toLocaleDateString('en-GB')} </div>
                 <div className='episode-hour'>{e.ChapterTime}</div>
               </div>
       <CardMedia
