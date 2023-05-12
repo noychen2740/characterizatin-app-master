@@ -31,7 +31,7 @@ function Favorites() {
 
   return ( //תצוגת הפרקים במסך
     <div className='episodes-page center'>
-      <TopOfAplication label='המעועדפים שלי' />
+      <TopOfAplication label='המועדפים שלי' />
       {/* <div className='title'>יומן המסע שלי</div> */}
       <br></br>
       <br></br>

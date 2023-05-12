@@ -11,7 +11,7 @@ export const favoriteservice={
 
 
 
-const base_url = 'http://194.90.158.74/cgroup99/prod/api'
+const base_url = 'https://localhost:44300/api'
 const module = 'Favourites'
 const userEmail = 'Benda669@gmail.com'
 
@@ -19,7 +19,7 @@ const userEmail = 'Benda669@gmail.com'
 // https://localhost:44350/api/traveldiary/noycn27@gmail.com/chapters
 async function Getall() {
     try {
-        const res = await axios.get(`${base_url}/${module}/Getall/${userEmail}`)
+        const res = await axios.get(`${base_url}/${module}/${userEmail}/Getall`)
         console.log({ res });
         return res.data
     } catch (err) {
