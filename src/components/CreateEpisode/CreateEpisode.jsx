@@ -79,8 +79,15 @@ function CreateEpisode() {
   };
   return ( //היצירה של הפרק מבחינה ויזואלית
     <div className='create-episode' >
+
       <TopOfAplication label='יצירה-עדכון פרק' />
       <div className='container center'>
+      <div className='container center'>
+      <TopOfAplication label='יצירה-עדכון פרק'  />
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
         <form onSubmit={submit} >
           <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-email">Title</InputLabel>
@@ -132,7 +139,6 @@ function CreateEpisode() {
           </Button>
         </div>
       </div>
-
       <Navigation></Navigation>
     </div>
 
