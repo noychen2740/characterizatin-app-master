@@ -18,7 +18,7 @@ import { favoriteservice } from '../../services/Favorites.service';
 function Favorites() {
   const navigate = useNavigate();
 
-  const [favorites, setFavorites] = useState([]);
+  const [favoritess, setFavorites] = useState([]);
 
   useEffect(() => { //טעינה של כל הפרקים
     loadFavorites();
@@ -26,6 +26,7 @@ function Favorites() {
 
   const loadFavorites = async () => { //טעינת כל הפרקים הקיימים
     const res = await favoriteservice.Getall();
+    console.log(res);
     setFavorites(res);
   };
 
@@ -35,33 +36,38 @@ function Favorites() {
       {/* <div className='title'>יומן המסע שלי</div> */}
       <br></br>
       <br></br>
-      <br></br>
-      <br></br>
-      <div className='episodes'>
-        {favorites.map((f) => {
+      <div className='Favoritesss'>
+        {favoritess.map((favorites) => {
           return (
-            <div className='episode'>
+            <div className='episode2'>
               <Card sx={{ maxWidth: 345 }}>
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    <div className='episode-title'>{f.CountryName}</div>
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    <div className='episode-desc'>{f.UserFavouritesRegionOfTheCountry}</div>
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button onClick={() => navigate(`/favorites/${f.FavouritesKey}`)} size="small"> תצוגה</Button>
+                  <CardMedia
+                    component="img"
+                    alt="green iguana"
+                    height="140"
+                    src={jeep} />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                    <div className='Fav-title'>{favorites.TitelDTO} </div>
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                    <h1 className='FAv-desc'>
+                    <p>{favorites.CountryNameDTO} </p>
+                    <p>{favorites.UserFavouritesRegionOfTheCountryDTO}</p>
+                    <p> {favorites.DescriptionDTO}</p>
+                    </h1>
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                  <Button onClick={() => navigate(`/favorites/${favorites.FavouritesKey}`)} size="small"> תצוגה</Button>
                 </CardActions>
-              </Card>
+                </Card>
               <br></br>
               <br></br>
             </div>
           );
         })}
       </div>
-      <br></br>
-      <br></br>
       <Navigation />
     </div>
   );
