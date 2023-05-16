@@ -79,7 +79,6 @@ function CreateEpisode() {
   };
   return ( //היצירה של הפרק מבחינה ויזואלית
     <div className='create-episode' >
-
       <TopOfAplication label='יצירה-עדכון פרק' />
       <div className='container center'>
       <div className='container center'>
@@ -141,8 +140,8 @@ function CreateEpisode() {
       </div>
       <Navigation></Navigation>
     </div>
-
+    </div>
   );
-}
+};
 
 export default CreateEpisode;

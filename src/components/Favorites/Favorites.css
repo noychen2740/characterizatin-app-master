@@ -1,0 +1,19 @@
+.Fav-title{
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    text-decoration-line: underline;
+}
+.episode{
+    direction: rtl;
+}
+.episode2{
+    direction: rtl;
+}
+.Favoritesss{
+    color: black;
+}
+.FAv-desc{
+    font-size: 10px;
+    color: black;
+}
