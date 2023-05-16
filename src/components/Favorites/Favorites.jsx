@@ -51,11 +51,11 @@ function Favorites() {
                     <div className='Fav-title'>{favorites.TitelDTO} </div>
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                    <h1 className='FAv-desc'>
+                    <div className='FAv-desc'>
                     <p>{favorites.CountryNameDTO} </p>
                     <p>{favorites.UserFavouritesRegionOfTheCountryDTO}</p>
                     <p> {favorites.DescriptionDTO}</p>
-                    </h1>
+                    </div>
                     </Typography>
                   </CardContent>
                   <CardActions>
