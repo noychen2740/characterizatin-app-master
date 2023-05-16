@@ -81,64 +81,65 @@ function CreateEpisode() {
     <div className='create-episode' >
       <TopOfAplication label='יצירה-עדכון פרק' />
       <div className='container center'>
-      <div className='container center'>
-      <TopOfAplication label='יצירה-עדכון פרק'  />
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-        <form onSubmit={submit} >
-          <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-email">Title</InputLabel>
-            <OutlinedInput
-              onInput={handleChange}
-              name='NameOfChapter'
-              id="outlined-adornment-email"
-              label="Title"
-              value={form?.NameOfChapter||''}
-            />
-          </FormControl>
-          <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
-            <DatePicker
-              label="Controlled picker"
-              value={dayjs(form?.ChapterDate)}
-              onChange={(ChapterDate) => setForm({ ...form, ChapterDate })}
-            />
-          </FormControl>
-          <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
-            <TimePicker
-              label="Controlled picker"
-              onChange={(ChapterTime) => setForm({ ...form, ChapterTime })}
-              value={time}
-            />
-          </FormControl>
-          <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-email">ChapterDescription</InputLabel>
-            <OutlinedInput
-              onInput={handleChange}
-              name='ChapterDescription'
-              id="outlined-adornment-email"
-              label="Title"
-              value={form?.ChapterDescription || ''}
-            />
-          </FormControl>
-          <div className='input-container'>
-            <br></br>
-            <input className='imginput' type='file'></input>
+        <div className='container center'>
+          <TopOfAplication label='יצירה-עדכון פרק' />
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <form onSubmit={submit} >
+            <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-email">Title</InputLabel>
+              <OutlinedInput
+                onInput={handleChange}
+                name='NameOfChapter'
+                id="outlined-adornment-email"
+                label="Title"
+                value={form?.NameOfChapter || ''}
+              />
+            </FormControl>
+            <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
+              <DatePicker
+                label="Controlled picker"
+                value={dayjs(form?.ChapterDate)}
+                onChange={(ChapterDate) => setForm({ ...form, ChapterDate })}
+              />
+            </FormControl>
+            <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
+              <TimePicker
+                label="Controlled picker"
+                onChange={(ChapterTime) => setForm({ ...form, ChapterTime })}
+                value={time}
+              />
+            </FormControl>
+            <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-email">ChapterDescription</InputLabel>
+              <OutlinedInput
+                onInput={handleChange}
+                name='ChapterDescription'
+                id="outlined-adornment-email"
+                label="Title"
+                value={form?.ChapterDescription || ''}
+              />
+            </FormControl>
+            <div className='input-container'>
+              <br></br>
+              <input className='imginput' type='file'></input>
+            </div>
+          </form>
+          <div className='input-container-button'>
+            <Button
+              className='btn btn-create'
+              variant='contained'
+              onClick={submit}
+              style={{ backgroundColor: '#598e89' }}
+            >
+              שמור פרק
+            </Button>
           </div>
-        </form>
-        <div className='input-container-button'>
-          <Button
-            className='btn btn-create'
-            variant='contained'
-            onClick={submit}
-            style={{ backgroundColor: '#598e89' }}
-          >
-            שמור פרק
-          </Button>
         </div>
+        <Navigation></Navigation>
       </div>
-      <Navigation></Navigation>
     </div>
     </div>
   );

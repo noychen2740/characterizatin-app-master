@@ -13,6 +13,7 @@ import { Alert, Box, Button, FormControl, InputLabel, MenuItem, NativeSelect, Pa
 import { Edit, PostAdd, RemoveRedEye } from '@mui/icons-material';
 import NewExpense from './NewExpense';
 import { useNavigate } from 'react-router-dom';
+import { getEnv } from '../utils/env';
 
 const columns = [
   { id: 'category', label: 'קטגוריה', minWidth: 1 },
@@ -80,7 +81,7 @@ export default function DataTable(props) {
       const deleteOrUpdateExpens=(ketToGET)=>{
       alert(ketToGET);
      
-  const apiUrl='http://localhost:65095/api/expenses/'
+  const apiUrl= getEnv() + '/api/expenses/'
   fetch(apiUrl+ketToGET, 
      {
     method: 'GET',

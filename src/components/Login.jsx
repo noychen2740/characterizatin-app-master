@@ -14,7 +14,7 @@ import { login } from '../utils/api'
 import { useNavigate } from 'react-router-dom';
 
 function Login(props) {
-    const nav=useNavigate();
+    const nav = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [loginFields, setLoginFields] = useState({
         password: '',
@@ -30,7 +30,6 @@ function Login(props) {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-
     return (
         <>
             <div className="App-login">

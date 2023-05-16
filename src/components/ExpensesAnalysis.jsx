@@ -6,7 +6,8 @@ import Navigation from './Navigation'
 import ProgressBar from './ProgressBar'
 import TopOfAplication from './TopOfAplication'
 import { LocalFireDepartment, Percent, PointOfSale, QueryStats, Savings } from '@mui/icons-material'
-import GraphsBar from './GraphsBar'
+import GraphsBar from './GraphsBar';
+import { getEnv } from '../utils/env'
 
 export default function ExpensesAnalysis() {
   const nav=useNavigate();
@@ -75,7 +76,7 @@ const [SumOfExpenseParty, setSumOfExpenseParty] = useState(0)
 //           },[])// הבאת פרטי המשתמש- שימוש לתקציב שכן נקבע בדף ניהול תקציב
           
 useEffect(()=>{
-const apiUrl='http://localhost:65095/api/expenses/getsumofall/?email=Benda669@gmail.com'
+const apiUrl= getEnv() + '/api/expenses/getsumofall/?email=Benda669@gmail.com'
 fetch(apiUrl, 
 {
   method: 'GET',

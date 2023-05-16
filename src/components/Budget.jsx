@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import styled from '@emotion/styled';
 import DataTable from './DataTable';
 import { useNavigate } from 'react-router-dom';
+import { getEnv } from '../utils/env';
 
 export default function Budget(props) {
   const nav=useNavigate();
@@ -65,7 +66,7 @@ export default function Budget(props) {
   const [userInApp, setUserInApp] = useState('');// בתאכלס, משתמש ישלח כבר מעטר, עד החיבור מביא אותו בגט לפי מיקום
 
 useEffect(()=>{
-        const apiUrl='http://localhost:65095/api/users/getemail/?email=Benda669@gmail.com'    
+        const apiUrl= getEnv() + '/api/users/getemail/?email=Benda669@gmail.com'    
         fetch(apiUrl, 
           {
           method: 'GET',
@@ -100,7 +101,7 @@ useEffect(()=>{
      },[])
  
 useEffect(()=>{
-  const apiUrl='http://localhost:65095/api/expenses/?email=Benda669@gmail.com'
+  const apiUrl= getEnv() + '/expenses/?email=Benda669@gmail.com'
   fetch(apiUrl, 
      {
      method: 'GET',
@@ -133,7 +134,7 @@ useEffect(()=>{
     
 
  const budgetChange=()=>{
-  const apiUrl='http://localhost:65095/api/users/putemail/budget/?email=Benda669@gmail.com'
+  const apiUrl= getEnv() + '/api/users/putemail/budget/?email=Benda669@gmail.com'
   fetch(apiUrl, 
     {
     method: 'PUT',

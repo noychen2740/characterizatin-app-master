@@ -11,6 +11,7 @@ import OptionsCom from './OptionsCom';
 import { Box } from '@mui/system';
 import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import { Gite, Whatshot } from '@mui/icons-material';
+import { getEnv } from '../utils/env';
 
 
 const containerStyle = {
@@ -19,17 +20,17 @@ const containerStyle = {
     borderRadius: '10px',
 };
 
-const Flagimage ="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
+const Flagimage = "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
 
 const star = {
     path:
-      "M8 12l-4.7023 2.4721.898-5.236L.3916 5.5279l5.2574-.764L8 0l2.3511 4.764 5.2574.7639-3.8043 3.7082.898 5.236z",
+        "M8 12l-4.7023 2.4721.898-5.236L.3916 5.5279l5.2574-.764L8 0l2.3511 4.764 5.2574.7639-3.8043 3.7082.898 5.236z",
     fillColor: "gold",
     fillOpacity: 0.9,
     scale: 1.3,
     strokeColor: "black",
     strokeWeight: 1,
-  }
+}
 
 const locations = [
     { lat: 26.167789, lng: 73.898222 },
@@ -43,7 +44,7 @@ const locations = [
     { lat: 30.828611, lng: 77.790222 },
     { lat: 26.556104, lng: 77.491577 },
     { lat: 25.759859, lng: 78.128708 },
-    { lat: 24.765015, lng:82.133858 },
+    { lat: 24.765015, lng: 82.133858 },
     { lat: -37.770104, lng: 145.143299 },
     { lat: -37.7737, lng: 145.145187 },
     { lat: -37.774785, lng: 145.137978 },
@@ -59,129 +60,118 @@ const locations = [
 const options = {
     imagePath: 'https://placehold.co/600x40'
 }// מקבץ דיפולטיבי אפור
-const optionTrip ={
+const optionTrip = {
     imagePath: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF94epaEiWysgcDS12ZdRe10FnQY_43-OtUCXti4hXl-VQyJk0AGJubYe2L2FOb82zC6I&usqp=CAU"
 
 }
-const optionSleep={
-    imagePath:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToaQeycIKgB5bCaIOrKTdjT1Gaz1stu0S17d_ygdC78TWAkEbbXcXw_mrSsIJxzAKbxzw&usqp=CAU"
+const optionSleep = {
+    imagePath: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToaQeycIKgB5bCaIOrKTdjT1Gaz1stu0S17d_ygdC78TWAkEbbXcXw_mrSsIJxzAKbxzw&usqp=CAU"
 }
-const optionAid={
-    imagePath:"https://img.lovepik.com/element/40021/9804.png_860.png"
+const optionAid = {
+    imagePath: "https://img.lovepik.com/element/40021/9804.png_860.png"
 }
-const optionAtraction={
-    imagePath:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiboOhgi6sKRvohBXDnCHnSrn3cbatkqK94FKt8FwjZL5fXbNZyQd2jJq6_QyMY_-UrGI&usqp=CAU"
+const optionAtraction = {
+    imagePath: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiboOhgi6sKRvohBXDnCHnSrn3cbatkqK94FKt8FwjZL5fXbNZyQd2jJq6_QyMY_-UrGI&usqp=CAU"
 }
 
 function createKey(location) {
     return location.lat + location.lng;
 }
+function createLocationsArray(location, latField, longField) {
+    const locationsA = [];
+    for (let index = 0; index < location.length; index++) {
+        locationsA[index] = { ...location[index], lat: location[index][latField], lng: location[index][longField] }
+    }
+    console.log(locationsA)
+    return locationsA;
+}
 function createLocation(location) {
-  const locationsA=[];
-  for (let index = 0; index < location.length; index++) {
-    locationsA[index]={lat: location[index].AttractionsLatitude, lng:location[index].AttractionsLongitude }
-  }
-  console.log(locationsA)
-  return locationsA;
-  }
+
+    return createLocationsArray(location, 'AttractionsLatitude', 'AttractionsLongitude')
+}
 function createLocationSleep(location) {
-    const locationsS=[];
-    for (let index = 0; index < location.length; index++) {
-      locationsS[index]={lat: location[index].SleepingCompLat, lng:location[index].SleepingCompLon }
-    }
-    console.log(locationsS)
-    return locationsS;
-  }
+    return createLocationsArray(location, 'SleepingCompLat', 'SleepingCompLon')
+}
 function createLocationTrip(location) {
-    const locationsT=[];
-    for (let index = 0; index < location.length; index++) {
-      locationsT[index]={lat: location[index].TripsLatitude, lng:location[index].TripsLongitude }
-    }
-    console.log(locationsT)
-    return locationsT;
-  }
+    return createLocationsArray(location, 'TripsLatitude', 'TripsLongitude')
+}
 function createLocationAid(location) {
-    const locationsAid=[];
-    for (let index = 0; index < location.length; index++) {
-      locationsAid[index]={lat: location[index].AidCompLat, lng:location[index].AidCompLon }
-    }
-    console.log(locationsAid)
-    return locationsAid;
-  }
+    return createLocationsArray(location, 'AidCompLat', 'AidCompLon')
+}
 
-function Map(props){
+function Map(props) {
 
-  const [attractionList, setAttractionList] = React.useState([]);// אטרקציות של המדינה שנבחרה
-  const [sleepingList, setSleepingList] = React.useState([]);// מקומות לינה של המדינה שנבחרה
-  const [aidCompListList, setAidCompListList] = React.useState([]);// מתחמי סיוע של המדינה שנבחרה
-  const [tripList, setTripList] = React.useState([]);// הצעות לטיולים במדינה שנבחרה
+    const [attractionList, setAttractionList] = React.useState([]);// אטרקציות של המדינה שנבחרה
+    const [sleepingList, setSleepingList] = React.useState([]);// מקומות לינה של המדינה שנבחרה
+    const [aidCompList, setAidCompListList] = React.useState([]);// מתחמי סיוע של המדינה שנבחרה
+    const [tripList, setTripList] = React.useState([]);// הצעות לטיולים במדינה שנבחרה
 
-  const [zoom, setZoom]=React.useState(3.5)
+    const [zoom, setZoom] = React.useState(3.5)
 
-  const handleChange = (event) => {
-    setSelectCountry(event.target.value);
-    if (event.target.value=='בסביבה') {
-        navigator.geolocation.getCurrentPosition(
-            position => {
-                setUserLocation({
-                    userLat: position.coords.latitude,
-                    userLng: position.coords.longitude
+    const handleChange = (event) => {
+        setSelectCountry(event.target.value);
+        if (event.target.value === 'בסביבה') {
+            navigator.geolocation.getCurrentPosition(
+                position => {
+                    setUserLocation({
+                        userLat: position.coords.latitude,
+                        userLng: position.coords.longitude
+                    })
+                    console.log(userLocation);
+                    setCenter({
+                        lat: userLocation.userLat,
+                        lng: userLocation.userLng
+                    })
+                }
+            )
+        }
+        else {
+            const apiURL = getEnv() + '/map/';
+            fetch(apiURL + event.target.value, {
+                method: 'GET',
+                headers: new Headers({
+                    'Content-Type': 'application/json; charset=UTF-8',
+                    'Accept': 'application/json; charset=UTF-8'
                 })
-                console.log(userLocation);
-                setCenter({
-                    lat: userLocation.userLat,
-                    lng: userLocation.userLng
+                // body: JSON.stringify({
+                //     country: value
+                // })
+            })
+                .then(response => {
+                    console.log('response= ', response);
+                    console.log('response statuse=', response.status);
+                    console.log('response.ok=', response.ok)
+
+                    return response.json()
                 })
-            }
-        )
-    }
-    else{
-    const apiURL = 'http://localhost:65095/api/map/'
-        fetch(apiURL + event.target.value, {
-            method: 'GET',
-            headers: new Headers({
-                'Content-Type': 'application/json; charset=UTF-8',
-                'Accept': 'application/json; charset=UTF-8'
-            })
-            // body: JSON.stringify({
-            //     country: value
-            // })
-        })
-            .then(response => {
-                console.log('response= ', response);
-                console.log('response statuse=', response.status);
-                console.log('response.ok=', response.ok)
 
-                return response.json()
-            })
-
-            .then(
-                (result) => {
-                    console.log("fetch get user by id=", result);
-                    console.log(result[0]);
-                    setcountryFromDB(result[0])
-                  setCenter({
-                    lat: result[0].CountryLat,
-                    lng: result[0].CountryLon
-                           })
-                setAttractionList(createLocation(result[0].AttractionList))//// בעזרת השם אם זה עובד, תיווצר בפועל רשימה מסוג לוקיישן על פי הפורמט המקובל על גוגל
-                setSleepingList(createLocationSleep(result[0].SleepingCompList))// מקומות לינה 
-                setAidCompListList(createLocationAid(result[0].AidCompList))// מתחמי סיוע
-                setTripList(createLocationTrip(result[0].tripList))// הצעות לטיולים
-                },
-                (error) => {
-                    console.log("err post=", error);
-                });
-    }
-  };
-  const [selectCountry, setSelectCountry] = React.useState("בחר מדינה");
+                .then(
+                    (result) => {
+                        console.log("fetch get user by id=", result);
+                        console.log(result[0]);
+                        setcountryFromDB(result[0])
+                        setCenter({
+                            lat: result[0].CountryLat,
+                            lng: result[0].CountryLon
+                        })
+                        setAttractionList(createLocation(result[0].AttractionList))//// בעזרת השם אם זה עובד, תיווצר בפועל רשימה מסוג לוקיישן על פי הפורמט המקובל על גוגל
+                        setSleepingList(createLocationSleep(result[0].SleepingCompList))// מקומות לינה 
+                        setAidCompListList(createLocationAid(result[0].AidCompList))// מתחמי סיוע
+                        setTripList(createLocationTrip(result[0].tripList))// הצעות לטיולים
+                    },
+                    (error) => {
+                        console.log("err post=", error);
+                    });
+        }
+    };
+    const [selectCountry, setSelectCountry] = React.useState("בחר מדינה");
 
     const [map, setMap] = React.useState(null);
 
     const [countryFromDB, setcountryFromDB] = useState(
         {
-          CountryLat: 0,
-          CountryLon: 0
+            CountryLat: 0,
+            CountryLon: 0
 
         }
     )//// מחזיק את כל הפרטים שיש לנו בדאטה בייס על המידה - נבנה כמערך שבמקום ה0 יש אובייקט שכולל גם הוא מערכים
@@ -204,18 +194,18 @@ function Map(props){
     const onLoad = React.useCallback(function callback(map_) {
         setMap(map_);
         navigator.geolocation.getCurrentPosition(
-          position => {
-              setUserLocation({
-                  userLat: position.coords.latitude,
-                  userLng: position.coords.longitude
-              })
-              console.log(userLocation);
-              setCenter({
-                  lat: position.coords.latitude,
-                  lng: position.coords.longitude
-              })
-          }
-      )
+            position => {
+                setUserLocation({
+                    userLat: position.coords.latitude,
+                    userLng: position.coords.longitude
+                })
+                console.log(userLocation);
+                setCenter({
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                })
+            }
+        )
 
     }, []);/// בכניסה ראשונית למסך מפה- יקבע המרכז על פי המיקום של המשתמש
 
@@ -223,89 +213,90 @@ function Map(props){
         setMap(null)
     }, []);
 
-    const locationClick=(cordinaint)=>{
-        setZoom(prev=>prev*1.2)
+    const locationClick = (cordinaint) => {
+        setZoom(prev => prev * 1.2)
         alert(cordinaint)
     }// זמני- בלחיצה על נקודה מסומנת איזה פעולה נרצה שתקה
     return isLoaded ? (
         <>
-    <TopOfAplication label='מה יש לעולם להציע'/>
-    <Paper>
-    <NativeSelect
-        defaultValue={selectCountry}
-        inputProps={{
-        name: 'PageNum',
-        id: 'uncontrolled-native',}}
-        onChange={handleChange}
-        sx={{ mb:2,mt:6,minWidth: 50, maxHeight:30, borderRadius: '20%', fontSize:'15px'}}>
-            <option value={'בסביבה'}>בסביבה שלי</option>
-            <option value={'הודו'}>הודו</option>
-            <option value={'ברזיל'}>ברזיל</option>
-            <option value={'אווקודור'}>אקוודור</option>
-            <option value={'ארגנטינה'}>ארגנטינה</option>
-            <option value={'בוליביה'}>בוליביה</option>
-            <option value={'בורמה'}>בורמה</option>
-            <option value={'נאפל'}>נאפל</option>
-            <option value={'גוואטמלה'}>גוואטמלה</option>
-            <option value={'ויאטנם'}>ויאטנם</option>
-            <option value={'לאוס'}>לאוס</option>
-            {/* <option value={'סרילנקה'}>סרילנקה</option>
+            <TopOfAplication label='מה יש לעולם להציע' />
+            <Paper>
+                <NativeSelect
+                    defaultValue={selectCountry}
+                    inputProps={{
+                        name: 'PageNum',
+                        id: 'uncontrolled-native',
+                    }}
+                    onChange={handleChange}
+                    sx={{ mb: 2, mt: 6, minWidth: 50, maxHeight: 30, borderRadius: '20%', fontSize: '15px' }}>
+                    <option value={'בסביבה'}>בסביבה שלי</option>
+                    <option value={'הודו'}>הודו</option>
+                    <option value={'ברזיל'}>ברזיל</option>
+                    <option value={'אווקודור'}>אקוודור</option>
+                    <option value={'ארגנטינה'}>ארגנטינה</option>
+                    <option value={'בוליביה'}>בוליביה</option>
+                    <option value={'בורמה'}>בורמה</option>
+                    <option value={'נאפל'}>נאפל</option>
+                    <option value={'גוואטמלה'}>גוואטמלה</option>
+                    <option value={'ויאטנם'}>ויאטנם</option>
+                    <option value={'לאוס'}>לאוס</option>
+                    {/* <option value={'סרילנקה'}>סרילנקה</option>
             <option value={'פיליפינים'}>פיליפינים</option> */}
-            {/* <option value={'פנמה'}>פנמה</option>
+                    {/* <option value={'פנמה'}>פנמה</option>
             <option value={'פרו'}>פרו</option>
             <option value={'צילה'}>צילה</option>
             <option value={'קוסטה ריקה'}>קוסטה ריקה</option>
             <option value={'קמבודיה'}>קמבודיה</option>
             <option value={'תאילנד'}>תאילנד</option> */}
-    </NativeSelect>
-            <br />
-            <GoogleMap
-                mapContainerStyle={containerStyle}
-                center={center}
-                zoom={zoom}
-                onLoad={onLoad}
-                onUnmount={onUnmount}>
-            <MarkerClusterer options={optionSleep}>
-                    {(clusterer) =>
-                        locations.map((location) => (
-                            <Marker key={createKey(location)} position={location} />
-                        ))
-                    }
-            </MarkerClusterer>
+                </NativeSelect>
+                <br />
+                <GoogleMap
+                    mapContainerStyle={containerStyle}
+                    center={center}
+                    zoom={zoom}
+                    onLoad={onLoad}
+                    onUnmount={onUnmount}>
+                    <MarkerClusterer options={optionSleep}>
+                        {(clusterer) =>
+                            locations.map((location) => (
+                                <Marker key={createKey(location)} position={location} />
+                            ))
+                        }
+                    </MarkerClusterer>
 
-            <MarkerClusterer options={optionAtraction}>
-                    {(clusterer) =>
-                        attractionList.map((location) => (
-                            <Marker label='A' key={createKey(location)} position={location}  onClick={()=>{locationClick(createKey(location))}}/>
-                        ))
-                    }
-            </MarkerClusterer>
+                    <MarkerClusterer options={optionAtraction}>
+                        {(clusterer) =>
+                            attractionList.map((location) => (
+                                <Marker label='A' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location)) }} />
+                            ))
+                        }
+                    </MarkerClusterer>
 
-            <MarkerClusterer options={optionSleep} >
-                    {(clusterer) =>
-                        sleepingList.map((location) => (
-                            <Marker label='S' key={createKey(location)} position={location} onClick={()=>{locationClick(createKey(location))}}/>
-                        ))
-                    }
-            </MarkerClusterer>
+                    <MarkerClusterer options={optionSleep} >
+                        {(clusterer) =>
+                            sleepingList.map((location) => (
+                                <Marker label='S' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location)) }} />
+                            ))
+                        }
+                    </MarkerClusterer>
 
-            <MarkerClusterer options={optionAid}>
-                    {(clusterer) =>
-                        aidCompListList.map((location) => (
-                            <Marker label='HOS' key={createKey(location)} position={location}onClick={()=>{locationClick(createKey(location))}}/>
-                        ))
-                    }
-            </MarkerClusterer>
-            
-            <MarkerClusterer options={optionTrip}>
-                    {(clusterer) =>
-                        tripList.map((location) => (
-                            <Marker label='T' key={createKey(location)} position={location} onClick={()=>{locationClick(createKey(location))}}/>
-                        ))
-                    }
-            </MarkerClusterer>
+                    <MarkerClusterer options={optionAid}>
+                        {(clusterer) =>
+                            aidCompList.map((location) => (
+                                <Marker label='HOS' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location)) }} />
+                            ))
+                        }
+                    </MarkerClusterer>
 
-            {/* <MarkerClusterer options={optionTrip}>
+                    <MarkerClusterer options={optionTrip}>
+                        {(clusterer) =>
+                            tripList.map((location) => (
+                                <Marker label='T' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location)) }} />
+                            ))
+                        }
+                    </MarkerClusterer>
+
+                    {/* <MarkerClusterer options={optionTrip}>
                     {(clusterer) =>
                         tripList.map((location) => (
                             <Marker key={createKey(location)} position={location} clusterer={clusterer} onClick={()=>{locationClick(createKey(location))}}/>
@@ -313,12 +304,12 @@ function Map(props){
                     }
             </MarkerClusterer> */}
 
-            </GoogleMap>
-            <Box>
-            <OptionsCom countryName={selectCountry}/>
-            </Box>
+                </GoogleMap>
+                <Box>
+                    <OptionsCom countryName={selectCountry} data={[aidCompList, tripList, sleepingList, attractionList]} />
+                </Box>
             </Paper>
-    <Navigation pagNav={'map'}/>
+            <Navigation pagNav={'map'} />
         </>
     ) : <></>
 }
