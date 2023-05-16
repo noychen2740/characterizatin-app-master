@@ -20,13 +20,14 @@ import Feedbacks from './components/Feedbacks/Feedbacks';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import ThanksPage from './components/ThanksPage/ThanksPage';
+import { getEnv } from './utils/env';
 
 function App() {
   const [userInApp, setUserInApp] = useState('');// בתאכלס, משתמש ישלח כבר מעטר, עד החיבור מביא אותו בגט לפי מיקום
   const [expensesInApp, setExpensesInApp] = useState('');/// הבאה בצורה אסינכורית את כל ההוצאות של המשתמש
 
   useEffect(() => {
-    const apiUrl = 'http://localhost:65095/api/users/getemail/?email=Benda669@gmail.com'
+    const apiUrl = getEnv() + '/users/getemail/?email=Benda669@gmail.com';
     fetch(apiUrl,
       {
         method: 'GET',
@@ -60,7 +61,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    const apiUrl = 'http://localhost:65095/api/expenses/?email=Benda669@gmail.com'
+    const apiUrl = getEnv() + '/expenses/?email=Benda669@gmail.com'
     fetch(apiUrl,
       {
         method: 'GET',
@@ -126,7 +127,7 @@ function App() {
             <Route path='CreateFeedback' element={<CreateFeedback />} />
             <Route path='Feedbacks' element={<Feedbacks />} />
             <Route path='ThanksPage' element={<ThanksPage />} />
-            
+
           </Routes>
 
 

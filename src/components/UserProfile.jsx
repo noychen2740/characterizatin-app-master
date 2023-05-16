@@ -15,6 +15,7 @@ import Paper from '@mui/material/Paper';
 import TopOfAplication from './TopOfAplication';
 import { Celebration, SelfImprovement } from '@mui/icons-material';
 import { resolvePath, useNavigate } from 'react-router-dom';
+import { getEnv } from '../utils/env';
 
 export default function UserProfile(props) {
   // const monKeyUpload=(req, fileKey, dest,max_mb=5,filesAllow=[".png",".jpg",".jpeg","gif"])=>{
@@ -50,7 +51,7 @@ export default function UserProfile(props) {
       backgroundColor: '#44b700',
       color: '#44b700',
       // boxShadow:'0 0 0 20px',
-       boxShadow: '0 0 0 2px ${theme.palette.background.paper}',
+      boxShadow: '0 0 0 2px ${theme.palette.background.paper}',
       '&::after': {
         position: 'absolute',
         top: 0,
@@ -74,177 +75,177 @@ export default function UserProfile(props) {
       },
     },
   }));
-  
-  const [checkType, setCheckType]= useState('')
+
+  const [checkType, setCheckType] = useState('')
 
   const [userInApp, setUserInApp] = useState('');// בתאכלס, משתמש ישלח כבר מעטר, עד החיבור מביא אותו בגט לפי מיקום
 
-  useEffect(()=>{
-    const email=props.email;
-    const apiUrl='http://localhost:65095/api/users/getemail/?email='
+  useEffect(() => {
+    const email = props.email;
+    const apiUrl = getEnv() + '/users/getemail/?email='
     // const apiUrl='http://localhost:58583/api/users/1'
 
-    fetch(apiUrl+email, 
+    fetch(apiUrl + email,
       {
-      method: 'GET',
-      headers: new Headers({
-        'Content-Type':'application/json; charset=UTF-8',
-        'Accept':'application/json; charset=UTF-8',
+        method: 'GET',
+        headers: new Headers({
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json; charset=UTF-8',
         })
-        
+
       })
-    .then(response => {
-     console.log('response= ',response);
-     console.log('response statuse=', response.status);
-     console.log('response.ok=', response.ok)
-    
-    return response.json()
-    })
-    .then(
-      (result)=>{
-        console.log("fetch get user by id=", result);
-        console.log("result=", result.UserFirstName);
-        setUserInApp(result); // השמה של המשתמש שהגיע מהדאטה בייס להמשך עבודה בצד שרת
-        console.log('first name=', userInApp.UserFirstName)
-        console.log('first name=', userInApp.UserLastName)
+      .then(response => {
+        console.log('response= ', response);
+        console.log('response statuse=', response.status);
+        console.log('response.ok=', response.ok)
 
-      },
-    (error) => {
-    console.log("err post=", error);
-    });     
+        return response.json()
+      })
+      .then(
+        (result) => {
+          console.log("fetch get user by id=", result);
+          console.log("result=", result.UserFirstName);
+          setUserInApp(result); // השמה של המשתמש שהגיע מהדאטה בייס להמשך עבודה בצד שרת
+          console.log('first name=', userInApp.UserFirstName)
+          console.log('first name=', userInApp.UserLastName)
 
-      },[])// משתמש שנכנס לראשונה לתהליך האפיון נכנס עם טייפ רייק- לאחר העדכון של האפיון נראצ הלהביא מחדש את המשתמש לאחר השינויים
+        },
+        (error) => {
+          console.log("err post=", error);
+        });
+
+  }, [])// משתמש שנכנס לראשונה לתהליך האפיון נכנס עם טייפ רייק- לאחר העדכון של האפיון נראצ הלהביא מחדש את המשתמש לאחר השינויים
 
 
-  useEffect(()=>{
+  useEffect(() => {
 
-      if (userInApp.UserType=='מוצילר') {
-        setCheckType( <HikingIcon/>)
-      }
-      if (userInApp.UserType=='בליין') {
-       
-        setCheckType(<Celebration/>)
-      }
-      if (userInApp.UserType=='ציל') {
-    
-        setCheckType(<SelfImprovement/>) 
-      }
-      
-  },[userInApp.UserType])/// מתעדכן לאחר כל שינוי של הטייפ של המתשמש בדאטה בייס
+    if (userInApp.UserType == 'מוצילר') {
+      setCheckType(<HikingIcon />)
+    }
+    if (userInApp.UserType == 'בליין') {
+
+      setCheckType(<Celebration />)
+    }
+    if (userInApp.UserType == 'ציל') {
+
+      setCheckType(<SelfImprovement />)
+    }
+
+  }, [userInApp.UserType])/// מתעדכן לאחר כל שינוי של הטייפ של המתשמש בדאטה בייס
 
   return (
     <>
-<TopOfAplication label='הפרופיל שלי'  />
+      <TopOfAplication label='הפרופיל שלי' />
 
-<img className="App-logo" src="logo.png" style={{marginTop:'5px', width:'120px'}} />
+      <img className="App-logo" src="logo.png" style={{ marginTop: '5px', width: '120px' }} />
 
-<Box style={{marginBottom:'5px', backgroundColor:'#eeeeee', margin:'1px', padding:'25px',  borderRadius:'5%'}}>
-  <Stack direction={"row"} spacing={5} justifyContent={'space-around'} >
-  <StyledBadge
-        overlap="circular"
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-        variant="dot"
-      >
-  <Avatar sx={{ width:64, height:64 }} src="/broken-image.jpg" style={{  display: 'flex' } } onClick={()=>{alert("bdika")}} /> 
-  </StyledBadge>
-<p style={{color:'black'}}>שלום {props.name} <br /> {props.email} </p>
- </Stack>
-</Box>
+      <Box style={{ marginBottom: '5px', backgroundColor: '#eeeeee', margin: '1px', padding: '25px', borderRadius: '5%' }}>
+        <Stack direction={"row"} spacing={5} justifyContent={'space-around'} >
+          <StyledBadge
+            overlap="circular"
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+            variant="dot"
+          >
+            <Avatar sx={{ width: 64, height: 64 }} src="/broken-image.jpg" style={{ display: 'flex' }} onClick={() => { alert("bdika") }} />
+          </StyledBadge>
+          <p style={{ color: 'black' }}>שלום {props.name} <br /> {props.email} </p>
+        </Stack>
+      </Box>
 
-<List  sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar style={{
-  marginTop:'20px', marginBottom:'15px'
-  }}>
-          <Avatar>
-            <AutoStories onClick={()=>{nav('/episodes')}} />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText
-        style={{ textAlign:'right' }}
-          primary=" "
-          secondary={
-            <React.Fragment >
-              <Typography
-                sx={{ display: 'inline'}}
-                component="span"
-                variant="body2"
-                color="text.primary"
-              >
-               <b style={{textAlign:'center'}} > {'יומן המסע שלי'}</b>
-               <br />
-              </Typography>
-               {" לחץ על המחברת לצפייה בסיפור הדרך שלך"}
-             
-            </React.Fragment>
-          }
-        />
-      </ListItem>
+      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+        <ListItem alignItems="flex-start">
+          <ListItemAvatar style={{
+            marginTop: '20px', marginBottom: '15px'
+          }}>
+            <Avatar>
+              <AutoStories onClick={() => { nav('/episodes') }} />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText
+            style={{ textAlign: 'right' }}
+            primary=" "
+            secondary={
+              <React.Fragment >
+                <Typography
+                  sx={{ display: 'inline' }}
+                  component="span"
+                  variant="body2"
+                  color="text.primary"
+                >
+                  <b style={{ textAlign: 'center' }} > {'יומן המסע שלי'}</b>
+                  <br />
+                </Typography>
+                {" לחץ על המחברת לצפייה בסיפור הדרך שלך"}
 
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar style={{
-  marginTop:'20px', marginBottom:'15px'
-  }}>
-          <Avatar>
-          {checkType}
-         {/* <HikingIcon/> */}
-          {/* שליחת האייקון המתאים לפי הפרסונה שהתקבלה */}
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText
-        style={{ textAlign:'right' }}
-          primary=" "
-          secondary={
-            <React.Fragment>
-              <Typography
-                sx={{ display: 'inline' }}
-                component="span"
-                variant="body2"
-                color="text.primary"
-              >
-                
-               <b> {"אופיינת כ-" + userInApp.UserType}</b>
-               <br />
-              </Typography>
-              {"לחץ על האייקון על מנת ללמוד עוד אודות איפיון המערכת והמשמעות עבורך"}
-            </React.Fragment>
-          }
-        />
-      </ListItem>
+              </React.Fragment>
+            }
+          />
+        </ListItem>
 
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar style={{
-  marginTop:'20px', marginBottom:'15px'
-  }}>
-          <Avatar>
-            <FavoriteIcon onClick={()=>{nav('/Favorites')}} />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText
-        style={{ textAlign:'right' }}
-          primary=" "
-          secondary={
-            <React.Fragment>
-              <Typography
-                sx={{ display: 'inline' }}
-                component="span"
-                variant="body2"
-                color="text.primary"
-              >
-               <b> {'המועדפים שלי'}</b>
-               <br />
-              </Typography>
-              {"לחץ על ה-לב לצפייה ברשימת המועדפים שלך"}
-            </React.Fragment>
-          }
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-    </List>
+        <Divider variant="inset" component="li" />
+        <ListItem alignItems="flex-start">
+          <ListItemAvatar style={{
+            marginTop: '20px', marginBottom: '15px'
+          }}>
+            <Avatar>
+              {checkType}
+              {/* <HikingIcon/> */}
+              {/* שליחת האייקון המתאים לפי הפרסונה שהתקבלה */}
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText
+            style={{ textAlign: 'right' }}
+            primary=" "
+            secondary={
+              <React.Fragment>
+                <Typography
+                  sx={{ display: 'inline' }}
+                  component="span"
+                  variant="body2"
+                  color="text.primary"
+                >
 
-<Navigation pagNav={'profile'} />
+                  <b> {"אופיינת כ-" + userInApp.UserType}</b>
+                  <br />
+                </Typography>
+                {"לחץ על האייקון על מנת ללמוד עוד אודות איפיון המערכת והמשמעות עבורך"}
+              </React.Fragment>
+            }
+          />
+        </ListItem>
+
+        <Divider variant="inset" component="li" />
+        <ListItem alignItems="flex-start">
+          <ListItemAvatar style={{
+            marginTop: '20px', marginBottom: '15px'
+          }}>
+            <Avatar>
+              <FavoriteIcon onClick={() => { nav('/Favorites') }} />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText
+            style={{ textAlign: 'right' }}
+            primary=" "
+            secondary={
+              <React.Fragment>
+                <Typography
+                  sx={{ display: 'inline' }}
+                  component="span"
+                  variant="body2"
+                  color="text.primary"
+                >
+                  <b> {'המועדפים שלי'}</b>
+                  <br />
+                </Typography>
+                {"לחץ על ה-לב לצפייה ברשימת המועדפים שלך"}
+              </React.Fragment>
+            }
+          />
+        </ListItem>
+        <Divider variant="inset" component="li" />
+      </List>
+
+      <Navigation pagNav={'profile'} />
     </>
   )
 
