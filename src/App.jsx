@@ -16,12 +16,14 @@ import Episodes from './components/Episodes/Episodes';
 import CreateEpisode from './components/CreateEpisode/CreateEpisode';
 import EpisodePage from './components/EpisodePage/EpisodePage';
 import CreateFeedback from './components/CreateFeedback/CreateFeedback';
+import Diary from './components/Diary/Diary';
 import FeedbackPage from './components/FeedbackPage/FeedbackPage';
 import Feedbacks from './components/Feedbacks/Feedbacks';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import ThanksPage from './components/ThanksPage/ThanksPage';
 import { getEnv } from './utils/env';
+
 
 function App() {
   const [userInApp, setUserInApp] = useState('');// בתאכלס, משתמש ישלח כבר מעטר, עד החיבור מביא אותו בגט לפי מיקום
@@ -128,9 +130,10 @@ function App() {
             <Route path='CreateFeedback' element={<CreateFeedback />} />
             <Route path='Feedbacks' element={<Feedbacks />} />
             <Route path='ThanksPage' element={<ThanksPage />} />
+            <Route path='Diary' element={<Diary />} />
             <Route path='FeedbackPage/:FeedbackKey' element={<FeedbackPage />} />
           </Routes>
-
+          
 
 
           {/* <Questionnaire name="עומר"/> */}

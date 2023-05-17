@@ -10,7 +10,7 @@
 }
 
 .episode-title {
-  font-size: 23px;
+  font-size: 22px;
   font-weight: bold;
   padding-top: 15px;
 }
@@ -37,7 +37,8 @@ img {
 
 .episode-desc {
   line-break: anywhere;
-  font-size: 20px;
+  font-size: 15px;
+
 }
 .episode-PIC{
   width: 100%;

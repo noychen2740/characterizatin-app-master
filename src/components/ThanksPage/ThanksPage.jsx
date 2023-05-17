@@ -26,7 +26,7 @@ function ThanksPage() {
           className='btn btn-create'
           variant='contained'
           onClick={() => navigate('/userProfile')}
-        >חזרה ליצירת פיידבק</Button>
+        >חזרה למסך הבית</Button>
         <br></br>
         <br></br>
         <br></br>

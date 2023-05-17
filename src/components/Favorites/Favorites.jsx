@@ -14,7 +14,6 @@ import Navigation from '../Navigation';
 import { favoriteservice } from '../../services/Favorites.service';
 
 
-
 function Favorites() {
   const navigate = useNavigate();
 
@@ -46,15 +45,15 @@ function Favorites() {
                     alt="green iguana"
                     height="140"
                     src={jeep} />
-                  <CardContent>
+                  <CardContent className='card1'>
                     <Typography gutterBottom variant="h5" component="div">
                     <div className='Fav-title'>{favorites.TitelDTO} </div>
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                     <div className='FAv-desc'>
-                    <p>{favorites.CountryNameDTO} </p>
-                    <p>{favorites.UserFavouritesRegionOfTheCountryDTO}</p>
-                    <p> {favorites.DescriptionDTO}</p>
+                    <p>מדינה : {favorites.CountryNameDTO} </p>
+                    <p>עיר : {favorites.UserFavouritesRegionOfTheCountryDTO}</p>
+                    <p>סוג :  {favorites.DescriptionDTO}</p>
                     </div>
                     </Typography>
                   </CardContent>

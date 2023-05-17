@@ -7,7 +7,7 @@ export const chapterService = {
     getAll,
 }
 
-const base_url = 'https://localhost:44300/api'
+const base_url = 'http://194.90.158.74/cgroup99/prod/api'
 const module = 'traveldiary'
 const userEmail = 'noycn27@gmail.com'
 
