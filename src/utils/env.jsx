@@ -1,5 +1,8 @@
+const params = new Proxy(new URLSearchParams(window.location.search), {
+    get: (searchParams, prop) => searchParams.get(prop),
+});
+
 export const getEnv = () => {
-    const isLocal = window.location.href.includes('localhost');
-    if (isLocal) return 'https://localhost:65095';
-    else return 'PROD_SERVER_URL'
+    if (params.local) return 'https://localhost:44303';
+    else return 'http://194.90.158.74/cgroup99/prod/api'
 }
