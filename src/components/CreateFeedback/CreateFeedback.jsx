@@ -30,7 +30,6 @@ function CreateFeedback() {
     <div className='create-episode'>
       <div className='container center'>
       <TopOfAplication label='יצירת פיידבק חדש'  />
-      {/* <div className='title'>יומן המסע שלי</div> */}
       <br></br>
       <br></br>
       <br></br>
@@ -46,15 +45,9 @@ function CreateFeedback() {
                 name='FeedbackTitle'
                 id="fullWidth"
                 label="Title"
-                value={form?.FeedbackTitle}
-                // multiline={true} 
+                value={form?.FeedbackTitle} 
               />
           </FormControl>
-            {/* <label>כותרת</label>
-            <br></br>
-            <TextField name='FeedbackTitle' fullWidth id="fullWidth" cols='50'
-              rows='2' onInput={handleChange}
-              value={form?.FeedbackTitle} /> */}
           </div>
           <div className='input-container'>
           <FormControl sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
@@ -70,11 +63,6 @@ function CreateFeedback() {
                 multiline={true} 
               />
           </FormControl>
-            {/* <label>תיאור</label>
-            <br></br>
-            <TextField name='FeedbackDescription' fullWidth id="fullWidth" cols='50'
-              rows='3' onInput={handleChange}    multiline={true} 
-              value={form?.FeedbackDescription} /> */}
           </div>
           <div className='input-container'>
           <FormControl sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
@@ -87,16 +75,8 @@ function CreateFeedback() {
                 id="fullWidth"
                 label="Country"
                 value={form?.FeedbackCountry}
-                // multiline={true} 
               />
           </FormControl>
-
-
-            {/* <label>שם המדינה</label>
-            <br></br>
-            <TextField name='FeedbackCountry' fullWidth id="fullWidth" cols='50'
-              rows='10' onInput={handleChange}
-              value={form?.FeedbackCountry} /> */}
           </div>
           <div className='input-container'>
           <FormControl sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
@@ -108,17 +88,9 @@ function CreateFeedback() {
                 name='FeedbackRegionOfTheCountry'
                 id="fullWidth"
                 label="RegionOfTheCountry"
-                value={form?.FeedbackRegionOfTheCountry}
-                // multiline={true} 
+                value={form?.FeedbackRegionOfTheCountry} 
               />
           </FormControl>
-
-            
-            {/* <label>איזור במדינה </label>
-            <br></br>
-            <TextField name='FeedbackRegionOfTheCountry' fullWidth id="fullWidth" cols='50'
-              rows='10' onInput={handleChange}
-              value={form?.FeedbackRegionOfTheCountry} /> */}
           </div>
           <FormControl fullWidth>
           <label>סוג</label>
@@ -149,16 +121,8 @@ function CreateFeedback() {
                 id="fullWidth"
                 label="Longitude"
                 value={form?.FeedbackLongitude}
-                // multiline={true} 
               />
           </FormControl>
-
-
-            {/* <label>נקודת ציון </label>
-            <br></br>
-            <TextField name='FeedbackLongitude' fullWidth id="fullWidth" cols='50'
-              rows='10' onInput={handleChange}
-              value={form?.FeedbackLongitude} /> */}
           </div>
           <div className='input-container'>
           <FormControl sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
@@ -171,16 +135,11 @@ function CreateFeedback() {
                 id="fullWidth"
                 label="Latitude"
                 value={form?.FeedbackLatitude}
-                // multiline={true} 
               />
           </FormControl>
-
-
-            {/* <label>נקודות ציון</label>
-            <br></br>
-            <TextField name='FeedbackLatitude' fullWidth id="fullWidth" cols='50'
-              rows='10' onInput={handleChange}
-              value={form?.FeedbackLatitude} /> */}
+          </div>
+          <div className='input-container'>
+          <input className='imginput' type='file'></input>
           </div>
           <div className='input-container-button'>
           <Button

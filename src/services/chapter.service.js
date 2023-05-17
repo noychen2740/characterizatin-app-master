@@ -7,7 +7,7 @@ export const chapterService = {
     getAll,
 }
 
-const base_url = 'http://194.90.158.74/cgroup99/prod/api'
+const base_url = 'https://localhost:44300/api'
 const module = 'traveldiary'
 const userEmail = 'noycn27@gmail.com'
 
@@ -62,7 +62,7 @@ async function create(episode) {
 async function update(episode) {
     try {
         console.log({ episode });
-        const res = await axios.put(`${base_url}/${module}/PutUpdate/${episode.NameOfChapter}/`, episode)
+        const res = await axios.put(`${base_url}/${module}/PutUpdate/${episode.ChapterKey}/`, episode)
         console.log({ res });
         return res.data
     } catch (err) {

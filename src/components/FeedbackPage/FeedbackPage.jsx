@@ -51,11 +51,6 @@ function FeedbackPage() {
       <br></br>
       <br></br>
       <Card sx={{ maxWidth: 345 }}>
-                  {/* <CardMedia
-                    component="img"
-                    alt="green iguana"
-                    height="140"
-                    src={jeep} /> */}
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
                     <div className="title"> {feedback.FeedbackTitle}</div>
@@ -69,6 +64,7 @@ function FeedbackPage() {
                     <div>FeedbackLongitude : {feedback.FeedbackLongitude}</div>
                     <br></br>
                     <div>FeedbackLatitude : {feedback.FeedbackLatitude}</div>
+                    <div>{feedback.FeedbackPhoto}</div>
                     </Typography>
                   </CardContent>
                   <CardActions>
