@@ -11,7 +11,7 @@ export const feedbackService={
 
 
 
-const base_url = 'http://194.90.158.74/cgroup99/prod/api'
+const base_url = 'https://localhost:44300/api'
 const module = 'Feedback'
 const userEmail = 'Benda669@gmail.com'
 
@@ -53,7 +53,8 @@ async function create(feedback) {
 async function createfromuser(feedback) {
     console.log({ feedback });
     try {
-        const res = await axios.post(`${base_url}/${module}/PostFeed/`,feedback)
+        //api/Feedback/PostFeed/{useremail}/
+        const res = await axios.post(`${base_url}/${module}/PostFeed/${userEmail}/`,feedback)
         console.log({ res });
         return res.data
     } catch (err) {

@@ -31,7 +31,7 @@ function Feedbacks() {
 
   const getById = (FeedbackKey) => { //תצוגה של כל הפיידבק לפי לחיצה על הכתפור והצגתו במסך הבא לפי הקיי
     console.log({ FeedbackKey });
-    navigate(`/feedback/${FeedbackKey}`);
+    navigate(`/FeedbackPage/${FeedbackKey}`);
   };
 
   const loadFeedbacks = async () => { //תצוגה של כל הפיידבקים
