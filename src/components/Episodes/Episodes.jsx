@@ -46,8 +46,6 @@ function Episodes() {
       {/* <div className='title'>יומן המסע שלי</div> */}
       <br></br>
       <br></br>
-      <br></br>
-      <br></br>
       <div className='episodes'>
         {episodes.map((e) => {
           return (
@@ -83,8 +81,6 @@ function Episodes() {
           );
         })}
       </div>
-      <br></br>
-      <br></br>
       <Navigation/>
     </div>
   );

@@ -11,6 +11,7 @@ import TopOfAplication from '../TopOfAplication';
 import Navigation from '../Navigation';
 import { TimePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
+import Writing from '../../assets/Writing.png';
 
 
 
@@ -68,7 +69,6 @@ function CreateEpisode() {
         now.setMinutes(form.ChapterTime.split(':')[1])
         setTime(dayjs(now))
         setInit(false)
-
       }
     }
   }, [form])
@@ -79,17 +79,14 @@ function CreateEpisode() {
   };
   return ( //היצירה של הפרק מבחינה ויזואלית
     <div className='create-episode' >
-      <TopOfAplication label='יצירה-עדכון פרק' />
       <div className='container center'>
         <div className='container center'>
           <TopOfAplication label='יצירה-עדכון פרק' />
           <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
+          <img className='book-image3' src={Writing}></img>
           <form onSubmit={submit} >
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-email">Title</InputLabel>
+              <InputLabel htmlFor="outlined-adornment-email">שם הפרק</InputLabel>
               <OutlinedInput
                 onInput={handleChange}
                 name='NameOfChapter'
@@ -99,31 +96,37 @@ function CreateEpisode() {
               />
             </FormControl>
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
+            <InputLabel htmlFor="outlined-adornment-email"> תאריך</InputLabel>
               <DatePicker
-                label="Controlled picker"
+                label="Title"
                 value={dayjs(form?.ChapterDate)}
                 onChange={(ChapterDate) => setForm({ ...form, ChapterDate })}
               />
             </FormControl>
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
+            <InputLabel htmlFor="outlined-adornment-email"> שעה</InputLabel>
               <TimePicker
-                label="Controlled picker"
+                label=""
                 onChange={(ChapterTime) => setForm({ ...form, ChapterTime })}
                 value={time}
               />
             </FormControl>
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-email">ChapterDescription</InputLabel>
+              <InputLabel htmlFor="outlined-adornment-email">תיאור הפרק</InputLabel>
               <OutlinedInput
                 onInput={handleChange}
+                cols='50'
+                rows='5'
+                multiline={true} 
                 name='ChapterDescription'
                 id="outlined-adornment-email"
-                label="Title"
+                label=""
+                dir='rtl'
                 value={form?.ChapterDescription || ''}
               />
             </FormControl>
+            <br></br>
             <div className='input-container'>
-              <br></br>
               <input className='imginput' type='file'></input>
             </div>
           </form>
@@ -137,10 +140,10 @@ function CreateEpisode() {
               שמור פרק
             </Button>
           </div>
+          <br></br>
         </div>
         <Navigation></Navigation>
       </div>
-    </div>
     </div>
   );
 };

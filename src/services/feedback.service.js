@@ -11,7 +11,7 @@ export const feedbackService={
 
 
 
-const base_url = 'https://localhost:44300/api'
+const base_url = 'http://194.90.158.74/cgroup99/prod/api'
 const module = 'Feedback'
 const userEmail = 'Benda669@gmail.com'
 
