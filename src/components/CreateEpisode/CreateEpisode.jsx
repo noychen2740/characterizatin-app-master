@@ -26,11 +26,13 @@ function CreateEpisode() {
     ev.preventDefault();
     form.ChapterDate = new Date(form.ChapterDate).toLocaleDateString('en-us')
     form.ChapterTime = formatAMPM(new Date(form.ChapterTime))
+    console.log('before save to server');
     if (NameOfChapter) {
       const res = await chapterService.update(form);
     } else {
       const res = await chapterService.create(form);
     }
+    console.log('sumbit end');
     navigate('/episodes');
   };
 
@@ -47,10 +49,33 @@ function CreateEpisode() {
     var strTime = hours + ':' + minutes;
     return strTime;
   }
+
+  function getBase64(file) {
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      console.log(reader.result);
+      
+    setForm({ ...form, 'ChapterPictures': reader.result });
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+ }
+ 
   const handleChange = (ev) => { //לוקח את הפרמטרים ש/מזינים בפורם
     let { name, value } = ev.target;
+if(name==='ChapterPictures'){
+ 
+ const file= ev.target.files[0]
+ console.log(file);
+ if(file)
+getBase64(file)
+}else{
+
 
     setForm({ ...form, [name]: value });
+}
   };
 
   useEffect(() => { //טוען את הפרק לאחר ההוספה
@@ -65,9 +90,11 @@ function CreateEpisode() {
     if (form) {
       if (init) {
         const now = new Date()
+       if(form.ChapterTime){
         now.setHours(form.ChapterTime.split(':')[0])
         now.setMinutes(form.ChapterTime.split(':')[1])
         setTime(dayjs(now))
+       }
         setInit(false)
       }
     }
@@ -96,17 +123,17 @@ function CreateEpisode() {
               />
             </FormControl>
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-email"> תאריך</InputLabel>
+            {/* <InputLabel htmlFor="outlined-adornment-email"> תאריך</InputLabel> */}
               <DatePicker
-                label="Title"
+                label="תאריך"
                 value={dayjs(form?.ChapterDate)}
                 onChange={(ChapterDate) => setForm({ ...form, ChapterDate })}
               />
             </FormControl>
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-email"> שעה</InputLabel>
+            {/* <InputLabel htmlFor="outlined-adornment-email"> שעה</InputLabel> */}
               <TimePicker
-                label=""
+                label="שעה"
                 onChange={(ChapterTime) => setForm({ ...form, ChapterTime })}
                 value={time}
               />
@@ -127,7 +154,7 @@ function CreateEpisode() {
             </FormControl>
             <br></br>
             <div className='input-container'>
-              <input className='imginput' type='file'></input>
+              <input className='imginput' type='file' name='ChapterPictures' onChange={handleChange}  ></input>
             </div>
           </form>
           <div className='input-container-button'>

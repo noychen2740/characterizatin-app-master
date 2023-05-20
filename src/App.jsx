@@ -132,6 +132,9 @@ function App() {
             <Route path='ThanksPage' element={<ThanksPage />} />
             <Route path='Diary' element={<Diary />} />
             <Route path='FeedbackPage/:FeedbackKey' element={<FeedbackPage />} />
+            <Route path='ChatMsg' element={<ChatMsg />} />
+
+            
           </Routes>
           
 
