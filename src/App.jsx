@@ -6,7 +6,7 @@ import Persona from './components/Persona';
 import UserProfile from './components/UserProfile';
 import Budget from './components/Budget';
 import NewExpense from './components/NewExpense';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import ExpensesAnalysis from './components/ExpensesAnalysis';
 import Map from './components/Map';
 import Login from './components/Login';
@@ -23,12 +23,13 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import ThanksPage from './components/ThanksPage/ThanksPage';
 import { getEnv } from './utils/env';
+import ChatPage from './components/ChatPage/ChatPage';
 
 
 function App() {
   const [userInApp, setUserInApp] = useState('');// בתאכלס, משתמש ישלח כבר מעטר, עד החיבור מביא אותו בגט לפי מיקום
   const [expensesInApp, setExpensesInApp] = useState('');/// הבאה בצורה אסינכורית את כל ההוצאות של המשתמש
-
+  const nav = useNavigate();
   useEffect(() => {
     const apiUrl = getEnv() + '/users/getemail/?email=Benda669@gmail.com';
     fetch(apiUrl,
@@ -132,11 +133,9 @@ function App() {
             <Route path='ThanksPage' element={<ThanksPage />} />
             <Route path='Diary' element={<Diary />} />
             <Route path='FeedbackPage/:FeedbackKey' element={<FeedbackPage />} />
-            <Route path='ChatMsg' element={<ChatMsg />} />
+            <Route path='chat' element={<ChatPage />} />
 
-            
           </Routes>
-          
 
 
           {/* <Questionnaire name="עומר"/> */}
@@ -160,6 +159,11 @@ price={numOfExpense.PricePerOne} amount={numOfExpense.NumberOfRepeatExpenses} Ex
           {/* <Questionnaire name="עומר"/> */}
 
         </div>
+        <div className="chat-btn" onClick={() => nav('chat')}>
+          chat
+        </div>
+
+
       </LocalizationProvider>
 
     </div >
