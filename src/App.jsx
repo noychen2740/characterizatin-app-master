@@ -23,8 +23,10 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import ThanksPage from './components/ThanksPage/ThanksPage';
 import { getEnv } from './utils/env';
+import ChatsPage from './components/ChatsPage/ChatsPage';
 import ChatPage from './components/ChatPage/ChatPage';
-
+import Fab from '@mui/material/Fab';
+import ForumIcon from '@mui/icons-material/Forum';
 
 function App() {
   const [userInApp, setUserInApp] = useState('');// בתאכלס, משתמש ישלח כבר מעטר, עד החיבור מביא אותו בגט לפי מיקום
@@ -133,7 +135,8 @@ function App() {
             <Route path='ThanksPage' element={<ThanksPage />} />
             <Route path='Diary' element={<Diary />} />
             <Route path='FeedbackPage/:FeedbackKey' element={<FeedbackPage />} />
-            <Route path='chat' element={<ChatPage />} />
+            <Route path='chats' element={<ChatsPage />} />
+            <Route path='chat/:userEmail2' element={<ChatPage />} />
 
           </Routes>
 
@@ -159,9 +162,10 @@ price={numOfExpense.PricePerOne} amount={numOfExpense.NumberOfRepeatExpenses} Ex
           {/* <Questionnaire name="עומר"/> */}
 
         </div>
-        <div className="chat-btn" onClick={() => nav('chat')}>
-          chat
+        <div className="chat-btn" >
+          <ForumIcon onClick={() => nav('chats')}/>
         </div>
+        
 
 
       </LocalizationProvider>
