@@ -3,7 +3,7 @@ import './Episodes.css';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { chapterService } from '../../services/chapter.service';
-import  jeep from '../../assets/jeep.jpg'
+// import  jeep from '../../assets/jeep.jpg'
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -36,7 +36,7 @@ function Episodes() {
 
   const loadEpisodes = async () => { //טעינת כל הפרקים הקיימים
     const res = await chapterService.getAll();
-
+console.log('getting  episodes',res);
     setEpisodes(res);
   };
 
@@ -49,7 +49,7 @@ function Episodes() {
       <div className='episodes'>
         {episodes.map((e) => {
           return (
-            <div className='episode'>
+            <div key={e.NameOfChapter} className='episode'>
               <Card sx={{ maxWidth: 345 }}>
               <div className='episode-time'>
                 <div className='episode-date'> {new Date(e.ChapterDate).toLocaleDateString('en-GB')} </div>
@@ -57,9 +57,9 @@ function Episodes() {
               </div>
       <CardMedia
         component="img"
-        alt="green iguana"
+      
         height="140"
-        src={jeep}
+        src={e.ChapterPictures}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
