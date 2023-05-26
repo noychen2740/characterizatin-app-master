@@ -1,26 +1,40 @@
 import React, { useEffect, useState } from 'react'
 import './ChatPage.css'
 import { chatService } from '../../services/chat.service'
-function ChatPage() {
+import { useNavigate, useParams } from 'react-router-dom'
+import { doc, getDoc } from 'firebase/firestore'
+import { db } from '../../firebase'
 
-    const [chats, setChats] = useState([])
+function ChatPage() {
+    const nav = useNavigate()
+    const { userEmail2 } = useParams()
+    const [chat, setChat] = useState()
     useEffect(() => {
-        loadChats()
+        loadChat()
     }, [])
 
-
-    async function loadChats() {
-        const res = await chatService.getAllChats()
-        console.log(res);
-        setChats(res)
+    async function loadChat() {
+        const snapshot = await chatService.getChat(userEmail2)
+        let res;
+        snapshot.forEach(async (document) => {
+            res = document.data()
+            const promisses = await res.messages.map(async (messageId) => {
+                const docRef = doc(db, "messages", messageId);
+                const docSnap = await getDoc(docRef);
+                const meesage = { ...docSnap.data(), id: messageId }
+                return meesage
+            })
+            res.messages = await Promise.all(promisses)
+            setChat(res)
+        });
     }
     return (
         <div className='chat-page'>
             <div className="title">Chat</div>
-
-            {chats.map((c) => {
-                return <div className="chat">
-                    {c.userEmail1}
+            {chat && chat.messages.map((m) => {
+                console.log({ m });
+                return <div key={m.id} className="message">
+                    {m.txt}
                 </div>
             })}
         </div>
