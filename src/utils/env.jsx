@@ -3,6 +3,6 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
 });
 
 export const getEnv = () => {
-    if (params.local) return 'https://localhost:44303';
+    if (params.local) return 'https://localhost:44300/api';
     else return 'http://194.90.158.74/cgroup99/prod/api'
 }

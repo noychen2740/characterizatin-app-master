@@ -7,8 +7,8 @@ export const login = async (loginFields) => {
             'Content-Type': 'application/json; charset=UTF-8'
         },
         body: JSON.stringify({
-            Email: loginFields.email,
-            Password: loginFields.password
+            UserEmail: loginFields.email,
+            UserPassword: loginFields.password
         })
     })
     if (!response.ok) {
@@ -27,10 +27,10 @@ export const signup = async (loginFields) => {
             'Content-Type': 'application/json; charset=UTF-8'
         },
         body: JSON.stringify({
-            Email: loginFields.email,
-            Password: loginFields.password1,
-            SurName: loginFields.last_name,
-            FirstName: loginFields.first_name
+            UserEmail: loginFields.email,
+            UserPassword: loginFields.password1,
+            UserLastName: loginFields.last_name,
+            UserFirstName: loginFields.first_name
         })
     })
     if (!response.ok) {

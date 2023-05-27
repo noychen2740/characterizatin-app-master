@@ -66,7 +66,7 @@ export default function Budget(props) {
   const [userInApp, setUserInApp] = useState('');// בתאכלס, משתמש ישלח כבר מעטר, עד החיבור מביא אותו בגט לפי מיקום
 
 useEffect(()=>{
-        const apiUrl= getEnv() + '/api/users/getemail/?email=Benda669@gmail.com'    
+        const apiUrl= getEnv() + '/users/getemail/?email=Benda669@gmail.com'    
         fetch(apiUrl, 
           {
           method: 'GET',
@@ -134,7 +134,7 @@ useEffect(()=>{
     
 
  const budgetChange=()=>{
-  const apiUrl= getEnv() + '/api/users/putemail/budget/?email=Benda669@gmail.com'
+  const apiUrl= getEnv() + '/users/putemail/budget/?email=Benda669@gmail.com'
   fetch(apiUrl, 
     {
     method: 'PUT',

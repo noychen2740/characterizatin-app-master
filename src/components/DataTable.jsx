@@ -81,7 +81,7 @@ export default function DataTable(props) {
       const deleteOrUpdateExpens=(ketToGET)=>{
       alert(ketToGET);
      
-  const apiUrl= getEnv() + '/api/expenses/'
+  const apiUrl= getEnv() + '/expenses/'
   fetch(apiUrl+ketToGET, 
      {
     method: 'GET',

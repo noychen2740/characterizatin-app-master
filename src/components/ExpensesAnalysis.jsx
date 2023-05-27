@@ -76,7 +76,7 @@ const [SumOfExpenseParty, setSumOfExpenseParty] = useState(0)
 //           },[])// הבאת פרטי המשתמש- שימוש לתקציב שכן נקבע בדף ניהול תקציב
           
 useEffect(()=>{
-const apiUrl= getEnv() + '/api/expenses/getsumofall/?email=Benda669@gmail.com'
+const apiUrl= getEnv() + '/expenses/getsumofall/?email=Benda669@gmail.com'
 fetch(apiUrl, 
 {
   method: 'GET',
