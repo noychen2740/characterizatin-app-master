@@ -33,7 +33,8 @@ function App() {
   const [expensesInApp, setExpensesInApp] = useState('');/// הבאה בצורה אסינכורית את כל ההוצאות של המשתמש
   const nav = useNavigate();
   useEffect(() => {
-    const apiUrl = getEnv() + '/users/getemail/?email=Benda669@gmail.com';
+    const apiUrl = getEnv() +'/users/getemail/?email=Benda669@gmail.com';
+    // const apiUrl = 'https://localhost:44300/users/getemail/?email=Benda669@gmail.com';
     fetch(apiUrl,
       {
         method: 'GET',
@@ -57,7 +58,7 @@ function App() {
           setUserInApp(result); // השמה של המשתמש שהגיע מהדאטה בייס להמשך עבודה בצד שרת
           console.log('first name=', result.UserFirstName)
           console.log('first name=', result.UserLastName)
-          console.log('budget=', result.UserBuget)
+          console.log('budget=', result.UserBudget)
 
         },
         (error) => {
