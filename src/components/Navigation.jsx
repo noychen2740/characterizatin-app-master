@@ -17,7 +17,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { AccountCircle, CurrencyExchange, Home, TravelExplore } from '@mui/icons-material';
 import Budget from './Budget';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 
 export default function Navigation(props) {
   
@@ -63,7 +63,7 @@ const handleChange = (event, newValue) => {
           />
 
           {/* <BottomNavigationAction label="בית" value="Home" icon={<Home />} onClick={() => {props.navTo("profile")}} /> */}
-          <BottomNavigationAction label="בית" value="Home" icon={<Home />} onClick={() => {nav('/create-episode')}} />
+          <BottomNavigationAction label="בית" value="Home" icon={<MenuBookIcon/>} onClick={() => {nav('/create-episode')}} />
         </BottomNavigation>
     
         </Paper>
