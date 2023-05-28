@@ -9,7 +9,7 @@ export const chapterService = {
 
 const base_url = 'http://194.90.158.74/cgroup99/prod/api'
 const module = 'traveldiary'
-const userEmail = 'noycn27@gmail.com'
+const userEmail = 'Benda669@gmail.com'
 
 
 // https://localhost:44350/api/traveldiary/noycn27@gmail.com/chapters
