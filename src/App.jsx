@@ -6,7 +6,7 @@ import Persona from './components/Persona';
 import UserProfile from './components/UserProfile';
 import Budget from './components/Budget';
 import NewExpense from './components/NewExpense';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import ExpensesAnalysis from './components/ExpensesAnalysis';
 import Map from './components/Map';
 import Login from './components/Login';
@@ -31,9 +31,21 @@ import ForumIcon from '@mui/icons-material/Forum';
 function App() {
   const [userInApp, setUserInApp] = useState('');// בתאכלס, משתמש ישלח כבר מעטר, עד החיבור מביא אותו בגט לפי מיקום
   const [expensesInApp, setExpensesInApp] = useState('');/// הבאה בצורה אסינכורית את כל ההוצאות של המשתמש
+  const [chatVisiable, setChatVisiable] = useState(false);/// הבאה בצורה אסינכורית את כל ההוצאות של המשתמש
   const nav = useNavigate();
+  const location = useLocation();
+  const chatPaths = ['/profile','/budget','/map','/episodes','/Favorites']
+
   useEffect(() => {
-    const apiUrl = getEnv() +'/users/getemail/?email=Benda669@gmail.com';
+    if (chatPaths.includes(location.pathname)) {
+      setChatVisiable(true)
+    }else{
+      setChatVisiable(false)
+    }
+  }, [location]);
+
+  useEffect(() => {
+    const apiUrl = getEnv() + '/users/getemail/?email=Benda669@gmail.com';
     // const apiUrl = 'https://localhost:44300/users/getemail/?email=Benda669@gmail.com';
     fetch(apiUrl,
       {
@@ -163,10 +175,10 @@ price={numOfExpense.PricePerOne} amount={numOfExpense.NumberOfRepeatExpenses} Ex
           {/* <Questionnaire name="עומר"/> */}
 
         </div>
-        <div className="chat-btn" >
-          <ForumIcon onClick={() => nav('chats')}/>
-        </div>
-        
+        {chatVisiable && <div className="chat-btn" >
+          <ForumIcon onClick={() => nav('chats')} />
+        </div>}
+
 
 
       </LocalizationProvider>
