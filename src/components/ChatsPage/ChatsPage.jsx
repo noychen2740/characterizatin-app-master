@@ -14,16 +14,19 @@ import Typography from '@mui/material/Typography';
 function ChatsPage() {
     const nav = useNavigate()
     const [chats, setChats] = useState([])
+  
     useEffect(() => {
         loadChats()
     }, [])
-
 
     async function loadChats() {
         const res = await chatService.getAllChats()
         console.log(res);
         setChats(res)
     }
+  
+    
+    
     return (
         <div className='chat-page'>
              <TopOfAplication label='צ"אט' />
@@ -35,7 +38,7 @@ function ChatsPage() {
         </ListItemAvatar>
         <ListItemText
         key={c.id}
-          primary={c.userEmail2}
+          primary={c.username}
           onClick={() => nav(`/chat/${c.userEmail2}`)}
           secondary={
             <React.Fragment>

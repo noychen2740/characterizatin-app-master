@@ -36,7 +36,7 @@ function Episodes() {
 
   const loadEpisodes = async () => { //טעינת כל הפרקים הקיימים
     const res = await chapterService.getAll();
-console.log('getting  episodes',res);
+  console.log('getting  episodes',res);
     setEpisodes(res);
   };
 

@@ -1,5 +1,13 @@
 .chat-page {
     width: 100%;
- color: black;
+    color: black;
     margin-bottom: 15px;
+    direction: rtl;
 }
+
+.txt-input {
+    position: fixed !important;
+    display: block !important;
+    bottom: 53px;
+    width: 100%;
+} 
