@@ -13,11 +13,13 @@ import EditIcon from '@mui/icons-material/Edit';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import NavigationIcon from '@mui/icons-material/Navigation';
 import { FormControl, InputLabel, OutlinedInput } from '@mui/material'
+import { userService } from '../../services/user.service'
 function ChatPage() {
     const nav = useNavigate()
     const { userEmail2 } = useParams()
     const [chat, setChat] = useState()
     const [txt, setTxt] = useState('')
+    const userEmail = "Benda669@gmail.com"
     useEffect(() => {
         loadChat()
     }, [])
@@ -29,6 +31,7 @@ function ChatPage() {
     async function loadChat() {
         const q = await chatService.getChat(userEmail2)
         let res;
+      
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             querySnapshot.forEach(async (document) => {
                 res = { ...document.data(), id: document.id }
@@ -39,12 +42,16 @@ function ChatPage() {
                     return meesage
                 })
                 res.messages = await Promise.all(promisses)
+                const users = await userService.getAll()
+                const currentUser = users.find(u => u.UserEmail === res.userEmail2)
+                console.log({ currentUser });
+                res.username = `${currentUser?.UserFirstName} ${currentUser?.UserLastName}`
                 setChat(res)
             });
         });
 
 
-      
+
     }
 
     async function submit() {
@@ -54,13 +61,16 @@ function ChatPage() {
 
     return (
         <div className='chat-page'>
-            <TopOfAplication label='Chat' />
-            {chat && chat.messages.map((m) => {
-                console.log({ m });
-                return <div key={m.id} className="message">
-                    {m.txt}
-                </div>
-            })}
+            <TopOfAplication label={chat?.username||'Chat'} />
+            <div className="messages">
+                {chat && chat.messages.map((m) => {
+
+                    return <div key={m.id} className={m.userEmail === userEmail ? "right-message message" : "left-message message"}   >
+                        <span>  {m.txt}</span>
+                        <span className={m.userEmail === userEmail ? "time right-time" : "time left-time"}>10:47</span>
+                    </div>
+                })}
+            </div>
             <Box onClick={submit} style={{ position: 'fixed', alignItems: 'center', bottom: 60, left: 280, right: 0 }} sx={{ '& > :not(style)': { m: 1 } }}>
                 <Fab variant="extended">
                     <NavigationIcon sx={{ mr: 1 }} />

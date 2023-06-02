@@ -68,9 +68,15 @@ function CreateEpisode() {
     if (name === 'ChapterPictures') {
 
       const file = ev.target.files[0]
-      console.log(file);
-      if (file)
-        getBase64(file)
+      //upload to firebase storage 
+
+
+      //wait for result- need the addressId
+
+
+      // console.log(file);
+      // if (file)
+      //   getBase64(file)
     } else {
 
 

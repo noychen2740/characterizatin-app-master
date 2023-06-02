@@ -48,7 +48,10 @@ async function createMsg(txt, chat) {
 }
 
 async function getChat(userEmail2) {
+
     try {
+  
+
        return query(collection(db, "chats"), where("userEmail2", "==", userEmail2));
        
        
