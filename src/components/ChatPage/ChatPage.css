@@ -10,4 +10,53 @@
     display: block !important;
     bottom: 53px;
     width: 100%;
-} 
+}
+
+.css-dpjnhs-MuiInputBase-root-MuiOutlinedInput-root {
+    border-radius: 22px;
+    width: 70%;
+}
+
+.messages {
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    border-radius: 15px;
+    width: fit-content;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.right-message {
+    align-self: flex-start;
+    padding: 3px 15px 3px 5px;
+    background-color: #e0e0e0;
+
+}
+
+.left-message {
+    align-self: flex-end;
+    padding: 3px 5px 3px 5px;
+    background-color: #598e89;
+
+
+}
+
+.time {
+    font-size: 12px;
+    margin-top: auto;
+    color: darkgray;
+    display: block;
+}
+
+.left-time {
+    margin-left: 5px;
+    margin-right: 10px;
+}
+
+.right-time {
+    margin-right: 10px;
+    margin-left: 3px;
+}

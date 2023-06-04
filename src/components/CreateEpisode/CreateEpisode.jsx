@@ -12,6 +12,7 @@ import Navigation from '../Navigation';
 import { TimePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 import Writing from '../../assets/Writing.png';
+import { storageService } from '../../services/storage.service';
 
 
 
@@ -53,27 +54,26 @@ function CreateEpisode() {
   function getBase64(file) {
     var reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = function () {
-      console.log(reader.result);
-
-      setForm({ ...form, 'ChapterPictures': reader.result });
+    reader.onload = async function () {
+      await storageService.upload(reader.result)
+      // setForm({ ...form, 'ChapterPictures': reader.result });
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
     };
   }
 
-  const handleChange = (ev) => { //לוקח את הפרמטרים ש/מזינים בפורם
+  const handleChange = async (ev) => { //לוקח את הפרמטרים ש/מזינים בפורם
     let { name, value } = ev.target;
     if (name === 'ChapterPictures') {
 
       const file = ev.target.files[0]
-      console.log(file);
-      if (file)
-        getBase64(file)
+      console.log({ file });
+      if (file) {
+        const url = await storageService.upload(file)
+        setForm({ ...form, [name]: url });
+      }
     } else {
-
-
       setForm({ ...form, [name]: value });
     }
   };

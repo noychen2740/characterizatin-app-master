@@ -4,7 +4,8 @@ import { userService } from "./user.service";
 export const chatService = {
     getAllChats,
     getChat,
-    createMsg
+    createMsg,
+    createChat
 }
 
 const userEmail = 'Benda669@gmail.com'
@@ -48,10 +49,13 @@ async function createMsg(txt, chat) {
 }
 
 async function getChat(userEmail2) {
+
     try {
-       return query(collection(db, "chats"), where("userEmail2", "==", userEmail2));
-       
-       
+
+
+        return query(collection(db, "chats"), where("userEmail2", "==", userEmail2));
+
+
         // const chatSnapShot = await getDocs(q);
         // return chatSnapShot
 
@@ -61,6 +65,14 @@ async function getChat(userEmail2) {
     }
 }
 
+
+async function createChat(userEmail2) {
+    const docRef = await addDoc(collection(db, "chats"), {
+        userEmail2,
+        userEmail,
+        messages: []
+    });
+}
 // const q = query(collection(db, "cities"), where("state", "==", "CA"));
 // const unsubscribe = onSnapshot(q, (querySnapshot) => {
 //   const cities = [];
