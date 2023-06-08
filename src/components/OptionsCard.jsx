@@ -15,6 +15,33 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
+const fieldsMapper = {
+    0: {
+        title: "AidCompName",
+        image: "AidCompPhoto",
+        description: "AidCompDescription",
+        selector: "HOS"
+    },
+    1: {
+        title: "TripsName",
+        image: "TripsPhoto",
+        description: "TripsDescription",
+        selector: "T"
+    },
+    2: {
+        title: "SleepingCompName",
+        image: "SleepingCompPhoto",
+        description: "SleepingCompDescription",
+        selector: "S"
+    },
+    3: {
+        title: "AttractionName",
+        image: "AttractionPhoto",
+        description: "AttractionDescription",
+        selector: "A"
+    }
+}
+
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -26,15 +53,21 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-export default function OptionsCard(props) {
+export default function OptionsCard({ tabIndex, item, index, selected }) {
     const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
 
+    const { title, image, selector } = fieldsMapper[tabIndex];
+
+    const itemSelector = `${selector}${index}`
+
+    const isSelected = selected === `.${itemSelector}`
+
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card className={itemSelector} style={isSelected ? { backgroundColor: '#ececec' } : {}} sx={{ maxWidth: 345 }}>
             <CardHeader
                 avatar={
                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -46,20 +79,16 @@ export default function OptionsCard(props) {
                         <MoreVertIcon />
                     </IconButton>
                 }
-                title={props.title}
+                title={item[title]}
             />
             <CardMedia
                 component="img"
                 height="194"
-                image="/static/images/cards/paella.jpg"
-                // image={props.image}
-                alt="Paella dish"
+                image={item[image] || 'https://picsum.photos/200/300'}
             />
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                    This impressive paella is a perfect party dish and a fun meal to cook
-                    together with your guests. Add 1 cup of frozen peas along with the mussels,
-                    if you like.
+
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
