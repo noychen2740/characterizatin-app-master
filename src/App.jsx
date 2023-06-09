@@ -27,6 +27,7 @@ import ChatsPage from './components/ChatsPage/ChatsPage';
 import ChatPage from './components/ChatPage/ChatPage';
 import Fab from '@mui/material/Fab';
 import ForumIcon from '@mui/icons-material/Forum';
+import { chatService } from './services/chat.service';
 
 function App() {
   const [userInApp, setUserInApp] = useState('');// בתאכלס, משתמש ישלח כבר מעטר, עד החיבור מביא אותו בגט לפי מיקום
@@ -34,12 +35,12 @@ function App() {
   const [chatVisiable, setChatVisiable] = useState(false);/// הבאה בצורה אסינכורית את כל ההוצאות של המשתמש
   const nav = useNavigate();
   const location = useLocation();
-  const chatPaths = ['/profile','/budget','/map','/episodes','/Favorites']
-
+  const chatPaths = ['/profile', '/budget', '/map', '/episodes', '/Favorites']
+  const [isRead, setIsRead] = useState(true)
   useEffect(() => {
     if (chatPaths.includes(location.pathname)) {
       setChatVisiable(true)
-    }else{
+    } else {
       setChatVisiable(false)
     }
   }, [location]);
@@ -65,7 +66,6 @@ function App() {
       })
       .then(
         (result) => {
-          console.log("fetch get user by id=", result);
           console.log("result=", result.UserFirstName);
           setUserInApp(result); // השמה של המשתמש שהגיע מהדאטה בייס להמשך עבודה בצד שרת
           console.log('first name=', result.UserFirstName)
@@ -78,6 +78,15 @@ function App() {
         });
 
   }, [])
+
+  useEffect(() => {
+    loadFullChats()
+  }, [])
+
+
+  const loadFullChats = async () => {
+    await chatService.loadFullChats()
+  }
 
   useEffect(() => {
     const apiUrl = getEnv() + '/expenses/?email=Benda669@gmail.com'
@@ -177,6 +186,7 @@ price={numOfExpense.PricePerOne} amount={numOfExpense.NumberOfRepeatExpenses} Ex
         </div>
         {chatVisiable && <div className="chat-btn" >
           <ForumIcon onClick={() => nav('chats')} />
+          {!isRead && <div className="notification">N</div>}
         </div>}
 
 
