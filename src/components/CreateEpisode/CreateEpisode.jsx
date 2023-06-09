@@ -12,6 +12,7 @@ import Navigation from '../Navigation';
 import { TimePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 import Writing from '../../assets/Writing.png';
+import { storageService } from '../../services/storage.service';
 
 
 
@@ -53,29 +54,28 @@ function CreateEpisode() {
   function getBase64(file) {
     var reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = function () {
-      console.log(reader.result);
-      
-    setForm({ ...form, 'ChapterPictures': reader.result });
+    reader.onload = async function () {
+      await storageService.upload(reader.result)
+      // setForm({ ...form, 'ChapterPictures': reader.result });
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
     };
- }
- 
-  const handleChange = (ev) => { //לוקח את הפרמטרים ש/מזינים בפורם
+  }
+
+  const handleChange = async (ev) => { //לוקח את הפרמטרים ש/מזינים בפורם
     let { name, value } = ev.target;
-if(name==='ChapterPictures'){
- 
- const file= ev.target.files[0]
- console.log(file);
- if(file)
-getBase64(file)
-}else{
+    if (name === 'ChapterPictures') {
 
-
-    setForm({ ...form, [name]: value });
-}
+      const file = ev.target.files[0]
+      console.log({ file });
+      if (file) {
+        const url = await storageService.upload(file)
+        setForm({ ...form, [name]: url });
+      }
+    } else {
+      setForm({ ...form, [name]: value });
+    }
   };
 
   useEffect(() => { //טוען את הפרק לאחר ההוספה
@@ -90,11 +90,11 @@ getBase64(file)
     if (form) {
       if (init) {
         const now = new Date()
-       if(form.ChapterTime){
-        now.setHours(form.ChapterTime.split(':')[0])
-        now.setMinutes(form.ChapterTime.split(':')[1])
-        setTime(dayjs(now))
-       }
+        if (form.ChapterTime) {
+          now.setHours(form.ChapterTime.split(':')[0])
+          now.setMinutes(form.ChapterTime.split(':')[1])
+          setTime(dayjs(now))
+        }
         setInit(false)
       }
     }
@@ -123,7 +123,7 @@ getBase64(file)
               />
             </FormControl>
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
-            {/* <InputLabel htmlFor="outlined-adornment-email"> תאריך</InputLabel> */}
+              {/* <InputLabel htmlFor="outlined-adornment-email"> תאריך</InputLabel> */}
               <DatePicker
                 label="תאריך"
                 value={dayjs(form?.ChapterDate)}
@@ -131,7 +131,7 @@ getBase64(file)
               />
             </FormControl>
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
-            {/* <InputLabel htmlFor="outlined-adornment-email"> שעה</InputLabel> */}
+              {/* <InputLabel htmlFor="outlined-adornment-email"> שעה</InputLabel> */}
               <TimePicker
                 label="שעה"
                 onChange={(ChapterTime) => setForm({ ...form, ChapterTime })}
@@ -144,7 +144,7 @@ getBase64(file)
                 onInput={handleChange}
                 cols='50'
                 rows='5'
-                multiline={true} 
+                multiline={true}
                 name='ChapterDescription'
                 id="outlined-adornment-email"
                 label=""
