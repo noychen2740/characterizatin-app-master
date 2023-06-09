@@ -19,12 +19,28 @@ async function getAll() {
 
     ///http://194.90.158.74/cgroup99/prod/api/users/PutImg/?email=Benda669@gmail.com
     //api/traveldiary/Put/{nameofchapterfromdb}/
-    async function updateIMG(file) {
+    async function updateIMG(url) {
         try {
-            console.log({ file });
-            const res = await axios.put(`${base_url}/${module}/PutImg/?email=Benda669@gmail.com`, file)
-            console.log({ res });
-            return res.data
+            let data = JSON.stringify(url);
+
+            let config = {
+              method: 'put',
+              maxBodyLength: Infinity,
+              url: 'http://194.90.158.74/cgroup99/prod/api/users/PutImg/?email=Benda669@gmail.com',
+              headers: { 
+                'Accept': 'application/json', 
+                'Content-Type': 'application/json'
+              },
+              data : data
+            };
+            
+            axios.request(config)
+            .then((response) => {
+              console.log(JSON.stringify(response.data));
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         } catch (err) {
             console.log({ err });
         }

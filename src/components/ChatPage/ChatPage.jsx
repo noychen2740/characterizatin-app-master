@@ -38,10 +38,14 @@ function ChatPage() {
                 querySnapshot.forEach(async (document) => {
                     console.log(document.data());
                     res = { ...document.data(), id: document.id }
+                    res.messages = res?.messages?.length ? res.messages : [];
                     const promisses = await res.messages.map(async (messageId) => {
                         const docRef = doc(db, "messages", messageId);
                         const docSnap = await getDoc(docRef);
                         const meesage = { ...docSnap.data(), id: messageId }
+                        console.log({ res });
+                        if (res.userEmail1 !== meesage.userEmail)
+                            chatService.updateMsg(messageId)
                         return meesage
                     })
                     res.messages = await Promise.all(promisses)
@@ -84,7 +88,7 @@ function ChatPage() {
                     </div>
                 })}
             </div>
-            
+
             <Box onClick={submit} style={{ position: 'fixed', alignItems: 'center', bottom: 60, left: 280, right: 0 }} sx={{ '& > :not(style)': { m: 1 } }}>
                 <Fab variant="extended">
                     <NavigationIcon sx={{ mr: 1 }} />
@@ -103,7 +107,7 @@ function ChatPage() {
             </FormControl>
             <br></br>
             <br></br>
-            
+
             <Navigation></Navigation>
         </div>
     )

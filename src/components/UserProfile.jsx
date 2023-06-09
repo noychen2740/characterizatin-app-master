@@ -91,19 +91,22 @@ export default function UserProfile(props) {
 
     let { name, value } = ev.target;
     if (name==='UserImg') {
-
+      console.log(name);
       const file = ev.target.files[0]
       console.log({ file });
       if (file) {
         const url = await storageService.upload(file)
+        console.log(url)
+        const data=await userService.updateIMG(url)
+        console.log(data)
         setForm({ ...form, [name]: url });
       }
     } else {
       setForm({ ...form, [name]: value });
     }
-    const data= await userService.updateIMG('asdasd')
+    
 
-    console.log('sumbit end');
+    
   };
 
   useEffect(() => {
@@ -172,7 +175,7 @@ export default function UserProfile(props) {
             anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
             variant="dot"
           >
-            <Avatar sx={{ width: 64, height: 64 }} src="/broken-image.jpg" style={{ display: 'flex' }} onClick={() => {alert('bdike')}} />
+            <Avatar sx={{ width: 64, height: 64 }} src= {userInApp.UserImg} style={{ display: 'flex' }} onClick={() => {alert('bdike')}} />
     
           </StyledBadge>
 
