@@ -6,7 +6,7 @@ import Persona from './components/Persona';
 import UserProfile from './components/UserProfile';
 import Budget from './components/Budget';
 import NewExpense from './components/NewExpense';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import ExpensesAnalysis from './components/ExpensesAnalysis';
 import Map from './components/Map';
 import Login from './components/Login';
@@ -27,13 +27,27 @@ import ChatsPage from './components/ChatsPage/ChatsPage';
 import ChatPage from './components/ChatPage/ChatPage';
 import Fab from '@mui/material/Fab';
 import ForumIcon from '@mui/icons-material/Forum';
+import { chatService } from './services/chat.service';
 
 function App() {
   const [userInApp, setUserInApp] = useState('');// בתאכלס, משתמש ישלח כבר מעטר, עד החיבור מביא אותו בגט לפי מיקום
   const [expensesInApp, setExpensesInApp] = useState('');/// הבאה בצורה אסינכורית את כל ההוצאות של המשתמש
+  const [chatVisiable, setChatVisiable] = useState(false);/// הבאה בצורה אסינכורית את כל ההוצאות של המשתמש
   const nav = useNavigate();
+  const location = useLocation();
+  const chatPaths = ['/profile', '/budget', '/map', '/episodes', '/Favorites']
+  const [isRead, setIsRead] = useState(true)
+  useEffect(() => {
+    if (chatPaths.includes(location.pathname)) {
+      setChatVisiable(true)
+    } else {
+      setChatVisiable(false)
+    }
+  }, [location]);
+
   useEffect(() => {
     const apiUrl = getEnv() + '/users/getemail/?email=Benda669@gmail.com';
+    // const apiUrl = 'https://localhost:44300/users/getemail/?email=Benda669@gmail.com';
     fetch(apiUrl,
       {
         method: 'GET',
@@ -52,12 +66,11 @@ function App() {
       })
       .then(
         (result) => {
-          console.log("fetch get user by id=", result);
           console.log("result=", result.UserFirstName);
           setUserInApp(result); // השמה של המשתמש שהגיע מהדאטה בייס להמשך עבודה בצד שרת
           console.log('first name=', result.UserFirstName)
           console.log('first name=', result.UserLastName)
-          console.log('budget=', result.UserBuget)
+          console.log('budget=', result.UserBudget)
 
         },
         (error) => {
@@ -65,6 +78,15 @@ function App() {
         });
 
   }, [])
+
+  useEffect(() => {
+    loadFullChats()
+  }, [])
+
+
+  const loadFullChats = async () => {
+    await chatService.loadFullChats()
+  }
 
   useEffect(() => {
     const apiUrl = getEnv() + '/expenses/?email=Benda669@gmail.com'
@@ -162,10 +184,11 @@ price={numOfExpense.PricePerOne} amount={numOfExpense.NumberOfRepeatExpenses} Ex
           {/* <Questionnaire name="עומר"/> */}
 
         </div>
-        <div className="chat-btn" >
-          <ForumIcon onClick={() => nav('chats')}/>
-        </div>
-        
+        {chatVisiable && <div className="chat-btn" >
+          <ForumIcon onClick={() => nav('chats')} />
+          {!isRead && <div className="notification">N</div>}
+        </div>}
+
 
 
       </LocalizationProvider>

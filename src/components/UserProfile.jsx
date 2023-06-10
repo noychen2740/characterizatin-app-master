@@ -16,6 +16,10 @@ import TopOfAplication from './TopOfAplication';
 import { Celebration, SelfImprovement } from '@mui/icons-material';
 import { resolvePath, useNavigate } from 'react-router-dom';
 import { getEnv } from '../utils/env';
+import { storageService } from '../services/storage.service';
+import { file } from '@babel/types';
+import { userService } from '../services/user.service';
+import { async } from '@firebase/util';
 
 export default function UserProfile(props) {
   // const monKeyUpload=(req, fileKey, dest,max_mb=5,filesAllow=[".png",".jpg",".jpeg","gif"])=>{
@@ -77,8 +81,33 @@ export default function UserProfile(props) {
   }));
 
   const [checkType, setCheckType] = useState('')
-
+// const saveChange=async() => {
+//   const newName = await userService.updateIMG(file.name)
+//   console.log(newName)
+// }
   const [userInApp, setUserInApp] = useState('');// בתאכלס, משתמש ישלח כבר מעטר, עד החיבור מביא אותו בגט לפי מיקום
+  const [form, setForm] = useState();
+  const handleChange = async (ev) => { //לוקח את הפרמטרים ש/מזינים בפורם
+
+    let { name, value } = ev.target;
+    if (name==='UserImg') {
+      console.log(name);
+      const file = ev.target.files[0]
+      console.log({ file });
+      if (file) {
+        const url = await storageService.upload(file)
+        console.log(url)
+        const data=await userService.updateIMG(url)
+        console.log(data)
+        setForm({ ...form, [name]: url });
+      }
+    } else {
+      setForm({ ...form, [name]: value });
+    }
+    
+
+    
+  };
 
   useEffect(() => {
     const email = props.email;
@@ -146,12 +175,16 @@ export default function UserProfile(props) {
             anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
             variant="dot"
           >
-            <Avatar sx={{ width: 64, height: 64 }} src="/broken-image.jpg" style={{ display: 'flex' }} onClick={() => { alert("bdika") }} />
+            <Avatar sx={{ width: 64, height: 64 }} src= {userInApp.UserImg} style={{ display: 'flex' }} onClick={() => {alert('bdike')}} />
+    
           </StyledBadge>
+
           <p style={{ color: 'black' }}>שלום {props.name} <br /> {props.email} </p>
         </Stack>
       </Box>
-
+      <div>
+            <input className='imginput' type='file' name='UserImg' onChange={handleChange}  ></input>
+      </div>
       <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
         <ListItem alignItems="flex-start">
           <ListItemAvatar style={{

@@ -4,13 +4,6 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import OptionsCard from './OptionsCard';
 
-const NameFields = {
-  0: "AidCompName",
-  1: "TripsName",
-  2: "SleepingCompName",
-  3: "AttractionName",
-
-}
 export default function OptionsCom(props) {
   const [value, setValue] = React.useState(3);
   const [dataCard, setDataCard] = React.useState();
@@ -43,11 +36,11 @@ export default function OptionsCom(props) {
         <h3 style={{color:'blue'}}>  {dataCard} ב{props.countryName}</h3>
         <h3 style={{color:'pink'}}>  {dataCard} ב{props.countryName}</h3> */}
         {props.data[value].map((item, index) => {
-          return (<div key={'card' + index} onClick={() => {
+          return (<div className="mapCard" key={'card' + index} onClick={() => {
             console.log({ item })
             // navigate to item page
           }}>
-            <OptionsCard title={item[NameFields[value]] || 'test'} />
+            <OptionsCard selected={props.selected} tabIndex={value} item={item} index={index} />
           </div>)
         })}
       </Box>

@@ -186,6 +186,8 @@ function Map(props) {
         userLng: 0
     })
 
+    const [selected, setSelected] = useState('')
+
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: "AIzaSyBilylcKkzkj1q9WF1klt1564bXNR2NIQE"
@@ -213,14 +215,17 @@ function Map(props) {
         setMap(null)
     }, []);
 
-    const locationClick = (cordinaint) => {
-        setZoom(prev => prev * 1.2)
-        alert(cordinaint)
+    const locationClick = (cordinaint, selector) => {
+        const element = document.querySelector(selector);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: "center", inline: "nearest" });
+            setSelected(selector)
+        }
     }// זמני- בלחיצה על נקודה מסומנת איזה פעולה נרצה שתקה
     return isLoaded ? (
         <>
             <TopOfAplication label='מה יש לעולם להציע' />
-            <Paper>
+            <div>
                 <NativeSelect
                     defaultValue={selectCountry}
                     inputProps={{
@@ -266,32 +271,32 @@ function Map(props) {
 
                     <MarkerClusterer options={optionAtraction}>
                         {(clusterer) =>
-                            attractionList.map((location) => (
-                                <Marker label='A' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location)) }} />
+                            attractionList.map((location, index) => (
+                                <Marker label='A' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.A${index}`) }} />
                             ))
                         }
                     </MarkerClusterer>
 
                     <MarkerClusterer options={optionSleep} >
                         {(clusterer) =>
-                            sleepingList.map((location) => (
-                                <Marker label='S' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location)) }} />
+                            sleepingList.map((location, index) => (
+                                <Marker label='S' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.S${index}`) }} />
                             ))
                         }
                     </MarkerClusterer>
 
                     <MarkerClusterer options={optionAid}>
                         {(clusterer) =>
-                            aidCompList.map((location) => (
-                                <Marker label='HOS' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location)) }} />
+                            aidCompList.map((location, index) => (
+                                <Marker label='HOS' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.HOS${index}`) }} />
                             ))
                         }
                     </MarkerClusterer>
 
                     <MarkerClusterer options={optionTrip}>
                         {(clusterer) =>
-                            tripList.map((location) => (
-                                <Marker label='T' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location)) }} />
+                            tripList.map((location, index) => (
+                                <Marker label='T' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.T${index}`) }} />
                             ))
                         }
                     </MarkerClusterer>
@@ -306,9 +311,9 @@ function Map(props) {
 
                 </GoogleMap>
                 <Box>
-                    <OptionsCom countryName={selectCountry} data={[aidCompList, tripList, sleepingList, attractionList]} />
+                    <OptionsCom selected={selected} countryName={selectCountry} data={[aidCompList, tripList, sleepingList, attractionList]} />
                 </Box>
-            </Paper>
+            </div>
             <Navigation pagNav={'map'} />
         </>
     ) : <></>
