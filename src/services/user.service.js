@@ -19,14 +19,15 @@ async function getAll() {
 
     ///http://194.90.158.74/cgroup99/prod/api/users/PutImg/?email=Benda669@gmail.com
     //api/traveldiary/Put/{nameofchapterfromdb}/
-    async function updateIMG(url) {
+    async function updateIMG(url,email) {
         try {
             let data = JSON.stringify(url);
-
+            const Email=email;
             let config = {
               method: 'put',
               maxBodyLength: Infinity,
-              url: 'http://194.90.158.74/cgroup99/prod/api/users/PutImg/?email=Benda669@gmail.com',
+              url: 'http://194.90.158.74/cgroup99/prod/api/users/PutImg/?email='+Email,
+              // url: 'http://194.90.158.74/cgroup99/prod/api/users/PutImg/?email=Benda669@gmail.com',
               headers: { 
                 'Accept': 'application/json', 
                 'Content-Type': 'application/json'

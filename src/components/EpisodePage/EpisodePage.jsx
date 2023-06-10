@@ -14,7 +14,7 @@ import Navigation from '../Navigation';
 
 
 
-function EpisodePage() {
+function EpisodePage(props) {
   const [episode, setEpisode] = useState(null);
   const { NameOfChapter } = useParams();
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ function EpisodePage() {
   }, []);
 
   const loadEpisode = async () => { //טוען את הפרק הספציפי לפי שם הפרק
-    const data = await chapterService.getById(NameOfChapter);
+    const data = await chapterService.getById(NameOfChapter,props.userEmailFromDB);
     setEpisode(data);
   };
   return episode ? ( //תצוגת הפרק עצמו

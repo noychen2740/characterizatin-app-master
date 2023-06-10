@@ -20,10 +20,10 @@ export default function Question(props) {
     else {
       const randomNumber = Math.ceil((Math.random() * 100));
       if (randomNumber <= 33) {
-        const apiUrl = getEnv() + '/users/putemail/type/?email=Benda669@gmail.com'
+        const apiUrl = getEnv() + '/users/putemail/type/?email='
         // const apiUrl='http://localhost:58583/api/users/1'
-
-        fetch(apiUrl,
+        // const apiUrl = getEnv() + '/users/putemail/type/?email=Benda669@gmail.com'
+        fetch(apiUrl + props.userEmailFromDB,
           {
             method: 'PUT',
             body: JSON.stringify('מוצילר'),
@@ -46,9 +46,10 @@ export default function Question(props) {
         nav('/PersonaM')
       }
       else if (randomNumber <= 66) {
-        const apiUrl = getEnv() + '/users/putemail/type/?email=Benda669@gmail.com'
+        const apiUrl = getEnv() + '/users/putemail/type/?email='
         // const apiUrl='http://localhost:65095/api/users/putid/6'
-        fetch(apiUrl,
+        // const apiUrl = getEnv() + '/users/putemail/type/?email=Benda669@gmail.com'
+        fetch(apiUrl+props.userEmailFromDB,
           {
             method: 'PUT',
             body: JSON.stringify('בליין'),
@@ -72,9 +73,10 @@ export default function Question(props) {
 
       }
       else if (randomNumber <= 100) {
-        const apiUrl = getEnv() + '/users/putemail/type/?email=Benda669@gmail.com'
+       // const apiUrl = getEnv() + '/users/putemail/type/?email=Benda669@gmail.com'
+        const apiUrl = getEnv() + '/users/putemail/type/?email='
         // const apiUrl='http://localhost:65095/api/users/putid/6'
-        fetch(apiUrl,
+        fetch(apiUrl+props.userEmailFromDB,
           {
             method: 'PUT',
             body: JSON.stringify('ציל'),
@@ -125,7 +127,7 @@ export default function Question(props) {
         <h3 style={{
           color: 'black', fontSize: '20px',
           textAlign: 'center', marginLeft: 'auto', marginRight: 'auto'
-        }}> {props.name}, עוד כמה שאלות וסיימנו <br /> </h3>
+        }}> {props.userFromDB.UserFirstName}, עוד כמה שאלות וסיימנו <br /> </h3>
 
         <h5 style={
           {

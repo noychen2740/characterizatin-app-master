@@ -16,7 +16,7 @@ import { storageService } from '../../services/storage.service';
 
 
 
-function CreateEpisode() {
+function CreateEpisode(props) {
   const [form, setForm] = useState();
   const [time, setTime] = useState();
   const [init, setInit] = useState(true);
@@ -31,7 +31,7 @@ function CreateEpisode() {
     if (NameOfChapter) {
       const res = await chapterService.update(form);
     } else {
-      const res = await chapterService.create(form);
+      const res = await chapterService.create(form,props.userEmailFromDB);
     }
     console.log('sumbit end');
     navigate('/episodes');
@@ -101,7 +101,7 @@ function CreateEpisode() {
   }, [form])
 
   const loadEpisode = async () => {
-    const data = await chapterService.getById(NameOfChapter);
+    const data = await chapterService.getById(NameOfChapter,props.userEmailFromDB);
     setForm(data);
   };
   return ( //היצירה של הפרק מבחינה ויזואלית
