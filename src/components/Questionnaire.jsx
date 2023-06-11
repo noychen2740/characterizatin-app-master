@@ -18,7 +18,7 @@ const nav=useNavigate();
     <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }} >
 <h3 style={{color:'black', fontSize:'20px', 
 textAlign:'center', marginLeft:'auto', marginRight:'auto' } }> 
-אהלן {props.name}<br /> שמחים שבחרת להצטרף אלינו</h3>
+אהלן {props.userFromDB.UserFirstName}<br /> שמחים שבחרת להצטרף אלינו</h3>
 
 <h5 style={{color:'black', fontSize:'15px', 
 textAlign:'center', marginLeft:'auto', marginRight:'auto'}}> לפנייך שאלות שיעזרו לנו 

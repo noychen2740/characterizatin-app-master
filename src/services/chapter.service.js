@@ -13,9 +13,10 @@ const userEmail = 'Benda669@gmail.com'
 
 
 // https://localhost:44350/api/traveldiary/noycn27@gmail.com/chapters
-async function getAll() {
+async function getAll(Email) {
     try {
-        const res = await axios.get(`${base_url}/${module}/${userEmail}/chapters`)
+        // const userEmail = Email;
+        const res = await axios.get(`${base_url}/${module}/${Email}/chapters`)
         console.log({ res });
         return res.data
     } catch (err) {
@@ -24,9 +25,9 @@ async function getAll() {
     }
 }
 // https://localhost:44350/api/traveldiary/Benda669@gmail.com/GetTravelDiaryChaptersById/טרק
-async function getById(NameOfChapter) {
+async function getById(NameOfChapter,Email) {
     try {
-        const res = await axios.get(`${base_url}/${module}/${userEmail}/GetTravelDiaryChaptersById/${NameOfChapter}`)
+        const res = await axios.get(`${base_url}/${module}/${Email}/GetTravelDiaryChaptersById/${NameOfChapter}`)
         console.log({ res });
         return res.data[0]
     } catch (err) {
@@ -37,12 +38,12 @@ async function getById(NameOfChapter) {
 // post: https://localhost:44350/api/traveldiary/Post/noycn27@gmail.com/{newchap}
 // api/traveldiary/PostCAP/{userImput}/
 
-async function create(episode) {
+async function create(episode,Email) {
   
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: `${base_url}/${module}/PostCAP/${userEmail}/`,
+        url: `${base_url}/${module}/PostCAP/${Email}/`,
         headers: { 
           'Content-Type': 'application/json', 
           'Accept': 'application/json'
@@ -72,9 +73,9 @@ async function update(episode) {
 
 
 
-async function remove(NameOfChapter) {
+async function remove(NameOfChapter,Email) {
     try {
-        const res = await axios.delete(`${base_url}/${module}/${userEmail}/deletechapter/${NameOfChapter}`)
+        const res = await axios.delete(`${base_url}/${module}/${Email}/deletechapter/${NameOfChapter}`)
         console.log({ res });
         return res.data
     } catch (err) {

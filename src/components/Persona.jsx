@@ -17,13 +17,13 @@ export default function Persona(props) {
     position: 'fixed', top: 30, left: 20, right: 0 }}/> </Button>
   </div>
   {props.pageNum=='mucillar' ? <div>
- <PersonaTemplate name={props.name} pageNum='mucillar'/>
+ <PersonaTemplate name={props.userFromDB.UserFirstName} pageNum='mucillar'/>
   </div> : ""}
   {props.pageNum=='balyanim' ? <div>
- <PersonaTemplate name={props.name} pageNum='balyanim'/>
+ <PersonaTemplate name={props.userFromDB.UserFirstName} pageNum='balyanim'/>
   </div> : ""}
   {props.pageNum=='chill' ? <div>
- <PersonaTemplate name={props.name} pageNum='chill'/>
+ <PersonaTemplate name={props.userFromDB.UserFirstName} pageNum='chill'/>
   </div> : ""}
   
   {/* <Button style={{backgroundColor:'#598e89'}} onClick={() => {props.continueClicked('userProfile')}} variant="contained">אני רוצה להתחיל</Button> */}
