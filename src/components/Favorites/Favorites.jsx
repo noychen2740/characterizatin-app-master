@@ -14,7 +14,7 @@ import Navigation from '../Navigation';
 import { favoriteservice } from '../../services/Favorites.service';
 
 
-function Favorites() {
+function Favorites(props) {
   const navigate = useNavigate();
 
   const [favoritess, setFavorites] = useState([]);
@@ -24,7 +24,7 @@ function Favorites() {
   }, []);
 
   const loadFavorites = async () => { //טעינת כל הפרקים הקיימים
-    const res = await favoriteservice.Getall();
+    const res = await favoriteservice.Getall(props.userEmailFromDB);
     console.log(res);
     setFavorites(res);
   };

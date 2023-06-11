@@ -14,12 +14,13 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import NavigationIcon from '@mui/icons-material/Navigation';
 import { FormControl, InputLabel, OutlinedInput } from '@mui/material'
 import { userService } from '../../services/user.service'
-function ChatPage() {
+function ChatPage(props) {
     const nav = useNavigate()
     const { userEmail2 } = useParams()
     const [chat, setChat] = useState()
     const [txt, setTxt] = useState('')
     const userEmail = "Benda669@gmail.com"
+    const Email=props.userEmailFromDB;
     useEffect(() => {
         loadChat()
     }, [])
@@ -82,9 +83,9 @@ function ChatPage() {
             <div className="messages">
                 {chat && chat.messages.map((m) => {
 
-                    return <div key={m.id} className={m.userEmail === userEmail ? "right-message message" : "left-message message"}   >
+                    return <div key={m.id} className={m.userEmail === Email ? "right-message message" : "left-message message"}   >
                         <span>  {m.txt}</span>
-                        <span className={m.userEmail === userEmail ? "time right-time" : "time left-time"}>10:47</span>
+                        <span className={m.userEmail === Email ? "time right-time" : "time left-time"}>10:47</span>
                     </div>
                 })}
             </div>

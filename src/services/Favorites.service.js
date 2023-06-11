@@ -17,9 +17,9 @@ const userEmail = 'Benda669@gmail.com'
 
 
 // https://localhost:44350/api/traveldiary/noycn27@gmail.com/chapters
-async function Getall() {
+async function Getall(Email) {
     try {
-        const res = await axios.get(`${base_url}/${module}/${userEmail}/Getall`)
+        const res = await axios.get(`${base_url}/${module}/${Email}/Getall`)
         console.log({ res });
         return res.data
     } catch (err) {

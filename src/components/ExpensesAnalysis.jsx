@@ -9,7 +9,7 @@ import { LocalFireDepartment, Percent, PointOfSale, QueryStats, Savings } from '
 import GraphsBar from './GraphsBar';
 import { getEnv } from '../utils/env'
 
-export default function ExpensesAnalysis() {
+export default function ExpensesAnalysis(props) {
   const nav=useNavigate();
   const {state}=useLocation();
   useEffect(()=>{
@@ -76,8 +76,9 @@ const [SumOfExpenseParty, setSumOfExpenseParty] = useState(0)
 //           },[])// הבאת פרטי המשתמש- שימוש לתקציב שכן נקבע בדף ניהול תקציב
           
 useEffect(()=>{
-const apiUrl= getEnv() + '/expenses/getsumofall/?email=Benda669@gmail.com'
-fetch(apiUrl, 
+// const apiUrl= getEnv() + '/expenses/getsumofall/?email=Benda669@gmail.com'
+const apiUrl= getEnv() + '/expenses/getsumofall/?email='
+fetch(apiUrl +props.userEmailFromDB, 
 {
   method: 'GET',
  headers: new Headers({

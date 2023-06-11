@@ -14,7 +14,7 @@ import Navigation from '../Navigation';
 
 
 
-function Episodes() {
+function Episodes(props) {
   const navigate = useNavigate();
 
   const [episodes, setEpisodes] = useState([]);
@@ -25,7 +25,7 @@ function Episodes() {
 
   const remove = async (id) => { //אפשרות למחיקת פרק לפי האי די שלו
     console.log({ id });
-    await chapterService.remove(id);
+    await chapterService.remove(id,props.userEmailFromDB);
     loadEpisodes();
   };
 
@@ -35,7 +35,7 @@ function Episodes() {
   };
 
   const loadEpisodes = async () => { //טעינת כל הפרקים הקיימים
-    const res = await chapterService.getAll();
+    const res = await chapterService.getAll(props.userEmailFromDB);
   console.log('getting  episodes',res);
     setEpisodes(res);
   };
@@ -70,9 +70,9 @@ function Episodes() {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button  onClick={() => edit(e.NameOfChapter)} size="small">עריכה</Button>
+        <Button  onClick={() => edit(e.NameOfChapter,props.userEmailFromDB)} size="small">עריכה</Button>
         <Button onClick={() => navigate(`/episode/${e.NameOfChapter}`)} size="small"> תצוגה</Button>
-        <Button onClick={() => remove(e.NameOfChapter)} size="small"> מחיקה</Button>
+        <Button onClick={() => remove(e.NameOfChapter,props.userEmailFromDB)} size="small"> מחיקה</Button>
       </CardActions>
     </Card>
     <br></br>

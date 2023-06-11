@@ -65,9 +65,10 @@ export default function Budget(props) {
 
   const [userInApp, setUserInApp] = useState('');// בתאכלס, משתמש ישלח כבר מעטר, עד החיבור מביא אותו בגט לפי מיקום
 
-useEffect(()=>{
-        const apiUrl= getEnv() + '/users/getemail/?email=Benda669@gmail.com'    
-        fetch(apiUrl, 
+        useEffect(()=>{
+        // const apiUrl= getEnv() + '/users/getemail/?email=Benda669@gmail.com'    
+        const apiUrl= getEnv() + '/users/getemail/?email='    
+        fetch(apiUrl+props.userEmailFromDB, 
           {
           method: 'GET',
           headers: new Headers({
@@ -101,8 +102,9 @@ useEffect(()=>{
      },[])
  
 useEffect(()=>{
-  const apiUrl= getEnv() + '/expenses/?email=Benda669@gmail.com'
-  fetch(apiUrl, 
+  // const apiUrl= getEnv() + '/expenses/?email=Benda669@gmail.com'
+  const apiUrl= getEnv() + '/expenses/?email='
+  fetch(apiUrl+props.userEmailFromDB, 
      {
      method: 'GET',
     headers: new Headers({
@@ -134,8 +136,9 @@ useEffect(()=>{
     
 
  const budgetChange=()=>{
-  const apiUrl= getEnv() + '/users/putemail/budget/?email=Benda669@gmail.com'
-  fetch(apiUrl, 
+  // const apiUrl= getEnv() + '/users/putemail/budget/?email=Benda669@gmail.com'
+  const apiUrl= getEnv() + '/users/putemail/budget/?email='
+  fetch(apiUrl+props.userEmailFromDB, 
     {
     method: 'PUT',
     body:JSON.stringify(value),

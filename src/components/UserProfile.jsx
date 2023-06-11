@@ -22,33 +22,8 @@ import { userService } from '../services/user.service';
 import { async } from '@firebase/util';
 
 export default function UserProfile(props) {
-  // const monKeyUpload=(req, fileKey, dest,max_mb=5,filesAllow=[".png",".jpg",".jpeg","gif"])=>{
-  //   return new Promise((resolce,reject)=>{
-  //     let myFile=req.files[fileKey];
-  //     if (!myFile) {
-  //       reject({msg:"you need to send file", code:"send_file"})
-  //     }
-  //     if (myFile.size<=1024*1024*max_mb) {
-  //       let extFile=path.extname(myFile.name)
-  //       if (filesAllow.includes(extFile)) {
-  //         dest=dest!=""?dest:myFile.name
-  //         myFile.mv("public/"+dest, (err)=>{
-  //           if (err) { return res.status(401).json({msg:"error",err})}
-  //           resolve({msg:"file upload"});
-  //         })
-  //       }
-  //       else{
-  //         reject({msg:"file not allowed",code:"ext" });
-  //       }
-  //     }
-  //     else{
-  //       reject({msg:"file too big, max"+max_mb+"mb!", code:"max"})
-  //     }
-  //   })
-  // }
+
   const nav = useNavigate();
-
-
 
   const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -95,9 +70,9 @@ export default function UserProfile(props) {
       const file = ev.target.files[0]
       console.log({ file });
       if (file) {
-        const url = await storageService.upload(file)
+        const url = await storageService.upload(file)//////////// בדיקה
         console.log(url)
-        const data=await userService.updateIMG(url)
+        const data=await userService.updateIMG(url,props.userEmailFromDB)
         console.log(data)
         setForm({ ...form, [name]: url });
       }
@@ -110,7 +85,7 @@ export default function UserProfile(props) {
   };
 
   useEffect(() => {
-    const email = props.email;
+    const email = props.userEmailFromDB;
     const apiUrl = getEnv() + '/users/getemail/?email='
     // const apiUrl='http://localhost:58583/api/users/1'
 
@@ -175,11 +150,11 @@ export default function UserProfile(props) {
             anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
             variant="dot"
           >
-            <Avatar sx={{ width: 64, height: 64 }} src= {userInApp.UserImg} style={{ display: 'flex' }} onClick={() => {alert('bdike')}} />
+            <Avatar sx={{ width: 64, height: 64 }} src= {props.userFromDB.UserImg} style={{ display: 'flex' }} onClick={() => {alert('bdike')}} />
     
           </StyledBadge>
 
-          <p style={{ color: 'black' }}>שלום {props.name} <br /> {props.email} </p>
+          <p style={{ color: 'black' }}>שלום {props.userFromDB.UserFirstName} <br /> {props.userEmailFromDB} </p>
         </Stack>
       </Box>
       <div>

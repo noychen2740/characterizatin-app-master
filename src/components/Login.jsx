@@ -79,7 +79,13 @@ function Login(props) {
                             message: "WOWWWW",
                             open: true
                         })
-                        // props.finishLogin()
+                       
+                        /////////////////////
+                        const sendEmail=()=>{props.getEmail(user.UserEmail)}
+                        sendEmail();///// העברת מייל לקומפוננטת האבא APP על מנת שנוכל לעבוד איתה בשאר האפליקציה
+                        const sendUser=()=>{props.getUser(user)}
+                        sendUser();/// העברת המשתמש כולו
+                        ////////////////////
                         nav('Questionnaire')
                     }
                     else {
