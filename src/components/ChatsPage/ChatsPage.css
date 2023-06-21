@@ -1,4 +1,5 @@
 .chat-page .chat {
     width: 100%;
     margin-bottom: 15px;
+    direction: rtl;
 }
