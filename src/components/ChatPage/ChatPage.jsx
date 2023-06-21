@@ -38,7 +38,7 @@ function ChatPage({ userFromDB }) {
                         const docRef = doc(db, "messages", messageId);
                         const docSnap = await getDoc(docRef);
                         const meesage = { ...docSnap.data(), id: messageId }
-                        if (res.userEmail1 !== meesage.userEmail)
+                        if (res.userEmail !== meesage.userEmail)
                             chatService.updateMsg(messageId, userFromDB.UserEmail)
                         return meesage
                     })

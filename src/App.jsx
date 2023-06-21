@@ -28,7 +28,7 @@ import ChatPage from './components/ChatPage/ChatPage';
 import Fab from '@mui/material/Fab';
 import ForumIcon from '@mui/icons-material/Forum';
 import { chatService } from './services/chat.service';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, onSnapshot } from 'firebase/firestore';
 import { userService } from './services/user.service';
 import { db } from './firebase';
 import { Badge } from '@mui/material';
@@ -118,28 +118,46 @@ function App() {
 
 
   const loadFullChats = async () => {
-    const chats = []
+    // const chats = []
     const users = await userService.getAll()
-    const querySnapshot = await chatService.loadFullChats()
-    querySnapshot.forEach(async (document) => {
-      const chat = { ...document.data(), id: document.id }
-      const currentUser = users.find(u => u.UserEmail === chat.userEmail2)
-      chat.messages = chat?.messages?.length ? chat.messages : [];
-      const promisses = await chat.messages.map(async (messageId) => {
-        const docRef = doc(db, "messages", messageId);
-        const docSnap = await getDoc(docRef);
-        const meesage = { ...docSnap.data(), id: messageId }
-        return meesage
-      })
-      chat.messages = await Promise.all(promisses);
-      console.log(chat);
-      const unreadMsgs = chat.messages.filter((m) => !m?.isRead && m.userEmail !== userEmailFromDB)
-      chat.isRead = !unreadMsgs.length
-      chat.username = `${currentUser?.UserFirstName} ${currentUser?.UserLastName}`
-      chats.push(chat);
-      const read = !chats.find(c => !c.isRead)
-      setIsRead(read)
-    });
+
+    const q = await chatService.getAllMsgs()
+
+    onSnapshot(q, async () => {
+      const querySnapshot = await chatService.loadFullChats()
+
+      const promises = await querySnapshot.docs.map(async (document) => {
+        const chat = { ...document.data(), id: document.id }
+        const currentUser = users.find(u => u.UserEmail === chat.userEmail2)
+        chat.messages = chat?.messages?.length ? chat.messages : [];
+        const promisses = await chat.messages.map(async (messageId) => {
+          const docRef = doc(db, "messages", messageId);
+          const docSnap = await getDoc(docRef);
+          const meesage = { ...docSnap.data(), id: messageId }
+          return meesage
+        })
+        chat.messages = await Promise.all(promisses);
+        const unreadMsgs = chat.messages.filter((m) => !m?.isRead && m.userEmail !== "noycn27@gmail.com")
+        chat.isRead = !unreadMsgs.length
+        chat.username = `${currentUser?.UserFirstName} ${currentUser?.UserLastName}`
+        console.log('added chat');
+        // chats.push(chat);
+        return chat
+      });
+
+
+      const chats = await Promise.all(promises)
+      const unReadChat = chats.find(c => {
+        console.log(c.isRead);
+        return !c.isRead
+      });
+      console.log({ unReadChat });
+      setIsRead(!unReadChat)
+
+      console.log('here after x');
+    })
+    //const querySnapshot = await chatService.loadFullChats()
+
   }
 
   useEffect(() => {
@@ -174,10 +192,6 @@ function App() {
         (error) => {
           console.log("err post=", error);
         });
-    window.onbeforeunload = function () {
-      localStorage.removeItem('user')
-    }
-
   }, [])
 
   ////////////////////////////////////////////////////////
@@ -235,7 +249,7 @@ function App() {
             <Route path="budget" element={<Budget userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} allExpenes={expensesInApp} bug={userFromDB.UserBudget} />} />
             {/* <Route path="budget" element={<Budget allExpenes={expensesInApp} bug={userInApp.UserBudget} />} /> */}
             {/* <Route path="budget" element={<Budget allExpenes={expensesInApp} continueClicked={(navigaitionTo) => { setPage(navigaitionTo)}} navToChange={(exNum) => {setNumOfExpense(exNum)}}/>}/>  */}
-            <Route path="profile" element={<UserProfile userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} personaType={userFromDB.UserType} />} />
+            <Route path="profile" element={userFromDB ? <UserProfile userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} personaType={userFromDB.UserType} /> : <div>Loading...</div>} />
             {/* <Route path="profile" element={<UserProfile name={userInApp.UserFirstName} email={userInApp.UserEmail} personaType={userInApp.UserType} />} /> */}
             {/* <Route path="profile" element={<UserProfile name={userInApp.UserFirstName} email={userInApp.UserEmail} personaType={userInApp.UserType} continueClicked={(navigaitionTo) => { setPage(navigaitionTo)}}/>}/>  */}
             {/* <Route path="NewExpense" element={<NewExpense title={numOfExpense.ExpensesTitle} price={numOfExpense.PricePerOne} amount={numOfExpense.NumberOfRepeatExpenses} ExKey={numOfExpense.ExpensesKey} Ecategory={numOfExpense.KindOfExpenses} />}/>  */}
