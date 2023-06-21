@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../App.css';
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -14,6 +14,8 @@ import { login } from '../utils/api'
 import { useNavigate } from 'react-router-dom';
 
 function Login(props) {
+
+ 
     const nav = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [loginFields, setLoginFields] = useState({
@@ -30,6 +32,13 @@ function Login(props) {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+
+    useEffect(() => {
+        const user= JSON.parse(localStorage.getItem('user'))
+        if(user){
+          nav('/profile')
+        }
+      }, [])
     return (
         <>
             <div className="App-login">
@@ -73,17 +82,18 @@ function Login(props) {
 
                     if (user) {
                         console.log({ user })
+                        localStorage.setItem('user', JSON.stringify(user))
                         // if user exist - login
                         setSnackbar({
                             severity: 'success',
                             message: "WOWWWW",
                             open: true
                         })
-                       
+
                         /////////////////////
-                        const sendEmail=()=>{props.getEmail(user.UserEmail)}
+                        const sendEmail = () => { props.getEmail(user.UserEmail) }
                         sendEmail();///// העברת מייל לקומפוננטת האבא APP על מנת שנוכל לעבוד איתה בשאר האפליקציה
-                        const sendUser=()=>{props.getUser(user)}
+                        const sendUser = () => { props.getUser(user) }
                         sendUser();/// העברת המשתמש כולו
                         ////////////////////
                         nav('Questionnaire')

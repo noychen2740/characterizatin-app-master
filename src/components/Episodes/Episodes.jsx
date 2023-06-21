@@ -21,7 +21,7 @@ function Episodes(props) {
 
   useEffect(() => { //טעינה של כל הפרקים
     loadEpisodes();
-  }, []);
+  }, [props.userEmailFromDB]);
 
   const remove = async (id) => { //אפשרות למחיקת פרק לפי האי די שלו
     console.log({ id });

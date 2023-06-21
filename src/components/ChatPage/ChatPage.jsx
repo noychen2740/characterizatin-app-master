@@ -8,19 +8,15 @@ import TopOfAplication from '../TopOfAplication';
 import Navigation from '../Navigation';
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import NavigationIcon from '@mui/icons-material/Navigation';
 import { FormControl, InputLabel, OutlinedInput } from '@mui/material'
 import { userService } from '../../services/user.service'
-function ChatPage(props) {
+function ChatPage({ userFromDB }) {
     const nav = useNavigate()
     const { userEmail2 } = useParams()
     const [chat, setChat] = useState()
     const [txt, setTxt] = useState('')
-    const userEmail = "Benda669@gmail.com"
-    const Email=props.userEmailFromDB;
+    // const Email=props.userEmailFromDB;
     useEffect(() => {
         loadChat()
     }, [])
@@ -30,35 +26,31 @@ function ChatPage(props) {
         setTxt(value)
     };
     async function loadChat() {
-        const q = await chatService.getChat(userEmail2)
+        const q = await chatService.getChat(userEmail2, userFromDB.UserEmail)
         let res;
 
         const unsubscribe = onSnapshot(q, async (querySnapshot) => {
-            console.log(querySnapshot.docs);
             if (querySnapshot?.docs?.length) {
                 querySnapshot.forEach(async (document) => {
-                    console.log(document.data());
                     res = { ...document.data(), id: document.id }
                     res.messages = res?.messages?.length ? res.messages : [];
                     const promisses = await res.messages.map(async (messageId) => {
                         const docRef = doc(db, "messages", messageId);
                         const docSnap = await getDoc(docRef);
                         const meesage = { ...docSnap.data(), id: messageId }
-                        console.log({ res });
                         if (res.userEmail1 !== meesage.userEmail)
-                            chatService.updateMsg(messageId)
+                            chatService.updateMsg(messageId, userFromDB.UserEmail)
                         return meesage
                     })
                     res.messages = await Promise.all(promisses)
                     const users = await userService.getAll()
                     const currentUser = users.find(u => u.UserEmail === res.userEmail2)
-                    console.log({ currentUser });
                     res.username = `${currentUser?.UserFirstName} ${currentUser?.UserLastName}`
                     setChat(res)
                 });
             } else {
-                console.log('else');
-                await chatService.createChat(userEmail2)
+                console.log('else', userFromDB);
+                await chatService.createChat(userEmail2, userFromDB.UserEmail)
                 loadChat()
             }
 
@@ -70,7 +62,7 @@ function ChatPage(props) {
 
     async function submit() {
         console.log('submit');
-        await chatService.createMsg(txt, chat)
+        await chatService.createMsg(txt, chat, userFromDB.UserEmail)
         setTxt('')
     }
 
@@ -82,13 +74,39 @@ function ChatPage(props) {
             <br></br>
             <div className="messages">
                 {chat && chat.messages.map((m) => {
+                    let time = '10:47'
 
-                    return <div key={m.id} className={m.userEmail === Email ? "right-message message" : "left-message message"}   >
+                    if (m?.createdAt) {
+                        const date = new Date(m.createdAt.seconds * 1000)
+                        date?.setSeconds(0)
+                        time = date?.toLocaleString()?.split(' ')[1]?.split(':');
+                        time = `${time[0]}:${time[1]}`
+                    }
+                    return <div key={m.id} className={m.userEmail === userFromDB.UserEmail ? "right-message message" : "left-message message"}   >
                         <span>  {m.txt}</span>
-                        <span className={m.userEmail === Email ? "time right-time" : "time left-time"}>10:47</span>
+                        <span className={m.userEmail === userFromDB.UserEmail ? "time right-time" : "time left-time"}>{time}</span>
                     </div>
                 })}
             </div>
+
+            {/* <div className="bottom">
+                <Box onClick={submit} className="send-btn" >
+                    <Fab variant="extended">
+                        <NavigationIcon  />
+                    </Fab>
+                </Box>
+                <FormControl  className='txt-input-chat' variant="outlined">
+                    <OutlinedInput
+                        onInput={handleChange}
+                        multiline={true}
+                        name='txt'
+                        label=""
+                        dir='rtl'
+                        value={txt}
+                    />
+                </FormControl>
+            </div> */}
+
 
             <Box onClick={submit} style={{ position: 'fixed', alignItems: 'center', bottom: 60, left: 280, right: 0 }} sx={{ '& > :not(style)': { m: 1 } }}>
                 <Fab variant="extended">
@@ -96,7 +114,6 @@ function ChatPage(props) {
                 </Fab>
             </Box>
             <FormControl sx={{ m: 1, }} className='txt-input' variant="outlined">
-                {/* <InputLabel htmlFor="outlined-adornment-email">תיאור הפרק</InputLabel> */}
                 <OutlinedInput
                     onInput={handleChange}
                     multiline={true}

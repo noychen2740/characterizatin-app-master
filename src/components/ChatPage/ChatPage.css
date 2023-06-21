@@ -2,7 +2,7 @@
     width: 100%;
     color: black;
     margin-bottom: 15px;
-    direction: rtl;
+    
 }
 
 .txt-input {
@@ -20,6 +20,7 @@
 .messages {
     display: flex;
     flex-direction: column;
+    margin-bottom: 40px;
 }
 
 .message {
@@ -59,4 +60,9 @@
 .right-time {
     margin-right: 10px;
     margin-left: 3px;
+}
+
+.bottom{
+    display: flex;
+    align-items: center;
 }
