@@ -7,7 +7,8 @@ export const chatService = {
     createMsg,
     createChat,
     updateMsg,
-    loadFullChats
+    loadFullChats,
+ getAllMsgs
 }
 
 
@@ -36,6 +37,10 @@ async function loadFullChats(userEmailFromDB) {
    
   return await getDocs(collection(db, "chats"));
   
+}
+
+async function getAllMsgs(){
+    return await query(collection(db, "messages"));
 }
 
 // 1.get all chats 

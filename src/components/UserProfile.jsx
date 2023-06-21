@@ -89,7 +89,7 @@ export default function UserProfile(props) {
     const apiUrl = getEnv() + '/users/getemail/?email='
     // const apiUrl='http://localhost:58583/api/users/1'
 
-    fetch(apiUrl + email,
+    fetch(apiUrl + props.userFromDB.UserEmail,
       {
         method: 'GET',
         headers: new Headers({
