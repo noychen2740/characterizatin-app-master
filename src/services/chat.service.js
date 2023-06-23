@@ -1,5 +1,5 @@
 import { db } from "../firebase";
-import { addDoc, collection, doc, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
+import { addDoc, and, collection, doc, getDoc, getDocs, or, query, updateDoc, where } from "firebase/firestore";
 import { userService } from "./user.service";
 export const chatService = {
     getAllChats,
@@ -7,10 +7,11 @@ export const chatService = {
     createMsg,
     createChat,
     updateMsg,
-    loadFullChats
+    loadFullChats,
+ getAllMsgs
 }
 
-const userEmail = 'Benda669@gmail.com'
+
 
 async function getAllChats() {
     try {
@@ -32,30 +33,14 @@ async function getAllChats() {
     }
 }
 
-async function loadFullChats() {
-    const chats = []
-    const users = await userService.getAll()
-    console.log({ users });
-    const querySnapshot = await getDocs(collection(db, "chats"));
-    querySnapshot.forEach(async (document) => {
-        const chat = { ...document.data(), id: document.id }
-        const currentUser = users.find(u => u.UserEmail === chat.userEmail2)
-        console.log({ currentUser });
-       chat.messages=chat?.messages?.length? chat.messages:[];
-        const promisses = await chat.messages.map(async (messageId) => {
-            const docRef = doc(db, "messages", messageId);
-            const docSnap = await getDoc(docRef);
-            const meesage = { ...docSnap.data(), id: messageId }
-            return meesage
-        })
-        chat.messages = await Promise.all(promisses);
-        const unreadMsgs = chat.messages.filter((m) => !m?.isRead&&m.userEmail!==userEmail)
-        console.log(unreadMsgs);
-        chat.isRead = !unreadMsgs.length
-        chat.username = `${currentUser?.UserFirstName} ${currentUser?.UserLastName}`
-        chats.push(chat);
-        console.log({chats});
-    });
+async function loadFullChats(userEmailFromDB) {
+   
+  return await getDocs(collection(db, "chats"));
+  
+}
+
+async function getAllMsgs(){
+    return await query(collection(db, "messages"));
 }
 
 // 1.get all chats 
@@ -63,19 +48,16 @@ async function loadFullChats() {
 //     3.get the chat the have the unread msg and present on the screen.
 
 
-async function createMsg(txt, chat) {
+async function createMsg(txt, chat, userEmailFromDB) {
     // create msg into firebase collection
-    console.log({ txt, chat });
     const docRef = await addDoc(collection(db, "messages"), {
         txt,
-        userEmail,
+        userEmail: userEmailFromDB,
         isRead: false,
         createdAt: new Date()
     });
-    console.log({ docRef });
     // get the current  chat
     const chatRef = doc(db, "chats", chat.id);
-    console.log({ chatRef })
     //update the current chat with the new msg
     await updateDoc(chatRef, {
         messages: [...chat.messages?.map(m => m.id) || [], docRef.id]
@@ -85,19 +67,28 @@ async function createMsg(txt, chat) {
 
 
 async function updateMsg(msgId) {
-    console.log({msgId});
     const messageRef = doc(db, "messages", msgId);
     await updateDoc(messageRef, {
         isRead: true
     });
 }
 
-async function getChat(userEmail2) {
+async function getChat(userEmail2, userEmailFromDB) {
 
     try {
 
 
-        return query(collection(db, "chats"), where("userEmail2", "==", userEmail2));
+        return query(collection(db, "chats"),
+            or(
+                and(
+                    where("userEmail2", "==", userEmail2),
+                    where("userEmail", "==", userEmailFromDB)
+                ),
+                and(
+                    where("userEmail2", "==", userEmailFromDB),
+                    where("userEmail", "==", userEmail2)
+                ))
+        );
 
 
         // const chatSnapShot = await getDocs(q);
@@ -110,10 +101,10 @@ async function getChat(userEmail2) {
 }
 
 
-async function createChat(userEmail2) {
+async function createChat(userEmail2, userEmailFromDB) {
     const docRef = await addDoc(collection(db, "chats"), {
         userEmail2,
-        userEmail,
+        userEmail: userEmailFromDB,
         messages: []
     });
 }
