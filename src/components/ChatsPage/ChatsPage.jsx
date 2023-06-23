@@ -12,7 +12,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { userService } from '../../services/user.service'
-function ChatsPage() {
+function ChatsPage({userFromDB}) {
   const nav = useNavigate()
   // const [chats, setChats] = useState([])
   const [users, setUsers] = useState([])

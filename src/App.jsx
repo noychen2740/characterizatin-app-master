@@ -28,7 +28,40 @@ import ChatPage from './components/ChatPage/ChatPage';
 import Fab from '@mui/material/Fab';
 import ForumIcon from '@mui/icons-material/Forum';
 import { chatService } from './services/chat.service';
-
+import { doc, getDoc, onSnapshot } from 'firebase/firestore';
+import { userService } from './services/user.service';
+import { db } from './firebase';
+import { Badge } from '@mui/material';
+import styled from '@emotion/styled';
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    backgroundColor: '#f00',
+    color: '#f00',
+    // boxShadow:'0 0 0 20px',
+    boxShadow: '0 0 0 2px ${theme.palette.background.paper}',
+    '&::after': {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      borderRadius: '50%',
+      animation: 'ripple 1.2s infinite ease-in-out',
+      border: '1px solid currentColor',
+      content: '""',
+    },
+  },
+  '@keyframes ripple': {
+    '0%': {
+      transform: 'scale(.8)',
+      opacity: 1,
+    },
+    '100%': {
+      transform: 'scale(2.4)',
+      opacity: 0,
+    },
+  },
+}));
 function App() {
   const [userInApp, setUserInApp] = useState('');// בתאכלס, משתמש ישלח כבר מעטר, עד החיבור מביא אותו בגט לפי מיקום
   const [expensesInApp, setExpensesInApp] = useState('');/// הבאה בצורה אסינכורית את כל ההוצאות של המשתמש
@@ -85,10 +118,50 @@ function App() {
 
 
   const loadFullChats = async () => {
-    await chatService.loadFullChats()
+    // const chats = []
+    const users = await userService.getAll()
+
+    const q = await chatService.getAllMsgs()
+
+    onSnapshot(q, async () => {
+      const querySnapshot = await chatService.loadFullChats()
+
+      const promises = await querySnapshot.docs.map(async (document) => {
+        const chat = { ...document.data(), id: document.id }
+        const currentUser = users.find(u => u.UserEmail === chat.userEmail2)
+        chat.messages = chat?.messages?.length ? chat.messages : [];
+        const promisses = await chat.messages.map(async (messageId) => {
+          const docRef = doc(db, "messages", messageId);
+          const docSnap = await getDoc(docRef);
+          const meesage = { ...docSnap.data(), id: messageId }
+          return meesage
+        })
+        chat.messages = await Promise.all(promisses);
+        const unreadMsgs = chat.messages.filter((m) => !m?.isRead && m.userEmail !== "noycn27@gmail.com")
+        chat.isRead = !unreadMsgs.length
+        chat.username = `${currentUser?.UserFirstName} ${currentUser?.UserLastName}`
+        console.log('added chat');
+        // chats.push(chat);
+        return chat
+      });
+
+
+      const chats = await Promise.all(promises)
+      const unReadChat = chats.find(c => {
+        console.log(c.isRead);
+        return !c.isRead
+      });
+      console.log({ unReadChat });
+      setIsRead(!unReadChat)
+
+      console.log('here after x');
+    })
+    //const querySnapshot = await chatService.loadFullChats()
+
   }
 
   useEffect(() => {
+    loadUser()
     const apiUrl = getEnv() + '/expenses/?email=Benda669@gmail.com'
     fetch(apiUrl,
       {
@@ -119,25 +192,35 @@ function App() {
         (error) => {
           console.log("err post=", error);
         });
-
   }, [])
 
-////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
 
-const [userEmailFromDB, setUserEmailFromDB] = useState('');
-const [userFromDB, setUserFromDB] = useState('');//שינוי של עומר לשרשור היוזר
+  const [userEmailFromDB, setUserEmailFromDB] = useState('');
+  const [userFromDB, setUserFromDB] = useState('');//שינוי של עומר לשרשור היוזר
 
-const getUserEmail=(email)=>{
-  setUserEmailFromDB(email)
-  console.log('get send email !!')
-  console.log(email)
- }
+  const getUserEmail = (email) => {
+    setUserEmailFromDB(email)
+    console.log('get send email !!')
+    console.log(email)
+  }
 
- const getUser =(user)=>{
-  setUserFromDB(user)
-  console.log('get send user !!')
-  console.log(user)
- }
+  const getUser = (user) => {
+    setUserFromDB(user)
+    console.log('get send user !!')
+    console.log(user)
+  }
+
+  const loadUser = () => {
+    const user = JSON.parse(localStorage.getItem('user'))
+    if (user) {
+      setUserFromDB(user)
+      setUserEmailFromDB(user.UserEmail)
+
+    } else {
+      nav('/')
+    }
+  }
 
 
 
@@ -148,9 +231,9 @@ const getUserEmail=(email)=>{
         <div className="App-characterizatin">
 
           <Routes>
-            <Route path="/" element={<Login getEmail={getUserEmail} getUser={getUser}/>} />
+            <Route path="/" element={<Login getEmail={getUserEmail} getUser={getUser} />} />
             <Route path="signup" element={<Signup />} />
-            <Route path="Questionnaire" element={<Questionnaire userFromDB={userFromDB} userEmailFromDB={userEmailFromDB}/>} />
+            <Route path="Questionnaire" element={<Questionnaire userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             {/* <Route path="Questionnaire" element={<Questionnaire name={userInApp.UserFirstName} />} /> */}
             <Route path="firstQues" element={<Question pageNum='first' userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             <Route path="secondQues" element={<Question userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} pageNum='second' />} />
@@ -161,18 +244,18 @@ const getUserEmail=(email)=>{
             {/* <Route path="PersonaM" element={<Persona name={userInApp.UserLastName} pageNum='mucillar' />} />
             <Route path="PersonaB" element={<Persona name={userInApp.UserFirstName} pageNum='balyanim' />} />
             <Route path="PersonaC" element={<Persona name={userInApp.UserFirstName} pageNum='chill' />} /> */}
-            <Route path="userProfile" element={<UserProfile userFromDB={userFromDB} userEmailFromDB={userEmailFromDB}/>} />
+            <Route path="userProfile" element={<UserProfile userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             {/* <Route path="userProfile" element={<UserProfile name={userInApp.UserFirstName} email={userInApp.UserEmail} />} /> */}
             <Route path="budget" element={<Budget userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} allExpenes={expensesInApp} bug={userFromDB.UserBudget} />} />
             {/* <Route path="budget" element={<Budget allExpenes={expensesInApp} bug={userInApp.UserBudget} />} /> */}
             {/* <Route path="budget" element={<Budget allExpenes={expensesInApp} continueClicked={(navigaitionTo) => { setPage(navigaitionTo)}} navToChange={(exNum) => {setNumOfExpense(exNum)}}/>}/>  */}
-            <Route path="profile" element={<UserProfile userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} personaType={userFromDB.UserType} />} />
+            <Route path="profile" element={userFromDB ? <UserProfile userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} personaType={userFromDB.UserType} /> : <div>Loading...</div>} />
             {/* <Route path="profile" element={<UserProfile name={userInApp.UserFirstName} email={userInApp.UserEmail} personaType={userInApp.UserType} />} /> */}
             {/* <Route path="profile" element={<UserProfile name={userInApp.UserFirstName} email={userInApp.UserEmail} personaType={userInApp.UserType} continueClicked={(navigaitionTo) => { setPage(navigaitionTo)}}/>}/>  */}
             {/* <Route path="NewExpense" element={<NewExpense title={numOfExpense.ExpensesTitle} price={numOfExpense.PricePerOne} amount={numOfExpense.NumberOfRepeatExpenses} ExKey={numOfExpense.ExpensesKey} Ecategory={numOfExpense.KindOfExpenses} />}/>  */}
-            <Route path="NewExpense" element={<NewExpense userFromDB={userFromDB} userEmailFromDB={userEmailFromDB}/>} />
+            <Route path="NewExpense" element={<NewExpense userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             {/* <Route path="NewExpense" element={<NewExpense />} /> */}
-            <Route path="Analysis" element={<ExpensesAnalysis userFromDB={userFromDB} userEmailFromDB={userEmailFromDB}/>} />
+            <Route path="Analysis" element={<ExpensesAnalysis userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             {/* <Route path="Analysis" element={<ExpensesAnalysis />} /> */}
             <Route path="map" element={<Map />} />
             {/* <Route path="map" element={<Map />} /> */}
@@ -183,7 +266,7 @@ const getUserEmail=(email)=>{
             {/* <Route path='favorite/:id' element={<FavoritePage />} /> */}
             <Route path='create-episode/:NameOfChapter' element={<CreateEpisode userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             {/* <Route path='create-episode/:NameOfChapter' element={<CreateEpisode />} /> */}
-            <Route path='create-episode' element={<CreateEpisode userFromDB={userFromDB} userEmailFromDB={userEmailFromDB}  />} />
+            <Route path='create-episode' element={<CreateEpisode userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             {/* <Route path='create-episode' element={<CreateEpisode  />} /> */}
             <Route path='episode/:NameOfChapter' element={<EpisodePage userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             {/* <Route path='episode/:NameOfChapter' element={<EpisodePage />} /> */}
@@ -192,7 +275,7 @@ const getUserEmail=(email)=>{
             <Route path='ThanksPage' element={<ThanksPage />} />
             <Route path='Diary' element={<Diary />} />
             <Route path='FeedbackPage/:FeedbackKey' element={<FeedbackPage />} />
-            <Route path='chats' element={<ChatsPage />} />
+            <Route path='chats' userFromDB={userFromDB} element={<ChatsPage />} />
             {/* <Route path='chats' element={<ChatsPage />} /> */}
             <Route path='chat/:userEmail2' element={<ChatPage userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             {/* <Route path='chat/:userEmail2' element={<ChatPage />} /> */}
@@ -222,8 +305,17 @@ price={numOfExpense.PricePerOne} amount={numOfExpense.NumberOfRepeatExpenses} Ex
 
         </div>
         {chatVisiable && <div className="chat-btn" >
-          <ForumIcon onClick={() => nav('chats')} />
-          {!isRead && <div className="notification">N</div>}
+          {!isRead ? <StyledBadge
+            overlap="circular"
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+            variant="dot"
+          >
+            <div className="chat-btn-container">
+              <ForumIcon onClick={() => nav('chats')} />
+            </div>
+          </StyledBadge> : <div className="chat-btn-container">
+            <ForumIcon onClick={() => nav('chats')} />
+          </div>}
         </div>}
 
 
