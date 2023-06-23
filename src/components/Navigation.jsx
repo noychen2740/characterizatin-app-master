@@ -46,7 +46,7 @@ const handleChange = (event, newValue) => {
             onClick={() => {nav('/profile')}}
           />
           <BottomNavigationAction
-            label="ניהול תקציב"
+            label="תקציב"
             value="budget"
             icon={<CurrencyExchange />}
             //  onClick={navTo}
