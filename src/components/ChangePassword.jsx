@@ -3,7 +3,7 @@ import React from 'react'
 import { useRef } from 'react'
 import emailjs from "@emailjs/browser"
 import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getEnv } from '../utils/env';
 import TopOfAplication from './TopOfAplication';
 
@@ -51,7 +51,7 @@ export default function ChangePassword() {
         <>              
         <TopOfAplication label='שכחתי סיסמא' />
     <section>
-        <div className="App-login">
+        <div className="App-login" style={{direction:'rtl'}}>
                 <img className="App-logo" src="forgetPassword.jpg" alt="sad" />
 
             <form ref={form} onSubmit={sendEmail} 
@@ -67,8 +67,10 @@ export default function ChangePassword() {
                <br />
                <br />
 
-                <button type='submit' className='--btn-- btn-primary' >שלח אליי סיסמא חדשה</button>
+                <button type='submit' className='--btn-- btn-primary' >שלחו אליי סיסמא חדשה</button>
             </form>
+            <br />
+            <Link onClick={() => nav("/")}>נזכרתי! תחזירו אותי להתחברות</Link>
 
         </div>
     </section>
