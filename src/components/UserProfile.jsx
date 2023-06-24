@@ -124,15 +124,15 @@ export default function UserProfile(props) {
   useEffect(() => {
 
     if (userInApp.UserType == 'מוצילר') {
-      setCheckType(<HikingIcon />)
+      setCheckType(<HikingIcon onClick={() => { nav('/Questionnaire') }}  />)
     }
     if (userInApp.UserType == 'בליין') {
 
-      setCheckType(<Celebration />)
+      setCheckType(<Celebration onClick={() => { nav('/Questionnaire') }}  />)
     }
     if (userInApp.UserType == 'ציל') {
 
-      setCheckType(<SelfImprovement />)
+      setCheckType(<SelfImprovement onClick={() => { nav('/Questionnaire') }}  />)
     }
 
   }, [userInApp.UserType])/// מתעדכן לאחר כל שינוי של הטייפ של המתשמש בדאטה בייס
@@ -216,7 +216,8 @@ export default function UserProfile(props) {
                   <b> {"אופיינת כ-" + userInApp.UserType}</b>
                   <br />
                 </Typography>
-                {"לחץ על האייקון על מנת ללמוד עוד אודות איפיון המערכת והמשמעות עבורך"}
+                {"חושב שהאפיון שקיבלת לא מתאים לך? לחץ על האייקון למענה חוזר עליו"}
+                {/* {"לחץ על האייקון על מנת ללמוד עוד אודות איפיון המערכת והמשמעות עבורך"} */}
               </React.Fragment>
             }
           />
