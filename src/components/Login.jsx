@@ -41,10 +41,10 @@ function Login(props) {
       }, [])
     return (
         <>
-            <div className="App-login">
+            <div className="App-login" style={{direction:'rtl'}}>
                 <img className="App-logo" src="logo.png" alt="sad" />
                 <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-email">Email</InputLabel>
+                    <InputLabel htmlFor="outlined-adornment-email">אימייל</InputLabel>
                     <OutlinedInput
                         error={!!loginFields.email && !validateEmail(loginFields.email)}
                         onBlur={ev => { setLoginFields({ ...loginFields, email: ev.target.value }) }}
@@ -54,7 +54,7 @@ function Login(props) {
                     />
                 </FormControl>
                 <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                    <InputLabel htmlFor="outlined-adornment-password">סיסמא</InputLabel>
                     <OutlinedInput
                         id="outlined-adornment-password"
                         type={showPassword ? 'text' : 'password'}
@@ -96,7 +96,7 @@ function Login(props) {
                         const sendUser = () => { props.getUser(user) }
                         sendUser();/// העברת המשתמש כולו
                         ////////////////////
-                        nav('Questionnaire')
+                        nav('userProfile')
                     }
                     else {
                         console.log("users wasnt found!")
@@ -111,10 +111,12 @@ function Login(props) {
 
 
                 }
-                } variant="contained">Login</Button>
+                } variant="contained">התחברות</Button>
             </div>
             {/* <Link onClick={() => { props.signupClicked() }}>Signup</Link> */}
-            <Link onClick={() => { nav('signup') }}>Signup</Link>
+            <Link onClick={() => { nav('signup') }}>עדיין לא נרשמתי</Link>
+            <br />
+            <Link onClick={() => { nav('ChangePassword') }}>שכחתי סיסמא</Link>
             <Snackbar snackbar={snackbar}></Snackbar>
         </>
     );

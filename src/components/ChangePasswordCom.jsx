@@ -14,14 +14,16 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { signup } from '../utils/api';
+import { signup2 } from '../utils/api';
 import { useNavigate } from 'react-router-dom';
+import TopOfAplication from './TopOfAplication';
+import Navigation from './Navigation';
 
-function Signup(props) {
+function ChangePasswordCom(props) {
     const nav=useNavigate();
     const [showPassword1, setShowPassword1] = useState(false);
     const [showPassword2, setShowPassword2] = useState(false);
     const [loginFields, setLoginFields] = useState({
-        email: '',
         first_name: '',
         last_name: '',
         password1: '',
@@ -41,16 +43,20 @@ function Signup(props) {
     };
 
     const formValidated = () => {
-        const { email, first_name, last_name, tos, password1, password2 } = loginFields;
-        const isValid = email && first_name && last_name && tos && password1 === password2;
+        const { first_name, last_name, tos, password1, password2 } = loginFields;
+        const isValid = first_name && last_name && tos && password1 === password2;
         return isValid;
     }
 
 
     return (
+        <>
+              <TopOfAplication label='שינוי פרטים אישיים' />
+
+            {/* <img className="App-logo" src="logo.png" style={{ marginTop: '5px', width: '120px' }} /> */}
         <div className="App-login" style={{direction:'rtl'}}>
-            <img className="App-logo" src="logo.png" />
-            <FormControl sx={{ m: 1, width: 'calc(100% - 16px)'}} variant="outlined">
+            <img className="App-logo" src="changeDetels.png" />
+            <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-first_name">שם פרטי</InputLabel>
                 <OutlinedInput
                     error={!loginFields.first_name && loginFields.first_name !== ''}
@@ -70,8 +76,8 @@ function Signup(props) {
                     label="Last name"
                 />
             </FormControl>
-            <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-email">אימייל</InputLabel>
+            {/* <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-email">Email</InputLabel>
                 <OutlinedInput
                     error={!!loginFields.email && !validateEmail(loginFields.email)}
                     onBlur={ev => { setLoginFields({ ...loginFields, email: ev.target.value }) }}
@@ -79,9 +85,9 @@ function Signup(props) {
                     type="email"
                     label="Email"
                 />
-            </FormControl>
+            </FormControl> */}
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password1">סיסמא</InputLabel>
+                <InputLabel htmlFor="outlined-adornment-password1">סיסמא חדשה</InputLabel>
                 <OutlinedInput
                     id="outlined-adornment-password1"
                     type={showPassword1 ? 'text' : 'password'}
@@ -124,10 +130,10 @@ function Signup(props) {
                 />
             </FormControl>
             <FormGroup>
-                <FormControlLabel style={{ color: "#333" }} control={<Checkbox onChange={(ev) => { setLoginFields({ ...loginFields, tos: ev.target.checked }) }} />} label="אני מאשר שפרטי נכונים" />
+                <FormControlLabel style={{ color: "#333" }} control={<Checkbox onChange={(ev) => { setLoginFields({ ...loginFields, tos: ev.target.checked }) }} />} label="אני מאשר את שינוי הפרטים" />
             </FormGroup>
             <Button disabled={!formValidated()} onClick={async () => {
-                const msg = await signup(loginFields);
+                const msg = await signup2(loginFields,props.userEmailFromDB,props.userFromDB);
                 if (!msg.includes('exist')) {
                     // if user created - login
                     setSnackbar({
@@ -136,7 +142,7 @@ function Signup(props) {
                         open: true
                     })
                     // props.finishSignUp()
-                    nav('/Questionnaire')
+                    nav('/userProfile')
                 } else {
                     // else show error message and do nothing
                     setSnackbar({
@@ -146,10 +152,14 @@ function Signup(props) {
                     })
                 }
 
-            }} variant="contained">Signup</Button>
+            }} variant="contained">שינוי פרטים</Button>
             <Snackbar snackbar={snackbar}></Snackbar>
         </div>
+        <Navigation pagNav={'profile'} />
+
+        </>
+
     );
 }
 
-export default Signup;
+export default ChangePasswordCom;

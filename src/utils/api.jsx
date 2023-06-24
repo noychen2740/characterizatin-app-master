@@ -39,3 +39,33 @@ export const signup = async (loginFields) => {
         return response.text()
     }
 }
+
+export const signup2 = async (loginFields,emailFromChangCom, userFromDB) => {
+    const response = await fetch(`${getEnv()}/users/putall/?email=`+emailFromChangCom, {
+        method: 'put',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify({
+            UserPassword: loginFields.password1,
+            UserLastName: loginFields.last_name,
+            UserFirstName: loginFields.first_name,
+            // UserType:'ציל',
+            UserType:userFromDB.UserType,
+            UserImg:userFromDB.UserImg,
+            UserBudget:userFromDB.UserBudget,
+            Numberoffrieds:userFromDB.Numberoffrieds,
+            // Numberoffrieds:2,
+            UserEmail:userFromDB.UserEmail,
+            UserTimeTraveling:userFromDB.UserTimeTraveling,
+            Userphonenumber:userFromDB.Userphonenumber
+
+        })
+    })
+    if (!response.ok) {
+        throw new Error('Data could not be fetched!')
+    } else {
+        return response.text()
+    }
+}
+
