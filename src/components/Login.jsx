@@ -96,7 +96,7 @@ function Login(props) {
                         const sendUser = () => { props.getUser(user) }
                         sendUser();/// העברת המשתמש כולו
                         ////////////////////
-                        nav('Questionnaire')
+                        nav('userProfile')
                     }
                     else {
                         console.log("users wasnt found!")
@@ -111,10 +111,12 @@ function Login(props) {
 
 
                 }
-                } variant="contained">Login</Button>
+                } variant="contained">התחברות</Button>
             </div>
             {/* <Link onClick={() => { props.signupClicked() }}>Signup</Link> */}
-            <Link onClick={() => { nav('signup') }}>Signup</Link>
+            <Link onClick={() => { nav('signup') }}>עדיין לא נרשמתי</Link>
+            <br />
+            <Link onClick={() => { nav('ChangePassword') }}>שכחתי סיסמא</Link>
             <Snackbar snackbar={snackbar}></Snackbar>
         </>
     );

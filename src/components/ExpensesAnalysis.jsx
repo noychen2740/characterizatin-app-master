@@ -5,9 +5,11 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import Navigation from './Navigation'
 import ProgressBar from './ProgressBar'
 import TopOfAplication from './TopOfAplication'
-import { LocalFireDepartment, Percent, PointOfSale, QueryStats, Savings } from '@mui/icons-material'
+import { ArrowDropDown, ArrowDropUp, LocalFireDepartment, Percent, PointOfSale, QueryStats, Savings } from '@mui/icons-material'
 import GraphsBar from './GraphsBar';
 import { getEnv } from '../utils/env'
+import { Kpi } from './Kpi'
+import KpiChart from './KpiChart'
 
 export default function ExpensesAnalysis(props) {
   const nav=useNavigate();
@@ -38,43 +40,17 @@ const [SumOfExpenseParty, setSumOfExpenseParty] = useState(0)
     }
   }/// שליטה על הצגה וסגיה של ניתוחים
 
-//  useEffect(()=>{
-//         const apiUrl='http://localhost:65095/api/users/getemail/?email=Benda669@gmail.com'
-//         // const apiUrl='http://localhost:58583/api/users/1'
-    
-//         fetch(apiUrl, 
-//           {
-//           method: 'GET',
-//           headers: new Headers({
-//             'Content-Type':'application/json; charset=UTF-8',
-//             'Accept':'application/json; charset=UTF-8',
-//             })
-            
-//           })
-//         .then(response => {
-//          console.log('response= ',response);
-//          console.log('response statuse=', response.status);
-//          console.log('response.ok=', response.ok)
-        
-//         return response.json()
-//         })
-//         .then(
-//           (result)=>{
-//             console.log("fetch get user by id=", result);
-//             console.log("result=", result.UserFirstName);
-//             setUserInApp(result); // השמה של המשתמש שהגיע מהדאטה בייס להמשך עבודה בצד שרת
-//             setUserBudget(result.UserBudget)
-//             console.log('first name=', result.UserFirstName)
-//             console.log('first name=', result.UserLastName)
-//             console.log('budget=', result.UserBudget)
 
-//           },
-//         (error) => {
-//         console.log("err post=", error);
-//         });     
-    
-//           },[])// הבאת פרטי המשתמש- שימוש לתקציב שכן נקבע בדף ניהול תקציב
-          
+////שייך להחזקת הממוצעים להשוואת צרכנות
+const [AvgOfExpenseAtraction, setAvgOfExpenseAtraction] = useState(0)
+const [AvgOfExpenseSleep, setAvgOfExpenseSleep] = useState(0)
+const [AvgOfExpenseDrugs, setAvgOfExpenseDrugs] = useState(0)
+const [AvgOfExpenseFood, setAvgOfExpenseFood] = useState(0)
+const [AvgOfExpenseCasino, setAvgOfExpenseCasino] = useState(0)
+const [AvgOfExpenseParty, setAvgfExpenseParty] = useState(0)
+const [AvgOfExpense, setAvgOfExpense] = useState(1);/// הוצאות המשתמש
+
+
 useEffect(()=>{
 // const apiUrl= getEnv() + '/expenses/getsumofall/?email=Benda669@gmail.com'
 const apiUrl= getEnv() + '/expenses/getsumofall/?email='
@@ -104,6 +80,38 @@ setSumOfExpenseFood(result.SumOfExpenseFood)
 setSumOfExpenseCasino(result.SumOfExpenseCasino)
 setSumOfExpenseParty(result.SumOfExpenseParty)
 setSumExpense(result.SumOfExpense)
+ },
+ (error) => {
+ console.log("err post=", error);
+ });     
+
+///// הוספה של ממוצעי צריכה
+const apiUrlA= getEnv() + '/expenses/statusOfExpenses/?email='
+fetch(apiUrlA +props.userEmailFromDB, 
+{
+  method: 'GET',
+ headers: new Headers({
+'Content-Type':'application/json; charset=UTF-8',
+'Accept':'application/json; charset=UTF-8',
+ }),
+     
+})
+.then(response => {
+console.log('response= ',response);
+console.log('response statuse=', response.status);
+console.log('response.ok=', response.ok)
+return response.json()
+})
+   .then(
+ (result)=>{
+ console.log("fetch get  sumOfExpense =", result);
+setAvgOfExpenseAtraction(result.SumOfExpenseAtraction); // השמה של המשתמש שהגיע מהדאטה בייס להמשך עבודה בצד שרת
+setAvgOfExpenseSleep(result.SumOfExpenseSleep)
+setAvgOfExpenseDrugs(result.SumOfExpenseDrugs)
+setAvgOfExpenseFood(result.SumOfExpenseFood)
+setAvgOfExpenseCasino(result.SumOfExpenseCasino)
+setAvgfExpenseParty(result.SumOfExpenseParty)
+setAvgOfExpense(result.SumOfExpense)
  },
  (error) => {
  console.log("err post=", error);
@@ -211,6 +219,78 @@ const DataPrecent = [
       {/* <Button style={{marginLeft:'auto', marginRight:'auto',backgroundColor:'#598e89',borderRadius:'90%'}} size='small' onClick={() => {booleanop(boolean)}} variant="contained" > {<QueryStats/>}</Button> */}
       </CardActions>
     </Card>
+
+<Card>
+  <KpiChart AvgOfExpenseDrugs={AvgOfExpenseDrugs} AvgOfExpenseFood={AvgOfExpenseFood}
+  AvgOfExpenseAtraction={AvgOfExpenseAtraction} AvgOfExpenseSleep={AvgOfExpenseSleep}
+  AvgOfExpenseCasino={AvgOfExpenseCasino} AvgOfExpenseParty={AvgOfExpenseParty} SumOfExpenseAtraction={SumOfExpenseAtraction}
+  SumOfExpenseSleep={SumOfExpenseSleep } SumOfExpenseDrugs={SumOfExpenseDrugs} SumOfExpenseFood={SumOfExpenseFood}
+  SumOfExpenseCasino={SumOfExpenseCasino} SumOfExpenseParty={SumOfExpenseParty}/>
+</Card>
+
+    <Card sx={{ minWidth: 275  }} style={{marginTop:'60px'}} >
+      <CardContent >
+      <h4>צריכת משתמשים דומים לי</h4>
+
+      <h5>אטרקציות</h5>
+      {SumOfExpenseAtraction>AvgOfExpenseAtraction ?
+        <Stack direction="column" spacing={2} style={{marginTop:'-25px'}}>
+          <Chip label={` % ${parseInt(((SumOfExpenseAtraction-AvgOfExpenseAtraction))/AvgOfExpenseAtraction*100)} אטרקציות`} icon={<ArrowDropUp style={{color:'red'}} />}  color="error" variant="outlined" />
+          
+          </Stack>
+          : <Stack direction="column" spacing={2} style={{marginTop:'-25px'}}>
+          <Chip label={` % ${parseInt(((SumOfExpenseAtraction-AvgOfExpenseAtraction))/AvgOfExpenseAtraction*100)} אטרקציות`} icon={<ArrowDropDown style={{color:'green'}} />}  color="success" variant="outlined" />
+          </Stack>}
+
+          <h5>לינה</h5>
+          {SumOfExpenseSleep>AvgOfExpenseSleep ?
+          <Stack direction="column" spacing={2} style={{marginTop:'-25px'}}>
+          <Chip icon={<ArrowDropUp style={{color:'red'}} />} label={` % ${parseInt(((SumOfExpenseSleep-AvgOfExpenseSleep))/AvgOfExpenseSleep*100)} `} color="error" variant="outlined" />
+          </Stack>
+          :<Stack direction="column" spacing={2} style={{marginTop:'-25px'}}>
+          <Chip icon={<ArrowDropDown style={{color:'green'}} />} label={` % ${parseInt(((SumOfExpenseSleep-AvgOfExpenseSleep))/AvgOfExpenseSleep*100)} `} color="success" variant="outlined" />
+          </Stack>}
+
+          <h5>מזון</h5>
+          {SumOfExpenseFood>AvgOfExpenseFood? 
+          <Stack direction="column" spacing={2} style={{marginTop:'-25px'}}>
+          <Chip icon={<ArrowDropUp style={{color:'red'}} />} label={` % ${parseInt((SumOfExpenseFood-AvgOfExpenseFood)/AvgOfExpenseFood*100)} `} color="error" variant="outlined" />
+          </Stack>
+          :<Stack direction="column" spacing={2} style={{marginTop:'-25px'}}>
+          <Chip icon={<ArrowDropDown style={{color:'green'}} />} label={` % ${parseInt((SumOfExpenseFood-AvgOfExpenseFood)/AvgOfExpenseFood*100)} `} color="success" variant="outlined" />
+          </Stack>}
+
+          <h5>בילויים</h5>
+          {SumOfExpenseParty>AvgOfExpenseParty? 
+          <Stack direction="column" spacing={2} style={{marginTop:'-25px'}}>
+          <Chip icon={<ArrowDropUp style={{color:'red'}} />} label={` % ${parseInt((SumOfExpenseParty-AvgOfExpenseParty)/AvgOfExpenseParty*100)} `} color="error" variant="outlined" />
+          </Stack>
+          :<Stack direction="column" spacing={2} style={{marginTop:'-25px'}}>
+          <Chip icon={<ArrowDropDown style={{color:'green'}} />} label={` % ${parseInt((SumOfExpenseParty-AvgOfExpenseParty)/AvgOfExpenseParty*100)} `} color="success" variant="outlined" />
+          </Stack>}
+
+          <h5>סמים</h5>
+          {SumOfExpenseDrugs>AvgOfExpenseDrugs ?
+          <Stack direction="column" spacing={2} style={{marginTop:'-25px'}}>
+          <Chip icon={<ArrowDropUp style={{color:'red'}} />} label={` % ${parseInt((SumOfExpenseDrugs-AvgOfExpenseDrugs)/AvgOfExpenseDrugs*100)} `} color="error" variant="outlined" />
+          </Stack>
+          :<Stack direction="column" spacing={2} style={{marginTop:'-25px'}}>
+          <Chip icon={<ArrowDropDown style={{color:'green'}} />} label={` % ${parseInt((SumOfExpenseDrugs-AvgOfExpenseDrugs)/AvgOfExpenseDrugs*100)} `} color="success" variant="outlined" />
+          </Stack>}
+
+          <h5>הימורים</h5>
+          {SumOfExpenseCasino-AvgOfExpenseCasino ? 
+          <Stack direction="column" spacing={2} style={{marginTop:'-25px'}}>
+          <Chip icon={<ArrowDropUp style={{color:'red'}} />} label={` % ${parseInt((SumOfExpenseCasino-AvgOfExpenseCasino)/AvgOfExpenseCasino*100)} `} color="error" variant="outlined" />
+          </Stack>
+          :<Stack direction="column" spacing={2} style={{marginTop:'-25px'}}>
+          <Chip icon={<ArrowDropDown style={{color:'green'}} />} label={` % ${parseInt((SumOfExpenseCasino-AvgOfExpenseCasino)/AvgOfExpenseCasino*100)} `} color="success" variant="outlined" />
+          </Stack>}
+
+      </CardContent>
+    </Card>
+
+
     {boolean==true&&<GraphsBar Data={Data} DataPrecent={DataPrecent}/>}
       <Navigation pagNav={'budget'}/>
     </div>

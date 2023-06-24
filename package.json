@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emailjs/browser": "^3.11.0",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.11",
@@ -17,6 +18,8 @@
     "axios": "^1.4.0",
     "chart.js": "^4.2.1",
     "dayjs": "^1.11.7",
+    "faker": "5.5.3",
+    "Faker": "^0.7.2",
     "firebase": "^9.22.1",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
@@ -27,7 +30,6 @@
     "recharts": "^2.5.0",
     "web-vitals": "^2.1.4"
   },
-  
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -52,5 +54,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "http://194.90.158.74/cgroup99/prod/build"
+  "homepage": "http://194.90.158.74/cgroup99/prod/build",
+  "devDependencies": {
+    "@faker-js/faker": "^8.0.2"
+  }
 }

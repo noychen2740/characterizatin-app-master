@@ -33,6 +33,8 @@ import { userService } from './services/user.service';
 import { db } from './firebase';
 import { Badge } from '@mui/material';
 import styled from '@emotion/styled';
+import ChangePassword from './components/ChangePassword';
+import ChangePasswordCom from './components/ChangePasswordCom';
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
     backgroundColor: '#f00',
@@ -232,6 +234,8 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Login getEmail={getUserEmail} getUser={getUser} />} />
+            <Route path='/ChangePassword' element={<ChangePassword/>}/>
+            <Route path='/ChangePasswordCom' element={<ChangePasswordCom userFromDB={userFromDB} userEmailFromDB={userEmailFromDB}/>}/>
             <Route path="signup" element={<Signup />} />
             <Route path="Questionnaire" element={<Questionnaire userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             {/* <Route path="Questionnaire" element={<Questionnaire name={userInApp.UserFirstName} />} /> */}
