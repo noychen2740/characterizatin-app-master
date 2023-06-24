@@ -54,7 +54,7 @@ function ChangePasswordCom(props) {
               <TopOfAplication label='שינוי פרטים אישיים' />
 
             {/* <img className="App-logo" src="logo.png" style={{ marginTop: '5px', width: '120px' }} /> */}
-        <div className="App-login">
+        <div className="App-login" style={{direction:'rtl'}}>
             <img className="App-logo" src="changeDetels.png" />
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-first_name">שם פרטי</InputLabel>
@@ -130,7 +130,7 @@ function ChangePasswordCom(props) {
                 />
             </FormControl>
             <FormGroup>
-                <FormControlLabel style={{ color: "#333" }} control={<Checkbox onChange={(ev) => { setLoginFields({ ...loginFields, tos: ev.target.checked }) }} />} label="Label" />
+                <FormControlLabel style={{ color: "#333" }} control={<Checkbox onChange={(ev) => { setLoginFields({ ...loginFields, tos: ev.target.checked }) }} />} label="אני מאשר את שינוי הפרטים" />
             </FormGroup>
             <Button disabled={!formValidated()} onClick={async () => {
                 const msg = await signup2(loginFields,props.userEmailFromDB,props.userFromDB);

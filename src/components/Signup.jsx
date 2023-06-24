@@ -48,10 +48,10 @@ function Signup(props) {
 
 
     return (
-        <div className="App-login">
+        <div className="App-login" style={{direction:'rtl'}}>
             <img className="App-logo" src="logo.png" />
-            <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-first_name">First name</InputLabel>
+            <FormControl sx={{ m: 1, width: 'calc(100% - 16px)'}} variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-first_name">שם פרטי</InputLabel>
                 <OutlinedInput
                     error={!loginFields.first_name && loginFields.first_name !== ''}
                     onBlur={ev => { setLoginFields({ ...loginFields, first_name: ev.target.value }) }}
@@ -61,7 +61,7 @@ function Signup(props) {
                 />
             </FormControl>
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-last_name">Last name</InputLabel>
+                <InputLabel htmlFor="outlined-adornment-last_name">שם משפחה</InputLabel>
                 <OutlinedInput
                     error={!loginFields.last_name && loginFields.last_name !== ''}
                     onBlur={ev => { setLoginFields({ ...loginFields, last_name: ev.target.value }) }}
@@ -71,7 +71,7 @@ function Signup(props) {
                 />
             </FormControl>
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-email">Email</InputLabel>
+                <InputLabel htmlFor="outlined-adornment-email">אימייל</InputLabel>
                 <OutlinedInput
                     error={!!loginFields.email && !validateEmail(loginFields.email)}
                     onBlur={ev => { setLoginFields({ ...loginFields, email: ev.target.value }) }}
@@ -81,7 +81,7 @@ function Signup(props) {
                 />
             </FormControl>
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password1">Password</InputLabel>
+                <InputLabel htmlFor="outlined-adornment-password1">סיסמא</InputLabel>
                 <OutlinedInput
                     id="outlined-adornment-password1"
                     type={showPassword1 ? 'text' : 'password'}
@@ -102,7 +102,7 @@ function Signup(props) {
                 />
             </FormControl>
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password2">Validate password</InputLabel>
+                <InputLabel htmlFor="outlined-adornment-password2">אימות סיסמא</InputLabel>
                 <OutlinedInput
                     id="outlined-adornment-password2"
                     type={showPassword2 ? 'text' : 'password'}
@@ -124,7 +124,7 @@ function Signup(props) {
                 />
             </FormControl>
             <FormGroup>
-                <FormControlLabel style={{ color: "#333" }} control={<Checkbox onChange={(ev) => { setLoginFields({ ...loginFields, tos: ev.target.checked }) }} />} label="Label" />
+                <FormControlLabel style={{ color: "#333" }} control={<Checkbox onChange={(ev) => { setLoginFields({ ...loginFields, tos: ev.target.checked }) }} />} label="אני מאשר שפרטי נכונים" />
             </FormGroup>
             <Button disabled={!formValidated()} onClick={async () => {
                 const msg = await signup(loginFields);
