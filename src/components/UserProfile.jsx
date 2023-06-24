@@ -13,7 +13,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Navigation from './Navigation';
 import Paper from '@mui/material/Paper';
 import TopOfAplication from './TopOfAplication';
-import { Celebration, SelfImprovement } from '@mui/icons-material';
+import { Celebration, Password, SelfImprovement } from '@mui/icons-material';
 import { resolvePath, useNavigate } from 'react-router-dom';
 import { getEnv } from '../utils/env';
 import { storageService } from '../services/storage.service';
@@ -247,6 +247,36 @@ export default function UserProfile(props) {
                   <br />
                 </Typography>
                 {"לחץ על ה-לב לצפייה ברשימת המועדפים שלך"}
+              </React.Fragment>
+            }
+          />
+        </ListItem>
+        <Divider variant="inset" component="li" />
+{/* שינוי סיסמא */}
+        <Divider variant="inset" component="li" />
+        <ListItem alignItems="flex-start">
+          <ListItemAvatar style={{
+            marginTop: '20px', marginBottom: '15px'
+          }}>
+            <Avatar>
+              <Password onClick={() => { nav('/ChangePasswordCom') }} />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText
+            style={{ textAlign: 'right' }}
+            primary=" "
+            secondary={
+              <React.Fragment>
+                <Typography
+                  sx={{ display: 'inline' }}
+                  component="span"
+                  variant="body2"
+                  color="text.primary"
+                >
+                  <b> {'שינוי פרטים'}</b>
+                  <br />
+                </Typography>
+                {"לחץ על ה-אייקון למעבר לשינוי הפרטים האישיים"}
               </React.Fragment>
             }
           />
