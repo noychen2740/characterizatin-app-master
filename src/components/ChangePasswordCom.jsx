@@ -16,6 +16,8 @@ import Checkbox from '@mui/material/Checkbox';
 import { signup } from '../utils/api';
 import { signup2 } from '../utils/api';
 import { useNavigate } from 'react-router-dom';
+import TopOfAplication from './TopOfAplication';
+import Navigation from './Navigation';
 
 function ChangePasswordCom(props) {
     const nav=useNavigate();
@@ -48,8 +50,12 @@ function ChangePasswordCom(props) {
 
 
     return (
+        <>
+              <TopOfAplication label='שינוי פרטים אישיים' />
+
+            {/* <img className="App-logo" src="logo.png" style={{ marginTop: '5px', width: '120px' }} /> */}
         <div className="App-login">
-            <img className="App-logo" src="logo.png" />
+            <img className="App-logo" src="changeDetels.png" />
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-first_name">שם פרטי</InputLabel>
                 <OutlinedInput
@@ -149,6 +155,10 @@ function ChangePasswordCom(props) {
             }} variant="contained">שינוי פרטים</Button>
             <Snackbar snackbar={snackbar}></Snackbar>
         </div>
+        <Navigation pagNav={'profile'} />
+
+        </>
+
     );
 }
 

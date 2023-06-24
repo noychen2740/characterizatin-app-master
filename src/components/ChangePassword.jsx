@@ -5,6 +5,7 @@ import emailjs from "@emailjs/browser"
 import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { getEnv } from '../utils/env';
+import TopOfAplication from './TopOfAplication';
 
 export default function ChangePassword() {
     const nav = useNavigate();
@@ -47,9 +48,11 @@ export default function ChangePassword() {
         nav('/')
       };
     return (
+        <>              
+        <TopOfAplication label='שכחתי סיסמא' />
     <section>
         <div className="App-login">
-                <img className="App-logo" src="logo.png" alt="sad" />
+                <img className="App-logo" src="forgetPassword.jpg" alt="sad" />
 
             <form ref={form} onSubmit={sendEmail} 
             className="--form-control--card--flex-center --ir-colum">
@@ -69,5 +72,6 @@ export default function ChangePassword() {
 
         </div>
     </section>
+    </>
   )
 }

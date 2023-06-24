@@ -13,7 +13,7 @@ import { TimePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 import Writing from '../../assets/Writing.png';
 import { storageService } from '../../services/storage.service';
-
+import yoman from '../../assets/yoman.jpg';
 
 
 function CreateEpisode(props) {
@@ -110,7 +110,7 @@ function CreateEpisode(props) {
         <div className='container center'>
           <TopOfAplication label='יצירה-עדכון פרק' />
           <br></br>
-          <img className='book-image3' src={Writing}></img>
+          <img className='book-image3' src={yoman}></img>
           <form onSubmit={submit} >
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-email">שם הפרק</InputLabel>
