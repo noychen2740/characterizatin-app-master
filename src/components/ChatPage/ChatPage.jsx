@@ -19,7 +19,19 @@ function ChatPage({ userFromDB }) {
     // const Email=props.userEmailFromDB;
     useEffect(() => {
         loadChat()
+
     }, [])
+    useEffect(() => {
+        if (chat) {
+            console.log({ chat });
+            chat.messages.forEach((meesage) => {
+                if (userFromDB.UserEmail !== meesage.userEmail)
+                    chatService.updateMsg(meesage.id, userFromDB.UserEmail)
+            })
+        }
+
+
+    }, [chat])
 
     const handleChange = (ev) => { //לוקח את הפרמטרים ש/מזינים בפורם
         let { name, value } = ev.target;
@@ -33,13 +45,18 @@ function ChatPage({ userFromDB }) {
             if (querySnapshot?.docs?.length) {
                 querySnapshot.forEach(async (document) => {
                     res = { ...document.data(), id: document.id }
+                    console.log({ res });
                     res.messages = res?.messages?.length ? res.messages : [];
                     const promisses = await res.messages.map(async (messageId) => {
                         const docRef = doc(db, "messages", messageId);
                         const docSnap = await getDoc(docRef);
                         const meesage = { ...docSnap.data(), id: messageId }
-                        if (res.userEmail !== meesage.userEmail)
-                            chatService.updateMsg(messageId, userFromDB.UserEmail)
+                        // if (!meesage.isRead) {
+                        //     console.log(res.userEmail, meesage.userEmail,meesage.txt);
+                        //     if (userFromDB.UserEmail !== meesage.userEmail)
+                        //         chatService.updateMsg(messageId, userFromDB.UserEmail)
+                        // }
+
                         return meesage
                     })
                     res.messages = await Promise.all(promisses)
