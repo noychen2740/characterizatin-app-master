@@ -8,7 +8,7 @@ export const chatService = {
     createChat,
     updateMsg,
     loadFullChats,
- getAllMsgs
+    getAllMsgs
 }
 
 
@@ -33,13 +33,17 @@ async function getAllChats() {
     }
 }
 
-async function loadFullChats(userEmailFromDB) {
-   
-  return await getDocs(collection(db, "chats"));
-  
+async function loadFullChats(UserEmail) {
+    //   return await getDocs(collection(db, "chats"));
+    return query(collection(db, "chats"),
+        or(
+            where("userEmail", "==", UserEmail),
+            where("userEmail2", "==", UserEmail),
+        ))
+
 }
 
-async function getAllMsgs(){
+async function getAllMsgs() {
     return await query(collection(db, "messages"));
 }
 
