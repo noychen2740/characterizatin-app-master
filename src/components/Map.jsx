@@ -108,22 +108,26 @@ function Map(props) {
 
     const [zoom, setZoom] = React.useState(3.5)
 
+    const myArea = () => {
+        navigator.geolocation.getCurrentPosition(
+            position => {
+                setUserLocation({
+                    userLat: position.coords.latitude,
+                    userLng: position.coords.longitude
+                })
+                console.log(userLocation);
+                setCenter({
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                })
+            }
+        )
+    }
+
     const handleChange = (event) => {
         setSelectCountry(event.target.value);
         if (event.target.value === 'בסביבה') {
-            navigator.geolocation.getCurrentPosition(
-                position => {
-                    setUserLocation({
-                        userLat: position.coords.latitude,
-                        userLng: position.coords.longitude
-                    })
-                    console.log(userLocation);
-                    setCenter({
-                        lat: userLocation.userLat,
-                        lng: userLocation.userLng
-                    })
-                }
-            )
+            myArea()
         }
         else {
             const apiURL = getEnv() + '/map/';
@@ -195,19 +199,7 @@ function Map(props) {
 
     const onLoad = React.useCallback(function callback(map_) {
         setMap(map_);
-        navigator.geolocation.getCurrentPosition(
-            position => {
-                setUserLocation({
-                    userLat: position.coords.latitude,
-                    userLng: position.coords.longitude
-                })
-                console.log(userLocation);
-                setCenter({
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                })
-            }
-        )
+        myArea()
 
     }, []);/// בכניסה ראשונית למסך מפה- יקבע המרכז על פי המיקום של המשתמש
 
