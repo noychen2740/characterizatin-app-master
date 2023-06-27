@@ -10,6 +10,8 @@ import GraphsBar from './GraphsBar';
 import { getEnv } from '../utils/env'
 import { Kpi } from './Kpi'
 import KpiChart from './KpiChart'
+import GeographyChart from './GeographyChart'
+import KpiCard from './KpiCard'
 
 export default function ExpensesAnalysis(props) {
   const nav=useNavigate();
@@ -145,7 +147,7 @@ setAvgOfExpense(result.SumOfExpense)
   },
   {
     id: 5,
-    KindOfExpenses: 'סמים',
+    KindOfExpenses: 'התארגנות',
     sumOfExpense: SumOfExpenseDrugs,
     // userLost: 234
   },
@@ -183,7 +185,7 @@ const DataPrecent = [
   },
   {
     id: 5,
-    KindOfExpenses: 'סמים',
+    KindOfExpenses: 'התארגנות',
     sumOfExpense: parseInt(SumOfExpenseDrugs/sumExpense*100),
     // userLost: 234
   },
@@ -220,15 +222,23 @@ const DataPrecent = [
       </CardActions>
     </Card>
 
-<Card>
+
+    {boolean==true&&<KpiCard SumOfExpenseAtraction={SumOfExpenseAtraction} AvgOfExpenseAtraction={AvgOfExpenseAtraction}
+    SumOfExpenseSleep={SumOfExpenseSleep} AvgOfExpenseSleep={AvgOfExpenseSleep}
+    SumOfExpenseFood={SumOfExpenseFood} AvgOfExpenseFood={AvgOfExpenseFood}
+    SumOfExpenseParty={SumOfExpenseParty} AvgOfExpenseParty={AvgOfExpenseParty}
+    SumOfExpenseDrugs={SumOfExpenseDrugs} AvgOfExpenseDrugs={AvgOfExpenseDrugs}
+    SumOfExpenseCasino={SumOfExpenseCasino} AvgOfExpenseCasino={AvgOfExpenseCasino}/>}
+          
+          
+    {boolean==true&&<Card>
   <KpiChart AvgOfExpenseDrugs={AvgOfExpenseDrugs} AvgOfExpenseFood={AvgOfExpenseFood}
   AvgOfExpenseAtraction={AvgOfExpenseAtraction} AvgOfExpenseSleep={AvgOfExpenseSleep}
   AvgOfExpenseCasino={AvgOfExpenseCasino} AvgOfExpenseParty={AvgOfExpenseParty} SumOfExpenseAtraction={SumOfExpenseAtraction}
   SumOfExpenseSleep={SumOfExpenseSleep } SumOfExpenseDrugs={SumOfExpenseDrugs} SumOfExpenseFood={SumOfExpenseFood}
   SumOfExpenseCasino={SumOfExpenseCasino} SumOfExpenseParty={SumOfExpenseParty}/>
-</Card>
-
-    <Card sx={{ minWidth: 275  }} style={{marginTop:'60px'}} >
+</Card>}
+    {/* <Card sx={{ minWidth: 275  }} style={{marginTop:'60px'}} >
       <CardContent >
       <h4>צריכת משתמשים דומים לי</h4>
 
@@ -288,7 +298,18 @@ const DataPrecent = [
           </Stack>}
 
       </CardContent>
-    </Card>
+    </Card> */}
+
+
+
+
+{/* <Card>
+  <KpiChart AvgOfExpenseDrugs={AvgOfExpenseDrugs} AvgOfExpenseFood={AvgOfExpenseFood}
+  AvgOfExpenseAtraction={AvgOfExpenseAtraction} AvgOfExpenseSleep={AvgOfExpenseSleep}
+  AvgOfExpenseCasino={AvgOfExpenseCasino} AvgOfExpenseParty={AvgOfExpenseParty} SumOfExpenseAtraction={SumOfExpenseAtraction}
+  SumOfExpenseSleep={SumOfExpenseSleep } SumOfExpenseDrugs={SumOfExpenseDrugs} SumOfExpenseFood={SumOfExpenseFood}
+  SumOfExpenseCasino={SumOfExpenseCasino} SumOfExpenseParty={SumOfExpenseParty}/>
+</Card> */}
 
 
     {boolean==true&&<GraphsBar Data={Data} DataPrecent={DataPrecent}/>}
