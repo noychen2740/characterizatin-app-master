@@ -37,6 +37,10 @@ import ChangePassword from './components/ChangePassword';
 import ChangePasswordCom from './components/ChangePasswordCom';
 import KpiCard from './components/KpiCard';
 import GeographyChart from './components/GeographyChart';
+import UserProfileAdmin from './components/UserProfileAdmin';
+import CreateFeedbackAdmin from './components/CreateFeedbackAdmin/CreateFeedbackAdmin';
+import MapAdmin from './components/MapAdmin';
+import ChangePasswordComAdmin from './components/ChangePasswordComAdmin';
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
     backgroundColor: '#f00',
@@ -290,6 +294,13 @@ function App() {
             {/* <Route path='chat/:userEmail2' element={<ChatPage />} /> */}
             <Route path='KpiCard' element={<KpiCard category={'אטרקציות'} expend={'852'} precent={'55'}/>} />
             {/* <Route path='GeographyChart' element={<GeographyChart/>} /> */}
+            
+            {/* אדמין */}
+            <Route path="UserProfileAdmin" element={<UserProfileAdmin userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
+            <Route path='CreateFeedbackAdmin' element={<CreateFeedbackAdmin />} />
+            <Route path="mapAdmin" element={<MapAdmin />} />
+            <Route path='ChangePasswordComAdmin' element={<ChangePasswordComAdmin userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
+
 
           </Routes>
 
