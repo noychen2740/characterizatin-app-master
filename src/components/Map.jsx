@@ -12,6 +12,7 @@ import { Box } from '@mui/system';
 import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import { Gite, Whatshot } from '@mui/icons-material';
 import { getEnv } from '../utils/env';
+import { saveUserPosToDB, getUsersPositions } from '../utils/api'
 
 
 const containerStyle = {
@@ -64,6 +65,9 @@ const optionTrip = {
     imagePath: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF94epaEiWysgcDS12ZdRe10FnQY_43-OtUCXti4hXl-VQyJk0AGJubYe2L2FOb82zC6I&usqp=CAU"
 
 }
+const userOptions = {
+    imagePath: "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA0L3BmLWljb240LWppcjIwNjItcG9yLWwtam9iNzg4LnBuZw.png"
+}
 const optionSleep = {
     imagePath: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToaQeycIKgB5bCaIOrKTdjT1Gaz1stu0S17d_ygdC78TWAkEbbXcXw_mrSsIJxzAKbxzw&usqp=CAU"
 }
@@ -99,31 +103,55 @@ function createLocationAid(location) {
     return createLocationsArray(location, 'AidCompLat', 'AidCompLon')
 }
 
+const usersLocationsMock = [
+    {
+        id: '12112',
+        user: 'atar',
+        position: {
+            lat: 32.4607275, lng: 35.0034335
+        }
+    }
+];
+
 function Map(props) {
 
     const [attractionList, setAttractionList] = React.useState([]);// אטרקציות של המדינה שנבחרה
     const [sleepingList, setSleepingList] = React.useState([]);// מקומות לינה של המדינה שנבחרה
     const [aidCompList, setAidCompListList] = React.useState([]);// מתחמי סיוע של המדינה שנבחרה
     const [tripList, setTripList] = React.useState([]);// הצעות לטיולים במדינה שנבחרה
-
+    const [usersList, setUsersList] = React.useState([])
     const [zoom, setZoom] = React.useState(3.5)
+
+    const myArea = () => {
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude
+                setUserLocation({
+                    userLat: lat,
+                    userLng: lng
+                })
+                console.log(userLocation);
+                setCenter({
+                    lat: lat,
+                    lng: lng
+                })
+
+                saveUserPosToDB({
+                    lat, lng,
+                    email: JSON.parse(localStorage.user).UserEmail
+                });
+
+                const users = await getUsersPositions();
+                setUsersList(usersLocationsMock);
+            }
+        )
+    }
 
     const handleChange = (event) => {
         setSelectCountry(event.target.value);
         if (event.target.value === 'בסביבה') {
-            navigator.geolocation.getCurrentPosition(
-                position => {
-                    setUserLocation({
-                        userLat: position.coords.latitude,
-                        userLng: position.coords.longitude
-                    })
-                    console.log(userLocation);
-                    setCenter({
-                        lat: userLocation.userLat,
-                        lng: userLocation.userLng
-                    })
-                }
-            )
+            myArea()
         }
         else {
             const apiURL = getEnv() + '/map/';
@@ -193,21 +221,13 @@ function Map(props) {
         googleMapsApiKey: "AIzaSyBilylcKkzkj1q9WF1klt1564bXNR2NIQE"
     })
 
+    const userClick = (user) => {
+        // TODO - SHOW USER DETAILS
+    }
+
     const onLoad = React.useCallback(function callback(map_) {
         setMap(map_);
-        navigator.geolocation.getCurrentPosition(
-            position => {
-                setUserLocation({
-                    userLat: position.coords.latitude,
-                    userLng: position.coords.longitude
-                })
-                console.log(userLocation);
-                setCenter({
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                })
-            }
-        )
+        myArea()
 
     }, []);/// בכניסה ראשונית למסך מפה- יקבע המרכז על פי המיקום של המשתמש
 
@@ -301,13 +321,21 @@ function Map(props) {
                         }
                     </MarkerClusterer>
 
+                    {usersList.length && <MarkerClusterer options={userOptions}>
+                        {(clusterer) =>
+                            usersList.map((user) => (
+                                <Marker label='U' key={createKey(user)} position={user.position} onClick={() => { userClick(user) }} />
+                            ))
+                        }
+                    </MarkerClusterer>}
+
                     {/* <MarkerClusterer options={optionTrip}>
-                    {(clusterer) =>
-                        tripList.map((location) => (
-                            <Marker key={createKey(location)} position={location} clusterer={clusterer} onClick={()=>{locationClick(createKey(location))}}/>
-                        ))
-                    }
-            </MarkerClusterer> */}
+                        {(clusterer) =>
+                            tripList.map((location) => (
+                                <Marker key={createKey(location)} position={location} clusterer={clusterer} onClick={() => { locationClick(createKey(location)) }} />
+                            ))
+                        }
+                    </MarkerClusterer> */}
 
                 </GoogleMap>
                 <Box>

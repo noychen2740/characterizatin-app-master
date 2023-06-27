@@ -11,14 +11,13 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const fieldsMapper = {
     0: {
         title: "AidCompName",
-        image: "AidCompPhoto",
+        image: "AidComplexesPhoto",
         description: "AidCompDescription",
         selector: "HOS"
     },
@@ -30,7 +29,7 @@ const fieldsMapper = {
     },
     2: {
         title: "SleepingCompName",
-        image: "SleepingCompPhoto",
+        image: "SleepingComplexesPhoto",
         description: "SleepingCompDescription",
         selector: "S"
     },
@@ -95,9 +94,7 @@ export default function OptionsCard({ tabIndex, item, index, selected }) {
                 <IconButton aria-label="add to favorites">
                     <FavoriteIcon />
                 </IconButton>
-                <IconButton aria-label="share">
-                    <ShareIcon />
-                </IconButton>
+
                 <ExpandMore
                     expand={expanded}
                     onClick={handleExpandClick}
