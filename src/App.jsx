@@ -35,6 +35,8 @@ import { Badge } from '@mui/material';
 import styled from '@emotion/styled';
 import ChangePassword from './components/ChangePassword';
 import ChangePasswordCom from './components/ChangePasswordCom';
+import KpiCard from './components/KpiCard';
+import GeographyChart from './components/GeographyChart';
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
     backgroundColor: '#f00',
@@ -283,6 +285,8 @@ function App() {
             {/* <Route path='chats' element={<ChatsPage />} /> */}
             <Route path='chat/:userEmail2' element={<ChatPage userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             {/* <Route path='chat/:userEmail2' element={<ChatPage />} /> */}
+            <Route path='KpiCard' element={<KpiCard category={'אטרקציות'} expend={'852'} precent={'55'}/>} />
+            {/* <Route path='GeographyChart' element={<GeographyChart/>} /> */}
 
           </Routes>
 
