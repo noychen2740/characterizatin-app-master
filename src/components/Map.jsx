@@ -58,25 +58,7 @@ const locations = [
     // { lat: -42.735258, lng: 147.438 },
     // { lat: -43.999792, lng: 170.463352 },
 ]
-const options = {
-    imagePath: 'https://placehold.co/600x40'
-}// מקבץ דיפולטיבי אפור
-const optionTrip = {
-    imagePath: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF94epaEiWysgcDS12ZdRe10FnQY_43-OtUCXti4hXl-VQyJk0AGJubYe2L2FOb82zC6I&usqp=CAU"
 
-}
-const userOptions = {
-    imagePath: "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA0L3BmLWljb240LWppcjIwNjItcG9yLWwtam9iNzg4LnBuZw.png"
-}
-const optionSleep = {
-    imagePath: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToaQeycIKgB5bCaIOrKTdjT1Gaz1stu0S17d_ygdC78TWAkEbbXcXw_mrSsIJxzAKbxzw&usqp=CAU"
-}
-const optionAid = {
-    imagePath: "https://img.lovepik.com/element/40021/9804.png_860.png"
-}
-const optionAtraction = {
-    imagePath: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiboOhgi6sKRvohBXDnCHnSrn3cbatkqK94FKt8FwjZL5fXbNZyQd2jJq6_QyMY_-UrGI&usqp=CAU"
-}
 
 function createKey(location) {
     return location.lat + location.lng;
@@ -281,53 +263,39 @@ function Map(props) {
                     zoom={zoom}
                     onLoad={onLoad}
                     onUnmount={onUnmount}>
-                    <MarkerClusterer options={optionSleep}>
-                        {(clusterer) =>
-                            locations.map((location) => (
-                                <Marker key={createKey(location)} position={location} />
-                            ))
-                        }
-                    </MarkerClusterer>
+                    {
+                        locations.map((location) => (
+                            <Marker key={createKey(location)} position={location} />
+                        ))
+                    }
 
-                    <MarkerClusterer options={optionAtraction}>
-                        {(clusterer) =>
-                            attractionList.map((location, index) => (
-                                <Marker label='A' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.A${index}`) }} />
-                            ))
-                        }
-                    </MarkerClusterer>
+                    {
+                        attractionList.map((location, index) => (
+                            <Marker label='A' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.A${index}`) }} />
+                        ))
+                    }
 
-                    <MarkerClusterer options={optionSleep} >
-                        {(clusterer) =>
-                            sleepingList.map((location, index) => (
-                                <Marker label='S' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.S${index}`) }} />
-                            ))
-                        }
-                    </MarkerClusterer>
+                    {
+                        sleepingList.map((location, index) => (
+                            <Marker label='S' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.S${index}`) }} />
+                        ))
+                    }
 
-                    <MarkerClusterer options={optionAid}>
-                        {(clusterer) =>
-                            aidCompList.map((location, index) => (
-                                <Marker label='HOS' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.HOS${index}`) }} />
-                            ))
-                        }
-                    </MarkerClusterer>
+                    {
+                        aidCompList.map((location, index) => (
+                            <Marker label='HOS' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.HOS${index}`) }} />
+                        ))
+                    }
 
-                    <MarkerClusterer options={optionTrip}>
-                        {(clusterer) =>
-                            tripList.map((location, index) => (
-                                <Marker label='T' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.T${index}`) }} />
-                            ))
-                        }
-                    </MarkerClusterer>
+                    {
+                        tripList.map((location, index) => (
+                            <Marker label='T' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.T${index}`) }} />
+                        ))
+                    }
 
-                    {usersList.length && <MarkerClusterer options={userOptions}>
-                        {(clusterer) =>
-                            usersList.map((user) => (
-                                <Marker label='U' key={createKey(user)} position={user.position} onClick={() => { userClick(user) }} />
-                            ))
-                        }
-                    </MarkerClusterer>}
+                    {usersList.length && usersList.map((user) => (
+                        <Marker icon={'https://placehold.co/15x15/'} key={createKey(user)} position={user.position} onClick={() => { userClick(user) }} />
+                    ))}
 
                     {/* <MarkerClusterer options={optionTrip}>
                         {(clusterer) =>
