@@ -28,7 +28,7 @@ import ChatPage from './components/ChatPage/ChatPage';
 import Fab from '@mui/material/Fab';
 import ForumIcon from '@mui/icons-material/Forum';
 import { chatService } from './services/chat.service';
-import { doc, getDoc, onSnapshot } from 'firebase/firestore';
+import { doc, getDoc, getDocs, onSnapshot } from 'firebase/firestore';
 import { userService } from './services/user.service';
 import { db } from './firebase';
 import { Badge } from '@mui/material';
@@ -74,6 +74,10 @@ function App() {
   const location = useLocation();
   const chatPaths = ['/profile', '/budget', '/map', '/episodes', '/Favorites']
   const [isRead, setIsRead] = useState(true)
+  ////////////////////////////////////////////////////////
+
+  const [userEmailFromDB, setUserEmailFromDB] = useState('');
+  const [userFromDB, setUserFromDB] = useState('');//שינוי של עומר לשרשור היוזר
   useEffect(() => {
     if (chatPaths.includes(location.pathname)) {
       setChatVisiable(true)
@@ -117,8 +121,10 @@ function App() {
   }, [])
 
   useEffect(() => {
-    loadFullChats()
-  }, [])
+    console.log({ userFromDB });
+    if (userFromDB)
+      loadFullChats()
+  }, [userFromDB])
 
 
   const loadFullChats = async () => {
@@ -128,9 +134,9 @@ function App() {
     const q = await chatService.getAllMsgs()
 
     onSnapshot(q, async () => {
-      const querySnapshot = await chatService.loadFullChats()
-
-      const promises = await querySnapshot.docs.map(async (document) => {
+      const querySnapshot = await chatService.loadFullChats(userFromDB.UserEmail)
+      const docs = await getDocs(querySnapshot)
+      const promises = await docs.docs.map(async (document) => {
         const chat = { ...document.data(), id: document.id }
         const currentUser = users.find(u => u.UserEmail === chat.userEmail2)
         chat.messages = chat?.messages?.length ? chat.messages : [];
@@ -141,7 +147,7 @@ function App() {
           return meesage
         })
         chat.messages = await Promise.all(promisses);
-        const unreadMsgs = chat.messages.filter((m) => !m?.isRead && m.userEmail !== "noycn27@gmail.com")
+        const unreadMsgs = chat.messages.filter((m) => !m?.isRead && m.userEmail !== userFromDB.UserEmail)
         chat.isRead = !unreadMsgs.length
         chat.username = `${currentUser?.UserFirstName} ${currentUser?.UserLastName}`
         console.log('added chat');
@@ -198,10 +204,7 @@ function App() {
         });
   }, [])
 
-  ////////////////////////////////////////////////////////
 
-  const [userEmailFromDB, setUserEmailFromDB] = useState('');
-  const [userFromDB, setUserFromDB] = useState('');//שינוי של עומר לשרשור היוזר
 
   const getUserEmail = (email) => {
     setUserEmailFromDB(email)
@@ -236,8 +239,8 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Login getEmail={getUserEmail} getUser={getUser} />} />
-            <Route path='/ChangePassword' element={<ChangePassword/>}/>
-            <Route path='/ChangePasswordCom' element={<ChangePasswordCom userFromDB={userFromDB} userEmailFromDB={userEmailFromDB}/>}/>
+            <Route path='/ChangePassword' element={<ChangePassword />} />
+            <Route path='/ChangePasswordCom' element={<ChangePasswordCom userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             <Route path="signup" element={<Signup />} />
             <Route path="Questionnaire" element={<Questionnaire userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             {/* <Route path="Questionnaire" element={<Questionnaire name={userInApp.UserFirstName} />} /> */}
@@ -281,7 +284,7 @@ function App() {
             <Route path='ThanksPage' element={<ThanksPage />} />
             <Route path='Diary' element={<Diary />} />
             <Route path='FeedbackPage/:FeedbackKey' element={<FeedbackPage />} />
-            <Route path='chats' userFromDB={userFromDB} element={<ChatsPage />} />
+            <Route path='chats'  element={<ChatsPage  userFromDB={userFromDB} />} />
             {/* <Route path='chats' element={<ChatsPage />} /> */}
             <Route path='chat/:userEmail2' element={<ChatPage userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             {/* <Route path='chat/:userEmail2' element={<ChatPage />} /> */}
