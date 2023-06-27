@@ -59,7 +59,7 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://proj.ruppin.ac.il/cgroup99/prod/build",
+  "homepage": "http://194.90.158.74/cgroup99/prod/build",
   "devDependencies": {
     "@faker-js/faker": "^8.0.2"
   }
