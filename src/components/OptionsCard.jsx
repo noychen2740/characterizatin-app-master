@@ -18,8 +18,8 @@ const fieldsMapper = {
     0: {
         title: "AidCompName",
         image: "AidComplexesPhoto",
-        description: "AidCompDescription",
-        selector: "HOS"
+        description: "AidComplexesDescription",
+        selector: "H"
     },
     1: {
         title: "TripsName",
@@ -30,7 +30,7 @@ const fieldsMapper = {
     2: {
         title: "SleepingCompName",
         image: "SleepingComplexesPhoto",
-        description: "SleepingCompDescription",
+        description: "SleepingComplexesDescription",
         selector: "S"
     },
     3: {
@@ -68,16 +68,16 @@ export default function OptionsCard({ tabIndex, item, index, selected }) {
     return (
         <Card className={itemSelector} style={isSelected ? { backgroundColor: '#ececec' } : {}} sx={{ maxWidth: 345 }}>
             <CardHeader
-                avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                        { }
-                    </Avatar>
-                }
-                action={
-                    <IconButton aria-label="settings">
-                        <MoreVertIcon />
-                    </IconButton>
-                }
+                // avatar={
+                //     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                //         { }
+                //     </Avatar>
+                // }
+                // action={
+                //     <IconButton aria-label="settings">
+                //         <MoreVertIcon />
+                //     </IconButton>
+                // }
                 title={item[title]}
             />
             <CardMedia

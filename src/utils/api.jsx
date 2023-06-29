@@ -38,9 +38,9 @@ export const login = async (loginFields) => {
     }
 }
 
-export const saveUserPosToDB = async (userPos) => {
-    const response = await fetch(`${getEnv()}/saveUserPos`, {
-        method: 'POST',
+export const saveUserPosToDB = async ({ email, lat, lng }) => {
+    const response = await fetch(`${getEnv()}/users/PutlocationById/${email}/${lat}/${lng}/`, {
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json; charset=UTF-8'
         },
@@ -110,7 +110,7 @@ export const signup2 = async (loginFields, emailFromChangCom, userFromDB) => {
 
 export const getUsersPositions = async () => {
     const { lat, lng } = await userPos()
-    const apiUrl = getEnv() + `/users/getPositions?lat=${lat}&lng=${lng}`;
+    const apiUrl = getEnv() + `/Users/getusersplace?lat=${lat}&lng=${lng}`;
     return new Promise(resolve => {
         fetch(apiUrl,
             {

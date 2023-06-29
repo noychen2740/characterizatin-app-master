@@ -250,3 +250,21 @@ p {
 .mapCard img {
   height: 200px;
 }
+
+.infoBox {
+  color: #111;
+  width: 150px;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.infoBoxTitle {
+  position: absolute;
+  width: 180px;
+  font-size: 16px;
+}
+
+.infoBoxName {
+  font-size: 24px;
+  font-weight: 700;
+}

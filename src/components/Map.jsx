@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { GoogleMap, useJsApiLoader, Marker, MarkerClusterer, OverlayView, StreetViewPanorama } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, Marker, InfoWindow, MarkerClusterer, OverlayView, StreetViewPanorama } from '@react-google-maps/api';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import CountrySelect from './SelectComp';
@@ -96,13 +96,14 @@ const usersLocationsMock = [
 ];
 
 function Map(props) {
+    const [selectedTab, setSelectedTab] = React.useState(3);
 
     const [attractionList, setAttractionList] = React.useState([]);// אטרקציות של המדינה שנבחרה
     const [sleepingList, setSleepingList] = React.useState([]);// מקומות לינה של המדינה שנבחרה
     const [aidCompList, setAidCompListList] = React.useState([]);// מתחמי סיוע של המדינה שנבחרה
     const [tripList, setTripList] = React.useState([]);// הצעות לטיולים במדינה שנבחרה
     const [usersList, setUsersList] = React.useState([])
-    const [zoom, setZoom] = React.useState(3.5)
+    const [zoom, setZoom] = React.useState(12)
 
     const myArea = () => {
         navigator.geolocation.getCurrentPosition(
@@ -125,7 +126,11 @@ function Map(props) {
                 });
 
                 const users = await getUsersPositions();
-                setUsersList(usersLocationsMock);
+                setUsersList(users.map(user => ({
+                    ...user,
+                    lat: user.UserLotPosition,
+                    lng: user.UserLatPosition
+                })));
             }
         )
     }
@@ -133,9 +138,11 @@ function Map(props) {
     const handleChange = (event) => {
         setSelectCountry(event.target.value);
         if (event.target.value === 'בסביבה') {
+            setZoom(12)
             myArea()
         }
         else {
+            setZoom(3.5)
             const apiURL = getEnv() + '/map/';
             fetch(apiURL + event.target.value, {
                 method: 'GET',
@@ -175,7 +182,7 @@ function Map(props) {
         }
     };
     const [selectCountry, setSelectCountry] = React.useState("בחר מדינה");
-
+    const [userInfoBox, setUserInfoBox] = React.useState(null)
     const [map, setMap] = React.useState(null);
 
     const [countryFromDB, setcountryFromDB] = useState(
@@ -204,7 +211,7 @@ function Map(props) {
     })
 
     const userClick = (user) => {
-        // TODO - SHOW USER DETAILS
+        setUserInfoBox(user)
     }
 
     const onLoad = React.useCallback(function callback(map_) {
@@ -218,10 +225,20 @@ function Map(props) {
     }, []);
 
     const locationClick = (cordinaint, selector) => {
+
+        const mapper = {
+            'H': 0,
+            'T': 1,
+            'S': 2,
+            'A': 3
+        }
+        setSelectedTab(mapper[selector[1]])
+        setSelected(selector)
+
+
         const element = document.querySelector(selector);
         if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: "center", inline: "nearest" });
-            setSelected(selector)
         }
     }// זמני- בלחיצה על נקודה מסומנת איזה פעולה נרצה שתקה
     return isLoaded ? (
@@ -247,14 +264,14 @@ function Map(props) {
                     <option value={'גוואטמלה'}>גוואטמלה</option>
                     <option value={'ויאטנם'}>ויאטנם</option>
                     <option value={'לאוס'}>לאוס</option>
-                    {/* <option value={'סרילנקה'}>סרילנקה</option>
-            <option value={'פיליפינים'}>פיליפינים</option> */}
-                    {/* <option value={'פנמה'}>פנמה</option>
-            <option value={'פרו'}>פרו</option>
-            <option value={'צילה'}>צילה</option>
-            <option value={'קוסטה ריקה'}>קוסטה ריקה</option>
-            <option value={'קמבודיה'}>קמבודיה</option>
-            <option value={'תאילנד'}>תאילנד</option> */}
+                    <option value={'סרילנקה'}>סרילנקה</option>
+                    <option value={'פיליפינים'}>פיליפינים</option>
+                    <option value={'פנמה'}>פנמה</option>
+                    <option value={'פרו'}>פרו</option>
+                    <option value={'צילה'}>צילה</option>
+                    <option value={'קוסטה ריקה'}>קוסטה ריקה</option>
+                    <option value={'קמבודיה'}>קמבודיה</option>
+                    <option value={'תאילנד'}>תאילנד</option>
                 </NativeSelect>
                 <br />
                 <GoogleMap
@@ -283,7 +300,7 @@ function Map(props) {
 
                     {
                         aidCompList.map((location, index) => (
-                            <Marker label='HOS' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.HOS${index}`) }} />
+                            <Marker label='H' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.HOS${index}`) }} />
                         ))
                     }
 
@@ -293,9 +310,30 @@ function Map(props) {
                         ))
                     }
 
-                    {usersList.length && usersList.map((user) => (
-                        <Marker icon={'https://placehold.co/15x15/'} key={createKey(user)} position={user.position} onClick={() => { userClick(user) }} />
+                    {usersList.map((user) => (
+                        <Marker label="U" key={createKey(user) + Math.random() * 9999999} position={user} onClick={() => {
+                            userClick(user)
+                        }} >
+                        </Marker>
                     ))}
+
+                    {
+                        userInfoBox && <InfoWindow
+                            onCloseClick={() => { setUserInfoBox(null) }}
+                            position={userInfoBox}
+                        >
+                            <div className='infoBox' onClick={() => {
+                                props.onUserClick(userInfoBox)
+                            }}>
+                                <div className='infoBoxTitle'>
+                                    דבר עם
+                                    <div className='infoBoxName'>
+                                        {userInfoBox.UserFirstName}
+                                    </div>
+                                </div>
+                            </div>
+                        </InfoWindow>
+                    }
 
                     {/* <MarkerClusterer options={optionTrip}>
                         {(clusterer) =>
@@ -307,7 +345,7 @@ function Map(props) {
 
                 </GoogleMap>
                 <Box>
-                    <OptionsCom selected={selected} countryName={selectCountry} data={[aidCompList, tripList, sleepingList, attractionList]} />
+                    <OptionsCom tabChanged={(value) => { setSelectedTab(value) }} value={selectedTab} selected={selected} countryName={selectCountry} data={[aidCompList, tripList, sleepingList, attractionList]} />
                 </Box>
             </div>
             <Navigation pagNav={'map'} />
