@@ -6,6 +6,7 @@ export const favoriteservice = {
     PutFavourites,
     DeleteFavourites,
     Getall,
+    AddFav
     // createfromuser
 }
 
@@ -31,6 +32,16 @@ async function Getall(Email) {
 async function getByName(FavKey) {
     try {
         const res = await axios.get(`${base_url}/${module}/${FavKey}/GetByName`)
+        console.log({ res });
+        return res.data[0]
+    } catch (err) {
+        console.log({ err });
+    }
+}
+//api/Favourites/{OptINTindb}/{Favemail}/PostAddFav
+async function AddFav(FavKey,Email) {
+    try {
+        const res = await axios.post(`${base_url}/${module}/${FavKey}/${Email}/PostAddFav`)
         console.log({ res });
         return res.data[0]
     } catch (err) {
@@ -73,10 +84,12 @@ async function PutFavourites(id) {
 }
 
 
+
+
 //api/Feedback/DeleteFeedback/{feedbackIDfromdb}
-async function DeleteFavourites(DeleteFavouritesIDfromdb) {
+async function DeleteFavourites(FavKey) {
     try {
-        const res = await axios.delete(`${base_url}/${module}/DeleteFeedback/${DeleteFavouritesIDfromdb}`)
+        const res = await axios.delete(`${base_url}/${module}/DeleteFavourites/${FavKey}`)
         console.log({ res });
         return res.data
     } catch (err) {

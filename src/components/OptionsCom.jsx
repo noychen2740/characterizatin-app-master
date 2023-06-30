@@ -44,5 +44,5 @@ export default function OptionsCom(props) {
         })}
       </Box>
     </Box>
-  );
-}
+  )
+};
