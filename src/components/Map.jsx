@@ -13,6 +13,7 @@ import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import { Gite, Whatshot } from '@mui/icons-material';
 import { getEnv } from '../utils/env';
 import { saveUserPosToDB, getUsersPositions } from '../utils/api'
+import { useNavigate } from 'react-router';
 
 
 const containerStyle = {
@@ -104,7 +105,7 @@ function Map(props) {
     const [tripList, setTripList] = React.useState([]);// הצעות לטיולים במדינה שנבחרה
     const [usersList, setUsersList] = React.useState([])
     const [zoom, setZoom] = React.useState(12)
-
+    const nav = useNavigate()
     const myArea = () => {
         navigator.geolocation.getCurrentPosition(
             async (position) => {
@@ -323,7 +324,8 @@ function Map(props) {
                             position={userInfoBox}
                         >
                             <div className='infoBox' onClick={() => {
-                                props.onUserClick(userInfoBox)
+                                console.log(userInfoBox);
+                                nav(`/chat/${userInfoBox.Useremail}`)
                             }}>
                                 <div className='infoBoxTitle'>
                                     דבר עם
