@@ -266,7 +266,7 @@ function App() {
             {/* <Route path="NewExpense" element={<NewExpense />} /> */}
             <Route path="Analysis" element={<ExpensesAnalysis userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             {/* <Route path="Analysis" element={<ExpensesAnalysis />} /> */}
-            <Route path="map" element={<Map />} />
+            <Route path="map" element={<Map userFromDB={userFromDB} />} />
             {/* <Route path="map" element={<Map />} /> */}
             <Route path='episodes' element={<Episodes userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             {/* <Route path='episodes' element={<Episodes />} /> */}
@@ -314,6 +314,8 @@ price={numOfExpense.PricePerOne} amount={numOfExpense.NumberOfRepeatExpenses} Ex
 
           {/* <Questionnaire name="עומר"/> */}
 
+
+{/* לא לגעת בקוד הזה */}
         </div>
         {chatVisiable && <div className="chat-btn" >
           {!isRead ? <StyledBadge
@@ -328,7 +330,7 @@ price={numOfExpense.PricePerOne} amount={numOfExpense.NumberOfRepeatExpenses} Ex
             <ForumIcon onClick={() => nav('chats')} />
           </div>}
         </div>}
-
+{/* לא לגעת בקוד הזה */}
 
 
       </LocalizationProvider>

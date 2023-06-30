@@ -124,22 +124,24 @@ function ChatPage({ userFromDB }) {
                 </FormControl>
             </div> */}
 
-
-            <Box onClick={submit} style={{ position: 'fixed', alignItems: 'center', bottom: 60, left: 280, right: 0 }} sx={{ '& > :not(style)': { m: 1 } }}>
-                <Fab variant="extended">
-                    <NavigationIcon sx={{ mr: 1 }} />
-                </Fab>
-            </Box>
-            <FormControl sx={{ m: 1, }} className='txt-input' variant="outlined">
-                <OutlinedInput
-                    onInput={handleChange}
-                    multiline={true}
-                    name='txt'
-                    label=""
-                    dir='rtl'
-                    value={txt}
-                />
-            </FormControl>
+            <div className='btuo'>
+                <Box onClick={submit} style={{ zIndex:10 ,position: 'fixed', alignItems: 'center', bottom: 60, left: 280, right: 0 }} sx={{ '& > :not(style)': { m: 1 } }}>
+                    <Fab variant="extended">
+                        <NavigationIcon sx={{ mr: 1 }} />
+                    </Fab>
+                </Box>
+                <FormControl sx={{ m: 1, }} className='txt-input' variant="outlined">
+                    <OutlinedInput
+                        onInput={handleChange}
+                        multiline={true}
+                        name='txt'
+                        label=""
+                        dir='rtl'
+                        value={txt}
+                    />
+                </FormControl>
+            </div>
+            
             <br></br>
             <br></br>
 

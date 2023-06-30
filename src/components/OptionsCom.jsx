@@ -40,7 +40,7 @@ export default function OptionsCom(props) {
             console.log({ item })
             // navigate to item page
           }}>
-            <OptionsCard selected={props.selected} tabIndex={value} item={item} index={index} />
+            <OptionsCard userFromDB={props.userFromDB} selected={props.selected} tabIndex={value} item={item} index={index} />
           </div>)
         })}
       </Box>

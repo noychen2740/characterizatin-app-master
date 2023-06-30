@@ -268,7 +268,7 @@ function Map(props) {
                             ))
                         }
                     </MarkerClusterer>
-
+                    
                     <MarkerClusterer options={optionAtraction}>
                         {(clusterer) =>
                             attractionList.map((location, index) => (
@@ -311,7 +311,7 @@ function Map(props) {
 
                 </GoogleMap>
                 <Box>
-                    <OptionsCom selected={selected} countryName={selectCountry} data={[aidCompList, tripList, sleepingList, attractionList]} />
+                    <OptionsCom  userFromDB={props.userFromDB} selected={selected} countryName={selectCountry} data={[aidCompList, tripList, sleepingList, attractionList]} />
                 </Box>
             </div>
             <Navigation pagNav={'map'} />

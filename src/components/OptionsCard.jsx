@@ -14,6 +14,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { favoriteservice } from '../services/Favorites.service';
 
 const fieldsMapper = {
     0: {
@@ -53,9 +54,9 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-export default function OptionsCard({ tabIndex, item, index, selected }) {
+export default function OptionsCard({ tabIndex, item, index, selected,userFromDB }) {
     const [expanded, setExpanded] = React.useState(false);
-
+    console.log('gdgr',item, userFromDB);
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
@@ -92,7 +93,7 @@ export default function OptionsCard({ tabIndex, item, index, selected }) {
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
+                <IconButton aria-label="add to favorites" onClick={() => favoriteservice.AddFav(item.FKeyDto, userFromDB.UserEmail)}>
                     <FavoriteIcon />
                 </IconButton>
                 <IconButton aria-label="share">
