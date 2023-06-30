@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const favoriteservice={
+export const favoriteservice = {
     getByName,
     // create,
     PutFavourites,
@@ -11,7 +11,7 @@ export const favoriteservice={
 
 
 
-const base_url = 'http://194.90.158.74/cgroup99/prod/api'
+const base_url = 'https://proj.ruppin.ac.il/cgroup99/prod/api'
 const module = 'Favourites'
 const userEmail = 'Benda669@gmail.com'
 
@@ -24,7 +24,7 @@ async function Getall(Email) {
         return res.data
     } catch (err) {
         console.log({ err });
-        return []  
+        return []
     }
 }
 // https://localhost:44350/api/traveldiary/Benda669@gmail.com/GetTravelDiaryChaptersById/טרק

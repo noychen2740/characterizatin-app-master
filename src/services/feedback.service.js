@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const feedbackService={
+export const feedbackService = {
     getById,
     create,
     update,
@@ -11,7 +11,7 @@ export const feedbackService={
 
 
 
-const base_url = 'http://194.90.158.74/cgroup99/prod/api'
+const base_url = 'https://proj.ruppin.ac.il/cgroup99/prod/api'
 const module = 'Feedback'
 const userEmail = 'Benda669@gmail.com'
 
@@ -54,7 +54,7 @@ async function createfromuser(feedback) {
     console.log({ feedback });
     try {
         //api/Feedback/PostFeed/{useremail}/
-        const res = await axios.post(`${base_url}/${module}/PostFeed/${userEmail}/`,feedback)
+        const res = await axios.post(`${base_url}/${module}/PostFeed/${userEmail}/`, feedback)
         console.log({ res });
         return res.data
     } catch (err) {
