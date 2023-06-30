@@ -11,7 +11,6 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { favoriteservice } from '../services/Favorites.service';
@@ -19,9 +18,9 @@ import { favoriteservice } from '../services/Favorites.service';
 const fieldsMapper = {
     0: {
         title: "AidCompName",
-        image: "AidCompPhoto",
-        description: "AidCompDescription",
-        selector: "HOS"
+        image: "AidComplexesPhoto",
+        description: "AidComplexesDescription",
+        selector: "H"
     },
     1: {
         title: "TripsName",
@@ -31,8 +30,8 @@ const fieldsMapper = {
     },
     2: {
         title: "SleepingCompName",
-        image: "SleepingCompPhoto",
-        description: "SleepingCompDescription",
+        image: "SleepingComplexesPhoto",
+        description: "SleepingComplexesDescription",
         selector: "S"
     },
     3: {
@@ -70,16 +69,16 @@ export default function OptionsCard({ tabIndex, item, index, selected,userFromDB
     return (
         <Card className={itemSelector} style={isSelected ? { backgroundColor: '#ececec' } : {}} sx={{ maxWidth: 345 }}>
             <CardHeader
-                avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                        { }
-                    </Avatar>
-                }
-                action={
-                    <IconButton aria-label="settings">
-                        <MoreVertIcon />
-                    </IconButton>
-                }
+                // avatar={
+                //     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                //         { }
+                //     </Avatar>
+                // }
+                // action={
+                //     <IconButton aria-label="settings">
+                //         <MoreVertIcon />
+                //     </IconButton>
+                // }
                 title={item[title]}
             />
             <CardMedia
@@ -96,9 +95,7 @@ export default function OptionsCard({ tabIndex, item, index, selected,userFromDB
                 <IconButton aria-label="add to favorites" onClick={() => favoriteservice.AddFav(item.FKeyDto, userFromDB.UserEmail)}>
                     <FavoriteIcon />
                 </IconButton>
-                <IconButton aria-label="share">
-                    <ShareIcon />
-                </IconButton>
+
                 <ExpandMore
                     expand={expanded}
                     onClick={handleExpandClick}

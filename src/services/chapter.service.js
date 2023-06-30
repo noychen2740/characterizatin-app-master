@@ -7,7 +7,7 @@ export const chapterService = {
     getAll,
 }
 
-const base_url = 'http://194.90.158.74/cgroup99/prod/api'
+const base_url = 'https://proj.ruppin.ac.il/cgroup99/prod/api'
 const module = 'traveldiary'
 const userEmail = 'Benda669@gmail.com'
 
@@ -25,7 +25,7 @@ async function getAll(Email) {
     }
 }
 // https://localhost:44350/api/traveldiary/Benda669@gmail.com/GetTravelDiaryChaptersById/טרק
-async function getById(NameOfChapter,Email) {
+async function getById(NameOfChapter, Email) {
     try {
         const res = await axios.get(`${base_url}/${module}/${Email}/GetTravelDiaryChaptersById/${NameOfChapter}`)
         console.log({ res });
@@ -38,26 +38,26 @@ async function getById(NameOfChapter,Email) {
 // post: https://localhost:44350/api/traveldiary/Post/noycn27@gmail.com/{newchap}
 // api/traveldiary/PostCAP/{userImput}/
 
-async function create(episode,Email) {
-  
-      let config = {
+async function create(episode, Email) {
+
+    let config = {
         method: 'post',
         maxBodyLength: Infinity,
         url: `${base_url}/${module}/PostCAP/${Email}/`,
-        headers: { 
-          'Content-Type': 'application/json', 
-          'Accept': 'application/json'
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
         },
-        data : episode
-      };
-      
-      axios.request(config)
-      .then((response) => {
-        console.log(JSON.stringify(response.data));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        data: episode
+    };
+
+    axios.request(config)
+        .then((response) => {
+            console.log(JSON.stringify(response.data));
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 }
 //api/traveldiary/Put/{nameofchapterfromdb}/
 async function update(episode) {
@@ -73,7 +73,7 @@ async function update(episode) {
 
 
 
-async function remove(NameOfChapter,Email) {
+async function remove(NameOfChapter, Email) {
     try {
         const res = await axios.delete(`${base_url}/${module}/${Email}/deletechapter/${NameOfChapter}`)
         console.log({ res });

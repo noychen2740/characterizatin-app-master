@@ -188,7 +188,8 @@ p {
   max-width: 700px;
   margin: 0 auto;
 }
-.chat-btn-container{
+
+.chat-btn-container {
   width: 100%;
   height: 100%;
   position: relative;
@@ -207,7 +208,7 @@ p {
   background-color: #598e89;
   height: 45px;
   width: 45px;
- 
+
   cursor: pointer;
 }
 
@@ -244,4 +245,26 @@ p {
 
 .mapCard {
   margin: 50px 0;
+}
+
+.mapCard img {
+  height: 200px;
+}
+
+.infoBox {
+  color: #111;
+  width: 150px;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.infoBoxTitle {
+  position: absolute;
+  width: 180px;
+  font-size: 16px;
+}
+
+.infoBoxName {
+  font-size: 24px;
+  font-weight: 700;
 }
