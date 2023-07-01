@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import  jeep from '../../assets/jeep.jpg';
 import TopOfAplication from '../TopOfAplication';
 import Navigation from '../Navigation';
+import NavigationAdmin from '../NavigationAdmin';
 
 
 
@@ -72,7 +73,8 @@ function FeedbackPage() {
                     <Button onClick={() => remove(feedback.FeedbackKey)} size="small">מחיקת פידבק </Button>
                   </CardActions>
                 </Card>
-                <Navigation></Navigation>
+                {/* <Navigation></Navigation> */}
+                <NavigationAdmin pagNav={'toAdd'}/>
     </div>
   ) : <div className="loading">
     loading...
