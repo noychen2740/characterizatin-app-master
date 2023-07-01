@@ -96,7 +96,15 @@ function Login(props) {
                         const sendUser = () => { props.getUser(user) }
                         sendUser();/// העברת המשתמש כולו
                         ////////////////////
-                        nav('userProfile')
+                        /////////ניהול עבודה של אדמין
+                        if (user.UserEmail==='admin@gmail.com') {
+                            nav('UserProfileAdmin')
+                        }
+                        else{
+                            nav('userProfile')
+                        }
+                        /////////
+      
                     }
                     else {
                         console.log("users wasnt found!")

@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import  jeep from '../../assets/jeep.jpg';
 import TopOfAplication from '../TopOfAplication';
 import Navigation from '../Navigation';
+import NavigationAdmin from '../NavigationAdmin';
 
 
 
@@ -41,7 +42,7 @@ function Feedbacks() {
 
   return ( //תצוגה של הפיידבקים על המסך לפי הסדר
     <div className='feedbacks-page center'>
-      <TopOfAplication label='פיידבקים מהמשתמשים'  />
+      <TopOfAplication label='הצעות שמחכות לאישור'  />
       {/* <div className='title'>יומן המסע שלי</div> */}
       <br></br>
       <br></br>
@@ -79,7 +80,8 @@ function Feedbacks() {
       <br></br>
       <br></br>
       <br></br>
-      <Navigation></Navigation>
+      {/* <Navigation></Navigation> */}
+      <NavigationAdmin pagNav={'toAdd'}/>
     </div>
   );
 }
