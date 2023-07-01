@@ -14,6 +14,7 @@ import Navigation from '../Navigation';
 
 
 
+
 function Episodes(props) {
   const navigate = useNavigate();
 
@@ -28,6 +29,7 @@ function Episodes(props) {
     await chapterService.remove(id,props.userEmailFromDB);
     loadEpisodes();
   };
+  
 
   const edit = (id) => { //אפשרות לעריכה פרק לפי האי די שלו
     console.log({ id });
@@ -50,6 +52,7 @@ function Episodes(props) {
         {episodes.map((e) => {
           return (
             <div key={e.NameOfChapter} className='episode'>
+              
               <Card sx={{ maxWidth: 345 }}>
               <div className='episode-time'>
                 <div className='episode-date'> {new Date(e.ChapterDate).toLocaleDateString('en-GB')} </div>
