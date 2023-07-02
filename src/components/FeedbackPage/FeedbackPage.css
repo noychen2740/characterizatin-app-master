@@ -1,5 +1,46 @@
 .feedbackpage{
     font-size: 15px;
-    padding: 20px;
-
+}
+.Feedback-title3{
+  text-align: right;
+  font-size: 17px;
+  display: block;
+}
+.Feedback-title4{
+    text-align: right;
+    font-size: 17px;
+}
+.Feedback-title5{
+    text-align: right;
+    font-size: 17px;
+    
+}
+.cardimg{
+    height: 160px;
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+.greydiv{
+    background-color: rgb(245 245 244) !important;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px 40px;
+}
+.title2{
+  text-align: center !important;
+  font-size: 27px;
+  padding-top: 15px;
+  color: black;
+  align-items: center;
+}
+.rigt{
+    text-align: right !important;
+    flex-direction: row-reverse !important;
+    font-size: 12px !important;
+}
+.diva{
+    width: 100%;
 }

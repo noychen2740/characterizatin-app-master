@@ -47,18 +47,17 @@ function Feedbacks() {
       <br></br>
       <br></br>
       <br></br>
-      <br></br>
-      <br></br>
+
       <div className='feedbacks'>
         {feedbacks.map((f) => ( //תצוגה של הפיידבקים על המסך לפי map
           <div className='feedback'>
             <div className='feedback-content'>
-            <Card sx={{ maxWidth: 345 }}>
-                  <CardMedia
+            <Card className='cardstyle2' sx={{ maxWidth: 345 }}>
+                  <CardMedia className='cardimg2'
                     component="img"
                     alt="green iguana"
-                    height="140"
-                    src={jeep} />
+                    height="160"
+                    src={f.FeedbackPhoto} />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
                     <h1 className='Feedback-title2'>{f.FeedbackTitle}</h1>
@@ -68,7 +67,7 @@ function Feedbacks() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button onClick={() => getById(f.FeedbackKey)} size="small">הצגת פידבק </Button>
+                    <Button onClick={() => getById(f.FeedbackKey)} size="small">הצגת הצעה </Button>
                     {/* <Button onClick={() => remove(f.FeedbackKey)} size="small">מחיקת פידבק </Button> */}
                   </CardActions>
                 </Card>
@@ -77,7 +76,6 @@ function Feedbacks() {
           </div>
         ))}
       </div>
-      <br></br>
       <br></br>
       <br></br>
       {/* <Navigation></Navigation> */}
