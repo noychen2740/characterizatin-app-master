@@ -56,6 +56,7 @@ function CreateFeedbackAdmin() {
             <OutlinedInput
                 cols='50'
                 rows='2'
+                rows='3'
                 onInput={handleChange}
                 name='FeedbackDescription'
                 id="fullWidth"
@@ -94,6 +95,7 @@ function CreateFeedbackAdmin() {
           </FormControl>
           </div>
           <FormControl fullWidth>
+          <p className='pdiv'>לחץ כאן לבחירת סוג ההמלצה</p>
           <label>סוג</label>
             <Select
               labelId="demo-simple-select-label"
@@ -113,7 +115,7 @@ function CreateFeedbackAdmin() {
           <div className="seperator"></div>
           <div className='input-container'>
           <FormControl sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-email">נקודת ציון lon </InputLabel>
+            <InputLabel htmlFor="outlined-adornment-email">נקודת ציון קו אורך </InputLabel>
             <OutlinedInput
                 cols='50'
                 rows='1'
@@ -128,6 +130,7 @@ function CreateFeedbackAdmin() {
           <div className='input-container'>
           <FormControl sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-email">נקודת ציון lat </InputLabel>
+            <InputLabel htmlFor="outlined-adornment-email">נקודת ציון קו רוחב </InputLabel>
             <OutlinedInput
                 cols='50'
                 rows='1'
@@ -140,11 +143,13 @@ function CreateFeedbackAdmin() {
           </FormControl>
           </div>
           <div className='input-container'>
+            <p className='pdiv'>להוספת תמונה לחץ כאן</p>
           <input className='imginput' type='file'></input>
           </div>
           <div className='input-container-button'>
           <Button
             className='btn btn-create'
+            className='btn btn-create2'
             variant='contained'
             style={{backgroundColor:'#598e89'}}
             onClick={submit}
