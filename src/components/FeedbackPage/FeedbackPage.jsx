@@ -68,7 +68,7 @@ function FeedbackPage() {
                     height="140"
                     src={feedback.FeedbackPhoto} />
                     <div className='rigt'>
-                    <h1 className='title2'>{feedback.FeedbackTitle}<AddLocationAltTwoToneIcon/></h1>
+                    <h1 className='title2'><AddLocationAltTwoToneIcon/>   {feedback.FeedbackTitle}<AddLocationAltTwoToneIcon/></h1>
                     
                     <Divider variant="inset" />
                     <ListItem alignItems="flex-start">

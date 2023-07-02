@@ -33,8 +33,6 @@ function CreateFeedbackAdmin() {
       <TopOfAplication label='הוספת המלצה חדשה'  />
       <br></br>
       <br></br>
-      <br></br>
-      <br></br>
         <form onSubmit={submit}>       
           <div className='input-container'>
           <FormControl sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
@@ -55,7 +53,6 @@ function CreateFeedbackAdmin() {
             <InputLabel htmlFor="outlined-adornment-email">תיאור</InputLabel>
             <OutlinedInput
                 cols='50'
-                rows='2'
                 rows='3'
                 onInput={handleChange}
                 name='FeedbackDescription'
@@ -129,7 +126,6 @@ function CreateFeedbackAdmin() {
           </div>
           <div className='input-container'>
           <FormControl sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-email">נקודת ציון lat </InputLabel>
             <InputLabel htmlFor="outlined-adornment-email">נקודת ציון קו רוחב </InputLabel>
             <OutlinedInput
                 cols='50'
@@ -148,7 +144,6 @@ function CreateFeedbackAdmin() {
           </div>
           <div className='input-container-button'>
           <Button
-            className='btn btn-create'
             className='btn btn-create2'
             variant='contained'
             style={{backgroundColor:'#598e89'}}
