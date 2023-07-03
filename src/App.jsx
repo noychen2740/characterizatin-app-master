@@ -270,7 +270,7 @@ function App() {
             {/* <Route path="NewExpense" element={<NewExpense />} /> */}
             <Route path="Analysis" element={<ExpensesAnalysis userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             {/* <Route path="Analysis" element={<ExpensesAnalysis />} /> */}
-            <Route path="map" element={<Map  />} />
+            <Route path="map"  element={<Map userFromDB={userFromDB} />} />
             {/* <Route path="map" element={<Map />} /> */}
             <Route path='episodes' element={<Episodes userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             {/* <Route path='episodes' element={<Episodes />} /> */}
@@ -283,7 +283,7 @@ function App() {
             {/* <Route path='create-episode' element={<CreateEpisode  />} /> */}
             <Route path='episode/:NameOfChapter' element={<EpisodePage userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             {/* <Route path='episode/:NameOfChapter' element={<EpisodePage />} /> */}
-            <Route path='CreateFeedback' element={<CreateFeedback />} />
+            <Route path='CreateFeedback' element={<CreateFeedback  userFromDB={userFromDB} />} />
             <Route path='Feedbacks' element={<Feedbacks />} />
             <Route path='ThanksPage' element={<ThanksPage />} />
             <Route path='Diary' element={<Diary />} />
@@ -296,8 +296,8 @@ function App() {
             {/* <Route path='GeographyChart' element={<GeographyChart/>} /> */}
             
             {/* אדמין */}
-            <Route path="UserProfileAdmin" element={<UserProfileAdmin userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
-            <Route path='CreateFeedbackAdmin' element={<CreateFeedbackAdmin />} />
+            <Route path="UserProfileAdmin" element={userFromDB?<UserProfileAdmin userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />:<div>loading...</div>} />
+            <Route path='CreateFeedbackAdmin' element={<CreateFeedbackAdmin userFromDB={userFromDB} />} />
             <Route path="mapAdmin" element={<MapAdmin />} />
             <Route path='ChangePasswordComAdmin' element={<ChangePasswordComAdmin userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
 

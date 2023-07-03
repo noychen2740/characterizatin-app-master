@@ -3,10 +3,11 @@ import axios from 'axios';
 export const feedbackService = {
     getById,
     create,
-    update,
+    PutUpdateFeed,
     remove,
     getAll,
-    createfromuser
+    createfromuser,
+    PostFeedfromadmin
 }
 
 
@@ -50,11 +51,23 @@ async function create(feedback) {
     }
 }
 //api/Feedback/PostFeed/
-async function createfromuser(feedback) {
+async function createfromuser(feedback, userFromDB) {
     console.log({ feedback });
     try {
         //api/Feedback/PostFeed/{useremail}/
-        const res = await axios.post(`${base_url}/${module}/PostFeed/${userEmail}/`, feedback)
+        const res = await axios.post(`${base_url}/${module}/PostFeed/${userFromDB.UserEmail}/`, feedback)
+        console.log({ res });
+        return res.data
+    } catch (err) {
+        console.log({ err });
+    }
+}
+
+async function PostFeedfromadmin(feedback, userFromDB) {
+    console.log({ feedback });
+    try {
+        //api/Feedback/PostFeed/{useremail}/
+        const res = await axios.post(`${base_url}/${module}/PostFeedfromadmin/${userFromDB.UserEmail}/`, feedback)
         console.log({ res });
         return res.data
     } catch (err) {
@@ -63,9 +76,9 @@ async function createfromuser(feedback) {
 }
 
 
-async function update(feedback) {
+async function PutUpdateFeed(FeedbackKey, feedback) {
     try {
-        const res = await axios.put(`${base_url}/${module}/Put/${feedback.NameOfChapter}/{newchap}`, feedback)
+        const res = await axios.put(`${base_url}/${module}/PutUpdateFeed/${FeedbackKey}/`, feedback)
         console.log({ res });
         return res.data
     } catch (err) {

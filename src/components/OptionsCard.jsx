@@ -43,7 +43,7 @@ const fieldsMapper = {
 }
 
 const ExpandMore = styled((props) => {
-    const { expand, ...other } = props;
+    const { expand,...other } = props;
     return <IconButton {...other} />;
 })(({ theme, expand }) => ({
     transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
@@ -53,9 +53,9 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-export default function OptionsCard({ tabIndex, item, index, selected,userFromDB }) {
+export default function OptionsCard({ tabIndex, item, index, selected, userFromDB }) {
     const [expanded, setExpanded] = React.useState(false);
-    console.log('gdgr',item, userFromDB);
+    console.log('gdgr', item, userFromDB);
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
@@ -92,7 +92,7 @@ export default function OptionsCard({ tabIndex, item, index, selected,userFromDB
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites" onClick={() => favoriteservice.AddFav(item.FKeyDto, userFromDB.UserEmail)}>
+                <IconButton aria-label="add to favorites" onClick={() => favoriteservice.AddFav(item.OptionKey, userFromDB.UserEmail)}>
                     <FavoriteIcon />
                 </IconButton>
 

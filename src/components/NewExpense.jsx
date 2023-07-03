@@ -48,7 +48,7 @@ export default function NewExpense(props) {
     const apiUrl = getEnv() + '/expenses/post'
     // const apiUrl='http://localhost:58583/api/users/1'
     const expense = {
-      UserEmail: props.userEmailFromDB,// שונה
+      UserEmail: props.userFromDB.UserEmail,// שונה
       // UserEmail: "Benda669@gmail.com",// ישתנה בהמשך יועבר דרך פרופס
       PricePerOne: price,
       NumberOfRepeatExpenses: amount,
@@ -108,7 +108,7 @@ export default function NewExpense(props) {
     // const apiUrl='http://localhost:58583/api/users/1'
     const expense = {
       // UserEmail: "Benda669@gmail.com",// ישתנה בהמשך יועבר דרך פרופס
-      UserEmail: props.userEmailFromDB,// שונה
+      UserEmail: props.userFromDB.UserEmail,// שונה
       PricePerOne: price,
       NumberOfRepeatExpenses: amount,
       ExpensesTitle: title,
