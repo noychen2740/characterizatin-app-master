@@ -41,6 +41,7 @@ async function getByName(FavKey) {
 //api/Favourites/{OptINTindb}/{Favemail}/PostAddFav
 async function AddFav(FavKey,Email) {
     try {
+        console.log(FavKey,Email);
         const res = await axios.post(`${base_url}/${module}/${FavKey}/${Email}/PostAddFav`)
         console.log({ res });
         return res.data[0]

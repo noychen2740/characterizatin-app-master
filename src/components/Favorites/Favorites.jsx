@@ -49,24 +49,12 @@ function Favorites(props) {
     <div className='episodes-page center'>
       <TopOfAplication label='המועדפים שלי' />
       {/* <div className='title'>יומן המסע שלי</div> */}
-      <br></br>
-      <br></br>
-      <div className='Favoritesss'>
+     <div className='Favoritesss'>
         {favoritess.map((item, idx) => {
           return (
             <div className='episode2'>
               <Card sx={{ maxWidth: 345 }}>
                 <CardHeader
-                  avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                      { }
-                    </Avatar>
-                  }
-                  action={
-                    <IconButton aria-label="settings">
-                      <MoreVertIcon />
-                    </IconButton>
-                  }
                   title={item.FnameDTO}
                 />
                 <CardMedia
@@ -79,13 +67,11 @@ function Favorites(props) {
 
                   </Typography>
                 </CardContent>
-                <CardActions disableSpacing>
+                <CardActions className='btn2' disableSpacing>
                   <IconButton onClick={() => removeFavorite(item.FkeyDTO)} aria-label="add to favorites">
                     <FavoriteIcon style={{ color: 'red' }} />
                   </IconButton>
-                  <IconButton aria-label="share">
-                    <ShareIcon />
-                  </IconButton>
+
                   <ExpandMore
                     expand={expandedIdx === idx}
                     onClick={() => {
@@ -98,12 +84,14 @@ function Favorites(props) {
                     aria-expanded={expandedIdx === idx}
                     aria-label="show more"
                   >
-                    <ExpandMoreIcon />
+
+                   <ExpandMoreIcon/>
                   </ExpandMore>
+                  
                 </CardActions>
-                <Collapse in={expandedIdx === idx} timeout="auto" unmountOnExit>
+                <Collapse className='btn2' in={expandedIdx === idx} timeout="auto" unmountOnExit>
                   <CardContent>
-                    <Typography paragraph>{item.FdescriptionDTO}</Typography>
+                    <Typography  paragraph>{item.FdescriptionDTO}</Typography>
                   </CardContent>
                 </Collapse>
               </Card>

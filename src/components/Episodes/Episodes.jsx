@@ -66,13 +66,14 @@ function Episodes(props) {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
+          
         <div className='episode-title'>{e.NameOfChapter}</div>
         </Typography>
         <Typography variant="body2" color="text.secondary">
         <div className='episode-desc'>{e.ChapterDescription.length > 20 ? e.ChapterDescription.substring(0, 20) + '...' : e.ChapterDescription}</div>
         </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions className='btn2'>
         <Button  onClick={() => edit(e.NameOfChapter,props.userEmailFromDB)} size="small">עריכה</Button>
         <Button onClick={() => navigate(`/episode/${e.NameOfChapter}`)} size="small"> תצוגה</Button>
         <Button onClick={() => remove(e.NameOfChapter,props.userEmailFromDB)} size="small"> מחיקה</Button>

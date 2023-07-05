@@ -8,23 +8,34 @@ import { TextField } from '@mui/material';
 import TopOfAplication from '../TopOfAplication';
 import Navigation from '../Navigation';
 import NavigationAdmin from '../NavigationAdmin';
+import { storageService } from '../../services/storage.service';
 
 
-function CreateFeedbackAdmin() {
+function CreateFeedbackAdmin({userFromDB}) {
   const [form, setForm] = useState();
   const { id } = useParams();
   const navigate = useNavigate();
 
   const submit = async (ev) => { //לאחר ההוספה של הפרק העמוד מובל לעמוד תודה למשתמש
     ev.preventDefault();
-    const res = await feedbackService.createfromuser(form);
+    const res = await feedbackService.PostFeedfromadmin(form,userFromDB);
     navigate('/ThanksPage');
   };
 
-  const handleChange = (ev) => { //לוקח את הפרמטרים מהטופס לדאטה בייס
-    let { name, value } = ev.target;
 
-    setForm({ ...form, [name]: value }); 
+  const handleChange = async (ev) => { //לוקח את הפרמטרים ש/מזינים בפורם
+    let { name, value } = ev.target;
+    if (name === 'FeedbackPhoto') {
+
+      const file = ev.target.files[0]
+      console.log({ file });
+      if (file) {
+        const url = await storageService.upload(file)
+        setForm({ ...form, [name]: url });
+      }
+    } else {
+      setForm({ ...form, [name]: value });
+    }
   };
 
   return ( //יצירה של הפידבק
@@ -33,11 +44,9 @@ function CreateFeedbackAdmin() {
       <TopOfAplication label='הוספת המלצה חדשה'  />
       <br></br>
       <br></br>
-      <br></br>
-      <br></br>
         <form onSubmit={submit}>       
           <div className='input-container'>
-          <FormControl sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
+          <FormControl className='grydiv' sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-email">כותרת</InputLabel>
             <OutlinedInput
                 cols='50'
@@ -51,11 +60,11 @@ function CreateFeedbackAdmin() {
           </FormControl>
           </div>
           <div className='input-container'>
-          <FormControl sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
+          <FormControl className='grydiv'  sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-email">תיאור</InputLabel>
             <OutlinedInput
                 cols='50'
-                rows='2'
+                rows='3'
                 onInput={handleChange}
                 name='FeedbackDescription'
                 id="fullWidth"
@@ -66,7 +75,7 @@ function CreateFeedbackAdmin() {
           </FormControl>
           </div>
           <div className='input-container'>
-          <FormControl sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
+          <FormControl className='grydiv'  sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-email">שם המדינה</InputLabel>
             <OutlinedInput
                 cols='50'
@@ -80,7 +89,7 @@ function CreateFeedbackAdmin() {
           </FormControl>
           </div>
           <div className='input-container'>
-          <FormControl sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
+          <FormControl className='grydiv'  sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-email">איזור במדינה  </InputLabel>
             <OutlinedInput
                 cols='50'
@@ -94,8 +103,9 @@ function CreateFeedbackAdmin() {
           </FormControl>
           </div>
           <FormControl fullWidth>
+          <p className='pdiv'>לחץ כאן לבחירת סוג ההמלצה</p>
           <label>סוג</label>
-            <Select
+            <Select  className='grydiv'  
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={form?.KindOfFeedback}
@@ -111,9 +121,27 @@ function CreateFeedbackAdmin() {
             </Select>
           </FormControl>
           <div className="seperator"></div>
+          <FormControl fullWidth>
+          <p className='pdiv'>לחץ כאן לבחירת סוג משתמש</p>
+          <label>סוג</label>
+            <Select className='grydiv'  
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={form?.FeedbackPersona}
+              label="Age"
+              name='FeedbackPersona'
+              fullWidth
+              onChange={handleChange}
+            >
+              <MenuItem value={"מוצילר"}>מוצילר</MenuItem>
+              <MenuItem value={"צייל"}>צייל</MenuItem>
+              <MenuItem value={"בליין"}>בליין</MenuItem>
+            </Select>
+          </FormControl>
+          <div className="seperator"></div>
           <div className='input-container'>
-          <FormControl sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-email">נקודת ציון lon </InputLabel>
+          <FormControl className='grydiv'  sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
+            <InputLabel htmlFor="outlined-adornment-email">נקודת ציון קו אורך </InputLabel>
             <OutlinedInput
                 cols='50'
                 rows='1'
@@ -126,8 +154,8 @@ function CreateFeedbackAdmin() {
           </FormControl>
           </div>
           <div className='input-container'>
-          <FormControl sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-email">נקודת ציון lat </InputLabel>
+          <FormControl className='grydiv'  sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
+            <InputLabel htmlFor="outlined-adornment-email">נקודת ציון קו רוחב </InputLabel>
             <OutlinedInput
                 cols='50'
                 rows='1'
@@ -140,11 +168,12 @@ function CreateFeedbackAdmin() {
           </FormControl>
           </div>
           <div className='input-container'>
-          <input className='imginput' type='file'></input>
+            <p className='pdiv'>להוספת תמונה לחץ כאן</p>
+          <input className='imginput' type='file' name='FeedbackPhoto' onChange={handleChange}></input>
           </div>
           <div className='input-container-button'>
           <Button
-            className='btn btn-create'
+            className='btn btn-create2'
             variant='contained'
             style={{backgroundColor:'#598e89'}}
             onClick={submit}

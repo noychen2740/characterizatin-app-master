@@ -9,14 +9,14 @@ import TopOfAplication from '../TopOfAplication';
 import Navigation from '../Navigation';
 
 
-function CreateFeedback() {
+function CreateFeedback({userFromDB}) {
   const [form, setForm] = useState();
   const { id } = useParams();
   const navigate = useNavigate();
 
   const submit = async (ev) => { //לאחר ההוספה של הפרק העמוד מובל לעמוד תודה למשתמש
     ev.preventDefault();
-    const res = await feedbackService.createfromuser(form);
+    const res = await feedbackService.createfromuser(form,userFromDB);
     navigate('/ThanksPage');
   };
 

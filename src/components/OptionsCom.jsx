@@ -3,6 +3,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import OptionsCard from './OptionsCard';
+import { useSlotProps } from '@mui/base';
 
 export default function OptionsCom(props) {
   const [dataCard, setDataCard] = React.useState();
@@ -39,7 +40,7 @@ export default function OptionsCom(props) {
             console.log({ item })
             // navigate to item page
           }}>
-            <OptionsCard selected={props.selected} tabIndex={props.value} item={item} index={index} />
+            <OptionsCard selected={props.selected} userFromDB={props.userFromDB} tabIndex={props.value} item={item} index={index} />
           </div>)
         })}
       </Box>

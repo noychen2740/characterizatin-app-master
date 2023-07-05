@@ -347,7 +347,7 @@ function Map(props) {
 
                 </GoogleMap>
                 <Box>
-                    <OptionsCom tabChanged={(value) => { setSelectedTab(value) }} value={selectedTab} selected={selected} countryName={selectCountry} data={[aidCompList, tripList, sleepingList, attractionList]} />
+                    <OptionsCom tabChanged={(value) => { setSelectedTab(value) }} value={selectedTab} selected={selected} userFromDB={props.userFromDB} countryName={selectCountry} data={[aidCompList, tripList, sleepingList, attractionList]} />
                 </Box>
             </div>
             <Navigation pagNav={'map'} />

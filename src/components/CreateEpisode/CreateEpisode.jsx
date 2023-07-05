@@ -112,7 +112,7 @@ function CreateEpisode(props) {
           <br></br>
           <img className='book-image3' src={yoman}></img>
           <form onSubmit={submit} >
-            <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
+            <FormControl className='sty' sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-email">שם הפרק</InputLabel>
               <OutlinedInput
                 onInput={handleChange}
@@ -122,7 +122,7 @@ function CreateEpisode(props) {
                 value={form?.NameOfChapter || ''}
               />
             </FormControl>
-            <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
+            <FormControl className='sty'  sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
               {/* <InputLabel htmlFor="outlined-adornment-email"> תאריך</InputLabel> */}
               <DatePicker
                 label="תאריך"
@@ -130,7 +130,7 @@ function CreateEpisode(props) {
                 onChange={(ChapterDate) => setForm({ ...form, ChapterDate })}
               />
             </FormControl>
-            <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
+            <FormControl className='sty'  sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
               {/* <InputLabel htmlFor="outlined-adornment-email"> שעה</InputLabel> */}
               <TimePicker
                 label="שעה"
@@ -138,7 +138,7 @@ function CreateEpisode(props) {
                 value={time}
               />
             </FormControl>
-            <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
+            <FormControl className='sty'  sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-email">תיאור הפרק</InputLabel>
               <OutlinedInput
                 onInput={handleChange}
@@ -153,6 +153,7 @@ function CreateEpisode(props) {
               />
             </FormControl>
             <br></br>
+            <p className='pp'>לחץ כאן להוספת תמונה</p>
             <div className='input-container'>
               <input className='imginput' type='file' name='ChapterPictures' onChange={handleChange}  ></input>
             </div>

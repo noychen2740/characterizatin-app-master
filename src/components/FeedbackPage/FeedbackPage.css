@@ -4,7 +4,7 @@
 .Feedback-title3{
   text-align: right;
   font-size: 17px;
-  display: block;
+  flex-direction: row-reverse !important;
 }
 .Feedback-title4{
     text-align: right;
@@ -44,3 +44,4 @@
 .diva{
     width: 100%;
 }
+
