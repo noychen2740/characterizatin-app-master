@@ -46,7 +46,7 @@ function CreateFeedbackAdmin({userFromDB}) {
       <br></br>
         <form onSubmit={submit}>       
           <div className='input-container'>
-          <FormControl sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
+          <FormControl className='grydiv' sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-email">כותרת</InputLabel>
             <OutlinedInput
                 cols='50'
@@ -60,7 +60,7 @@ function CreateFeedbackAdmin({userFromDB}) {
           </FormControl>
           </div>
           <div className='input-container'>
-          <FormControl sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
+          <FormControl className='grydiv'  sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-email">תיאור</InputLabel>
             <OutlinedInput
                 cols='50'
@@ -75,7 +75,7 @@ function CreateFeedbackAdmin({userFromDB}) {
           </FormControl>
           </div>
           <div className='input-container'>
-          <FormControl sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
+          <FormControl className='grydiv'  sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-email">שם המדינה</InputLabel>
             <OutlinedInput
                 cols='50'
@@ -89,7 +89,7 @@ function CreateFeedbackAdmin({userFromDB}) {
           </FormControl>
           </div>
           <div className='input-container'>
-          <FormControl sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
+          <FormControl className='grydiv'  sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-email">איזור במדינה  </InputLabel>
             <OutlinedInput
                 cols='50'
@@ -105,7 +105,7 @@ function CreateFeedbackAdmin({userFromDB}) {
           <FormControl fullWidth>
           <p className='pdiv'>לחץ כאן לבחירת סוג ההמלצה</p>
           <label>סוג</label>
-            <Select
+            <Select  className='grydiv'  
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={form?.KindOfFeedback}
@@ -122,9 +122,9 @@ function CreateFeedbackAdmin({userFromDB}) {
           </FormControl>
           <div className="seperator"></div>
           <FormControl fullWidth>
-          <p className='pdiv'>לחץ כאן לבחירת סוג משתממש</p>
+          <p className='pdiv'>לחץ כאן לבחירת סוג משתמש</p>
           <label>סוג</label>
-            <Select
+            <Select className='grydiv'  
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={form?.FeedbackPersona}
@@ -140,7 +140,7 @@ function CreateFeedbackAdmin({userFromDB}) {
           </FormControl>
           <div className="seperator"></div>
           <div className='input-container'>
-          <FormControl sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
+          <FormControl className='grydiv'  sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-email">נקודת ציון קו אורך </InputLabel>
             <OutlinedInput
                 cols='50'
@@ -154,7 +154,7 @@ function CreateFeedbackAdmin({userFromDB}) {
           </FormControl>
           </div>
           <div className='input-container'>
-          <FormControl sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
+          <FormControl className='grydiv'  sx={{ m: 1, width: 'calc(100% - 16px)',height: 'calc(90% - 16px)'}} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-email">נקודת ציון קו רוחב </InputLabel>
             <OutlinedInput
                 cols='50'

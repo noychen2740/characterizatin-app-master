@@ -46,7 +46,12 @@ function FeedbackPage() {
     await feedbackService.remove(feedback.FeedbackKey);
     navigate('/feedbacks')
   };
-
+  const PutUpdateFeed = async (id) => { //מחיקה של הפיידבק הספציפי לפי הקיי
+    console.log({ id });
+    await feedbackService.PutUpdateFeed(feedback.FeedbackKey);
+    navigate('/CreateFeedback')
+  };
+//PutUpdateFeed
   const submit = async () => { //הוספה של הפיידבק הספציפי לפי הקיי
     console.log();
     const res = await feedbackService.create(feedback)
@@ -109,7 +114,7 @@ function FeedbackPage() {
                   <CardActions>
                     <Button onClick={submit} size="small">הוספת הצעה </Button>
                     <Button onClick={() => remove(feedback.FeedbackKey)} size="small">מחיקת הצעה </Button>
-                    <Button onClick={() => remove(feedback.FeedbackKey)} size="small">עריכת הצעה </Button>
+                    <Button onClick={() => PutUpdateFeed(feedback.FeedbackKey)} size="small">עריכת הצעה </Button>
                   </CardActions>
                 </Card>
                 <br></br>

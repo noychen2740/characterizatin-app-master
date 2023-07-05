@@ -75,10 +75,10 @@ async function PostFeedfromadmin(feedback, userFromDB) {
     }
 }
 
-
-async function PutUpdateFeed(FeedbackKey, feedback) {
+//api/Feedback/PutUpdateFeed/{feedKey}/
+async function PutUpdateFeed(feedback) {
     try {
-        const res = await axios.put(`${base_url}/${module}/PutUpdateFeed/${FeedbackKey}/`, feedback)
+        const res = await axios.put(`${base_url}/${module}/PutUpdateFeed/${feedback.FeedbackKey}/`, feedback)
         console.log({ res });
         return res.data
     } catch (err) {
