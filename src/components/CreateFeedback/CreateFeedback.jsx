@@ -42,7 +42,7 @@ function CreateFeedback({ userFromDB }) {
   return ( //יצירה של הפידבק
     <div className='create-episode'>
       <div className='container center'>
-        <TopOfAplication label='יצירת פיידבק חדש' />
+        <TopOfAplication label='הוספת נקודה חדשה' />
         <br></br>
         <br></br>
         <br></br>

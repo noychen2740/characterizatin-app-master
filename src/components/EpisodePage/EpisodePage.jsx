@@ -36,20 +36,18 @@ function EpisodePage(props) {
       {/* <div className='title'>יומן המסע שלי</div> */}
       <br></br>
       <br></br>
-      <br></br>
-      <br></br>
 <div className="container ">
 <Card sx={{ maxWidth: 345 }}>
-      {/* <CardMedia
+      <CardMedia
         component="img"
         alt="green iguana"
         height="140"
-        image="/static/images/cards/contemplative-reptile.jpg"
-      /> */}
+        src={episode.ChapterPictures}
+      />
       <div className='episode-time'>
 
 <div className='episode-date'> {new Date(episode.ChapterDate).toLocaleDateString('en-us')} </div>
-<div className='episode-hour'>{episode.ChapterTime}</div>
+{/* <div className='episode-hour'>{episode.ChapterTime}</div> */}
 </div>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
@@ -58,7 +56,6 @@ function EpisodePage(props) {
         <Typography variant="body2" color="text.secondary">
         <div className='episode-content'>
         <div className='episode-desc'>{episode.ChapterDescription}</div>
-        <img className='episode-img' src={episode.ChapterPictures} alt='' />
       </div>
         </Typography>
       </CardContent>

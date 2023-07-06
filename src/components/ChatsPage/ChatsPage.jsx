@@ -91,9 +91,9 @@ function ChatsPage({ userFromDB }) {
                     variant="body2"
                     color="text.primary"
                   >
-                    Hi!
+                    
+                  סוג משתמש : {c.UserType}
                   </Typography>
-                  {' — Lets talk :)'}
                 </React.Fragment>
 
               }
