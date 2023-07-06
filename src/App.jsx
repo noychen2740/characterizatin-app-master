@@ -297,8 +297,9 @@ function App() {
             
             {/* אדמין */}
             <Route path="UserProfileAdmin" element={userFromDB?<UserProfileAdmin userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />:<div>loading...</div>} />
+            <Route path='CreateFeedbackAdmin/:FeedbackKey' element={<CreateFeedbackAdmin userFromDB={userFromDB} />} />
             <Route path='CreateFeedbackAdmin' element={<CreateFeedbackAdmin userFromDB={userFromDB} />} />
-            <Route path="mapAdmin" element={<MapAdmin />} />
+                <Route path="mapAdmin" element={<MapAdmin />} />
             <Route path='ChangePasswordComAdmin' element={<ChangePasswordComAdmin userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
 
 

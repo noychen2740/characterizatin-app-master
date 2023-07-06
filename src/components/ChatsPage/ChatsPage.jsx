@@ -74,11 +74,11 @@ function ChatsPage({ userFromDB }) {
       <br></br>
       <br></br>
       {users.map((c) => {
-        console.log(c.UserEmail, c.unread);
+        console.log(c);
         return <div key={c.UserEmail} className={c.unread ? "chat unread" : "chat"} onClick={() => nav(`/chat/${c.UserEmail}`)}>
           <ListItem alignItems="flex-start">
             <ListItemAvatar>
-              <Avatar alt={c.userEmail2} src="/static/images/avatar/3.jpg" />
+              <Avatar alt={c.userEmail2} src={c.UserImg||"/static/images/avatar/3.jpg"} />
             </ListItemAvatar>
             <ListItemText
               key={c.id}
@@ -91,9 +91,9 @@ function ChatsPage({ userFromDB }) {
                     variant="body2"
                     color="text.primary"
                   >
-                    Hi!
+                    
+                  סוג משתמש : {c.UserType}
                   </Typography>
-                  {' — Lets talk :)'}
                 </React.Fragment>
 
               }
