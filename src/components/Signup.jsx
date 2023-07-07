@@ -146,7 +146,7 @@ function Signup(props) {
                     })
                 }
 
-            }} variant="contained">Signup</Button>
+            }} variant="contained">להרשמה</Button>
             <Snackbar snackbar={snackbar}></Snackbar>
         </div>
     );

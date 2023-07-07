@@ -1,18 +1,23 @@
 
 import styled from '@emotion/styled';
-import { Celebration, Fastfood, Hotel, LocalFlorist, Snowboarding, Whatshot } from '@mui/icons-material'
-import { Avatar, Box, Button, Card, CardActions, CardContent, Grid, Paper, Typography } from '@mui/material'
-import React from 'react'
+import { ArrowDropDown, ArrowDropUp, Celebration, CompareArrows, Edit, Expand, Fastfood, FollowTheSigns, Hotel, LocalFlorist, PriorityHigh, Snowboarding, Whatshot } from '@mui/icons-material'
+import { Alert, Avatar, Box, Button, Card, CardActions, CardContent, Chip, Grid, Paper, Typography } from '@mui/material'
+import React, { useEffect, useState } from 'react'
 
 export default function KpiCard(props) {
+
+  const [down,setDown]=useState(<ArrowDropDown style={{color:'green'}} />)
+  const [up,setUp]=useState(<ArrowDropUp style={{color:'red'}} />)
 
   return (
     <>
     <Box sx={{ flexGrow: 1 }}>
         <h3 style={{color:'black', background:'#eeeeee'}}>KPI </h3>
+        <Alert severity="error" sx={{direction:'rtl'}} icon={false} >חץ למעלה מעיד על הוצאה גבוהה בקטגוריה !</Alert>
+
       <Grid container spacing={{ xs: 2}} columns={{ xs: 4 }}>
       <Grid item xs={2}>
-    <Card sx={{ minWidth: 15, maxHeight:170  }} style={{marginTop:'10px'}} >
+    <Card sx={{ minWidth: 15, maxHeight:185  }} style={{marginTop:'10px'}} >
       <CardContent >
         <Avatar><Snowboarding/></Avatar>
         <Typography variant="h6" component="div" gutterBottom  >
@@ -22,7 +27,8 @@ export default function KpiCard(props) {
 
         <Typography variant="body2">
           <h5>שרפת <b>{props.SumOfExpenseAtraction}</b> ש"ח   </h5>
-          <h6 style={{textAlign:'left', direction:'ltr'}}>{parseInt((props.SumOfExpenseAtraction-props.AvgOfExpenseAtraction)/props.AvgOfExpenseAtraction*100)}% מעל ההוצאה המקובלת</h6>
+          {/* <h6 style={{textAlign:'left', direction:'ltr'}}>{parseInt((props.SumOfExpenseAtraction-props.AvgOfExpenseAtraction)/props.AvgOfExpenseAtraction*100)}% {props.SumOfExpenseAtraction<props.AvgOfExpenseAtraction? down:up}</h6> */}
+          <Chip icon={props.SumOfExpenseAtraction<props.AvgOfExpenseAtraction? down:up} label={`${parseInt(Math.abs((props.SumOfExpenseAtraction-props.AvgOfExpenseAtraction)/props.AvgOfExpenseAtraction*100))}% `} variant="outlined" />
         </Typography>
         
       </CardContent>
@@ -30,7 +36,7 @@ export default function KpiCard(props) {
     </Card>
     </Grid>
     <Grid item xs={2}>
-    <Card sx={{ minWidth: 15, maxHeight:170  }} style={{marginTop:'10px'}} >
+    <Card sx={{ minWidth: 15, maxHeight:185  }} style={{marginTop:'10px'}} >
       <CardContent >
         <Avatar ><Fastfood/></Avatar>
         <Typography variant="h6" component="div" gutterBottom  >
@@ -39,7 +45,9 @@ export default function KpiCard(props) {
 
         <Typography variant="body2">
           <h5> שרפת <b>{props.SumOfExpenseFood}</b> ש"ח   </h5>
-          <h6 style={{textAlign:'left', direction:'ltr'}}>{parseInt((props.SumOfExpenseFood-props.AvgOfExpenseFood)/props.AvgOfExpenseFood*100)}% מעל ההוצאה המקובלת</h6>
+          {/* <h6 style={{textAlign:'left', direction:'ltr'}}>{parseInt((props.SumOfExpenseFood-props.AvgOfExpenseFood)/props.AvgOfExpenseFood*100)}% {props.SumOfExpenseFood<props.AvgOfExpenseFood? down:up}</h6> */}
+          <Chip icon={props.SumOfExpenseFood<props.AvgOfExpenseFood? down:up} label={` % ${parseInt(Math.abs((props.SumOfExpenseFood-props.AvgOfExpenseFood)/props.AvgOfExpenseFood*100))} `} variant="outlined" />
+
         </Typography>
         
       </CardContent>
@@ -52,7 +60,7 @@ export default function KpiCard(props) {
 
     <Grid container spacing={{ xs: 2}} columns={{ xs: 4 }}>
       <Grid item xs={2}>
-    <Card sx={{ minWidth: 15, maxHeight:170  }} style={{marginTop:'10px'}} >
+    <Card sx={{ minWidth: 15, maxHeight:185  }} style={{marginTop:'10px'}} >
       <CardContent >
         <Avatar><Hotel/></Avatar>
         <Typography variant="h6" component="div" gutterBottom  >
@@ -61,7 +69,9 @@ export default function KpiCard(props) {
 
         <Typography variant="body2">
           <h5> שרפת <b>{props.SumOfExpenseSleep}</b> ש"ח   </h5>
-          <h6 style={{textAlign:'left', direction:'ltr'}}>{parseInt((props.SumOfExpenseSleep-props.AvgOfExpenseSleep)/props.AvgOfExpenseSleep*100)}% מעל ההוצאה המקובלת</h6>
+          {/* <h6 style={{textAlign:'left', direction:'ltr'}}>{parseInt((props.SumOfExpenseSleep-props.AvgOfExpenseSleep)/props.AvgOfExpenseSleep*100)}% {props.SumOfExpenseSleep<props.AvgOfExpenseSleep? down:up}</h6> */}
+          <Chip icon={props.SumOfExpenseSleep<props.AvgOfExpenseSleep? down:up} label={`${parseInt(Math.abs((props.SumOfExpenseSleep-props.AvgOfExpenseSleep)/props.AvgOfExpenseSleep*100))}%`} variant="outlined" />
+
         </Typography>
         
       </CardContent>
@@ -69,7 +79,7 @@ export default function KpiCard(props) {
     </Card>
     </Grid>
     <Grid item xs={2}>
-    <Card sx={{ minWidth: 15, maxHeight:170  }} style={{marginTop:'10px'}} >
+    <Card sx={{ minWidth: 15, maxHeight:185  }} style={{marginTop:'10px'}} >
       <CardContent >
         <Avatar><Celebration/></Avatar>
         <Typography variant="h6" component="div" gutterBottom  >
@@ -78,7 +88,9 @@ export default function KpiCard(props) {
 
         <Typography variant="body2">
           <h5> שרפת <b>{props.SumOfExpenseParty}</b> ש"ח   </h5>
-          <h6 style={{textAlign:'left', direction:'ltr'}}>{parseInt((props.SumOfExpenseParty-props.AvgOfExpenseParty)/props.AvgOfExpenseParty*100)}% מעל ההוצאה המקובלת</h6>
+          {/* <h6 style={{textAlign:'left', direction:'ltr'}}>{parseInt((props.SumOfExpenseParty-props.AvgOfExpenseParty)/props.AvgOfExpenseParty*100)}% {props.SumOfExpenseParty<props.AvgOfExpenseParty? down:up}</h6> */}
+          <Chip icon={props.SumOfExpenseParty<props.AvgOfExpenseParty? down:up} label={`${parseInt(Math.abs((props.SumOfExpenseParty-props.AvgOfExpenseParty)/props.AvgOfExpenseParty*100))}%`} variant="outlined" />
+
         </Typography>
         
       </CardContent>
@@ -90,7 +102,7 @@ export default function KpiCard(props) {
 
     <Grid container spacing={{ xs: 2}} columns={{ xs: 4 }}>
       <Grid item xs={2}>
-    <Card sx={{ minWidth: 15, maxHeight:170  }} style={{marginTop:'10px'}} >
+    <Card sx={{ minWidth: 15, maxHeight:185  }} style={{marginTop:'10px'}} >
       <CardContent >
         <Avatar><Whatshot/></Avatar>
         <Typography variant="h6" component="div" gutterBottom  >
@@ -99,7 +111,8 @@ export default function KpiCard(props) {
 
         <Typography variant="body2">
           <h5> שרפת <b>{props.SumOfExpenseCasino}</b> ש"ח   </h5>
-          <h6 style={{textAlign:'left', direction:'ltr'}}>{parseInt((props.SumOfExpenseCasino-props.AvgOfExpenseCasino)/props.AvgOfExpenseCasino*100)}% מעל ההוצאה המקובלת</h6>
+          {/* <h6 style={{textAlign:'left', direction:'ltr'}}>{parseInt((props.SumOfExpenseCasino-props.AvgOfExpenseCasino)/props.AvgOfExpenseCasino*100)}% {props.SumOfExpenseCasino<props.AvgOfExpenseCasino? down:up}</h6> */}
+          <Chip icon={props.SumOfExpenseCasino<props.AvgOfExpenseCasino? down:up} label={`${parseInt(Math.abs((props.SumOfExpenseCasino-props.AvgOfExpenseCasino)/props.AvgOfExpenseCasino*100))}%`} variant="outlined" />
         </Typography>
         
       </CardContent>
@@ -107,7 +120,7 @@ export default function KpiCard(props) {
     </Card>
     </Grid>
     <Grid item xs={2}>
-    <Card sx={{ minWidth: 15, maxHeight:170  }} style={{marginTop:'10px'}} >
+    <Card sx={{ minWidth: 15, maxHeight:185 }} style={{marginTop:'10px'}} >
       <CardContent >
         <Avatar><LocalFlorist/></Avatar>
         <Typography variant="h6" component="div" gutterBottom  >
@@ -117,7 +130,8 @@ export default function KpiCard(props) {
 
         <Typography variant="body2">
           <h5> שרפת <b>{props.SumOfExpenseDrugs}</b> ש"ח   </h5>
-          <h6 style={{textAlign:'left', direction:'ltr'}}>{parseInt((props.SumOfExpenseDrugs-props.AvgOfExpenseDrugs)/props.AvgOfExpenseDrugs*100)}% מעל ההוצאה המקובלת</h6>
+          {/* <h6 style={{textAlign:'left', direction:'ltr'}}>{parseInt((props.SumOfExpenseDrugs-props.AvgOfExpenseDrugs)/props.AvgOfExpenseDrugs*100)}% {props.SumOfExpenseDrugs<props.AvgOfExpenseDrugs? down:up}</h6> */}
+          <Chip icon={props.SumOfExpenseDrugs<props.AvgOfExpenseDrugs? down:up} label={`${parseInt(Math.abs((props.SumOfExpenseDrugs-props.AvgOfExpenseDrugs)/props.AvgOfExpenseDrugs*100))}%`} variant="outlined" />
         </Typography>
         
       </CardContent>

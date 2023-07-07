@@ -111,7 +111,7 @@ export default function GraphsBar(props) {
       />
 </Card>
 
-<Card sx={{ minWidth: 275, height: 380  }} style={{marginBottom:'20px'}}>
+<Card sx={{ minWidth: 275, height: 400  }} style={{marginBottom:'30px'}}>
       <h3 style={{ textAlign: "center" }}>פילוח הוצאות</h3>
       <Pie
         data={chartDataP}
