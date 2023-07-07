@@ -32,6 +32,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",
     "react-scripts": "^5.0.1",
+    "react-snap-carousel": "^0.3.2",
     "recharts": "^2.5.0",
     "web-vitals": "^2.1.4"
   },
@@ -59,7 +60,7 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "http://194.90.158.74/cgroup99/prod/build",
+  "homepage": "https://proj.ruppin.ac.il/cgroup99/prod/build",
   "devDependencies": {
     "@faker-js/faker": "^8.0.2"
   }

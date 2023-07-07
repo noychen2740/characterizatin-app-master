@@ -73,7 +73,7 @@ export default function UserProfileAdmin(props) {
       if (file) {
         const url = await storageService.upload(file)//////////// בדיקה
         console.log(url)
-        const data=await userService.updateIMG(url,props.userEmailFromDB)
+        const data=await userService.updateIMG(url,props.userFromDB.UserEmail)
         console.log(data)
         setForm({ ...form, [name]: url });
       }
@@ -86,11 +86,12 @@ export default function UserProfileAdmin(props) {
   };
 
   useEffect(() => {
-    const email = props.userEmailFromDB;
+    console.log(props.userFromDB,"uesrprofileadmin");
+    const email = props.userFromDB.UserEmail;
     const apiUrl = getEnv() + '/users/getemail/?email='
     // const apiUrl='http://localhost:58583/api/users/1'
 
-    fetch(apiUrl + props.userFromDB.UserEmail,
+    fetch(apiUrl + email,
       {
         method: 'GET',
         headers: new Headers({
@@ -159,7 +160,7 @@ export default function UserProfileAdmin(props) {
     
           </StyledBadge>
 
-          <p style={{ color: 'black' }}>שלום {props.userFromDB.UserFirstName} <br /> {props.userEmailFromDB} </p>
+          <p style={{ color: 'black' }}>שלום {props.userFromDB.UserFirstName} <br /> {props.userFromDB.UserEmail} </p>
         </Stack>
       </Box>
       <div>

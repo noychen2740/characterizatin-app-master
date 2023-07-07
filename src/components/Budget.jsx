@@ -68,7 +68,7 @@ export default function Budget(props) {
         useEffect(()=>{
         // const apiUrl= getEnv() + '/users/getemail/?email=Benda669@gmail.com'    
         const apiUrl= getEnv() + '/users/getemail/?email='    
-        fetch(apiUrl+props.userEmailFromDB, 
+        fetch(apiUrl+props.userFromDB.UserEmail, 
           {
           method: 'GET',
           headers: new Headers({
@@ -104,7 +104,7 @@ export default function Budget(props) {
 useEffect(()=>{
   // const apiUrl= getEnv() + '/expenses/?email=Benda669@gmail.com'
   const apiUrl= getEnv() + '/expenses/?email='
-  fetch(apiUrl+props.userEmailFromDB, 
+  fetch(apiUrl+props.userFromDB.UserEmail, 
      {
      method: 'GET',
     headers: new Headers({

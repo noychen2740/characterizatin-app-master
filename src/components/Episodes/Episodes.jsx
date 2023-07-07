@@ -14,6 +14,7 @@ import Navigation from '../Navigation';
 
 
 
+
 function Episodes(props) {
   const navigate = useNavigate();
 
@@ -28,6 +29,7 @@ function Episodes(props) {
     await chapterService.remove(id,props.userEmailFromDB);
     loadEpisodes();
   };
+  
 
   const edit = (id) => { //אפשרות לעריכה פרק לפי האי די שלו
     console.log({ id });
@@ -51,30 +53,29 @@ function Episodes(props) {
           return (
             <div key={e.NameOfChapter} className='episode'>
               <Card sx={{ maxWidth: 345 }}>
-              <div className='episode-time'>
-                <div className='episode-date'> {new Date(e.ChapterDate).toLocaleDateString('en-GB')} </div>
-                <div className='episode-hour'>{e.ChapterTime}</div>
-              </div>
-      <CardMedia
-        component="img"
-      
-        height="140"
-        src={e.ChapterPictures}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-        <div className='episode-title'>{e.NameOfChapter}</div>
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-        <div className='episode-desc'>{e.ChapterDescription.length > 20 ? e.ChapterDescription.substring(0, 20) + '...' : e.ChapterDescription}</div>
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button  onClick={() => edit(e.NameOfChapter,props.userEmailFromDB)} size="small">עריכה</Button>
-        <Button onClick={() => navigate(`/episode/${e.NameOfChapter}`)} size="small"> תצוגה</Button>
-        <Button onClick={() => remove(e.NameOfChapter,props.userEmailFromDB)} size="small"> מחיקה</Button>
-      </CardActions>
-    </Card>
+                <CardMedia className='cardimg2'
+                      component="img"
+                      alt="green iguana"
+                      height="160"
+                      src={e.ChapterPictures} />
+                      <div className='episode-time'>
+                  <div className='episode-date'> {new Date(e.ChapterDate).toLocaleDateString('en-GB')} </div>
+                  {/* <div className='episode-hour'>{e.ChapterTime}</div> */}
+                </div>
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                    <h1 className='Feedback-title2'>{e.NameOfChapter}</h1>
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                    <h1 className='Feedback-title3'>{e.ChapterDescription.length > 20 ? e.ChapterDescription.substring(0, 20) + '...' : e.ChapterDescription}</h1>
+                    </Typography>
+                  </CardContent>
+                  <CardActions className='btn2'>
+                    <Button  onClick={() => edit(e.NameOfChapter,props.userEmailFromDB)} size="small">עריכה</Button>
+                    <Button onClick={() => navigate(`/episode/${e.NameOfChapter}`)} size="small"> תצוגה</Button>
+                    <Button onClick={() => remove(e.NameOfChapter,props.userEmailFromDB)} size="small"> מחיקה</Button>
+                  </CardActions>
+                </Card>
     <br></br>
       <br></br>
             </div>

@@ -1,17 +1,18 @@
 import axios from 'axios';
 
-export const feedbackService={
+export const feedbackService = {
     getById,
     create,
-    update,
+    PutUpdateFeed,
     remove,
     getAll,
-    createfromuser
+    createfromuser,
+    PostFeedfromadmin
 }
 
 
 
-const base_url = 'http://194.90.158.74/cgroup99/prod/api'
+const base_url = 'https://proj.ruppin.ac.il/cgroup99/prod/api'
 const module = 'Feedback'
 const userEmail = 'Benda669@gmail.com'
 
@@ -50,11 +51,11 @@ async function create(feedback) {
     }
 }
 //api/Feedback/PostFeed/
-async function createfromuser(feedback) {
+async function createfromuser(feedback, userFromDB) {
     console.log({ feedback });
     try {
         //api/Feedback/PostFeed/{useremail}/
-        const res = await axios.post(`${base_url}/${module}/PostFeed/${userEmail}/`,feedback)
+        const res = await axios.post(`${base_url}/${module}/PostFeed/${userFromDB.UserEmail}/`, feedback)
         console.log({ res });
         return res.data
     } catch (err) {
@@ -62,10 +63,22 @@ async function createfromuser(feedback) {
     }
 }
 
-
-async function update(feedback) {
+async function PostFeedfromadmin(feedback, userFromDB) {
+    console.log({ feedback });
     try {
-        const res = await axios.put(`${base_url}/${module}/Put/${feedback.NameOfChapter}/{newchap}`, feedback)
+        //api/Feedback/PostFeed/{useremail}/
+        const res = await axios.post(`${base_url}/${module}/PostFeedfromadmin/${userFromDB.UserEmail}/`, feedback)
+        console.log({ res });
+        return res.data
+    } catch (err) {
+        console.log({ err });
+    }
+}
+
+//api/Feedback/PutUpdateFeed/{feedKey}/
+async function PutUpdateFeed(feedback) {
+    try {
+        const res = await axios.put(`${base_url}/${module}/PutUpdateFeed/${feedback.FeedbackKey}/`, feedback)
         console.log({ res });
         return res.data
     } catch (err) {

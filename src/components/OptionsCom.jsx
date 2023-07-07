@@ -3,21 +3,21 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import OptionsCard from './OptionsCard';
+import { useSlotProps } from '@mui/base';
 
 export default function OptionsCom(props) {
-  const [value, setValue] = React.useState(3);
   const [dataCard, setDataCard] = React.useState();
   const renderCard = (value) => {
     setDataCard(value)
   }
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    props.tabChanged(newValue)
   };
   return (
     <Box sx={{ maxWidth: { xs: 330 }, bgcolor: 'background.paper', mb: 5 }}>
       <Tabs
-        value={value}
+        value={props.value}
         onChange={handleChange}
         variant="scrollable"
         scrollButtons
@@ -35,15 +35,15 @@ export default function OptionsCom(props) {
         <h3 style={{color:'green'}}> {dataCard} ב{props.countryName}</h3>
         <h3 style={{color:'blue'}}>  {dataCard} ב{props.countryName}</h3>
         <h3 style={{color:'pink'}}>  {dataCard} ב{props.countryName}</h3> */}
-        {props.data[value].map((item, index) => {
+        {props.data[props.value].map((item, index) => {
           return (<div className="mapCard" key={'card' + index} onClick={() => {
             console.log({ item })
             // navigate to item page
           }}>
-            <OptionsCard selected={props.selected} tabIndex={value} item={item} index={index} />
+            <OptionsCard selected={props.selected} userFromDB={props.userFromDB} tabIndex={props.value} item={item} index={index} />
           </div>)
         })}
       </Box>
     </Box>
-  );
-}
+  )
+};

@@ -4,6 +4,6 @@
     direction: rtl;
 }
 
-.unread{
-    background-color: red;
+.unread span{
+    font-weight: bold
 }

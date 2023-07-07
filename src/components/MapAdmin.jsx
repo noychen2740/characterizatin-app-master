@@ -312,7 +312,7 @@ function MapAdmin(props) {
 
                 </GoogleMap>
                 <Box>
-                    <OptionsCom selected={selected} countryName={selectCountry} data={[aidCompList, tripList, sleepingList, attractionList]} />
+                    <OptionsCom selected={selected}  countryName={selectCountry} data={[aidCompList, tripList, sleepingList, attractionList]} />
                 </Box>
             </div>
             <NavigationAdmin pagNav={'mapAdmin'} />

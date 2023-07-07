@@ -270,7 +270,7 @@ function App() {
             {/* <Route path="NewExpense" element={<NewExpense />} /> */}
             <Route path="Analysis" element={<ExpensesAnalysis userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             {/* <Route path="Analysis" element={<ExpensesAnalysis />} /> */}
-            <Route path="map" element={<Map />} />
+            <Route path="map"  element={<Map userFromDB={userFromDB} />} />
             {/* <Route path="map" element={<Map />} /> */}
             <Route path='episodes' element={<Episodes userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             {/* <Route path='episodes' element={<Episodes />} /> */}
@@ -283,22 +283,23 @@ function App() {
             {/* <Route path='create-episode' element={<CreateEpisode  />} /> */}
             <Route path='episode/:NameOfChapter' element={<EpisodePage userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             {/* <Route path='episode/:NameOfChapter' element={<EpisodePage />} /> */}
-            <Route path='CreateFeedback' element={<CreateFeedback />} />
+            <Route path='CreateFeedback' element={<CreateFeedback  userFromDB={userFromDB} />} />
             <Route path='Feedbacks' element={<Feedbacks />} />
             <Route path='ThanksPage' element={<ThanksPage />} />
             <Route path='Diary' element={<Diary />} />
             <Route path='FeedbackPage/:FeedbackKey' element={<FeedbackPage />} />
-            <Route path='chats'  element={<ChatsPage  userFromDB={userFromDB} />} />
+            <Route path='chats' element={<ChatsPage userFromDB={userFromDB} />} />
             {/* <Route path='chats' element={<ChatsPage />} /> */}
             <Route path='chat/:userEmail2' element={<ChatPage userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             {/* <Route path='chat/:userEmail2' element={<ChatPage />} /> */}
-            <Route path='KpiCard' element={<KpiCard category={'אטרקציות'} expend={'852'} precent={'55'}/>} />
+            <Route path='KpiCard' element={<KpiCard category={'אטרקציות'} expend={'852'} precent={'55'} />} />
             {/* <Route path='GeographyChart' element={<GeographyChart/>} /> */}
             
             {/* אדמין */}
-            <Route path="UserProfileAdmin" element={<UserProfileAdmin userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
-            <Route path='CreateFeedbackAdmin' element={<CreateFeedbackAdmin />} />
-            <Route path="mapAdmin" element={<MapAdmin />} />
+            <Route path="UserProfileAdmin" element={userFromDB?<UserProfileAdmin userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />:<div>loading...</div>} />
+            <Route path='CreateFeedbackAdmin/:FeedbackKey' element={<CreateFeedbackAdmin userFromDB={userFromDB} />} />
+            <Route path='CreateFeedbackAdmin' element={<CreateFeedbackAdmin userFromDB={userFromDB} />} />
+                <Route path="mapAdmin" element={<MapAdmin />} />
             <Route path='ChangePasswordComAdmin' element={<ChangePasswordComAdmin userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
 
 
@@ -325,6 +326,8 @@ price={numOfExpense.PricePerOne} amount={numOfExpense.NumberOfRepeatExpenses} Ex
 
           {/* <Questionnaire name="עומר"/> */}
 
+
+{/* לא לגעת בקוד הזה */}
         </div>
         {chatVisiable && <div className="chat-btn" >
           {!isRead ? <StyledBadge
@@ -339,7 +342,7 @@ price={numOfExpense.PricePerOne} amount={numOfExpense.NumberOfRepeatExpenses} Ex
             <ForumIcon onClick={() => nav('chats')} />
           </div>}
         </div>}
-
+{/* לא לגעת בקוד הזה */}
 
 
       </LocalizationProvider>

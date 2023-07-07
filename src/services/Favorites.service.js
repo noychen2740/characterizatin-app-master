@@ -1,17 +1,18 @@
 import axios from 'axios';
 
-export const favoriteservice={
+export const favoriteservice = {
     getByName,
     // create,
     PutFavourites,
     DeleteFavourites,
     Getall,
+    AddFav
     // createfromuser
 }
 
 
 
-const base_url = 'http://194.90.158.74/cgroup99/prod/api'
+const base_url = 'https://proj.ruppin.ac.il/cgroup99/prod/api'
 const module = 'Favourites'
 const userEmail = 'Benda669@gmail.com'
 
@@ -24,13 +25,24 @@ async function Getall(Email) {
         return res.data
     } catch (err) {
         console.log({ err });
-        return []  
+        return []
     }
 }
 // https://localhost:44350/api/traveldiary/Benda669@gmail.com/GetTravelDiaryChaptersById/טרק
 async function getByName(FavKey) {
     try {
         const res = await axios.get(`${base_url}/${module}/${FavKey}/GetByName`)
+        console.log({ res });
+        return res.data[0]
+    } catch (err) {
+        console.log({ err });
+    }
+}
+//api/Favourites/{OptINTindb}/{Favemail}/PostAddFav
+async function AddFav(FavKey,Email) {
+    try {
+        console.log(FavKey,Email);
+        const res = await axios.post(`${base_url}/${module}/${FavKey}/${Email}/PostAddFav`)
         console.log({ res });
         return res.data[0]
     } catch (err) {
@@ -73,10 +85,12 @@ async function PutFavourites(id) {
 }
 
 
+
+
 //api/Feedback/DeleteFeedback/{feedbackIDfromdb}
-async function DeleteFavourites(DeleteFavouritesIDfromdb) {
+async function DeleteFavourites(FavKey) {
     try {
-        const res = await axios.delete(`${base_url}/${module}/DeleteFeedback/${DeleteFavouritesIDfromdb}`)
+        const res = await axios.delete(`${base_url}/${module}/DeleteFavourites/${FavKey}`)
         console.log({ res });
         return res.data
     } catch (err) {

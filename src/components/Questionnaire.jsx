@@ -12,24 +12,24 @@ const nav=useNavigate();
   return (
     <>
     <div className='App-questionnaire'>
-      <TopOfAplication label='השלמת פרופיל אישי'/>
-    <img className="App-logo" src="logo.png" style={{maxWidth:'250px', marginLeft:'auto', marginRight:'auto'}} />
-    <br />
-    <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }} >
-<h3 style={{color:'black', fontSize:'20px', 
-textAlign:'center', marginLeft:'auto', marginRight:'auto' } }> 
-אהלן {props.userFromDB.UserFirstName}<br /> שמחים שבחרת להצטרף אלינו</h3>
+        <TopOfAplication label='השלמת פרופיל אישי'/>
+          <img className="App-logo" src="logo.png" style={{maxWidth:'250px', marginLeft:'auto', marginRight:'auto'}} />
+          <br />
+          <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }} >
+            <h3 style={{color:'black', fontSize:'20px', 
+            textAlign:'center', marginLeft:'auto', marginRight:'auto' } }> 
+            אהלן {props.userFromDB.UserFirstName}<br /> שמחים שבחרת להצטרף אלינו</h3>
 
-<h5 style={{color:'black', fontSize:'15px', 
-textAlign:'center', marginLeft:'auto', marginRight:'auto'}}> לפנייך שאלות שיעזרו לנו 
-להכיר אותך טוב יותר, וכך להתאים עבורך את ההמלצות המדוייקות עבורך </h5>
+            <h5 style={{color:'black', fontSize:'15px', 
+            textAlign:'center', marginLeft:'auto', marginRight:'auto'}}> לפנייך שאלות שיעזרו לנו 
+            להכיר אותך טוב יותר, וכך להתאים עבורך את ההמלצות המדוייקות עבורך </h5>
 
-{/* <Button style={{backgroundColor:'#598e89'}} onClick={() => {props.continueClicked() }} variant="contained">לחץ להתחלה</Button> */}
-<Button style={{backgroundColor:'#598e89'}} onClick={() => {nav('/firstQues')}} variant="contained">לחץ להתחלה</Button>
+            {/* <Button style={{backgroundColor:'#598e89'}} onClick={() => {props.continueClicked() }} variant="contained">לחץ להתחלה</Button> */}
+            <Button style={{backgroundColor:'#598e89'}} onClick={() => {nav('/firstQues')}} variant="contained">לחץ להתחלה</Button>
 
-</Box>
+          </Box>
       
- </div>
+    </div>
     </>
   )
 }

@@ -8,10 +8,20 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import  jeep from '../../assets/jeep.jpg';
+import jeep from '../../assets/jeep.jpg';
 import TopOfAplication from '../TopOfAplication';
 import Navigation from '../Navigation';
 import NavigationAdmin from '../NavigationAdmin';
+import AddLocationAltTwoToneIcon from '@mui/icons-material/AddLocationAltTwoTone';
+import ListItem from '@mui/material/ListItem';
+import Divider from '@mui/material/Divider';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import PublicTwoToneIcon from '@mui/icons-material/PublicTwoTone';
+import LocationCityTwoToneIcon from '@mui/icons-material/LocationCityTwoTone';
+import FormatListNumberedTwoToneIcon from '@mui/icons-material/FormatListNumberedTwoTone';
+import MapTwoToneIcon from '@mui/icons-material/MapTwoTone';
 
 
 
@@ -36,45 +46,79 @@ function FeedbackPage() {
     await feedbackService.remove(feedback.FeedbackKey);
     navigate('/feedbacks')
   };
-
+  const PutUpdateFeed = async () => { //מחיקה של הפיידבק הספציפי לפי הקיי
+    navigate(`/CreateFeedbackAdmin/${feedback.FeedbackKey}`)
+  };
+  //PutUpdateFeed
   const submit = async () => { //הוספה של הפיידבק הספציפי לפי הקיי
     console.log();
     const res = await feedbackService.create(feedback)
-  await  feedbackService.remove(feedback.FeedbackKey)
+    await feedbackService.remove(feedback.FeedbackKey)
     navigate('/feedbacks')
   }
   return feedback ? ( //תצוגה של הפידבק הספציפי על המסך
     <div className='feedbackpage'>
-      <TopOfAplication label={feedback.FeedbackTitle}  />
+      <TopOfAplication label="הוספת המלצה" />
       {/* <div className='title'>יומן המסע שלי</div> */}
       <br></br>
       <br></br>
       <br></br>
+      <Card className='cardstyle' sx={{ maxWidth: 345,direction:'rtl' }}>
+        <CardContent>
+          <CardMedia className='cardimg'
+            component="img"
+            alt="green iguana"
+            height="140"
+            src={feedback.FeedbackPhoto} />
+          <div className='rigt'>
+            <h1 className='title2'><AddLocationAltTwoToneIcon />   {feedback.FeedbackTitle}<AddLocationAltTwoToneIcon /></h1>
+
+            <Divider variant="inset" />
+            <ListItem alignItems="flex-start">
+              <ListItemAvatar>
+                <Typography gutterBottom variant="h5" component="div">
+                  <h1 className='Feedback-title3'>שם המדינה : {feedback.FeedbackCountry}  <PublicTwoToneIcon /></h1>
+                </Typography>
+              </ListItemAvatar>
+            </ListItem>
+            <Divider className='diva' variant="inset" />
+            <ListItem alignItems="flex-start">
+              <ListItemAvatar>
+                <Typography gutterBottom variant="h5" component="div">
+                  <h1 className='Feedback-title3'> איזור במדינה : {feedback.FeedbackRegionOfTheCountry}  <LocationCityTwoToneIcon /></h1>
+                </Typography>
+              </ListItemAvatar>
+            </ListItem>
+            <Divider variant="inset" />
+            <ListItem alignItems="flex-start">
+              <ListItemAvatar>
+                <Typography gutterBottom variant="h5" component="div">
+                  <h1 className='Feedback-title3'> תיאור מהמשתמש :  {feedback.FeedbackDescription}  <FormatListNumberedTwoToneIcon /></h1>
+                </Typography>
+              </ListItemAvatar>
+            </ListItem>
+            <Divider variant="inset" />
+            <ListItem alignItems="flex-start">
+              <ListItemAvatar>
+                <Typography gutterBottom variant="h5" component="div">
+                  <h3 className='Feedback-title4'> : נקודת ציון של ההמלצה   <MapTwoToneIcon /></h3>
+                  <h3 className='Feedback-title4'>קו אורך : {feedback.FeedbackLongitude}</h3>
+                  <h3 className='Feedback-title4'>קו רוחב : {feedback.FeedbackLatitude}</h3>
+                </Typography>
+              </ListItemAvatar>
+            </ListItem>
+          </div>
+        </CardContent>
+        <CardActions>
+          <Button onClick={submit} size="small">הוספת הצעה </Button>
+          <Button onClick={() => remove(feedback.FeedbackKey)} size="small">מחיקת הצעה </Button>
+          <Button onClick={() => PutUpdateFeed(feedback.FeedbackKey)} size="small">עריכת הצעה </Button>
+        </CardActions>
+      </Card>
       <br></br>
-      <Card sx={{ maxWidth: 345 }}>
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                    <div className="title"> {feedback.FeedbackTitle}</div>
-                    <div>שם המדינה : {feedback.FeedbackCountry}</div>
-                    <div>איזור במדינה : {feedback.FeedbackRegionOfTheCountry}</div>
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                    <div>תיאור מהמשתמש : {feedback.FeedbackDescription}</div>
-                    <div>סוג הפיידבק : {feedback.KindOfFeedback}</div>
-                    <div>נקודת ציון של הפיידבק : </div>
-                    <div>FeedbackLongitude : {feedback.FeedbackLongitude}</div>
-                    <br></br>
-                    <div>FeedbackLatitude : {feedback.FeedbackLatitude}</div>
-                    <div>{feedback.FeedbackPhoto}</div>
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button onClick={submit} size="small">הוספת פידבק </Button>
-                    <Button onClick={() => remove(feedback.FeedbackKey)} size="small">מחיקת פידבק </Button>
-                  </CardActions>
-                </Card>
-                {/* <Navigation></Navigation> */}
-                <NavigationAdmin pagNav={'toAdd'}/>
+      <br></br>
+      {/* <Navigation></Navigation> */}
+      <NavigationAdmin pagNav={'toAdd'} />
     </div>
   ) : <div className="loading">
     loading...

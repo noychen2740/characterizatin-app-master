@@ -102,10 +102,11 @@ export default function Question(props) {
   return (
     <>
 
-      {props.pageNum == 'first' ? <div>
+      {props.pageNum == 'first' ? 
+      <div>
         <TopOfAplication label='שאלות היכרות' />
-        <img className="App-logo" src="logo.png" style={{ marginTop: '45px' }} alt='logo' />
-        <SingelQuestion q="מינך" f="אחר" s="אישה" t="גבר" />
+        <img className="App-logo" src="logo.png" style={{ marginTop: '45px', alignItems:'right' }} alt='logo' />
+        <SingelQuestion  q="מינך" f="אחר" s="אישה" t="גבר" />
         <SingelQuestion q="איזור מגורים" f=" דרום" s="מרכז" t="צפון" />
         <SingelQuestion q="באיזה יבשת תכננת לטייל" f="דרום אמריקה" s="מרכז אמריקה" t="מזרח" fo="לא החלטתי" />
         <SingelQuestion q="הרכב הטיסה שלך" f="לבד" s="חברים" t="בן\בת זוג" fo="מחפש פרטנר" />

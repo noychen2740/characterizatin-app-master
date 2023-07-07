@@ -36,7 +36,7 @@ const handleChange = (event, newValue) => {
   return (
  
     <Box sx={{ pb: 1 , width: 150 }} style={{alignItems:'center'}}>
-    <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+    <Paper sx={{zIndex:10, backgroundColor:'white', position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
     <BottomNavigation value={value} onChange={handleChange}>
           <BottomNavigationAction
             label="פרופיל"

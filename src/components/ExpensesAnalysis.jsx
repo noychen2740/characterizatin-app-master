@@ -56,7 +56,7 @@ const [AvgOfExpense, setAvgOfExpense] = useState(1);/// הוצאות המשתמ�
 useEffect(()=>{
 // const apiUrl= getEnv() + '/expenses/getsumofall/?email=Benda669@gmail.com'
 const apiUrl= getEnv() + '/expenses/getsumofall/?email='
-fetch(apiUrl +props.userEmailFromDB, 
+fetch(apiUrl +props.userFromDB.UserEmail, 
 {
   method: 'GET',
  headers: new Headers({
@@ -89,7 +89,7 @@ setSumExpense(result.SumOfExpense)
 
 ///// הוספה של ממוצעי צריכה
 const apiUrlA= getEnv() + '/expenses/statusOfExpenses/?email='
-fetch(apiUrlA +props.userEmailFromDB, 
+fetch(apiUrlA +props.userFromDB.UserEmail, 
 {
   method: 'GET',
  headers: new Headers({

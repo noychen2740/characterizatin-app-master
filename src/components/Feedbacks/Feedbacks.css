@@ -39,9 +39,26 @@ img {
 } */
 .Feedback-title2{
   text-align: center;
-  font-size: 15px;
+  font-size: 22px;
   padding-top: 5px;
+  color: black;
+}
+.Feedback-title3{
+  text-align: center;
+  font-size: 17px;
+  padding-top: 5px;
+  color: black;
+  padding: 20px;
 }
 .css-1knaqv7-MuiButtonBase-root-MuiButton-root{
   color: #598e89 !important;
+  font-weight: bold !important;
+}
+.cardimg2{
+  height: 160px;
+  display: flex !important;
+  
+}
+.cardstyle2{
+  background-color: rgb(245 245 244) !important;
 }

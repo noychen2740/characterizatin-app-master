@@ -19,7 +19,6 @@ function ChatPage({ userFromDB }) {
     // const Email=props.userEmailFromDB;
     useEffect(() => {
         loadChat()
-
     }, [])
     useEffect(() => {
         if (chat) {
@@ -28,8 +27,9 @@ function ChatPage({ userFromDB }) {
                 if (userFromDB.UserEmail !== meesage.userEmail)
                     chatService.updateMsg(meesage.id, userFromDB.UserEmail)
             })
-        }
+            window.scrollTo(0, document.body.scrollHeight);
 
+        }
 
     }, [chat])
 
@@ -124,22 +124,24 @@ function ChatPage({ userFromDB }) {
                 </FormControl>
             </div> */}
 
+            <div style={{ zIndex: 2, backgroundColor: 'white' }}>
+                <Box onClick={submit} style={{ zIndex: 10, position: 'fixed', alignItems: 'center', bottom: 55, left: 280, right: 0, backgroundColor: 'white' }} sx={{ '& > :not(style)': { m: 1 } }}>
+                    <Fab variant="extended">
+                        <NavigationIcon sx={{ mr: 1 }} />
+                    </Fab>
+                </Box>
+                <FormControl style={{ paddingBottom: 5, paddingTop: 3, zIndex: 1, position: 'fixed', alignItems: 'center', bottom: 47, backgroundColor: 'white' }} sx={{ m: 1, }} className='txt-input' variant="outlined">
+                    <OutlinedInput
+                        onInput={handleChange}
+                        multiline={true}
+                        name='txt'
+                        label=""
+                        dir='rtl'
+                        value={txt}
+                    />
+                </FormControl>
+            </div>
 
-            <Box onClick={submit} style={{ position: 'fixed', alignItems: 'center', bottom: 60, left: 280, right: 0 }} sx={{ '& > :not(style)': { m: 1 } }}>
-                <Fab variant="extended">
-                    <NavigationIcon sx={{ mr: 1 }} />
-                </Fab>
-            </Box>
-            <FormControl sx={{ m: 1, }} className='txt-input' variant="outlined">
-                <OutlinedInput
-                    onInput={handleChange}
-                    multiline={true}
-                    name='txt'
-                    label=""
-                    dir='rtl'
-                    value={txt}
-                />
-            </FormControl>
             <br></br>
             <br></br>
 
