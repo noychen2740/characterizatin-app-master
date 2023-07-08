@@ -225,7 +225,7 @@ function MapAdmin(props) {
     }// זמני- בלחיצה על נקודה מסומנת איזה פעולה נרצה שתקה
     return isLoaded ? (
         <>
-            <TopOfAplication label='מה יש לעולם להציע' />
+            <TopOfAplication label='מה יש לעולם להציע' UserType={props.userFromDB.UserType} />
             <div>
                 <NativeSelect
                     defaultValue={selectCountry}

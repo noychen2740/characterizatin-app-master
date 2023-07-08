@@ -124,22 +124,25 @@ export default function UserProfile(props) {
   useEffect(() => {
 
     if (userInApp.UserType == 'מוצילר') {
-      setCheckType(<HikingIcon onClick={() => { nav('/Questionnaire') }}  />)
-    }
-    if (userInApp.UserType == 'בליין') {
+      // setCheckType(<HikingIcon onClick={() => { nav('/Questionnaire') }}  />)
+      setCheckType(<HikingIcon onClick={() => { nav('/NewQuestion') }}  />)
 
-      setCheckType(<Celebration onClick={() => { nav('/Questionnaire') }}  />)
+    }
+    
+    if (userInApp.UserType == 'בליין') {
+      // setCheckType(<Celebration onClick={() => { nav('/Questionnaire') }}  />)
+      setCheckType(<Celebration onClick={() => { nav('/NewQuestion') }}  />)
     }
     if (userInApp.UserType == 'ציל') {
-
-      setCheckType(<SelfImprovement onClick={() => { nav('/Questionnaire') }}  />)
+      // setCheckType(<SelfImprovement onClick={() => { nav('/Questionnaire') }}  />)
+      setCheckType(<SelfImprovement onClick={() => { nav('/NewQuestion') }}  />)
     }
 
   }, [userInApp.UserType])/// מתעדכן לאחר כל שינוי של הטייפ של המתשמש בדאטה בייס
 
   return (
     <>
-      <TopOfAplication label='הפרופיל שלי' />
+      <TopOfAplication label='הפרופיל שלי' UserType={props.userFromDB.UserType} />
 
       <img className="App-logo" src="logo.png" style={{ marginTop: '5px', width: '120px' }} />
 

@@ -198,7 +198,7 @@ const DataPrecent = [
 ];
     return (
     <div>
-      <TopOfAplication label='ניתוח הוצאות'/>
+      <TopOfAplication label='ניתוח הוצאות' UserType={props.userFromDB.UserType}/>
       <Card sx={{ minWidth: 275  }} style={{marginTop:'60px'}} >
       <img className="App-logo" src="analysis3.png" style={{marginTop:'15px'}} />
       <CardContent >

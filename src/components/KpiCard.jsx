@@ -46,7 +46,7 @@ export default function KpiCard(props) {
         <Typography variant="body2">
           <h5> שרפת <b>{props.SumOfExpenseFood}</b> ש"ח   </h5>
           {/* <h6 style={{textAlign:'left', direction:'ltr'}}>{parseInt((props.SumOfExpenseFood-props.AvgOfExpenseFood)/props.AvgOfExpenseFood*100)}% {props.SumOfExpenseFood<props.AvgOfExpenseFood? down:up}</h6> */}
-          <Chip icon={props.SumOfExpenseFood<props.AvgOfExpenseFood? down:up} label={` % ${parseInt(Math.abs((props.SumOfExpenseFood-props.AvgOfExpenseFood)/props.AvgOfExpenseFood*100))} `} variant="outlined" />
+          <Chip icon={props.SumOfExpenseFood<props.AvgOfExpenseFood? down:up} label={` ${parseInt(Math.abs((props.SumOfExpenseFood-props.AvgOfExpenseFood)/props.AvgOfExpenseFood*100))}%`} variant="outlined" />
 
         </Typography>
         
