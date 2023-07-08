@@ -45,7 +45,6 @@ function EpisodePage(props) {
         src={episode.ChapterPictures}
       />
       <div className='episode-time'>
-
 <div className='episode-date'> {new Date(episode.ChapterDate).toLocaleDateString('en-us')} </div>
 {/* <div className='episode-hour'>{episode.ChapterTime}</div> */}
 </div>

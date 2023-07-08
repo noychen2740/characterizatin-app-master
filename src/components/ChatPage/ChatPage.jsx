@@ -61,7 +61,9 @@ function ChatPage({ userFromDB }) {
                     })
                     res.messages = await Promise.all(promisses)
                     const users = await userService.getAll()
-                    const currentUser = users.find(u => u.UserEmail === res.userEmail2)
+                    const currentUser = users.find(u => {
+                        return (u.UserEmail === res.userEmail2 || u.UserEmail === res.userEmail) && (u.UserEmail !== userFromDB.UserEmail)
+                    })
                     res.username = `${currentUser?.UserFirstName} ${currentUser?.UserLastName}`
                     setChat(res)
                 });
