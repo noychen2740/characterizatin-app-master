@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Favorites.css';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '@mui/material';
-import { chapterService } from '../../services/chapter.service';
-import jeep from '../../assets/jeep.jpg'
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
@@ -14,13 +11,9 @@ import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { ExpandMore } from '@mui/icons-material';
 
 
@@ -48,6 +41,8 @@ function Favorites(props) {
   return ( //תצוגת הפרקים במסך
     <div className='episodes-page center'>
       <TopOfAplication label='המועדפים שלי' />
+      <br></br>
+      <br></br>
       {/* <div className='title'>יומן המסע שלי</div> */}
      <div className='Favoritesss'>
         {favoritess.map((item, idx) => {
@@ -95,26 +90,6 @@ function Favorites(props) {
                   </CardContent>
                 </Collapse>
               </Card>
-              {/* <Card sx={{ maxWidth: 345 }}>
-                  <CardMedia
-                    component="img"
-                    alt="green iguana"
-                    height="140"
-                    src={favorites.FphotoDTO} />
-                  <CardContent className='card1'>
-                    <Typography gutterBottom variant="h5" component="div">
-                    <div className='Fav-title'>{favorites.FnameDTO} </div>
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                    <div className='FAv-desc'>
-                    <p>{favorites.FdescriptionDTO} </p>
-                    </div>
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                  <Button onClick={() => navigate(`/favorites/${favorites.FavouritesKey}`)} size="small"> תצוגה</Button>
-                </CardActions>
-                </Card> */}
               <br></br>
               <br></br>
             </div>

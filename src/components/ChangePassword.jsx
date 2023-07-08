@@ -2,17 +2,19 @@
 import React from 'react'
 import { useRef } from 'react'
 import emailjs from "@emailjs/browser"
-import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
+import { Button, FormControl, InputLabel, OutlinedInput } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { getEnv } from '../utils/env';
 import TopOfAplication from './TopOfAplication';
+import { useState } from 'react';
+
 
 export default function ChangePassword() {
     const nav = useNavigate();
     const [email, setEmail] = React.useState('');
 
     const form =useRef()
-
+    const [msg, setMsg] = useState('')
     const sendEmail = (e) => {
         e.preventDefault();
     
@@ -53,25 +55,73 @@ export default function ChangePassword() {
     <section>
         <div className="App-login" style={{direction:'rtl'}}>
                 <img className="App-logo" src="forgetPassword.jpg" alt="sad" />
-
             <form ref={form} onSubmit={sendEmail} 
             className="--form-control--card--flex-center --ir-colum">
-                <input type="text"
+              <FormControl  sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
+                <p className='ps'>שם פרטי</p>
+              <InputLabel htmlFor="outlined-adornment-email"> </InputLabel>
+              <OutlinedInput
+                placeholder='שם פרטי'
+                type="text"
+                cols='50'
+                rows='1'
+                name='user_name' required
+                id="outlined-adornment-email"
+                label=""
+                dir='rtl'
+              />
+            </FormControl>
+                {/* <input type="text"
                 placeholder='שם פרטי' 
-                name='user_name' required />
+                name='user_name' required /> */}
                 <br />
                 <br />
-                <input type="email"
+                <FormControl  sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
+                <p className='ps'>כתובת מייל איתה נרשמת </p>
+              <InputLabel htmlFor="outlined-adornment-email"> </InputLabel>
+              <OutlinedInput
+                placeholder='כתובת מייל איתה נירשמת'
+                type="email"
+                cols='50'
+                rows='1'
+                name='user_email' required onChange={(event) => { setEmail(event.target.value) }}
+                id="outlined-adornment-email"
+                label=""
+                dir='rtl'
+              />
+            </FormControl>
+                {/* <input type="email"
                 placeholder='כתובת מייל איתה נירשמת' 
-                name='user_email' required onChange={(event) => { setEmail(event.target.value) }} />
+                name='user_email' required onChange={(event) => { setEmail(event.target.value) }} /> */}
                <br />
                <br />
+               
+               <div className='btns'>
+               <Button onClick={() => {
+                setMsg('סיסמא חדשה מחכה לך במייל')
+                setTimeout(() => {
+                    setMsg('')
+                }, 5000)
+              }}
+              className='btncreate'
+              variant='contained'
+              type='submit'
+            >
+               שלחו אליי סיסמא חדשה
 
-                <button type='submit' className='--btn-- btn-primary' >שלחו אליי סיסמא חדשה</button>
+            </Button>
+            <Button onClick={() => nav("/")}
+              className='btncreate'
+              variant='contained'
+              >
+               נזכרתי ! תחזירו אותי להתחברות
+
+            </Button>
+               </div>
+            <p>
+                {msg && <div className="msg">{msg}</div>}
+                </p>
             </form>
-            <br />
-            <Link onClick={() => nav("/")}>נזכרתי! תחזירו אותי להתחברות</Link>
-
         </div>
     </section>
     </>
