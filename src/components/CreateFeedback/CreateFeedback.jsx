@@ -50,7 +50,7 @@ function CreateFeedback({ userFromDB }) {
         <form onSubmit={submit}>
           <div className='input-container'>
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)', height: 'calc(90% - 16px)' }} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-email">כותרת</InputLabel>
+              <InputLabel htmlFor="outlined-adornment-email">שם מלא (כפי שמופיע בגוגל)</InputLabel>
               <OutlinedInput
                 cols='50'
                 rows='1'
@@ -78,7 +78,42 @@ function CreateFeedback({ userFromDB }) {
             </FormControl>
           </div>
           <div className='input-container'>
-            <FormControl sx={{ m: 1, width: 'calc(100% - 16px)', height: 'calc(90% - 16px)' }} variant="outlined">
+            
+          <FormControl fullWidth>
+          <InputLabel htmlFor="outlined-adornment-email">שם המדינה</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={form?.FeedbackCountry}
+              label="Age"
+              name='FeedbackCountry'
+              fullWidth
+              onChange={handleChange}
+            >
+              <MenuItem value={"אווקודור"}>אווקודור</MenuItem>
+              <MenuItem value={"ארגנטינה"}>ארגנטינה</MenuItem>
+              <MenuItem value={"בוליביה"}>בוליביה</MenuItem>
+              <MenuItem value={"בורמה"}>בורמה</MenuItem>
+              <MenuItem value={"ברזיל"}>ברזיל</MenuItem>
+              <MenuItem value={"גוואטמלה"}>גוואטמלה</MenuItem>
+              <MenuItem value={"הודו"}>הודו</MenuItem>
+              <MenuItem value={"ויאטנם"}>ויאטנם</MenuItem>
+              <MenuItem value={"לאוס"}>לאוס</MenuItem>
+              <MenuItem value={"מקסיקו"}>מקסיקו</MenuItem>
+              <MenuItem value={"נאפל"}>נאפל</MenuItem>
+              <MenuItem value={"סרילנקה"}>סרילנקה</MenuItem>
+              <MenuItem value={"פיליפינים"}>פיליפינים</MenuItem>
+              <MenuItem value={"פנמה"}>פנמה</MenuItem>
+              <MenuItem value={"פרו"}>פרו</MenuItem>
+              <MenuItem value={"צילה"}>צילה</MenuItem>
+              <MenuItem value={"קולומביה"}>קולומביה</MenuItem>
+              <MenuItem value={"קוסטה ריקה"}>קוסטה ריקה</MenuItem>
+              <MenuItem value={"קמבודיה"}>קמבודיה</MenuItem>
+              <MenuItem value={"תאילנד"}>תאילנד</MenuItem>
+            </Select>
+          </FormControl>
+
+            {/* <FormControl sx={{ m: 1, width: 'calc(100% - 16px)', height: 'calc(90% - 16px)' }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-email">שם המדינה</InputLabel>
               <OutlinedInput
                 cols='50'
@@ -89,7 +124,7 @@ function CreateFeedback({ userFromDB }) {
                 label="Country"
                 value={form?.FeedbackCountry}
               />
-            </FormControl>
+            </FormControl> */}
           </div>
           <div className='input-container'>
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)', height: 'calc(90% - 16px)' }} variant="outlined">
@@ -106,6 +141,7 @@ function CreateFeedback({ userFromDB }) {
             </FormControl>
           </div>
           <FormControl fullWidth>
+          <InputLabel htmlFor="outlined-adornment-email">סוג מתאים </InputLabel>
             <label>סוג</label>
             <Select
               labelId="demo-simple-select-label"
@@ -123,7 +159,7 @@ function CreateFeedback({ userFromDB }) {
             </Select>
           </FormControl>
           <div className="seperator"></div>
-          <div className='input-container'>
+          {/* <div className='input-container'>
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)', height: 'calc(90% - 16px)' }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-email">נקודת ציון lon </InputLabel>
               <OutlinedInput
@@ -136,8 +172,8 @@ function CreateFeedback({ userFromDB }) {
                 value={form?.FeedbackLongitude}
               />
             </FormControl>
-          </div>
-          <div className='input-container'>
+          </div> */}
+          {/* <div className='input-container'>
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)', height: 'calc(90% - 16px)' }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-email">נקודת ציון lat </InputLabel>
               <OutlinedInput
@@ -150,7 +186,7 @@ function CreateFeedback({ userFromDB }) {
                 value={form?.FeedbackLatitude}
               />
             </FormControl>
-          </div>
+          </div> */}
           <div className='input-container'>
             <input className='imginput' type='file' name='FeedbackPhoto' onChange={handleChange}></input>
             {loading && <div className="loading"> loading...</div>}

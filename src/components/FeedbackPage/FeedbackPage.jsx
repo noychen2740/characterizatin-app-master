@@ -77,7 +77,7 @@ function FeedbackPage(props) {
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
                 <Typography gutterBottom variant="h5" component="div">
-                  <h1 className='Feedback-title3'>שם המדינה : {feedback.FeedbackCountry}  <PublicTwoToneIcon /></h1>
+                  <h1 className='Feedback-title3'><PublicTwoToneIcon /> שם המדינה : {feedback.FeedbackCountry}  </h1>
                 </Typography>
               </ListItemAvatar>
             </ListItem>
@@ -85,7 +85,7 @@ function FeedbackPage(props) {
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
                 <Typography gutterBottom variant="h5" component="div">
-                  <h1 className='Feedback-title3'> איזור במדינה : {feedback.FeedbackRegionOfTheCountry}  <LocationCityTwoToneIcon /></h1>
+                  <h1 className='Feedback-title3'>  <LocationCityTwoToneIcon /> איזור במדינה : {feedback.FeedbackRegionOfTheCountry} </h1>
                 </Typography>
               </ListItemAvatar>
             </ListItem>
@@ -93,7 +93,7 @@ function FeedbackPage(props) {
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
                 <Typography gutterBottom variant="h5" component="div">
-                  <h1 className='Feedback-title3'> תיאור מהמשתמש :  {feedback.FeedbackDescription}  <FormatListNumberedTwoToneIcon /></h1>
+                  <h1 className='Feedback-title3'> <FormatListNumberedTwoToneIcon />   תיאור מהמשתמש :  {feedback.FeedbackDescription}  </h1>
                 </Typography>
               </ListItemAvatar>
             </ListItem>
@@ -101,9 +101,10 @@ function FeedbackPage(props) {
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
                 <Typography gutterBottom variant="h5" component="div">
-                  <h3 className='Feedback-title4'> : נקודת ציון של ההמלצה   <MapTwoToneIcon /></h3>
+                  <h3 className='Feedback-title4'><MapTwoToneIcon /> נקודת ציון של ההמלצה :   </h3>
                   <h3 className='Feedback-title4'>קו אורך : {feedback.FeedbackLongitude}</h3>
                   <h3 className='Feedback-title4'>קו רוחב : {feedback.FeedbackLatitude}</h3>
+                  <h3 className='Feedback-title4'>זכור לשנות בהתאם למיקום הנכון</h3>
                 </Typography>
               </ListItemAvatar>
             </ListItem>

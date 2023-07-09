@@ -5,7 +5,7 @@ import Avatar from '@mui/material/Avatar';
 import CountrySelect from './SelectComp';
 import TopOfAplication from './TopOfAplication';
 import Navigation from './Navigation';
-import { NativeSelect, Paper } from '@mui/material';
+import { Button, NativeSelect, Paper } from '@mui/material';
 import FormControlLabelPosition from './FormControlLabelPosition';
 import OptionsCom from './OptionsCom';
 import { Box } from '@mui/system';
@@ -246,6 +246,12 @@ function Map(props) {
         <>
             <TopOfAplication label='מה יש לעולם להציע' UserType={props.userFromDB.UserType} />
             <div>
+            <Button onClick={() => nav("/CreateFeedback")}
+              className='btncreate2'
+              variant='contained'
+              >
+               ?שכחנו משהו
+            </Button>
                 <NativeSelect
                     defaultValue={selectCountry}
                     inputProps={{
@@ -274,6 +280,7 @@ function Map(props) {
                     <option value={'קמבודיה'}>קמבודיה</option>
                     <option value={'תאילנד'}>תאילנד</option>
                 </NativeSelect>
+                
                 <br />
                 <GoogleMap
                     mapContainerStyle={containerStyle}
