@@ -69,7 +69,8 @@ export const signup = async (loginFields) => {
             UserFirstName: loginFields.first_name,
             UserLatPosition: pos.lat,
             UserLongPosition: pos.lng,
-            UserLngPosition: pos.lng
+            UserLngPosition: pos.lng,
+            Userphonenumber: loginFields.phone
         })
     })
     if (!response.ok) {
