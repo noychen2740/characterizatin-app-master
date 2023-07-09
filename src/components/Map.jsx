@@ -308,7 +308,7 @@ function Map(props) {
 
                     {
                         aidCompList.map((location, index) => (
-                            <Marker label='H' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.HOS${index}`) }} />
+                            <Marker label='H' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.H${index}`) }} />
                         ))
                     }
 
