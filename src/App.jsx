@@ -249,56 +249,32 @@ function App() {
             <Route path="signup" element={<Signup />} />
             <Route path='NewQuestion' element={<NewQuestion userFromDB={userFromDB} userEmailFromDB={userEmailFromDB}/>}/>
             <Route path="Questionnaire" element={<Questionnaire userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
-            {/* <Route path="Questionnaire" element={<Questionnaire name={userInApp.UserFirstName} />} /> */}
             <Route path="firstQues" element={<Question pageNum='first' userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             <Route path="secondQues" element={<Question userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} pageNum='second' />} />
-            {/* <Route path="secondQues" element={<Question name={userInApp.UserFirstName} pageNum='second' />} /> */}
             <Route path="PersonaM" element={<Persona userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} pageNum='mucillar' />} />
             <Route path="PersonaB" element={<Persona userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} pageNum='balyanim' />} />
             <Route path="PersonaC" element={<Persona userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} pageNum='chill' />} />
-            {/* <Route path="PersonaM" element={<Persona name={userInApp.UserLastName} pageNum='mucillar' />} />
-            <Route path="PersonaB" element={<Persona name={userInApp.UserFirstName} pageNum='balyanim' />} />
-            <Route path="PersonaC" element={<Persona name={userInApp.UserFirstName} pageNum='chill' />} /> */}
             <Route path="userProfile" element={<UserProfile userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
-            {/* <Route path="userProfile" element={<UserProfile name={userInApp.UserFirstName} email={userInApp.UserEmail} />} /> */}
-            <Route path="budget" element={<Budget userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} allExpenes={expensesInApp} bug={userFromDB.UserBudget} />} />
-            {/* <Route path="budget" element={<Budget allExpenes={expensesInApp} bug={userInApp.UserBudget} />} /> */}
-            {/* <Route path="budget" element={<Budget allExpenes={expensesInApp} continueClicked={(navigaitionTo) => { setPage(navigaitionTo)}} navToChange={(exNum) => {setNumOfExpense(exNum)}}/>}/>  */}
+            <Route path="budget" element={<Budget userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} bug={userFromDB.UserBudget} />} />
+            {/* <Route path="budget" element={<Budget userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} allExpenes={expensesInApp} bug={userFromDB.UserBudget} />} /> */}
             <Route path="profile" element={userFromDB ? <UserProfile userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} personaType={userFromDB.UserType} /> : <div>Loading...</div>} />
-            {/* <Route path="profile" element={<UserProfile name={userInApp.UserFirstName} email={userInApp.UserEmail} personaType={userInApp.UserType} />} /> */}
-            {/* <Route path="profile" element={<UserProfile name={userInApp.UserFirstName} email={userInApp.UserEmail} personaType={userInApp.UserType} continueClicked={(navigaitionTo) => { setPage(navigaitionTo)}}/>}/>  */}
-            {/* <Route path="NewExpense" element={<NewExpense title={numOfExpense.ExpensesTitle} price={numOfExpense.PricePerOne} amount={numOfExpense.NumberOfRepeatExpenses} ExKey={numOfExpense.ExpensesKey} Ecategory={numOfExpense.KindOfExpenses} />}/>  */}
             <Route path="NewExpense" element={<NewExpense userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
-            {/* <Route path="NewExpense" element={<NewExpense />} /> */}
             <Route path="Analysis" element={<ExpensesAnalysis userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
-            {/* <Route path="Analysis" element={<ExpensesAnalysis />} /> */}
             <Route path="map"  element={<Map userFromDB={userFromDB} />} />
-            {/* <Route path="map" element={<Map />} /> */}
             <Route path='episodes' element={<Episodes userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
-            {/* <Route path='episodes' element={<Episodes />} /> */}
             <Route path='favorites' element={<Favorites userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
-            {/* <Route path='favorites' element={<Favorites />} /> */}
-            {/* <Route path='favorite/:id' element={<FavoritePage />} /> */}
             <Route path='create-episode/:NameOfChapter' element={<CreateEpisode userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
-            {/* <Route path='create-episode/:NameOfChapter' element={<CreateEpisode />} /> */}
             <Route path='create-episode' element={<CreateEpisode userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
-            {/* <Route path='create-episode' element={<CreateEpisode  />} /> */}
             <Route path='episode/:NameOfChapter' element={<EpisodePage userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
-            {/* <Route path='episode/:NameOfChapter' element={<EpisodePage />} /> */}
             <Route path='CreateFeedback' element={<CreateFeedback  userFromDB={userFromDB} />} />
-            <Route path='Feedbacks' element={<Feedbacks />} />
+            <Route path='Feedbacks' element={<Feedbacks userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             <Route path='ThanksPage' element={<ThanksPage />} />
             <Route path='Diary' element={<Diary />} />
-            <Route path='FeedbackPage/:FeedbackKey' element={<FeedbackPage />} />
+            <Route path='FeedbackPage/:FeedbackKey' element={<FeedbackPage  userFromDB={userFromDB} userEmailFromDB={userEmailFromDB}/>} />
             <Route path='chats' element={<ChatsPage userFromDB={userFromDB} />} />
-            {/* <Route path='chats' element={<ChatsPage />} /> */}
             <Route path='chat/:userEmail2' element={<ChatPage userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
-            {/* <Route path='chat/:userEmail2' element={<ChatPage />} /> */}
             <Route path='KpiCard' element={<KpiCard category={'אטרקציות'} expend={'852'} precent={'55'} />} />
-            {/* <Route path='GeographyChart' element={<GeographyChart/>} /> */}
            
-            {/* <Route path='NewQuestion' element={<NewQuestion/>}/> */}
-
             {/* אדמין */}
             <Route path="UserProfileAdmin" element={userFromDB?<UserProfileAdmin userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />:<div>loading...</div>} />
             <Route path='CreateFeedbackAdmin/:FeedbackKey' element={<CreateFeedbackAdmin userFromDB={userFromDB} />} />
@@ -308,28 +284,6 @@ function App() {
 
 
           </Routes>
-
-
-          {/* <Questionnaire name="עומר"/> */}
-
-          {/* {page === 'Questionnaire' && <Questionnaire  name={userInApp.UserFirstName} continueClicked={() => { setPage('firstQues') } } />}
-{page === 'firstQues' && <Question pageNum='first' continueClicked={() => { setPage('secondQues') }} />}
-{page === 'secondQues' && <Question name={userInApp.UserFirstName} pageNum='second' continueClicked={(navigaitionTo) => { setPage(navigaitionTo) }}/>}
-
-{page === 'PersonaM' && <Persona name={userInApp.UserLastName} pageNum='mucillar' continueClicked={(navigaitionTo) => { setPage(navigaitionTo)}}/>}
-{page === 'PersonaB' && <Persona name={userInApp.UserFirstName} pageNum='balyanim' continueClicked={(navigaitionTo) => { setPage(navigaitionTo)}}/>}
-{page === 'PersonaC' && <Persona name={userInApp.UserFirstName} pageNum='chill' continueClicked={(navigaitionTo) => { setPage(navigaitionTo)}}/>}
-
-{page === 'userProfile' && <UserProfile name={userInApp.UserFirstName} email={userInApp.UserEmail} personaType={userInApp.UserType} continueClicked={(navigaitionTo) => { setPage(navigaitionTo)}}/>}
-
-{page === 'budget' && <Budget allExpenes={expensesInApp} continueClicked={(navigaitionTo) => { setPage(navigaitionTo)}} navToChange={(exNum) => {setNumOfExpense(exNum)}}/>}
-{page === 'profile' && <UserProfile name={userInApp.UserFirstName} email={userInApp.UserEmail} personaType={userInApp.UserType} continueClicked={(navigaitionTo) => { setPage(navigaitionTo)}}/>}
-
-{page === 'NewExpense' && <NewExpense continueClicked={(navigaitionTo) => { setPage(navigaitionTo)}} title={numOfExpense.ExpensesTitle} 
-price={numOfExpense.PricePerOne} amount={numOfExpense.NumberOfRepeatExpenses} ExKey={numOfExpense.ExpensesKey} Ecategory={numOfExpense.KindOfExpenses} />} */}
-
-          {/* <Questionnaire name="עומר"/> */}
-
 
 {/* לא לגעת בקוד הזה */}
         </div>

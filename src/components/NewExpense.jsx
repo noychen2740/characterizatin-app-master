@@ -172,7 +172,7 @@ export default function NewExpense(props) {
               <MenuItem value={'מזון'}>מזון</MenuItem>
               <MenuItem value={'בילויים'}>בילויים</MenuItem>
               <MenuItem value={'הימורים'}>הימורים</MenuItem>
-              <MenuItem value={'סמים'}>סמים</MenuItem>
+              <MenuItem value={'סמים'}>התארגנות</MenuItem>
             </Select>
           </FormControl>
 

@@ -15,7 +15,7 @@ import NavigationAdmin from '../NavigationAdmin';
 
 
 
-function Feedbacks() {
+function Feedbacks(props) {
   const navigate = useNavigate();
 
   const [feedbacks, setFeedbacks] = useState([]);
@@ -42,7 +42,7 @@ function Feedbacks() {
 
   return ( //תצוגה של הפיידבקים על המסך לפי הסדר
     <div className='feedbacks-page center'>
-      <TopOfAplication label='הצעות שמחכות לאישור'  />
+      <TopOfAplication label='הצעות שמחכות לאישור' UserType={props.userFromDB.UserType} />
       {/* <div className='title'>יומן המסע שלי</div> */}
       <br></br>
       <br></br>

@@ -52,7 +52,7 @@ function ChangePasswordComAdmin(props) {
 
     return (
         <>
-              <TopOfAplication label='שינוי פרטים אישיים' />
+              <TopOfAplication label='שינוי פרטים אישיים' UserType={props.userFromDB.UserType}/>
 
             {/* <img className="App-logo" src="logo.png" style={{ marginTop: '5px', width: '120px' }} /> */}
         <div className="App-login" style={{direction:'rtl'}}>

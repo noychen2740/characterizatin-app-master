@@ -230,14 +230,21 @@ const DataPrecent = [
     SumOfExpenseDrugs={SumOfExpenseDrugs} AvgOfExpenseDrugs={AvgOfExpenseDrugs}
     SumOfExpenseCasino={SumOfExpenseCasino} AvgOfExpenseCasino={AvgOfExpenseCasino}/>}
           
-          
-    {boolean==true&&<Card>
+
+        {/* גרף המשווה ביחסים בין ההוצאות   */}
+    {/* {boolean==true&&<Card>
   <KpiChart AvgOfExpenseDrugs={AvgOfExpenseDrugs} AvgOfExpenseFood={AvgOfExpenseFood}
   AvgOfExpenseAtraction={AvgOfExpenseAtraction} AvgOfExpenseSleep={AvgOfExpenseSleep}
   AvgOfExpenseCasino={AvgOfExpenseCasino} AvgOfExpenseParty={AvgOfExpenseParty} SumOfExpenseAtraction={SumOfExpenseAtraction}
   SumOfExpenseSleep={SumOfExpenseSleep } SumOfExpenseDrugs={SumOfExpenseDrugs} SumOfExpenseFood={SumOfExpenseFood}
   SumOfExpenseCasino={SumOfExpenseCasino} SumOfExpenseParty={SumOfExpenseParty}/>
 </Card>}
+     */}
+       {/* גרף המשווה ביחסים בין ההוצאות   */}
+
+
+
+
     {/* <Card sx={{ minWidth: 275  }} style={{marginTop:'60px'}} >
       <CardContent >
       <h4>צריכת משתמשים דומים לי</h4>

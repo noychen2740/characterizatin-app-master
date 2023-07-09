@@ -8,7 +8,7 @@ import Avatar from '@mui/material/Avatar';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useState } from 'react';
 import { Button } from '@mui/material';
-import { ArrowBackIosNew, Celebration, SelfImprovement} from '@mui/icons-material';
+import { ArrowBackIosNew, Celebration, ManageAccounts, SelfImprovement} from '@mui/icons-material';
 import { useNavigate } from 'react-router';
 import LogoutIcon from '@mui/icons-material/Logout';
 import HikingIcon from '@mui/icons-material/Hiking';
@@ -32,6 +32,10 @@ function TopOfAplication(props) {
     }
     if (props.UserType == 'ציל') {
       setCheckType(<SelfImprovement />)
+    }
+    if (props.UserType == 'אדמין') {
+
+      setCheckType(<ManageAccounts/>)
     }
 
   }, [])

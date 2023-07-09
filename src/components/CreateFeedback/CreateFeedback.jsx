@@ -42,7 +42,7 @@ function CreateFeedback({ userFromDB }) {
   return ( //יצירה של הפידבק
     <div className='create-episode'>
       <div className='container center'>
-        <TopOfAplication label='הוספת נקודה חדשה' />
+        <TopOfAplication label='הוספת נקודה חדשה' UserType={userFromDB.UserType} />
         <br></br>
         <br></br>
         <br></br>
