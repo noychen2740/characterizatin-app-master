@@ -162,7 +162,7 @@ useEffect(()=>{
 
   return (
     <>
-      <TopOfAplication label='מעקב הוצאות'  />
+      <TopOfAplication label='מעקב הוצאות' UserType={props.userFromDB.UserType} />
       
       <Card sx={{ minWidth: 275  }} style={{marginTop:'60px'}} >
       <CardContent >

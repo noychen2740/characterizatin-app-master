@@ -8,9 +8,10 @@ import Avatar from '@mui/material/Avatar';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useState } from 'react';
 import { Button } from '@mui/material';
-import { ArrowBackIosNew } from '@mui/icons-material';
+import { ArrowBackIosNew, Celebration, ManageAccounts, SelfImprovement} from '@mui/icons-material';
 import { useNavigate } from 'react-router';
 import LogoutIcon from '@mui/icons-material/Logout';
+import HikingIcon from '@mui/icons-material/Hiking';
 
 function TopOfAplication(props) {
   const nav = useNavigate()
@@ -18,6 +19,29 @@ function TopOfAplication(props) {
     localStorage.removeItem('user');
     nav('/')
   }
+  const [checkType, setCheckType] = useState('')
+
+  React.useEffect(() => {
+
+    if (props.UserType == 'מוצילר') {
+      setCheckType(<HikingIcon />)
+    }
+    
+    if (props.UserType == 'בליין') {
+      setCheckType(<Celebration />)
+    }
+    if (props.UserType == 'ציל') {
+      setCheckType(<SelfImprovement />)
+    }
+    if (props.UserType == 'אדמין') {
+
+      setCheckType(<ManageAccounts/>)
+    }
+
+  }, [])
+
+
+
   return (
     <>
       <AppBar position="fixed" sx={{ bgcolor: '#598e89', width: '100%', height: '70px' }}  >
@@ -47,7 +71,11 @@ function TopOfAplication(props) {
             </Typography>
             <span style={{ marginLeft: '35px', marginRight: '35px' }} >{props.label}</span>
             <IconButton style={{ marginRight: 'auto', marginLeft: 'auto' }} sx={{ p: 0 }}>
-              <Avatar src="/broken-image.jpg" variant="rounded" style={{ borderRadius: '40%' }} sx={{ mt: 1 }} />
+              {/* <Avatar src="/broken-image.jpg" variant="rounded" style={{ borderRadius: '40%' }} sx={{ mt: 1 }} /> */}
+             <Avatar variant="rounded" style={{ borderRadius: '40%' }} sx={{ mt: 1 }} >
+              {checkType}
+             </Avatar>
+
             </IconButton>
           </Toolbar>
         </Container>

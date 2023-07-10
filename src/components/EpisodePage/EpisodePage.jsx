@@ -32,7 +32,7 @@ function EpisodePage(props) {
   };
   return episode ? ( //תצוגת הפרק עצמו
     <div className='episode-page  center'>
-      <TopOfAplication label={NameOfChapter}  />
+      <TopOfAplication label={NameOfChapter} UserType={props.userFromDB.UserType}  />
       {/* <div className='title'>יומן המסע שלי</div> */}
       <br></br>
       <br></br>

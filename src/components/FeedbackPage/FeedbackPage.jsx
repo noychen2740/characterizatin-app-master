@@ -25,7 +25,7 @@ import MapTwoToneIcon from '@mui/icons-material/MapTwoTone';
 
 
 
-function FeedbackPage() {
+function FeedbackPage(props) {
   const [feedback, setFeedback] = useState(null);
   const { FeedbackKey } = useParams();
   const navigate = useNavigate();
@@ -58,7 +58,7 @@ function FeedbackPage() {
   }
   return feedback ? ( //תצוגה של הפידבק הספציפי על המסך
     <div className='feedbackpage'>
-      <TopOfAplication label="הוספת המלצה" />
+      <TopOfAplication label="הוספת המלצה" UserType={props.userFromDB.UserType} />
       {/* <div className='title'>יומן המסע שלי</div> */}
       <br></br>
       <br></br>

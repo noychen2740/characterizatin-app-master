@@ -56,7 +56,7 @@ const [AvgOfExpense, setAvgOfExpense] = useState(1);/// הוצאות המשתמ�
 useEffect(()=>{
 // const apiUrl= getEnv() + '/expenses/getsumofall/?email=Benda669@gmail.com'
 const apiUrl= getEnv() + '/expenses/getsumofall/?email='
-fetch(apiUrl +props.userFromDB.UserEmail, 
+fetch(apiUrl +props.userEmailFromDB, 
 {
   method: 'GET',
  headers: new Headers({
@@ -89,7 +89,7 @@ setSumExpense(result.SumOfExpense)
 
 ///// הוספה של ממוצעי צריכה
 const apiUrlA= getEnv() + '/expenses/statusOfExpenses/?email='
-fetch(apiUrlA +props.userFromDB.UserEmail, 
+fetch(apiUrlA +props.userEmailFromDB, 
 {
   method: 'GET',
  headers: new Headers({
@@ -198,7 +198,7 @@ const DataPrecent = [
 ];
     return (
     <div>
-      <TopOfAplication label='ניתוח הוצאות' UserType={props.userFromDB.UserType}/>
+      <TopOfAplication label='ניתוח הוצאות'/>
       <Card sx={{ minWidth: 275  }} style={{marginTop:'60px'}} >
       <img className="App-logo" src="analysis3.png" style={{marginTop:'15px'}} />
       <CardContent >
@@ -230,21 +230,14 @@ const DataPrecent = [
     SumOfExpenseDrugs={SumOfExpenseDrugs} AvgOfExpenseDrugs={AvgOfExpenseDrugs}
     SumOfExpenseCasino={SumOfExpenseCasino} AvgOfExpenseCasino={AvgOfExpenseCasino}/>}
           
-
-        {/* גרף המשווה ביחסים בין ההוצאות   */}
-    {/* {boolean==true&&<Card>
+          
+    {boolean==true&&<Card>
   <KpiChart AvgOfExpenseDrugs={AvgOfExpenseDrugs} AvgOfExpenseFood={AvgOfExpenseFood}
   AvgOfExpenseAtraction={AvgOfExpenseAtraction} AvgOfExpenseSleep={AvgOfExpenseSleep}
   AvgOfExpenseCasino={AvgOfExpenseCasino} AvgOfExpenseParty={AvgOfExpenseParty} SumOfExpenseAtraction={SumOfExpenseAtraction}
   SumOfExpenseSleep={SumOfExpenseSleep } SumOfExpenseDrugs={SumOfExpenseDrugs} SumOfExpenseFood={SumOfExpenseFood}
   SumOfExpenseCasino={SumOfExpenseCasino} SumOfExpenseParty={SumOfExpenseParty}/>
 </Card>}
-     */}
-       {/* גרף המשווה ביחסים בין ההוצאות   */}
-
-
-
-
     {/* <Card sx={{ minWidth: 275  }} style={{marginTop:'60px'}} >
       <CardContent >
       <h4>צריכת משתמשים דומים לי</h4>
