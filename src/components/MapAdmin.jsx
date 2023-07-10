@@ -191,7 +191,7 @@ function MapAdmin(props) {
 
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
-        googleMapsApiKey: "AIzaSyBilylcKkzkj1q9WF1klt1564bXNR2NIQE"
+        googleMapsApiKey: "AIzaSyCzxNzo8N6KHRkVreIVvJeqnLVE2vDjJ8c"
     })
 
     const onLoad = React.useCallback(function callback(map_) {
@@ -312,7 +312,7 @@ function MapAdmin(props) {
 
                 </GoogleMap>
                 <Box>
-                    <OptionsCom selected={selected}  countryName={selectCountry} data={[aidCompList, tripList, sleepingList, attractionList]} />
+                    <OptionsCom selected={selected} countryName={selectCountry} data={[aidCompList, tripList, sleepingList, attractionList]} />
                 </Box>
             </div>
             <NavigationAdmin pagNav={'mapAdmin'} />
