@@ -108,7 +108,7 @@ function CreateEpisode(props) {
     <div className='create-episode' >
       <div className='container center'>
         <div className='container center'>
-          <TopOfAplication label='יצירה-עדכון פרק' />
+          <TopOfAplication label='יצירה-עדכון פרק' UserType={props.userFromDB.UserType} />
           <br></br>
           <img className='book-image3' src={yoman}></img>
           <form onSubmit={submit} >

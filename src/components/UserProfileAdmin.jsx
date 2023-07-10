@@ -145,7 +145,7 @@ export default function UserProfileAdmin(props) {
 
   return (
     <>
-      <TopOfAplication label='הפרופיל שלי' />
+      <TopOfAplication label='הפרופיל שלי' UserType={props.userFromDB.UserType} />
 
       <img className="App-logo" src="logo.png" style={{ marginTop: '5px', width: '120px' }} />
 

@@ -11,9 +11,8 @@ export default function Persona(props) {
   return (
     <>
     <div>
-  {/* <Button onClick={()=>{props.continueClicked('secondQues')}}> <ArrowBackIosNew style={{color:'black',
-    position: 'fixed', top: 30, left: 20, right: 0 }}/> </Button> */}
-      <Button onClick={()=>{nav('/secondQues')}}> <ArrowBackIosNew style={{color:'black',
+
+      <Button onClick={()=>{nav('/NewQuestion')}}> <ArrowBackIosNew style={{color:'black',
     position: 'fixed', top: 30, left: 20, right: 0 }}/> </Button>
   </div>
   {props.pageNum=='mucillar' ? <div>

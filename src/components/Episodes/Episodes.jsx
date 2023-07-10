@@ -44,7 +44,7 @@ function Episodes(props) {
 
   return ( //תצוגת הפרקים במסך
     <div className='episodes-page center'>
-      <TopOfAplication label='הפרקים שלי'  />
+      <TopOfAplication label='הפרקים שלי' UserType={props.userFromDB.UserType}  />
       {/* <div className='title'>יומן המסע שלי</div> */}
       <br></br>
       <br></br>

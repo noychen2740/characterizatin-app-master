@@ -141,7 +141,7 @@ export default function NewExpense(props) {
 
   return (
     <>
-      <TopOfAplication label='הוצאה חדשה' />
+      <TopOfAplication label='הוצאה חדשה' UserType={props.userFromDB.UserType} />
       <Paper sx={{ maxWidth: '300' }} style={{ direction: 'rtl', backgroundColor: '#eeeeee' }}>
         <img className="App-logo" src="expense-logo.png" style={{ marginTop: '5px' }} />
 
@@ -172,7 +172,7 @@ export default function NewExpense(props) {
               <MenuItem value={'מזון'}>מזון</MenuItem>
               <MenuItem value={'בילויים'}>בילויים</MenuItem>
               <MenuItem value={'הימורים'}>הימורים</MenuItem>
-              <MenuItem value={'סמים'}>סמים</MenuItem>
+              <MenuItem value={'סמים'}>התארגנות</MenuItem>
             </Select>
           </FormControl>
 

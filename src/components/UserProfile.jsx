@@ -124,42 +124,52 @@ export default function UserProfile(props) {
   useEffect(() => {
 
     if (userInApp.UserType == 'מוצילר') {
-      setCheckType(<HikingIcon onClick={() => { nav('/Questionnaire') }}  />)
-    }
-    if (userInApp.UserType == 'בליין') {
+      // setCheckType(<HikingIcon onClick={() => { nav('/Questionnaire') }}  />)
+      setCheckType(<HikingIcon onClick={() => { nav('/NewQuestion') }}  />)
 
-      setCheckType(<Celebration onClick={() => { nav('/Questionnaire') }}  />)
+    }
+    
+    if (userInApp.UserType == 'בליין') {
+      // setCheckType(<Celebration onClick={() => { nav('/Questionnaire') }}  />)
+      setCheckType(<Celebration onClick={() => { nav('/NewQuestion') }}  />)
     }
     if (userInApp.UserType == 'ציל') {
-
-      setCheckType(<SelfImprovement onClick={() => { nav('/Questionnaire') }}  />)
+      // setCheckType(<SelfImprovement onClick={() => { nav('/Questionnaire') }}  />)
+      setCheckType(<SelfImprovement onClick={() => { nav('/NewQuestion') }}  />)
     }
 
   }, [userInApp.UserType])/// מתעדכן לאחר כל שינוי של הטייפ של המתשמש בדאטה בייס
 
   return (
     <>
-      <TopOfAplication label='הפרופיל שלי' />
+      <TopOfAplication label='הפרופיל שלי' UserType={props.userFromDB.UserType} />
 
       <img className="App-logo" src="logo.png" style={{ marginTop: '5px', width: '120px' }} />
 
-      <Box style={{ marginBottom: '5px', backgroundColor: '#eeeeee', margin: '1px', padding: '25px', borderRadius: '5%' }}>
+      <Box style={{ marginBottom: '0px', backgroundColor: '#eeeeee', margin: '1px',paddingBottom:'0px',paddingBottom:10,paddingTop:0, paddingLeft:20, paddingRight:20, borderRadius: '5%' }}>
+      <input  style={{marginRight:'235px', color:'#eeeeee', backgroundColor:'#eeeeee', fontSize:'0px'}} className='imginput' type='file' name='UserImg' onChange={handleChange} />
+
         <Stack direction={"row"} spacing={5} justifyContent={'space-around'} >
           <StyledBadge
             overlap="circular"
             anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
             variant="dot"
           >
-            <Avatar sx={{ width: 64, height: 64 }} src= {props.userFromDB.UserImg} style={{ display: 'flex' }} onClick={() => {alert('bdike')}} />
-    
+
+            <Avatar sx={{ width: 64, height: 64 }} src= {props.userFromDB.UserImg} style={{ display: 'flex' }}/> 
+
+            {/* <Avatar sx={{ width: 64, height: 64 }} src= {props.userFromDB.UserImg} style={{ display: 'flex' }} onClick={() => {alert('bdike')}} /> */}
+
           </StyledBadge>
 
-          <p style={{ color: 'black' }}>שלום {props.userFromDB.UserFirstName} <br /> {props.userEmailFromDB} </p>
+          <p style={{ color: 'black' }}>שלום {props.userFromDB.UserFirstName} <br /> {props.userEmailFromDB}  </p>
+            
         </Stack>
+
       </Box>
-      <div>
-            <input className='imginput' type='file' name='UserImg' onChange={handleChange}  ></input>
-      </div>
+      {/* <div>
+            <input className='imginput' type='file' name='UserImg' onChange={handleChange} ></input>
+      </div> */}
       <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
         <ListItem alignItems="flex-start">
           <ListItemAvatar style={{
