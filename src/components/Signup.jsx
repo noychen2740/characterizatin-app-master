@@ -7,7 +7,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { validateEmail } from '../utils/helpers'
+import { validateEmail, validatePhone } from '../utils/helpers'
 import { Button } from '@mui/material';
 import { Snackbar } from './Snackbar'
 import FormGroup from '@mui/material/FormGroup';
@@ -17,7 +17,7 @@ import { signup } from '../utils/api';
 import { useNavigate } from 'react-router-dom';
 
 function Signup(props) {
-    const nav=useNavigate();
+    const nav = useNavigate();
     const [showPassword1, setShowPassword1] = useState(false);
     const [showPassword2, setShowPassword2] = useState(false);
     const [loginFields, setLoginFields] = useState({
@@ -41,16 +41,16 @@ function Signup(props) {
     };
 
     const formValidated = () => {
-        const { email, first_name, last_name, tos, password1, password2 } = loginFields;
-        const isValid = email && first_name && last_name && tos && password1 === password2;
+        const { email, first_name, last_name, tos, password1, password2, phone } = loginFields;
+        const isValid = phone && email && first_name && last_name && tos && password1 === password2;
         return isValid;
     }
 
 
     return (
-        <div className="App-login" style={{direction:'rtl'}}>
+        <div className="App-login" style={{ direction: 'rtl' }}>
             <img className="App-logo" src="logo.png" />
-            <FormControl sx={{ m: 1, width: 'calc(100% - 16px)'}} variant="outlined">
+            <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-first_name">שם פרטי</InputLabel>
                 <OutlinedInput
                     error={!loginFields.first_name && loginFields.first_name !== ''}
@@ -70,6 +70,18 @@ function Signup(props) {
                     label="Last name"
                 />
             </FormControl>
+
+            <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-phone">טלפון</InputLabel>
+                <OutlinedInput
+                    error={!!loginFields.phone && !validatePhone(loginFields.phone)}
+                    onBlur={ev => { setLoginFields({ ...loginFields, phone: ev.target.value }) }}
+                    id="outlined-adornment-phone"
+                    type="phone"
+                    label="Phone"
+                />
+            </FormControl>
+
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-email">אימייל</InputLabel>
                 <OutlinedInput
