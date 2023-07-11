@@ -101,9 +101,9 @@ function FeedbackPage(props) {
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
                 <Typography gutterBottom variant="h5" component="div">
-                  <h3 className='Feedback-title4'><MapTwoToneIcon /> נקודת ציון של ההמלצה :   </h3>
-                  <h3 className='Feedback-title4'>קו אורך : {feedback.FeedbackLongitude}</h3>
-                  <h3 className='Feedback-title4'>קו רוחב : {feedback.FeedbackLatitude}</h3>
+                  <h3 className='Feedback-title3'><MapTwoToneIcon /> נקודת ציון של ההמלצה :   </h3>
+                  <h3 className='Feedback-title3'>קו אורך : {feedback.FeedbackLongitude}</h3>
+                  <h3 className='Feedback-title3'>קו רוחב : {feedback.FeedbackLatitude}</h3>
                   <h3 className='Feedback-title4'>זכור לשנות בהתאם למיקום הנכון</h3>
                 </Typography>
               </ListItemAvatar>
