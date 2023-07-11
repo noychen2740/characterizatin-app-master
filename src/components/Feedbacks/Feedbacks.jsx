@@ -63,7 +63,7 @@ function Feedbacks(props) {
                     <h1 className='Feedback-title2'>{f.FeedbackTitle}</h1>
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                    <h1 className='Feedback-title3'>{f.FeedbackDescription}</h1>
+                    <h1 className='Feedback-title3'>{f.FeedbackDescription.length > 20 ?'...'+  f.FeedbackDescription.substring(0, 20) : f.FeedbackDescription}</h1>
                     </Typography>
                   </CardContent>
                   <CardActions>

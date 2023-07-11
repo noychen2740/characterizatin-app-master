@@ -5,7 +5,7 @@ import Avatar from '@mui/material/Avatar';
 import CountrySelect from './SelectComp';
 import TopOfAplication from './TopOfAplication';
 import Navigation from './Navigation';
-import { NativeSelect, Paper } from '@mui/material';
+import { Button, NativeSelect, Paper } from '@mui/material';
 import FormControlLabelPosition from './FormControlLabelPosition';
 import OptionsCom from './OptionsCom';
 import { Box } from '@mui/system';
@@ -208,7 +208,7 @@ function Map(props) {
 
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
-        googleMapsApiKey: "AIzaSyBilylcKkzkj1q9WF1klt1564bXNR2NIQE"
+        googleMapsApiKey: "AIzaSyCzxNzo8N6KHRkVreIVvJeqnLVE2vDjJ8c"
     })
 
     const userClick = (user) => {
@@ -246,6 +246,12 @@ function Map(props) {
         <>
             <TopOfAplication label='מה יש לעולם להציע' UserType={props.userFromDB.UserType} />
             <div>
+                <Button onClick={() => nav("/CreateFeedback")}
+                    className='btncreate2'
+                    variant='contained'
+                >
+                    ?שכחנו משהו
+                </Button>
                 <NativeSelect
                     defaultValue={selectCountry}
                     inputProps={{
@@ -274,6 +280,7 @@ function Map(props) {
                     <option value={'קמבודיה'}>קמבודיה</option>
                     <option value={'תאילנד'}>תאילנד</option>
                 </NativeSelect>
+
                 <br />
                 <GoogleMap
                     mapContainerStyle={containerStyle}
@@ -301,7 +308,7 @@ function Map(props) {
 
                     {
                         aidCompList.map((location, index) => (
-                            <Marker label='H' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.HOS${index}`) }} />
+                            <Marker label='H' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.H${index}`) }} />
                         ))
                     }
 

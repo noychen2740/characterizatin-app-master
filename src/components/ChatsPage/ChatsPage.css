@@ -5,5 +5,13 @@
 }
 
 .unread span{
-    font-weight: bold
+    font-weight: bold;
+    color: black;
+    padding-top: 10px;
+}
+.unread{
+    font-weight: bold;
+    border: 3px solid  #598e89;
+    border-radius: 40px 40px;
+    padding-top: 10px;
 }

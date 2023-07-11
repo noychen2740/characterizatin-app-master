@@ -14,6 +14,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { favoriteservice } from '../services/Favorites.service';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 const fieldsMapper = {
     0: {
@@ -43,7 +45,7 @@ const fieldsMapper = {
 }
 
 const ExpandMore = styled((props) => {
-    const { expand,...other } = props;
+    const { expand, ...other } = props;
     return <IconButton {...other} />;
 })(({ theme, expand }) => ({
     transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
@@ -55,10 +57,30 @@ const ExpandMore = styled((props) => {
 
 export default function OptionsCard({ tabIndex, item, index, selected, userFromDB }) {
     const [expanded, setExpanded] = React.useState(false);
+    const [favAtts, setFavAtt] = React.useState([]);
+    const [msg, setMsg] = useState('')
     console.log('gdgr', item, userFromDB);
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
+    useEffect(() => {
+        loadFavs()
+    }, [])
+
+    const loadFavs = async () => {
+        const res = await favoriteservice.Getall(userFromDB.UserEmail)
+        console.log({ res });
+        setFavAtt(res)
+    }
+
+    const isFav = (attraction) => {
+        return favAtts.find(f =>
+            f.FnameDTO === attraction.AttractionName ||
+            f.FnameDTO === attraction.AidCompName ||
+            f.FnameDTO === attraction.TripsName ||
+            f.FnameDTO === attraction.SleepingCompName
+        )
+    }
 
     const { title, image, selector, description } = fieldsMapper[tabIndex];
 
@@ -91,9 +113,19 @@ export default function OptionsCard({ tabIndex, item, index, selected, userFromD
 
                 </Typography>
             </CardContent>
+            {msg && <div className="msg">{msg}</div>}
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites" onClick={() => favoriteservice.AddFav(item.OptionKey, userFromDB.UserEmail)}>
-                    <FavoriteIcon />
+                <IconButton aria-label="ad d to favorites" onClick={() => {
+                    if (isFav(item)) {
+                        setMsg('אופס, פריט זה כבר נמצא במועדפים שלך')
+                        setTimeout(() => {
+                            setMsg('')
+                        }, 1000)
+                    } else {
+                        favoriteservice.AddFav(item.OptionKey, userFromDB.UserEmail)
+                    }
+                }}>
+                    <FavoriteIcon style={isFav(item) ? { color: 'red' } : {}} />
                 </IconButton>
 
                 <ExpandMore

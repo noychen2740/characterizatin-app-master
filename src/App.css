@@ -228,6 +228,24 @@ p {
     max-width: 310px;
   }
 }
+.btncreate{
+  background-color: #598e89 !important;
+  align-items: flex-end !important;
+  text-align: center !important;
+  width:100%;
+  height: 80%;
+  margin: auto;
+}
+
+.btncreate2{
+  background-color: #598e89 !important;
+  align-items: flex-end !important;
+  text-align: center !important;
+  font-size: 10px !important;
+  width:90px !important;
+  height: 30px !important;
+  margin-right: 30px !important;
+}
 
 
 
@@ -267,4 +285,16 @@ p {
 .infoBoxName {
   font-size: 24px;
   font-weight: 700;
+}
+
+.ps{
+  font-size: 16px;
+}
+.qes{
+ text-align: right;
+  align-items: flex-start !important;
+}
+.MuiFormGroup-root{
+  text-align: right !important;
+  align-items: flex-start !important;
 }
