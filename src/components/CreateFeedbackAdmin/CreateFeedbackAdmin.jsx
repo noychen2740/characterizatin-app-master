@@ -127,7 +127,7 @@ function CreateFeedbackAdmin({ userFromDB }) {
             <Select className='grydiv'
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={form?.KindOfFeedback}
+              value={form?.KindOfFeedback||''}
               label="Age"
               name='KindOfFeedback'
               fullWidth
@@ -146,7 +146,7 @@ function CreateFeedbackAdmin({ userFromDB }) {
             <Select className='grydiv'
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={form?.FeedbackPersona}
+              value={form?.FeedbackPersona||''}
               label="Age"
               name='FeedbackPersona'
               fullWidth

@@ -114,7 +114,7 @@ export default function ChangePassword() {
               className='btncreate'
               variant='contained'
               >
-               נזכרתי ! תחזירו אותי להתחברות
+             תחזירו אותי להתחברות
 
             </Button>
                </div>

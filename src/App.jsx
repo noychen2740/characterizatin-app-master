@@ -77,7 +77,7 @@ function App() {
   const [chatVisiable, setChatVisiable] = useState(false);/// הבאה בצורה אסינכורית את כל ההוצאות של המשתמש
   const nav = useNavigate();
   const location = useLocation();
-  const chatPaths = ['/profile', '/budget', '/map', '/episodes', '/Favorites']
+  const chatPaths = ['/profile', '/budget', '/map', '/episodes', '/Favorites','/UserProfileAdmin']
   const [isRead, setIsRead] = useState(true)
   ////////////////////////////////////////////////////////
 
