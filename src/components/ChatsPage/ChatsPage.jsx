@@ -38,14 +38,12 @@ function ChatsPage({ userFromDB }) {
     console.log({ ...res });
     let inc = 0
     let loadUsers = false
-    res.forEach(async (u) => {
+    const userPromises = res.map(async (u) => {
       const q = await chatService.getChat(u.UserEmail, userFromDB.UserEmail)
       const docs = await getDocs(q)
       let chat;
-      inc++
-      docs.docs.forEach(async (document) => {
+      const x = await docs.docs.map(async document => {
         chat = { ...document.data(), id: document.id }
-        console.log(chat.id, u.UserEmail);
         chat.messages = chat?.messages?.length ? chat.messages : [];
         const promisses = await chat.messages.map(async (messageId) => {
           const docRef = doc(db, "messages", messageId);
@@ -55,15 +53,12 @@ function ChatsPage({ userFromDB }) {
         })
         chat.messages = await Promise.all(promisses)
         u.unread = !!chat.messages.filter(m => m.userEmail !== userFromDB.UserEmail).find((m) => !m.isRead)
-        if (inc === res.length && !loadUsers) {
-          console.log('overrr', [...res]);
-          loadUsers = true
-          setUsers(res)
-        }
-
       })
-
+      await Promise.all(x)
+      return u
     })
+    const result = await Promise.all(userPromises)
+    setUsers(result)
   }
 
 
@@ -74,11 +69,11 @@ function ChatsPage({ userFromDB }) {
       <br></br>
       <br></br>
       {users.map((c) => {
-        console.log(c);
+
         return <div key={c.UserEmail} className={c.unread ? "chat unread" : "chat"} onClick={() => nav(`/chat/${c.UserEmail}`)}>
           <ListItem alignItems="flex-start">
             <ListItemAvatar>
-              <Avatar alt={c.userEmail2} src={c.UserImg||"/static/images/avatar/3.jpg"} />
+              <Avatar alt={c.userEmail2} src={c.UserImg || "/static/images/avatar/3.jpg"} />
             </ListItemAvatar>
             <ListItemText
               key={c.id}
@@ -91,8 +86,8 @@ function ChatsPage({ userFromDB }) {
                     variant="body2"
                     color="text.primary"
                   >
-                    
-                  סוג משתמש : {c.UserType}
+
+                    סוג משתמש : {c.UserType}
                   </Typography>
                 </React.Fragment>
 

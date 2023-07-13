@@ -198,7 +198,7 @@ function CreateFeedback({ userFromDB }) {
               style={{ backgroundColor: '#598e89' }}
               onClick={submit}
             >
-              שמור פידבק
+              שמור המלצה
             </Button>
           </div>
           <br></br>

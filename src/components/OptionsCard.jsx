@@ -115,14 +115,15 @@ export default function OptionsCard({ tabIndex, item, index, selected, userFromD
             </CardContent>
             {msg && <div className="msg">{msg}</div>}
             <CardActions disableSpacing>
-                <IconButton aria-label="ad d to favorites" onClick={() => {
+                <IconButton aria-label="ad d to favorites" onClick={async() => {
                     if (isFav(item)) {
                         setMsg('אופס, פריט זה כבר נמצא במועדפים שלך')
                         setTimeout(() => {
                             setMsg('')
                         }, 1000)
                     } else {
-                        favoriteservice.AddFav(item.OptionKey, userFromDB.UserEmail)
+                       await  favoriteservice.AddFav(item.OptionKey, userFromDB.UserEmail)
+                        loadFavs()
                     }
                 }}>
                     <FavoriteIcon style={isFav(item) ? { color: 'red' } : {}} />
