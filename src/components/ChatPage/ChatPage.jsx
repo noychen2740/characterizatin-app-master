@@ -64,7 +64,7 @@ function ChatPage({ userFromDB }) {
                     const currentUser = users.find(u => {
                         return (u.UserEmail === res.userEmail2 || u.UserEmail === res.userEmail) && (u.UserEmail !== userFromDB.UserEmail)
                     })
-                    res.username = `${currentUser?.UserFirstName} ${currentUser?.UserLastName}`
+                    res.username = currentUser?`${currentUser?.UserFirstName} ${currentUser?.UserLastName}`:`${userFromDB?.UserFirstName} ${userFromDB?.UserLastName}`
                     setChat(res)
                 });
             } else {
