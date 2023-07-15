@@ -249,8 +249,9 @@ function Map(props) {
                 <Button onClick={() => nav("/CreateFeedback")}
                     className='btncreate2'
                     variant='contained'
+                    style={{direction:'rtl'}}
                 >
-                    ?שכחנו משהו
+                    מה שכחנו?
                 </Button>
                 <NativeSelect
                     defaultValue={selectCountry}

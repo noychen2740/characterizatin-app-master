@@ -127,7 +127,6 @@ export default function OptionsCard({ tabIndex, item, index, selected, userFromD
                 }}>
                     <FavoriteIcon style={isFav(item) ? { color: 'red' } : {}} />
                 </IconButton>
-
                 <ExpandMore
                     expand={expanded}
                     onClick={handleExpandClick}
@@ -136,6 +135,7 @@ export default function OptionsCard({ tabIndex, item, index, selected, userFromD
                 >
                     <ExpandMoreIcon />
                 </ExpandMore>
+                {/* {"בליין"} */}
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>

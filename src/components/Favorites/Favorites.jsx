@@ -47,7 +47,7 @@ function Favorites(props) {
 
   return ( //תצוגת הפרקים במסך
     <div className='episodes-page center'>
-    <TopOfAplication label='המועדפים שלי' />      {/* <div className='title'>יומן המסע שלי</div> */}
+    <TopOfAplication label='המועדפים שלי'  UserType={props.userFromDB.UserType}/>      {/* <div className='title'>יומן המסע שלי</div> */}
      <div className='Favoritesss'>
         {favoritess.map((item, idx) => {
           return (

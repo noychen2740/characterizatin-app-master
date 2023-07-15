@@ -12,7 +12,7 @@ export default function KpiCard(props) {
   return (
     <>
     <Box sx={{ flexGrow: 1 }}>
-        <h3 style={{color:'black', background:'#eeeeee'}}>KPI </h3>
+        <h4 style={{color:'black', background:'#eeeeee'}}>מצבך ביחס למשתמשים דומים </h4>
         <Alert severity="error" sx={{direction:'rtl'}} icon={false} >חץ למעלה מעיד על הוצאה גבוהה בקטגוריה !</Alert>
 
       <Grid container spacing={{ xs: 2}} columns={{ xs: 4 }}>
