@@ -56,6 +56,11 @@ function Favorites(props) {
                 <CardHeader
                   title={item.FnameDTO}
                 />
+                
+                  <Typography variant="body2" color="text.secondary">
+                    <h3>נמצא ב : {item.FcountryDTO}</h3>
+                  </Typography>
+               
                 <CardMedia
                   component="img"
                   height="194"
