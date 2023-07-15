@@ -47,7 +47,7 @@ function Favorites(props) {
 
   return ( //תצוגת הפרקים במסך
     <div className='episodes-page center'>
-    <TopOfAplication label='המועדפים שלי' />      {/* <div className='title'>יומן המסע שלי</div> */}
+    <TopOfAplication label='המועדפים שלי'  UserType={props.userFromDB.UserType}/>      {/* <div className='title'>יומן המסע שלי</div> */}
      <div className='Favoritesss'>
         {favoritess.map((item, idx) => {
           return (
@@ -58,7 +58,7 @@ function Favorites(props) {
                 />
                 
                   <Typography variant="body2" color="text.secondary">
-                    <h3>נמצא ב : {item.FcountryDTO}</h3>
+                    <h3>נמצא ב{item.FcountryDTO}</h3>
                   </Typography>
                
                 <CardMedia
@@ -75,7 +75,7 @@ function Favorites(props) {
                   <IconButton onClick={() => removeFavorite(item.FkeyDTO)} aria-label="add to favorites">
                     <FavoriteIcon style={{ color: 'red' }} />
                   </IconButton>
-
+                  {"צפייה בפרטים מלאים"}
                   <ExpandMore
                     expand={expandedIdx === idx}
                     onClick={() => {
@@ -91,7 +91,6 @@ function Favorites(props) {
 
                    <ExpandMoreIcon/>
                   </ExpandMore>
-                  
                 </CardActions>
                 <Collapse className='btn2' in={expandedIdx === idx} timeout="auto" unmountOnExit>
                   <CardContent>
