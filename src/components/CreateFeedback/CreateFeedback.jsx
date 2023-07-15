@@ -8,6 +8,7 @@ import { TextField } from '@mui/material';
 import TopOfAplication from '../TopOfAplication';
 import Navigation from '../Navigation';
 import { storageService } from '../../services/storage.service';
+import Swal from 'sweetalert2';
 
 
 function CreateFeedback({ userFromDB }) {
@@ -18,7 +19,16 @@ function CreateFeedback({ userFromDB }) {
   const submit = async (ev) => { //לאחר ההוספה של הפרק העמוד מובל לעמוד תודה למשתמש
     ev.preventDefault();
     const res = await feedbackService.createfromuser(form, userFromDB);
-    navigate('/ThanksPage');
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'אנחנו מודים לך על השיתוף, נוסיף את ההצעה בהקדם',
+      showConfirmButton: false,
+      timer: 3000
+    })
+    // navigate('/ThanksPage');
+    navigate('/userProfile');
+
   };
 
   const handleChange = async (ev) => { //לוקח את הפרמטרים ש/מזינים בפורם
@@ -141,7 +151,7 @@ function CreateFeedback({ userFromDB }) {
             </FormControl>
           </div>
           <FormControl fullWidth>
-          <InputLabel htmlFor="outlined-adornment-email">סוג מתאים </InputLabel>
+          <InputLabel htmlFor="outlined-adornment-email">איזה סוג של המלצה זו</InputLabel>
             <label>סוג</label>
             <Select
               labelId="demo-simple-select-label"
@@ -152,10 +162,10 @@ function CreateFeedback({ userFromDB }) {
               fullWidth
               onChange={handleChange}
             >
-              <MenuItem value={"Attractions"}>Attractions</MenuItem>
-              <MenuItem value={"Trips"}>Trips</MenuItem>
-              <MenuItem value={"SleepingComplexes"}>SleepingComplexes</MenuItem>
-              <MenuItem value={"AidComplexes"}>AidComplexes</MenuItem>
+              <MenuItem value={"Attractions"}>אטרקציות</MenuItem>
+              <MenuItem value={"Trips"}>טיולים</MenuItem>
+              <MenuItem value={"SleepingComplexes"}>מקומות לינה</MenuItem>
+              <MenuItem value={"AidComplexes"}>מתחמי סיוע</MenuItem>
             </Select>
           </FormControl>
           <div className="seperator"></div>
@@ -193,12 +203,12 @@ function CreateFeedback({ userFromDB }) {
           </div>
           <div className='input-container-button'>
             <Button
-              className='btn btn-create'
+              // className='btn btn-create'
               variant='contained'
               style={{ backgroundColor: '#598e89' }}
               onClick={submit}
             >
-              שמור המלצה
+              הוספה
             </Button>
           </div>
           <br></br>

@@ -136,7 +136,7 @@ export default function OptionsCard({ tabIndex, item, index, selected, userFromD
                 >
                     <ExpandMoreIcon />
                 </ExpandMore>
-                {/* {"בליין"} */}
+                {item.AttractionsPersona || item.SleepingComplexesPersona || item.TripsPersona }
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>

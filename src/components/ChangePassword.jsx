@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getEnv } from '../utils/env';
 import TopOfAplication from './TopOfAplication';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 
 
 export default function ChangePassword() {
@@ -54,7 +55,7 @@ export default function ChangePassword() {
         <TopOfAplication label='שכחתי סיסמא' />
     <section>
         <div className="App-login" style={{direction:'rtl'}}>
-                <img className="App-logo" src="forgetPassword.jpg" alt="sad" />
+                <img className="App-logo" src="forgetPassword.png" alt="sad" />
             <form ref={form} onSubmit={sendEmail} 
             className="--form-control--card--flex-center --ir-colum">
               <FormControl  sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
@@ -98,10 +99,17 @@ export default function ChangePassword() {
                
                <div className='btns'>
                <Button onClick={() => {
-                setMsg('סיסמא חדשה מחכה לך במייל')
-                setTimeout(() => {
-                    setMsg('')
-                }, 5000)
+                Swal.fire({
+                  position: 'top-end',
+                  icon: 'success',
+                  title: 'סיסמא חדשה מחכה לך במייל',
+                  showConfirmButton: false,
+                  timer: 2200
+                })
+                // setMsg('סיסמא חדשה מחכה לך במייל')
+                // setTimeout(() => {
+                //     setMsg('')
+                // }, 5000)
               }}
               className='btncreate'
               variant='contained'
