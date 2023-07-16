@@ -152,7 +152,7 @@ function CreateFeedback({ userFromDB }) {
           </div>
           <FormControl fullWidth>
           <InputLabel htmlFor="outlined-adornment-email">איזה סוג של המלצה זו</InputLabel>
-            <label>סוג</label>
+            {/* <label>סוג</label> */}
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
