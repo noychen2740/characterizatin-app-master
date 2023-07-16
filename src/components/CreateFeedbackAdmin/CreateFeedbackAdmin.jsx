@@ -142,7 +142,7 @@ function CreateFeedbackAdmin({ userFromDB }) {
           <div className="seperator"></div>
           <FormControl fullWidth>
             <p className='pdiv'> לאיזה פרסונה הכי מתאים</p>
-            <label>סוג</label>
+            {/* <label>סוג</label> */}
             <Select className='grydiv'
               labelId="demo-simple-select-label"
               id="demo-simple-select"
