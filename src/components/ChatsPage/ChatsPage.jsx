@@ -99,8 +99,9 @@ function ChatsPage({ userFromDB }) {
         </div>
       })}
       {/* <NavigationAdmin/> */}
+      {userFromDB.UserEmail==="admin@gmail.com"?<NavigationAdmin/>:<Navigation/>}
 
-      <Navigation></Navigation>
+      {/* <Navigation></Navigation> */}
     </div>
   )
 }

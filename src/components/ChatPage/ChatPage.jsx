@@ -147,8 +147,8 @@ function ChatPage({ userFromDB }) {
 
             <br></br>
             <br></br>
-
-            <Navigation></Navigation>
+{userFromDB.UserEmail==="admin@gmail.com"?<NavigationAdmin/>:<Navigation/>}
+            {/* <Navigation></Navigation> */}
             {/* <NavigationAdmin/> */}
         </div>
     )
