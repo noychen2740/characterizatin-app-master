@@ -148,8 +148,10 @@ export default function UserProfileAdmin(props) {
       <TopOfAplication label='הפרופיל שלי' UserType={props.userFromDB.UserType} />
 
       <img className="App-logo" src="logo.png" style={{ marginTop: '5px', width: '120px' }} />
+      <Box style={{ marginBottom: '0px', backgroundColor: '#eeeeee', margin: '1px',paddingBottom:'0px',paddingBottom:10,paddingTop:0, paddingLeft:20, paddingRight:20, borderRadius: '5%' }}>
+      {/* <Box style={{ marginBottom: '5px', backgroundColor: '#eeeeee', margin: '1px', padding: '25px', borderRadius: '5%' }}> */}
+      <input  style={{marginRight:'235px', color:'#eeeeee', backgroundColor:'#eeeeee', fontSize:'0px'}} className='imginput' type='file' name='UserImg' onChange={handleChange} />
 
-      <Box style={{ marginBottom: '5px', backgroundColor: '#eeeeee', margin: '1px', padding: '25px', borderRadius: '5%' }}>
         <Stack direction={"row"} spacing={5} justifyContent={'space-around'} >
           <StyledBadge
             overlap="circular"
@@ -160,12 +162,12 @@ export default function UserProfileAdmin(props) {
     
           </StyledBadge>
 
-          <p style={{ color: 'black' }}>שלום {props.userFromDB.UserFirstName} <br /> {props.userFromDB.UserEmail} </p>
+          <p style={{ color: 'black' }}> {props.userFromDB.UserFirstName} שלום <br /> {props.userFromDB.UserEmail} </p>
         </Stack>
       </Box>
-      <div>
+      {/* <div>
             <input className='imginput' type='file' name='UserImg' onChange={handleChange}  ></input>
-      </div>
+      </div> */}
       <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
         <ListItem alignItems="flex-start">
           <ListItemAvatar style={{
@@ -197,15 +199,12 @@ export default function UserProfileAdmin(props) {
         </ListItem>
 
         <Divider variant="inset" component="li" />
-        <ListItem alignItems="flex-start">
+        {/* <ListItem alignItems="flex-start">
           <ListItemAvatar style={{
             marginTop: '20px', marginBottom: '15px'
           }}>
             <Avatar>
-              {/* {checkType} */}
               <ManageAccounts/>
-              {/* <HikingIcon/> */}
-              {/* שליחת האייקון המתאים לפי הפרסונה שהתקבלה */}
             </Avatar>
           </ListItemAvatar>
           <ListItemText
@@ -224,11 +223,10 @@ export default function UserProfileAdmin(props) {
                   <br />
                 </Typography>
                 {"שמחים שהתחברת למערכת, יש הרבה עבודה ועדכונים לעשות"}
-                {/* {"לחץ על האייקון על מנת ללמוד עוד אודות איפיון המערכת והמשמעות עבורך"} */}
               </React.Fragment>
             }
           />
-        </ListItem>
+        </ListItem> */}
 
         <Divider variant="inset" component="li" />
         <ListItem alignItems="flex-start">

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Swal from 'sweetalert2';
 export const chapterService = {
     getById,
     create,
@@ -77,6 +78,13 @@ async function remove(NameOfChapter, Email) {
     try {
         const res = await axios.delete(`${base_url}/${module}/${Email}/deletechapter/${NameOfChapter}`)
         console.log({ res });
+     Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'פרק נמחק בהצלחה',
+      showConfirmButton: false,
+      timer: 2000
+    })
         return res.data
     } catch (err) {
         console.log({ err });

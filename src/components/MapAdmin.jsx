@@ -1,17 +1,19 @@
 import React, { useState } from 'react'
-import { GoogleMap, useJsApiLoader, Marker, MarkerClusterer, OverlayView, StreetViewPanorama } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, Marker, InfoWindow, MarkerClusterer, OverlayView, StreetViewPanorama } from '@react-google-maps/api';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import CountrySelect from './SelectComp';
 import TopOfAplication from './TopOfAplication';
 import Navigation from './Navigation';
-import { NativeSelect, Paper } from '@mui/material';
+import { Button, NativeSelect, Paper } from '@mui/material';
 import FormControlLabelPosition from './FormControlLabelPosition';
 import OptionsCom from './OptionsCom';
 import { Box } from '@mui/system';
 import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import { Gite, Whatshot } from '@mui/icons-material';
 import { getEnv } from '../utils/env';
+import { saveUserPosToDB, getUsersPositions } from '../utils/api'
+import { useNavigate } from 'react-router';
 import NavigationAdmin from './NavigationAdmin';
 
 
@@ -58,22 +60,7 @@ const locations = [
     // { lat: -42.735258, lng: 147.438 },
     // { lat: -43.999792, lng: 170.463352 },
 ]
-const options = {
-    imagePath: 'https://placehold.co/600x40'
-}// מקבץ דיפולטיבי אפור
-const optionTrip = {
-    imagePath: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF94epaEiWysgcDS12ZdRe10FnQY_43-OtUCXti4hXl-VQyJk0AGJubYe2L2FOb82zC6I&usqp=CAU"
 
-}
-const optionSleep = {
-    imagePath: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToaQeycIKgB5bCaIOrKTdjT1Gaz1stu0S17d_ygdC78TWAkEbbXcXw_mrSsIJxzAKbxzw&usqp=CAU"
-}
-const optionAid = {
-    imagePath: "https://img.lovepik.com/element/40021/9804.png_860.png"
-}
-const optionAtraction = {
-    imagePath: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiboOhgi6sKRvohBXDnCHnSrn3cbatkqK94FKt8FwjZL5fXbNZyQd2jJq6_QyMY_-UrGI&usqp=CAU"
-}
 
 function createKey(location) {
     return location.lat + location.lng;
@@ -100,33 +87,64 @@ function createLocationAid(location) {
     return createLocationsArray(location, 'AidCompLat', 'AidCompLon')
 }
 
+const usersLocationsMock = [
+    {
+        id: '12112',
+        user: 'atar',
+        position: {
+            lat: 32.4607275, lng: 35.0034335
+        }
+    }
+];
+
 function MapAdmin(props) {
+    const [selectedTab, setSelectedTab] = React.useState(3);
 
     const [attractionList, setAttractionList] = React.useState([]);// אטרקציות של המדינה שנבחרה
     const [sleepingList, setSleepingList] = React.useState([]);// מקומות לינה של המדינה שנבחרה
     const [aidCompList, setAidCompListList] = React.useState([]);// מתחמי סיוע של המדינה שנבחרה
     const [tripList, setTripList] = React.useState([]);// הצעות לטיולים במדינה שנבחרה
+    const [usersList, setUsersList] = React.useState([])
+    const [zoom, setZoom] = React.useState(12)
+    const nav = useNavigate()
+    const myArea = () => {
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude
+                setUserLocation({
+                    userLat: lat,
+                    userLng: lng
+                })
+                console.log(userLocation);
+                setCenter({
+                    lat: lat,
+                    lng: lng
+                })
 
-    const [zoom, setZoom] = React.useState(3.5)
+                saveUserPosToDB({
+                    lat, lng,
+                    email: JSON.parse(localStorage.user).UserEmail
+                });
+
+                const users = await getUsersPositions();
+                setUsersList(users.map(user => ({
+                    ...user,
+                    lat: user.UserLotPosition,
+                    lng: user.UserLatPosition
+                })));
+            }
+        )
+    }
 
     const handleChange = (event) => {
         setSelectCountry(event.target.value);
         if (event.target.value === 'בסביבה') {
-            navigator.geolocation.getCurrentPosition(
-                position => {
-                    setUserLocation({
-                        userLat: position.coords.latitude,
-                        userLng: position.coords.longitude
-                    })
-                    console.log(userLocation);
-                    setCenter({
-                        lat: userLocation.userLat,
-                        lng: userLocation.userLng
-                    })
-                }
-            )
+            setZoom(12)
+            myArea()
         }
         else {
+            setZoom(3.5)
             const apiURL = getEnv() + '/map/';
             fetch(apiURL + event.target.value, {
                 method: 'GET',
@@ -166,7 +184,7 @@ function MapAdmin(props) {
         }
     };
     const [selectCountry, setSelectCountry] = React.useState("בחר מדינה");
-
+    const [userInfoBox, setUserInfoBox] = React.useState(null)
     const [map, setMap] = React.useState(null);
 
     const [countryFromDB, setcountryFromDB] = useState(
@@ -194,21 +212,13 @@ function MapAdmin(props) {
         googleMapsApiKey: "AIzaSyCzxNzo8N6KHRkVreIVvJeqnLVE2vDjJ8c"
     })
 
+    const userClick = (user) => {
+        setUserInfoBox(user)
+    }
+
     const onLoad = React.useCallback(function callback(map_) {
         setMap(map_);
-        navigator.geolocation.getCurrentPosition(
-            position => {
-                setUserLocation({
-                    userLat: position.coords.latitude,
-                    userLng: position.coords.longitude
-                })
-                console.log(userLocation);
-                setCenter({
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                })
-            }
-        )
+        myArea()
 
     }, []);/// בכניסה ראשונית למסך מפה- יקבע המרכז על פי המיקום של המשתמש
 
@@ -217,16 +227,33 @@ function MapAdmin(props) {
     }, []);
 
     const locationClick = (cordinaint, selector) => {
+
+        const mapper = {
+            'H': 0,
+            'T': 1,
+            'S': 2,
+            'A': 3
+        }
+        setSelectedTab(mapper[selector[1]])
+        setSelected(selector)
+
+
         const element = document.querySelector(selector);
         if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: "center", inline: "nearest" });
-            setSelected(selector)
         }
     }// זמני- בלחיצה על נקודה מסומנת איזה פעולה נרצה שתקה
     return isLoaded ? (
         <>
             <TopOfAplication label='מה יש לעולם להציע' UserType={props.userFromDB.UserType} />
             <div>
+                <Button onClick={() => nav("/CreateFeedbackAdmin")}
+                    className='btncreate2'
+                    variant='contained'
+                    style={{direction:'rtl'}}
+                >
+                    מה שכחנו?
+                </Button>
                 <NativeSelect
                     defaultValue={selectCountry}
                     inputProps={{
@@ -246,15 +273,16 @@ function MapAdmin(props) {
                     <option value={'גוואטמלה'}>גוואטמלה</option>
                     <option value={'ויאטנם'}>ויאטנם</option>
                     <option value={'לאוס'}>לאוס</option>
-                    {/* <option value={'סרילנקה'}>סרילנקה</option>
-            <option value={'פיליפינים'}>פיליפינים</option> */}
-                    {/* <option value={'פנמה'}>פנמה</option>
-            <option value={'פרו'}>פרו</option>
-            <option value={'צילה'}>צילה</option>
-            <option value={'קוסטה ריקה'}>קוסטה ריקה</option>
-            <option value={'קמבודיה'}>קמבודיה</option>
-            <option value={'תאילנד'}>תאילנד</option> */}
+                    <option value={'סרילנקה'}>סרילנקה</option>
+                    <option value={'פיליפינים'}>פיליפינים</option>
+                    <option value={'פנמה'}>פנמה</option>
+                    <option value={'פרו'}>פרו</option>
+                    <option value={'צילה'}>צילה</option>
+                    <option value={'קוסטה ריקה'}>קוסטה ריקה</option>
+                    <option value={'קמבודיה'}>קמבודיה</option>
+                    <option value={'תאילנד'}>תאילנד</option>
                 </NativeSelect>
+
                 <br />
                 <GoogleMap
                     mapContainerStyle={containerStyle}
@@ -262,57 +290,73 @@ function MapAdmin(props) {
                     zoom={zoom}
                     onLoad={onLoad}
                     onUnmount={onUnmount}>
-                    <MarkerClusterer options={optionSleep}>
-                        {(clusterer) =>
-                            locations.map((location) => (
-                                <Marker key={createKey(location)} position={location} />
-                            ))
-                        }
-                    </MarkerClusterer>
-
-                    <MarkerClusterer options={optionAtraction}>
-                        {(clusterer) =>
-                            attractionList.map((location, index) => (
-                                <Marker label='A' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.A${index}`) }} />
-                            ))
-                        }
-                    </MarkerClusterer>
-
-                    <MarkerClusterer options={optionSleep} >
-                        {(clusterer) =>
-                            sleepingList.map((location, index) => (
-                                <Marker label='S' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.S${index}`) }} />
-                            ))
-                        }
-                    </MarkerClusterer>
-
-                    <MarkerClusterer options={optionAid}>
-                        {(clusterer) =>
-                            aidCompList.map((location, index) => (
-                                <Marker label='HOS' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.HOS${index}`) }} />
-                            ))
-                        }
-                    </MarkerClusterer>
-
-                    <MarkerClusterer options={optionTrip}>
-                        {(clusterer) =>
-                            tripList.map((location, index) => (
-                                <Marker label='T' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.T${index}`) }} />
-                            ))
-                        }
-                    </MarkerClusterer>
-
-                    {/* <MarkerClusterer options={optionTrip}>
-                    {(clusterer) =>
-                        tripList.map((location) => (
-                            <Marker key={createKey(location)} position={location} clusterer={clusterer} onClick={()=>{locationClick(createKey(location))}}/>
+                    {
+                        locations.map((location) => (
+                            <Marker key={createKey(location)} position={location} />
                         ))
                     }
-            </MarkerClusterer> */}
+
+                    {
+                        attractionList.map((location, index) => (
+                            <Marker label='A' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.A${index}`) }} />
+                        ))
+                    }
+
+                    {
+                        sleepingList.map((location, index) => (
+                            <Marker label='S' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.S${index}`) }} />
+                        ))
+                    }
+
+                    {
+                        aidCompList.map((location, index) => (
+                            <Marker label='H' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.H${index}`) }} />
+                        ))
+                    }
+
+                    {
+                        tripList.map((location, index) => (
+                            <Marker label='T' key={createKey(location)} position={location} onClick={() => { locationClick(createKey(location), `.T${index}`) }} />
+                        ))
+                    }
+
+                    {usersList.map((user) => (
+                        <Marker label="U" key={createKey(user) + Math.random() * 9999999} position={user} onClick={() => {
+                            userClick(user)
+                        }} >
+                        </Marker>
+                    ))}
+
+                    {
+                        userInfoBox && <InfoWindow
+                            onCloseClick={() => { setUserInfoBox(null) }}
+                            position={userInfoBox}
+                        >
+                            <div className='infoBox' onClick={() => {
+                                console.log(userInfoBox);
+                                nav(`/chat/${userInfoBox.Useremail}`)
+                            }}>
+                                <div className='infoBoxTitle'>
+                                    דבר עם
+                                    <div className='infoBoxName'>
+                                        {userInfoBox.UserFirstName}
+                                    </div>
+                                </div>
+                            </div>
+                        </InfoWindow>
+                    }
+
+                    {/* <MarkerClusterer options={optionTrip}>
+                        {(clusterer) =>
+                            tripList.map((location) => (
+                                <Marker key={createKey(location)} position={location} clusterer={clusterer} onClick={() => { locationClick(createKey(location)) }} />
+                            ))
+                        }
+                    </MarkerClusterer> */}
 
                 </GoogleMap>
                 <Box>
-                    <OptionsCom selected={selected} countryName={selectCountry} data={[aidCompList, tripList, sleepingList, attractionList]} />
+                    <OptionsCom tabChanged={(value) => { setSelectedTab(value) }} value={selectedTab} selected={selected} userFromDB={props.userFromDB} countryName={selectCountry} data={[aidCompList, tripList, sleepingList, attractionList]} />
                 </Box>
             </div>
             <NavigationAdmin pagNav={'mapAdmin'} />

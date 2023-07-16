@@ -91,7 +91,7 @@ export default function GraphsBar(props) {
 </Card>
 
 <Card sx={{ minWidth: 275, height: 400  }} style={{marginBottom:'30px'}}>
-      <h4 style={{ textAlign: "center" }}>אחוז מסה"כ בחלוקה לקטגוריות</h4>
+      <h4 style={{ textAlign: "center" }}>כמה אחוז סוג ההוצאה מהווה</h4>
       <Pie
         data={chartDataP}
         options={{

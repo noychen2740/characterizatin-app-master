@@ -7,6 +7,7 @@ import { Button, FormControl, InputLabel, MenuItem, Paper, Select } from '@mui/m
 import Navigation from './Navigation';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getEnv } from '../utils/env';
+import Swal from 'sweetalert2';
 
 export default function NewExpense(props) {
 
@@ -72,15 +73,40 @@ export default function NewExpense(props) {
         console.log('response statuse=', response.status);
         console.log('response.ok=', response.ok)
         //  props.continueClicked('budget')
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'הוצאה חדשה נוספה',
+          showConfirmButton: false,
+          timer: 2000
+        })
+
         nav('/budget')
 
       },
         (error) => {
           console.log("err post=", error);
+          Swal.fire({
+            icon: 'error',
+            title: 'אופס...',
+            text: 'משהו השתבש, ההוצאה לא נוספה',
+          })
         });
   }
 
   const deleteExpense = () => {
+    Swal.fire({
+      title: 'מחיקת הוצאה לא ניתנת לשחזור',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'למחוק',
+      denyButtonText: `לא למחוק`,
+      cancelButtonText:'בטל'
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire('!נמחק', '', 'success')
+
     const apiUrl = getEnv() + '/expenses/delete/'
     fetch(apiUrl + state.ExpensesKey,
       {
@@ -101,6 +127,10 @@ export default function NewExpense(props) {
         (error) => {
           console.log("err post=", error);
         });
+      } else if (result.isDenied) {
+        Swal.fire('ההוצאה לא נמחקה', '', 'info')
+      }
+    })
   }
 
   const putExpense = () => {
@@ -116,27 +146,44 @@ export default function NewExpense(props) {
       ExpensesKey: state.ExpensesKey,// לא באמת משנה מה ישלח פה
       TotalPriceToPay: price * amount
     };
-    fetch(apiUrl + state.ExpensesKey,
-      {
-        method: 'PUT',
-        body: JSON.stringify(expense),
-        headers: new Headers({
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Accept': 'application/json; charset=UTF-8',
-        })
+    Swal.fire({
+      title: '?לשמור את השינויים',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'שמור',
+      denyButtonText: `אל תשמור`,
+      cancelButtonText:'בטל'
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire('!נשמר', '', 'success')
+        fetch(apiUrl + state.ExpensesKey,
+          {
+            method: 'PUT',
+            body: JSON.stringify(expense),
+            headers: new Headers({
+              'Content-Type': 'application/json; charset=UTF-8',
+              'Accept': 'application/json; charset=UTF-8',
+            })
+    
+          })
+          .then(response => {
+            console.log('response= ', response);
+            console.log('response statuse=', response.status);
+            console.log('response.ok=', response.ok)
+            //  props.continueClicked('budget')
+            nav('/budget')
+    
+          },
+            (error) => {
+              console.log("err post=", error);
+            });
 
-      })
-      .then(response => {
-        console.log('response= ', response);
-        console.log('response statuse=', response.status);
-        console.log('response.ok=', response.ok)
-        //  props.continueClicked('budget')
-        nav('/budget')
-
-      },
-        (error) => {
-          console.log("err post=", error);
-        });
+      } else if (result.isDenied) {
+        Swal.fire('השינויים לא נשמרו', '', 'info')
+      }
+    })
+    
   }
 
   return (

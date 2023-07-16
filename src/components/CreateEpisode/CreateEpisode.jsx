@@ -13,7 +13,8 @@ import { TimePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 import Writing from '../../assets/Writing.png';
 import { storageService } from '../../services/storage.service';
-import yoman from '../../assets/yoman.jpg';
+import yoman from '../../assets/yoman.png';
+import Swal from 'sweetalert2';
 
 
 function CreateEpisode(props) {
@@ -34,6 +35,13 @@ function CreateEpisode(props) {
       const res = await chapterService.create(form,props.userEmailFromDB);
     }
     console.log('sumbit end');
+      Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'פרק עודכן בהצלחה',
+      showConfirmButton: false,
+      timer: 2000
+    })
     navigate('/episodes');
   };
 
@@ -160,7 +168,7 @@ function CreateEpisode(props) {
           </form>
           <div className='input-container-button'>
             <Button
-              className='btn btn-create'
+              // className='btn btn-create'
               variant='contained'
               onClick={submit}
               style={{ backgroundColor: '#598e89' }}

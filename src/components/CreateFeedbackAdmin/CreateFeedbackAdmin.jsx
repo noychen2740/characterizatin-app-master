@@ -122,7 +122,7 @@ function CreateFeedbackAdmin({ userFromDB }) {
             </FormControl>
           </div>
           <FormControl fullWidth>
-            <p className='pdiv'>לחץ כאן לבחירת סוג ההמלצה</p>
+            <p className='pdiv'>לאיזה קטגוריה הממלצה מתאימה</p>
             <label>סוג</label>
             <Select className='grydiv'
               labelId="demo-simple-select-label"
@@ -141,7 +141,7 @@ function CreateFeedbackAdmin({ userFromDB }) {
           </FormControl>
           <div className="seperator"></div>
           <FormControl fullWidth>
-            <p className='pdiv'>לחץ כאן לבחירת סוג משתמש</p>
+            <p className='pdiv'> לאיזה פרסונה הכי מתאים</p>
             <label>סוג</label>
             <Select className='grydiv'
               labelId="demo-simple-select-label"
@@ -152,8 +152,9 @@ function CreateFeedbackAdmin({ userFromDB }) {
               fullWidth
               onChange={handleChange}
             >
+              <MenuItem value={"כולם"}>כולם</MenuItem>
               <MenuItem value={"מוצילר"}>מוצילר</MenuItem>
-              <MenuItem value={"צייל"}>צייל</MenuItem>
+              <MenuItem value={"ציל"}>ציל</MenuItem>
               <MenuItem value={"בליין"}>בליין</MenuItem>
             </Select>
           </FormControl>
@@ -161,7 +162,7 @@ function CreateFeedbackAdmin({ userFromDB }) {
           <div className='input-container'>
           
             <FormControl className='grydiv' sx={{ m: 1, width: 'calc(100% - 16px)', height: 'calc(90% - 16px)' }} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-email">נקודת ציון קו אורך </InputLabel>
+              <InputLabel htmlFor="outlined-adornment-email">נקודת ציון- קו אורך </InputLabel>
               <OutlinedInput
                 cols='50'
                 rows='1'
@@ -175,7 +176,7 @@ function CreateFeedbackAdmin({ userFromDB }) {
           </div>
           <div className='input-container'>
             <FormControl className='grydiv' sx={{ m: 1, width: 'calc(100% - 16px)', height: 'calc(90% - 16px)' }} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-email">נקודת ציון קו רוחב </InputLabel>
+              <InputLabel htmlFor="outlined-adornment-email">נקודת ציון- קו רוחב </InputLabel>
               <OutlinedInput
                 cols='50'
                 rows='1'
@@ -194,7 +195,7 @@ function CreateFeedbackAdmin({ userFromDB }) {
           </div>
           <div className='input-container-button'>
             <Button
-              className='btn btn-create2'
+              // className='btn btn-create2'
               variant='contained'
               style={{ backgroundColor: '#598e89' }}
               onClick={submit}

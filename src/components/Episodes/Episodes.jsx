@@ -11,6 +11,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import TopOfAplication from '../TopOfAplication';
 import Navigation from '../Navigation';
+import Swal from 'sweetalert2';
 
 
 
@@ -27,6 +28,13 @@ function Episodes(props) {
   const remove = async (id) => { //אפשרות למחיקת פרק לפי האי די שלו
     console.log({ id });
     await chapterService.remove(id,props.userEmailFromDB);
+    // Swal.fire({
+    //   position: 'center',
+    //   icon: 'success',
+    //   title: 'פרק נמחק בהצלחה',
+    //   showConfirmButton: false,
+    //   timer: 2000
+    // })
     loadEpisodes();
   };
   
