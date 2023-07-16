@@ -247,7 +247,7 @@ function MapAdmin(props) {
         <>
             <TopOfAplication label='מה יש לעולם להציע' UserType={props.userFromDB.UserType} />
             <div>
-                <Button onClick={() => nav("/CreateFeedback")}
+                <Button onClick={() => nav("/CreateFeedbackAdmin")}
                     className='btncreate2'
                     variant='contained'
                     style={{direction:'rtl'}}

@@ -162,10 +162,10 @@ function CreateFeedback({ userFromDB }) {
               fullWidth
               onChange={handleChange}
             >
-              <MenuItem value={"Attractions"}>אטרקציות</MenuItem>
-              <MenuItem value={"Trips"}>טיולים</MenuItem>
-              <MenuItem value={"SleepingComplexes"}>מקומות לינה</MenuItem>
-              <MenuItem value={"AidComplexes"}>מתחמי סיוע</MenuItem>
+              <MenuItem value={"Attractions"}>Attractions</MenuItem>
+              <MenuItem value={"Trips"}>Trips</MenuItem>
+              <MenuItem value={"SleepingComplexes"}>SleepingComplexes</MenuItem>
+              <MenuItem value={"AidComplexes"}>AidComplexes</MenuItem>
             </Select>
           </FormControl>
           <div className="seperator"></div>
