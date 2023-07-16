@@ -1,10 +1,48 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./NewQuestion.css";
 import TopOfAplication from "../TopOfAplication";
 import { useNavigate } from "react-router-dom";
 import { getEnv } from "../../utils/env";
 
 function NewQuestion(props) {
+
+  useEffect(() => {
+    const apiUrl = getEnv() + '/users/getemail/?email=';
+    // const apiUrl = 'https://localhost:44300/users/getemail/?email=Benda669@gmail.com';
+    fetch(apiUrl+props.userEmailFromDB,
+      {
+        method: 'GET',
+        headers: new Headers({
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json; charset=UTF-8',
+        })
+
+      })
+      .then(response => {
+        console.log('response= ', response);
+        console.log('response statuse=', response.status);
+        console.log('response.ok=', response.ok)
+
+        return response.json()
+      })
+      .then(
+        (result) => {
+          console.log("result=", result.UserFirstName);
+          const sendUser = () => { props.getUser(result) }
+          sendUser();/// העברת המשתמש כולו
+          console.log('first name=', result.UserFirstName)
+          console.log('first name=', result.UserLastName)
+          console.log('budget=', result.UserBudget)
+
+        },
+        (error) => {
+          console.log("err post=", error);
+        });
+
+  }, [])
+
+
+
   const nav = useNavigate();
 
   const onEnd = () => {/// זמני , ישונה אחרי שנבנה את קלקולייט- ניתן לייצר מהקריאה אלמנט ורק לשלוח את הערך

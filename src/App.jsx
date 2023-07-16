@@ -246,8 +246,8 @@ function App() {
             <Route path="/" element={<Login getEmail={getUserEmail} getUser={getUser} />} />
             <Route path='/ChangePassword' element={<ChangePassword />} />
             <Route path='/ChangePasswordCom' element={<ChangePasswordCom userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
-            <Route path="signup" element={<Signup />} />
-            <Route path='NewQuestion' element={<NewQuestion userFromDB={userFromDB} userEmailFromDB={userEmailFromDB}/>}/>
+            <Route path="signup" element={<Signup getEmail={getUserEmail} />} />
+            <Route path='NewQuestion' element={<NewQuestion getUser={getUser} userFromDB={userFromDB} userEmailFromDB={userEmailFromDB}/>}/>
             <Route path="Questionnaire" element={<Questionnaire userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             <Route path="firstQues" element={<Question pageNum='first' userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             <Route path="secondQues" element={<Question userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} pageNum='second' />} />
