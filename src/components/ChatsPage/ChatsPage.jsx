@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import { userService } from '../../services/user.service'
 import { doc, getDoc, getDocs } from 'firebase/firestore'
 import { db } from '../../firebase'
+import NavigationAdmin from '../NavigationAdmin'
 function ChatsPage({ userFromDB }) {
   const nav = useNavigate()
   // const [chats, setChats] = useState([])
@@ -97,6 +98,8 @@ function ChatsPage({ userFromDB }) {
           <Divider variant="inset" />
         </div>
       })}
+      {/* <NavigationAdmin/> */}
+
       <Navigation></Navigation>
     </div>
   )

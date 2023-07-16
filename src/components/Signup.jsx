@@ -15,6 +15,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { signup } from '../utils/api';
 import { useNavigate } from 'react-router-dom';
+import { getEnv } from '../utils/env';
 
 function Signup(props) {
     const nav = useNavigate();
@@ -139,7 +140,7 @@ function Signup(props) {
                 <FormControlLabel style={{ color: "#333" }} control={<Checkbox onChange={(ev) => { setLoginFields({ ...loginFields, tos: ev.target.checked }) }} />} label="אני מאשר שפרטי נכונים" />
             </FormGroup>
             <Button disabled={!formValidated()} onClick={async () => {
-                const msg = await signup(loginFields);
+               const msg = await signup(loginFields);
                 if (!msg.includes('exist')) {
                     // if user created - login
                     setSnackbar({
@@ -147,8 +148,45 @@ function Signup(props) {
                         message: "WOWWWW",
                         open: true
                     })
-                    // props.finishSignUp()
-                    nav('/Questionnaire')
+                    //////
+                    const sendEmail = () => { props.getEmail(loginFields.email) }
+                        sendEmail();///// העברת מייל לקומפוננטת האבא APP על מנת שנוכל לעבוד איתה בשאר האפליקציה
+                        /////////
+                        /////// הסופת הוצאה ראשונית להצגת הטבלה
+                        const postNewExpenseToDB = () => {
+                            const apiUrl = getEnv() + '/expenses/post'
+                            // const apiUrl='http://localhost:58583/api/users/1'
+                            const expense = {
+                              UserEmail: loginFields.email,// 
+                              PricePerOne: 0,
+                              NumberOfRepeatExpenses: 0,
+                              ExpensesTitle: "לחץ לעריכה",
+                              KindOfExpenses: "לחץ לעריכה",
+                              TotalPriceToPay: 0
+                            };
+                            fetch(apiUrl,
+                              {
+                                method: 'POST',
+                                body: JSON.stringify(expense),
+                                headers: new Headers({
+                                  'Content-Type': 'application/json; charset=UTF-8',
+                                  'Accept': 'application/json; charset=UTF-8',
+                                })
+                        
+                              })
+                              .then(response => {
+                                console.log('response= ', response);
+                                console.log('response statuse=', response.status);
+                                console.log('response.ok=', response.ok)
+                                // nav('/budget')
+                                nav('/NewQuestion')
+                              },
+                                (error) => {
+                                  console.log("err post=", error);
+                                });
+                          }
+                          postNewExpenseToDB();
+
                 } else {
                     // else show error message and do nothing
                     setSnackbar({
