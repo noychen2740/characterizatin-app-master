@@ -75,36 +75,37 @@ function FeedbackPage(props) {
 
             <Divider variant="inset" />
             <ListItem alignItems="flex-start">
-              <ListItemAvatar>
+              <ListItemAvatar style={{marginTop: '-15px', marginBottom: '-15px'}}>
                 <Typography gutterBottom variant="h5" component="div">
-                  <h1 className='Feedback-title3'><PublicTwoToneIcon /> שם המדינה : {feedback.FeedbackCountry}  </h1>
+                  <h1 className='Feedback-title3'><PublicTwoToneIcon /> <b>שם המדינה-</b> {feedback.FeedbackCountry}  </h1>
                 </Typography>
               </ListItemAvatar>
             </ListItem>
             <Divider className='diva' variant="inset" />
             <ListItem alignItems="flex-start">
-              <ListItemAvatar>
+              <ListItemAvatar style={{marginTop: '-15px', marginBottom: '-15px'}}>
                 <Typography gutterBottom variant="h5" component="div">
-                  <h1 className='Feedback-title3'>  <LocationCityTwoToneIcon /> איזור במדינה : {feedback.FeedbackRegionOfTheCountry} </h1>
+                  <h1 className='Feedback-title3'>  <LocationCityTwoToneIcon /> <b> איזור במדינה-</b> {feedback.FeedbackRegionOfTheCountry} </h1>
                 </Typography>
               </ListItemAvatar>
             </ListItem>
             <Divider variant="inset" />
             <ListItem alignItems="flex-start">
-              <ListItemAvatar>
+              <ListItemAvatar style={{marginTop: '-15px', marginBottom: '-15px'}}>
                 <Typography gutterBottom variant="h5" component="div">
-                  <h1 className='Feedback-title3'> <FormatListNumberedTwoToneIcon />   תיאור מהמשתמש :  {feedback.FeedbackDescription}  </h1>
+                  <h1 className='Feedback-title3'> <FormatListNumberedTwoToneIcon />  <b>תיאור מהמשתמש</b> <br /> {feedback.FeedbackDescription} </h1>
                 </Typography>
               </ListItemAvatar>
             </ListItem>
             <Divider variant="inset" />
             <ListItem alignItems="flex-start">
-              <ListItemAvatar>
+              <ListItemAvatar style={{marginTop: '-15px', marginBottom: '-15px'}}>
                 <Typography gutterBottom variant="h5" component="div">
-                  <h3 className='Feedback-title3'><MapTwoToneIcon /> נקודת ציון של ההמלצה :   </h3>
-                  <h3 className='Feedback-title3'>קו אורך : {feedback.FeedbackLongitude}</h3>
-                  <h3 className='Feedback-title3'>קו רוחב : {feedback.FeedbackLatitude}</h3>
-                  <h3 className='Feedback-title4'>זכור לשנות בהתאם למיקום הנכון</h3>
+                  <h3 className='Feedback-title3'><MapTwoToneIcon /> <b>נקודת ציון של ההמלצה</b> <br /> <br />
+                   <b>קו אורך:</b> {feedback.FeedbackLongitude} <br /> <br /> <b>קו רוחב:</b> {feedback.FeedbackLatitude} </h3>
+                  {/* <h3 className='Feedback-title3'>קו אורך : {feedback.FeedbackLongitude}</h3>
+                  <h3 className='Feedback-title3'>קו רוחב : {feedback.FeedbackLatitude}</h3> */}
+                  <h3 className='Feedback-title4'>* זכור לשנות בהתאם למיקום הנכון</h3>
                 </Typography>
               </ListItemAvatar>
             </ListItem>
