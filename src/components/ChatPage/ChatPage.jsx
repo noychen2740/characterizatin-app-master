@@ -11,6 +11,7 @@ import Fab from '@mui/material/Fab';
 import NavigationIcon from '@mui/icons-material/Navigation';
 import { FormControl, InputLabel, OutlinedInput } from '@mui/material'
 import { userService } from '../../services/user.service'
+import NavigationAdmin from '../NavigationAdmin'
 function ChatPage({ userFromDB }) {
     const nav = useNavigate()
     const { userEmail2 } = useParams()
@@ -146,8 +147,9 @@ function ChatPage({ userFromDB }) {
 
             <br></br>
             <br></br>
-
-            <Navigation></Navigation>
+{userFromDB.UserEmail==="admin@gmail.com"?<NavigationAdmin/>:<Navigation/>}
+            {/* <Navigation></Navigation> */}
+            {/* <NavigationAdmin/> */}
         </div>
     )
 }
