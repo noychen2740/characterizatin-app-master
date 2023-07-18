@@ -18,6 +18,8 @@ import { signup2 } from '../utils/api';
 import { useNavigate } from 'react-router-dom';
 import TopOfAplication from './TopOfAplication';
 import Navigation from './Navigation';
+import { AccountCircle } from '@mui/icons-material';
+import Swal from 'sweetalert2';
 
 function ChangePasswordCom(props) {
     const nav=useNavigate();
@@ -64,6 +66,17 @@ function ChangePasswordCom(props) {
                     id="outlined-adornment-first_name"
                     type="text"
                     label="First name"
+                    //
+                    startAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                                // aria-label="toggle password visibility"
+                                edge="end"
+                            >
+                                {<AccountCircle/>}
+                            </IconButton>
+                        </InputAdornment>
+                    }
                 />
             </FormControl>
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
@@ -74,6 +87,17 @@ function ChangePasswordCom(props) {
                     id="outlined-adornment-last_name"
                     type="text"
                     label="Last name"
+                    //
+                    startAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                                // aria-label="toggle password visibility"
+                                edge="end"
+                            >
+                                {<AccountCircle/>}
+                            </IconButton>
+                        </InputAdornment>
+                    }
                 />
             </FormControl>
             {/* <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
@@ -91,7 +115,8 @@ function ChangePasswordCom(props) {
                 <OutlinedInput
                     id="outlined-adornment-password1"
                     type={showPassword1 ? 'text' : 'password'}
-                    endAdornment={
+                    // endAdornment
+                    startAdornment={
                         <InputAdornment position="end">
                             <IconButton
                                 aria-label="toggle password visibility"
@@ -112,7 +137,7 @@ function ChangePasswordCom(props) {
                 <OutlinedInput
                     id="outlined-adornment-password2"
                     type={showPassword2 ? 'text' : 'password'}
-                    endAdornment={
+                    startAdornment={
                         <InputAdornment position="end">
                             <IconButton
                                 aria-label="toggle password visibility"
@@ -132,7 +157,7 @@ function ChangePasswordCom(props) {
             <FormGroup>
                 <FormControlLabel style={{ color: "#333" }} control={<Checkbox onChange={(ev) => { setLoginFields({ ...loginFields, tos: ev.target.checked }) }} />} label="אני מאשר את שינוי הפרטים" />
             </FormGroup>
-            <Button disabled={!formValidated()} onClick={async () => {
+            <Button style={{backgroundColor: '#598e89'}} disabled={!formValidated()} onClick={async () => {
                 const msg = await signup2(loginFields,props.userEmailFromDB,props.userFromDB);
                 if (!msg.includes('exist')) {
                     // if user created - login
@@ -141,8 +166,14 @@ function ChangePasswordCom(props) {
                         message: "WOWWWW",
                         open: true
                     })
-                    // props.finishSignUp()
-                    nav('/userProfile')
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'פרטים עודכנו בהצלחה',
+                        showConfirmButton: false,
+                        timer: 2000
+                      })
+                          nav('/userProfile')
                 } else {
                     // else show error message and do nothing
                     setSnackbar({
