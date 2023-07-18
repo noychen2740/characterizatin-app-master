@@ -66,7 +66,7 @@ function ChatsPage({ userFromDB }) {
 
   return (
     <div className='chat-page'>
-      <TopOfAplication label='צ"אט' />
+      <TopOfAplication label="צ'אט" />
       <br></br>
       <br></br>
       {users.map((c) => {
