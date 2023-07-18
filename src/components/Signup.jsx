@@ -16,6 +16,7 @@ import Checkbox from '@mui/material/Checkbox';
 import { signup } from '../utils/api';
 import { useNavigate } from 'react-router-dom';
 import { getEnv } from '../utils/env';
+import { AccountCircle, AlternateEmail, LocalPhone } from '@mui/icons-material';
 
 function Signup(props) {
     const nav = useNavigate();
@@ -59,6 +60,17 @@ function Signup(props) {
                     id="outlined-adornment-first_name"
                     type="text"
                     label="First name"
+                    //
+                    startAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                                // aria-label="toggle password visibility"
+                                edge="end"
+                            >
+                                {<AccountCircle/>}
+                            </IconButton>
+                        </InputAdornment>
+                    }
                 />
             </FormControl>
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
@@ -69,6 +81,17 @@ function Signup(props) {
                     id="outlined-adornment-last_name"
                     type="text"
                     label="Last name"
+                    //
+                    startAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                                // aria-label="toggle password visibility"
+                                edge="end"
+                            >
+                                {<AccountCircle/>}
+                            </IconButton>
+                        </InputAdornment>
+                    }
                 />
             </FormControl>
 
@@ -80,6 +103,17 @@ function Signup(props) {
                     id="outlined-adornment-phone"
                     type="phone"
                     label="Phone"
+                    ///
+                    startAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                                // aria-label="toggle password visibility"
+                                edge="end"
+                            >
+                                {<LocalPhone/>}
+                            </IconButton>
+                        </InputAdornment>
+                    }
                 />
             </FormControl>
 
@@ -91,6 +125,17 @@ function Signup(props) {
                     id="outlined-adornment-email"
                     type="email"
                     label="Email"
+                    /////
+                    startAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                                // aria-label="toggle password visibility"
+                                edge="end"
+                            >
+                                {<AlternateEmail/>}
+                            </IconButton>
+                        </InputAdornment>
+                    }
                 />
             </FormControl>
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
@@ -98,7 +143,8 @@ function Signup(props) {
                 <OutlinedInput
                     id="outlined-adornment-password1"
                     type={showPassword1 ? 'text' : 'password'}
-                    endAdornment={
+                    // endAdornment
+                    startAdornment={
                         <InputAdornment position="end">
                             <IconButton
                                 aria-label="toggle password visibility"
@@ -119,7 +165,7 @@ function Signup(props) {
                 <OutlinedInput
                     id="outlined-adornment-password2"
                     type={showPassword2 ? 'text' : 'password'}
-                    endAdornment={
+                    startAdornment={
                         <InputAdornment position="end">
                             <IconButton
                                 aria-label="toggle password visibility"
@@ -139,7 +185,7 @@ function Signup(props) {
             <FormGroup>
                 <FormControlLabel style={{ color: "#333" }} control={<Checkbox onChange={(ev) => { setLoginFields({ ...loginFields, tos: ev.target.checked }) }} />} label="אני מאשר שפרטי נכונים" />
             </FormGroup>
-            <Button disabled={!formValidated()} onClick={async () => {
+            <Button style={{backgroundColor: '#598e89'}} disabled={!formValidated()} onClick={async () => {
                const msg = await signup(loginFields);
                 if (!msg.includes('exist')) {
                     // if user created - login
