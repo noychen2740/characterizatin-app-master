@@ -12,6 +12,7 @@ import { Button, Link } from '@mui/material';
 import { Snackbar } from './Snackbar';
 import { login } from '../utils/api'
 import { useNavigate } from 'react-router-dom';
+import { AlternateEmail } from '@mui/icons-material';
 
 function Login(props) {
 
@@ -44,13 +45,23 @@ function Login(props) {
             <div className="App-login" style={{direction:'rtl'}}>
                 <img className="App-logo" src="logo.png" alt="sad" />
                 <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-email">אימייל</InputLabel>
+                    <InputLabel  htmlFor="outlined-adornment-email">אימייל</InputLabel>
                     <OutlinedInput
                         error={!!loginFields.email && !validateEmail(loginFields.email)}
                         onBlur={ev => { setLoginFields({ ...loginFields, email: ev.target.value }) }}
                         id="outlined-adornment-email"
                         type="email"
                         label="Email"
+                        startAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    edge="end"
+                                >
+                                    {<AlternateEmail/>}
+                                </IconButton>
+                            </InputAdornment>
+                        }
                     />
                 </FormControl>
                 <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
@@ -58,7 +69,7 @@ function Login(props) {
                     <OutlinedInput
                         id="outlined-adornment-password"
                         type={showPassword ? 'text' : 'password'}
-                        endAdornment={
+                        startAdornment={
                             <InputAdornment position="end">
                                 <IconButton
                                     aria-label="toggle password visibility"
@@ -74,7 +85,7 @@ function Login(props) {
                         label="Password"
                     />
                 </FormControl>
-                <Button onClick={async () => {
+                <Button style={{backgroundColor: '#598e89'}} onClick={async () => {
                     //send loginFields to server and validate that user exist
 
                     const res = await login(loginFields);
