@@ -83,6 +83,8 @@ function App() {
 
   const [userEmailFromDB, setUserEmailFromDB] = useState('');
   const [userFromDB, setUserFromDB] = useState('');//שינוי של עומר לשרשור היוזר
+  const [userType, setUserType] = useState('');//טיים לאפ
+
   useEffect(() => {
     if (chatPaths.includes(location.pathname)) {
       setChatVisiable(true)
@@ -254,10 +256,10 @@ function App() {
             <Route path="PersonaM" element={<Persona userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} pageNum='mucillar' />} />
             <Route path="PersonaB" element={<Persona userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} pageNum='balyanim' />} />
             <Route path="PersonaC" element={<Persona userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} pageNum='chill' />} />
-            <Route path="userProfile" element={<UserProfile userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
+            <Route path="userProfile" element={<UserProfile userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} getUser={getUser}/>} />
             <Route path="budget" element={<Budget userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} bug={userFromDB.UserBudget} />} />
             {/* <Route path="budget" element={<Budget userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} allExpenes={expensesInApp} bug={userFromDB.UserBudget} />} /> */}
-            <Route path="profile" element={userFromDB ? <UserProfile userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} personaType={userFromDB.UserType} /> : <div>Loading...</div>} />
+            <Route path="profile" element={userFromDB ? <UserProfile userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} getUser={getUser} personaType={userFromDB.UserType} /> : <div>Loading...</div>} />
             <Route path="NewExpense" element={<NewExpense userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             <Route path="Analysis" element={<ExpensesAnalysis userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             <Route path="map"  element={<Map userFromDB={userFromDB} />} />
