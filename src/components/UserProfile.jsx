@@ -115,7 +115,10 @@ export default function UserProfile(props) {
           setUserInApp(result); // השמה של המשתמש שהגיע מהדאטה בייס להמשך עבודה בצד שרת
           console.log('first name=', userInApp.UserFirstName)
           console.log('first name=', userInApp.UserLastName)
-
+          /////
+          const sendUser = () => { props.getUser(result) }
+          sendUser();/// העברת המשתמש כולו
+          ////
         },
         (error) => {
           console.log("err post=", error);
