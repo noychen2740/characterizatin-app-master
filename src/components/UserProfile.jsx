@@ -54,6 +54,7 @@ export default function UserProfile(props) {
       },
     },
   }));
+  const [changeP, setChangeP] = useState('')
 
   const [checkType, setCheckType] = useState('')
 // const saveChange=async() => {
@@ -65,6 +66,7 @@ export default function UserProfile(props) {
   const handleChange = async (ev) => { //לוקח את הפרמטרים ש/מזינים בפורם
 
     let { name, value } = ev.target;
+    setChangeP(name);
     if (name==='UserImg') {
       console.log(name);
       const file = ev.target.files[0]
@@ -80,6 +82,7 @@ export default function UserProfile(props) {
       setForm({ ...form, [name]: value });
     }
     
+  
 
     
   };
@@ -112,13 +115,16 @@ export default function UserProfile(props) {
           setUserInApp(result); // השמה של המשתמש שהגיע מהדאטה בייס להמשך עבודה בצד שרת
           console.log('first name=', userInApp.UserFirstName)
           console.log('first name=', userInApp.UserLastName)
-
+          /////
+          const sendUser = () => { props.getUser(result) }
+          sendUser();/// העברת המשתמש כולו
+          ////
         },
         (error) => {
           console.log("err post=", error);
         });
 
-  }, [])// משתמש שנכנס לראשונה לתהליך האפיון נכנס עם טייפ רייק- לאחר העדכון של האפיון נראצ הלהביא מחדש את המשתמש לאחר השינויים
+  }, [form])// משתמש שנכנס לראשונה לתהליך האפיון נכנס עם טייפ רייק- לאחר העדכון של האפיון נראצ הלהביא מחדש את המשתמש לאחר השינויים
 
 
   useEffect(() => {
@@ -142,6 +148,7 @@ export default function UserProfile(props) {
 
   return (
     <>
+      {/* <TopOfAplication label='הפרופיל שלי' UserType={userInApp.UserType} /> */}
       <TopOfAplication label='הפרופיל שלי' UserType={props.userFromDB.UserType} />
 
       <img className="App-logo" src="logo.png" style={{ marginTop: '5px', width: '120px' }} />
@@ -156,14 +163,16 @@ export default function UserProfile(props) {
             variant="dot"
           >
 
-            <Avatar sx={{ width: 64, height: 64 }} src= {props.userFromDB.UserImg} style={{ display: 'flex' }}/> 
+            {/* <Avatar sx={{ width: 64, height: 64 }} src= {props.userFromDB.UserImg} style={{ display: 'flex' }}/>  */}
+            <Avatar sx={{ width: 64, height: 64 }} src= {userInApp.UserImg} style={{ display: 'flex' }}/> 
 
             {/* <Avatar sx={{ width: 64, height: 64 }} src= {props.userFromDB.UserImg} style={{ display: 'flex' }} onClick={() => {alert('bdike')}} /> */}
 
           </StyledBadge>
 
-          <p style={{ color: 'black' }}>שלום {props.userFromDB.UserFirstName} <br /> {props.userEmailFromDB}  </p>
-            
+          {/* <p style={{ color: 'black' }}>שלום {props.userFromDB.UserFirstName} <br /> {props.userEmailFromDB}  </p> */}
+          <p style={{ color: 'black' }}>שלום {userInApp.UserFirstName} <br /> {props.userEmailFromDB}  </p>
+
         </Stack>
 
       </Box>
