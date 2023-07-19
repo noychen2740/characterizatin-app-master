@@ -47,7 +47,7 @@ function FeedbackPage(props) {
     navigate('/feedbacks')
   };
   const PutUpdateFeed = async () => { //מחיקה של הפיידבק הספציפי לפי הקיי
-    navigate(`/CreateFeedbackAdmin/${feedback.FeedbackKey}`)
+    navigate(`/EditFeedbackAdmin/${feedback.FeedbackKey}`)
   };
   //PutUpdateFeed
   const submit = async () => { //הוספה של הפיידבק הספציפי לפי הקיי
@@ -106,6 +106,10 @@ function FeedbackPage(props) {
                   {/* <h3 className='Feedback-title3'>קו אורך : {feedback.FeedbackLongitude}</h3>
                   <h3 className='Feedback-title3'>קו רוחב : {feedback.FeedbackLatitude}</h3> */}
                   <h3 className='Feedback-title4'>* זכור לשנות בהתאם למיקום הנכון</h3>
+                </Typography>
+                <Typography gutterBottom variant="h5" component="div">
+                  
+                  <h3 className='Feedback-title4'>מתאים למשתמש מסוג : {feedback.FeedbackPersona} </h3>
                 </Typography>
               </ListItemAvatar>
             </ListItem>

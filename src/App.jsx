@@ -42,6 +42,7 @@ import CreateFeedbackAdmin from './components/CreateFeedbackAdmin/CreateFeedback
 import MapAdmin from './components/MapAdmin';
 import ChangePasswordComAdmin from './components/ChangePasswordComAdmin';
 import NewQuestion from './components/NewQuestion/NewQuestion';
+import EditFeedbackAdmin from './components/EditFeedbackAdmin/EditFeedbackAdmin';
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
     backgroundColor: '#f00',
@@ -281,7 +282,7 @@ function App() {
             <Route path='CreateFeedbackAdmin' element={<CreateFeedbackAdmin userFromDB={userFromDB} />} />
                 <Route path="mapAdmin" element={<MapAdmin userFromDB={userFromDB} />} />
             <Route path='ChangePasswordComAdmin' element={<ChangePasswordComAdmin userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
-
+            <Route path='EditFeedbackAdmin/:FeedbackKey' element={<EditFeedbackAdmin userFromDB={userFromDB} />} />
 
           </Routes>
 
