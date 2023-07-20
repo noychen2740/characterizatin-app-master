@@ -119,7 +119,6 @@ function Signup(props) {
                     startAdornment={
                         <InputAdornment position="end">
                             <IconButton
-                                // aria-label="toggle password visibility"
                                 edge="end"
                             >
                                 {<LocalPhone/>}
@@ -141,7 +140,6 @@ function Signup(props) {
                     startAdornment={
                         <InputAdornment position="end">
                             <IconButton
-                                // aria-label="toggle password visibility"
                                 edge="end"
                             >
                                 {<AlternateEmail/>}

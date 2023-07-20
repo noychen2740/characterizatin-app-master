@@ -140,7 +140,6 @@ export default function UserProfile(props) {
 
   return (
     <>
-      {/* <TopOfAplication label='הפרופיל שלי' UserType={userInApp.UserType} /> */}
       <TopOfAplication label='הפרופיל שלי' UserType={props.userFromDB.UserType} />
 
       <img className="App-logo" src="logo.png" style={{ marginTop: '5px', width: '120px' }} />
@@ -155,12 +154,10 @@ export default function UserProfile(props) {
             variant="dot"
           >
 
-            {/* <Avatar sx={{ width: 64, height: 64 }} src= {props.userFromDB.UserImg} style={{ display: 'flex' }}/>  */}
             <Avatar sx={{ width: 64, height: 64 }} src= {userInApp.UserImg} style={{ display: 'flex' }}/> 
 
           </StyledBadge>
 
-          {/* <p style={{ color: 'black' }}>שלום {props.userFromDB.UserFirstName} <br /> {props.userEmailFromDB}  </p> */}
           <p style={{ color: 'black' }}>שלום {userInApp.UserFirstName} <br /> {props.userEmailFromDB}  </p>
 
         </Stack>

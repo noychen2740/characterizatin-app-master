@@ -16,7 +16,6 @@ export default function SingelQuestion(props) {
   // row
     aria-labelledby="demo-radio-buttons-group-label"
     defaultValue="1"
-    // name="row-radio-buttons-group"
     name="radio-buttons-group"
   >
 

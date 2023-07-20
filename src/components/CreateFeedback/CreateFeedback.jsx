@@ -10,6 +10,15 @@ import Navigation from '../Navigation';
 import { storageService } from '../../services/storage.service';
 import Swal from 'sweetalert2';
 
+import rtlPlugin from "stylis-plugin-rtl";
+import { prefixer } from "stylis";
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
+
+const cacheRtl = createCache({
+  key: "muirtl",
+  stylisPlugins: [prefixer,rtlPlugin],
+});
 
 function CreateFeedback({ userFromDB }) {
   const [form, setForm] = useState();
@@ -50,6 +59,8 @@ function CreateFeedback({ userFromDB }) {
 
 
   return ( //יצירה של הפידבק
+  <CacheProvider value={cacheRtl}>
+
     <div className='create-episode'>
       <div className='container center'>
         <TopOfAplication label='הוספת נקודה חדשה' UserType={userFromDB.UserType} />
@@ -123,18 +134,7 @@ function CreateFeedback({ userFromDB }) {
             </Select>
           </FormControl>
 
-            {/* <FormControl sx={{ m: 1, width: 'calc(100% - 16px)', height: 'calc(90% - 16px)' }} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-email">שם המדינה</InputLabel>
-              <OutlinedInput
-                cols='50'
-                rows='1'
-                onInput={handleChange}
-                name='FeedbackCountry'
-                id="fullWidth"
-                label="Country"
-                value={form?.FeedbackCountry}
-              />
-            </FormControl> */}
+
           </div>
           <div className='input-container'>
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)', height: 'calc(90% - 16px)' }} variant="outlined">
@@ -169,34 +169,7 @@ function CreateFeedback({ userFromDB }) {
             </Select>
           </FormControl>
           <div className="seperator"></div>
-          {/* <div className='input-container'>
-            <FormControl sx={{ m: 1, width: 'calc(100% - 16px)', height: 'calc(90% - 16px)' }} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-email">נקודת ציון lon </InputLabel>
-              <OutlinedInput
-                cols='50'
-                rows='1'
-                onInput={handleChange}
-                name='FeedbackLongitude'
-                id="fullWidth"
-                label="Longitude"
-                value={form?.FeedbackLongitude}
-              />
-            </FormControl>
-          </div> */}
-          {/* <div className='input-container'>
-            <FormControl sx={{ m: 1, width: 'calc(100% - 16px)', height: 'calc(90% - 16px)' }} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-email">נקודת ציון lat </InputLabel>
-              <OutlinedInput
-                cols='50'
-                rows='1'
-                onInput={handleChange}
-                name='FeedbackLatitude'
-                id="fullWidth"
-                label="Latitude"
-                value={form?.FeedbackLatitude}
-              />
-            </FormControl>
-          </div> */}
+
           <div className='input-container'>
             <input className='imginput' type='file' name='FeedbackPhoto' onChange={handleChange}></input>
             {loading && <div className="loading"> loading...</div>}
@@ -217,6 +190,8 @@ function CreateFeedback({ userFromDB }) {
       </div>
       <Navigation></Navigation>
     </div>
+    </CacheProvider>
+
   );
 }
 

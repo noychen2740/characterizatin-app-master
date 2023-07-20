@@ -118,7 +118,6 @@ export default function Question(props) {
         <div>
           <Button onClick={() => { nav('/firstQues') }}> <ArrowBackIosNew style={{ color: 'black', marginRight: '250', position: 'absolute' }} /> </Button>
         </div>
-        {/* <TopOfAplication label='היכרות - מתקדם'/> */}
         <img className="App-logo" src="logo.png" style={{ marginTop: '45px' }} alt='logo' />
 
         <h3 style={{
