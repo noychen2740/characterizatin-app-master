@@ -91,16 +91,7 @@ export default function OptionsCard({ tabIndex, item, index, selected, userFromD
     return (
         <Card className={itemSelector} style={isSelected ? { backgroundColor: '#ececec' } : {}} sx={{ maxWidth: 345 }}>
             <CardHeader
-                // avatar={
-                //     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                //         { }
-                //     </Avatar>
-                // }
-                // action={
-                //     <IconButton aria-label="settings">
-                //         <MoreVertIcon />
-                //     </IconButton>
-                // }
+
                 title={item[title]}
             />
             <CardMedia

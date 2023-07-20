@@ -14,7 +14,6 @@ function Diary() {
       <br></br>
       <br></br>
       <TopOfAplication label='יומן המסע שלי'  />
-      {/* <div className='title'>יומן המסע שלי</div> */}
       <br></br>
       <div className='desc'>
         יומן מסע הינו כלי המאפשר לכם לתעד פרקים בטיול שלכם.... בכל פרק תתארו את

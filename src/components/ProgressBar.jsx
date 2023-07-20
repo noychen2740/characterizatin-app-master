@@ -27,7 +27,6 @@ const ProgressBar = (props) => {
   return (
     <div style={containerStyles}>
       <div style={fillerStyles}>
-      {/* <span style={labelStyles}>{`${props.sumOfexpenses}₪`}</span> */}
       <span style={labelStyles}>{`${completed}%`}</span>
       </div>
     </div>

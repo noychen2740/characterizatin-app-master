@@ -27,7 +27,6 @@ export default function KpiCard(props) {
 
         <Typography variant="body2">
           <h5>שרפת <b>{props.SumOfExpenseAtraction}</b> ש"ח   </h5>
-          {/* <h6 style={{textAlign:'left', direction:'ltr'}}>{parseInt((props.SumOfExpenseAtraction-props.AvgOfExpenseAtraction)/props.AvgOfExpenseAtraction*100)}% {props.SumOfExpenseAtraction<props.AvgOfExpenseAtraction? down:up}</h6> */}
           <Chip icon={props.SumOfExpenseAtraction<props.AvgOfExpenseAtraction? down:up} label={`${parseInt(Math.abs((props.SumOfExpenseAtraction-props.AvgOfExpenseAtraction)/props.AvgOfExpenseAtraction*100))}% `} variant="outlined" />
         </Typography>
         
@@ -45,7 +44,6 @@ export default function KpiCard(props) {
 
         <Typography variant="body2">
           <h5> שרפת <b>{props.SumOfExpenseFood}</b> ש"ח   </h5>
-          {/* <h6 style={{textAlign:'left', direction:'ltr'}}>{parseInt((props.SumOfExpenseFood-props.AvgOfExpenseFood)/props.AvgOfExpenseFood*100)}% {props.SumOfExpenseFood<props.AvgOfExpenseFood? down:up}</h6> */}
           <Chip icon={props.SumOfExpenseFood<props.AvgOfExpenseFood? down:up} label={` ${parseInt(Math.abs((props.SumOfExpenseFood-props.AvgOfExpenseFood)/props.AvgOfExpenseFood*100))}%`} variant="outlined" />
 
         </Typography>
@@ -69,7 +67,6 @@ export default function KpiCard(props) {
 
         <Typography variant="body2">
           <h5> שרפת <b>{props.SumOfExpenseSleep}</b> ש"ח   </h5>
-          {/* <h6 style={{textAlign:'left', direction:'ltr'}}>{parseInt((props.SumOfExpenseSleep-props.AvgOfExpenseSleep)/props.AvgOfExpenseSleep*100)}% {props.SumOfExpenseSleep<props.AvgOfExpenseSleep? down:up}</h6> */}
           <Chip icon={props.SumOfExpenseSleep<props.AvgOfExpenseSleep? down:up} label={`${parseInt(Math.abs((props.SumOfExpenseSleep-props.AvgOfExpenseSleep)/props.AvgOfExpenseSleep*100))}%`} variant="outlined" />
 
         </Typography>
@@ -88,7 +85,6 @@ export default function KpiCard(props) {
 
         <Typography variant="body2">
           <h5> שרפת <b>{props.SumOfExpenseParty}</b> ש"ח   </h5>
-          {/* <h6 style={{textAlign:'left', direction:'ltr'}}>{parseInt((props.SumOfExpenseParty-props.AvgOfExpenseParty)/props.AvgOfExpenseParty*100)}% {props.SumOfExpenseParty<props.AvgOfExpenseParty? down:up}</h6> */}
           <Chip icon={props.SumOfExpenseParty<props.AvgOfExpenseParty? down:up} label={`${parseInt(Math.abs((props.SumOfExpenseParty-props.AvgOfExpenseParty)/props.AvgOfExpenseParty*100))}%`} variant="outlined" />
 
         </Typography>
@@ -111,7 +107,6 @@ export default function KpiCard(props) {
 
         <Typography variant="body2">
           <h5> שרפת <b>{props.SumOfExpenseCasino}</b> ש"ח   </h5>
-          {/* <h6 style={{textAlign:'left', direction:'ltr'}}>{parseInt((props.SumOfExpenseCasino-props.AvgOfExpenseCasino)/props.AvgOfExpenseCasino*100)}% {props.SumOfExpenseCasino<props.AvgOfExpenseCasino? down:up}</h6> */}
           <Chip icon={props.SumOfExpenseCasino<props.AvgOfExpenseCasino? down:up} label={`${parseInt(Math.abs((props.SumOfExpenseCasino-props.AvgOfExpenseCasino)/props.AvgOfExpenseCasino*100))}%`} variant="outlined" />
         </Typography>
         
@@ -130,7 +125,6 @@ export default function KpiCard(props) {
 
         <Typography variant="body2">
           <h5> שרפת <b>{props.SumOfExpenseDrugs}</b> ש"ח   </h5>
-          {/* <h6 style={{textAlign:'left', direction:'ltr'}}>{parseInt((props.SumOfExpenseDrugs-props.AvgOfExpenseDrugs)/props.AvgOfExpenseDrugs*100)}% {props.SumOfExpenseDrugs<props.AvgOfExpenseDrugs? down:up}</h6> */}
           <Chip icon={props.SumOfExpenseDrugs<props.AvgOfExpenseDrugs? down:up} label={`${parseInt(Math.abs((props.SumOfExpenseDrugs-props.AvgOfExpenseDrugs)/props.AvgOfExpenseDrugs*100))}%`} variant="outlined" />
         </Typography>
         

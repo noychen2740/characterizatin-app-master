@@ -8,7 +8,6 @@ function NewQuestion(props) {
 
   useEffect(() => {
     const apiUrl = getEnv() + '/users/getemail/?email=';
-    // const apiUrl = 'https://localhost:44300/users/getemail/?email=Benda669@gmail.com';
     fetch(apiUrl+props.userEmailFromDB,
       {
         method: 'GET',
@@ -231,14 +230,6 @@ function NewQuestion(props) {
       <TopOfAplication label='שאלות היכרות' />
     <div className="NewQuestion">
 
-      {/* 1. Header  */}
-      {/* <h1>USA Quiz 🇺🇸</h1> */}
-
-      {/* 2. Current Score  */}
-
-      {/* <h2>Score: {score}</h2> */}
-
-      {/* 3. Show results or show the question game  */}
       {showResults ? (
         /* 4. Final Results */
         <div className="final-results">
@@ -246,8 +237,6 @@ function NewQuestion(props) {
           <h2>
           {scoreM} | {scoreC} | {scoreB}
 
-            {/* {score} out of {questions.length} correct - (
-            {(score / questions.length) * 100}%) */}
           </h2>
           <button onClick={() => restartGame()}>לחץ לסיום</button>
         </div>

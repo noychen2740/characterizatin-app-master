@@ -18,6 +18,16 @@ import { useNavigate } from 'react-router-dom';
 import { getEnv } from '../utils/env';
 import { AccountCircle, AlternateEmail, LocalPhone } from '@mui/icons-material';
 
+import rtlPlugin from "stylis-plugin-rtl";
+import { prefixer } from "stylis";
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
+
+const cacheRtl = createCache({
+  key: "muirtl",
+  stylisPlugins: [prefixer,rtlPlugin],
+});
+
 function Signup(props) {
     const nav = useNavigate();
     const [showPassword1, setShowPassword1] = useState(false);
@@ -50,6 +60,8 @@ function Signup(props) {
 
 
     return (
+        <CacheProvider value={cacheRtl}>
+
         <div className="App-login" style={{ direction: 'rtl' }}>
             <img className="App-logo" src="logo.png" />
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
@@ -107,7 +119,6 @@ function Signup(props) {
                     startAdornment={
                         <InputAdornment position="end">
                             <IconButton
-                                // aria-label="toggle password visibility"
                                 edge="end"
                             >
                                 {<LocalPhone/>}
@@ -129,7 +140,6 @@ function Signup(props) {
                     startAdornment={
                         <InputAdornment position="end">
                             <IconButton
-                                // aria-label="toggle password visibility"
                                 edge="end"
                             >
                                 {<AlternateEmail/>}
@@ -245,6 +255,8 @@ function Signup(props) {
             }} variant="contained">להרשמה</Button>
             <Snackbar snackbar={snackbar}></Snackbar>
         </div>
+        </CacheProvider>
+
     );
 }
 

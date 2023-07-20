@@ -25,7 +25,6 @@ export default function Persona(props) {
  <PersonaTemplate name={props.userFromDB.UserFirstName} pageNum='chill'/>
   </div> : ""}
   
-  {/* <Button style={{backgroundColor:'#598e89'}} onClick={() => {props.continueClicked('userProfile')}} variant="contained">אני רוצה להתחיל</Button> */}
   <Button style={{backgroundColor:'#598e89'}} onClick={() => {nav('/userProfile')}} variant="contained">אני רוצה להתחיל</Button>
 
     </>

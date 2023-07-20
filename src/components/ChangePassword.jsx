@@ -72,9 +72,6 @@ export default function ChangePassword() {
                 dir='rtl'
               />
             </FormControl>
-                {/* <input type="text"
-                placeholder='שם פרטי' 
-                name='user_name' required /> */}
                 <br />
                 <br />
                 <FormControl  sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
@@ -91,9 +88,6 @@ export default function ChangePassword() {
                 dir='rtl'
               />
             </FormControl>
-                {/* <input type="email"
-                placeholder='כתובת מייל איתה נירשמת' 
-                name='user_email' required onChange={(event) => { setEmail(event.target.value) }} /> */}
                <br />
                <br />
                
@@ -106,10 +100,7 @@ export default function ChangePassword() {
                   showConfirmButton: false,
                   timer: 2200
                 })
-                // setMsg('סיסמא חדשה מחכה לך במייל')
-                // setTimeout(() => {
-                //     setMsg('')
-                // }, 5000)
+
               }}
               className='btncreate'
               variant='contained'
