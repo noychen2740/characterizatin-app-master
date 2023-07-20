@@ -10,7 +10,15 @@ import Navigation from '../Navigation';
 import NavigationAdmin from '../NavigationAdmin';
 import { storageService } from '../../services/storage.service';
 
+import rtlPlugin from "stylis-plugin-rtl";
+import { prefixer } from "stylis";
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
 
+const cacheRtl = createCache({
+  key: "muirtl",
+  stylisPlugins: [prefixer,rtlPlugin],
+});
 function CreateFeedbackAdmin({ userFromDB }) {
   const [form, setForm] = useState();
   const { FeedbackKey } = useParams();
@@ -58,6 +66,8 @@ function CreateFeedbackAdmin({ userFromDB }) {
   };
 
   return ( //יצירה של הפידבק
+  <CacheProvider value={cacheRtl}>
+
     <div className='create-episode'>
       <div className='container center'>
         <TopOfAplication label='הוספת נקודה חדשה' UserType={userFromDB.UserType} />
@@ -209,6 +219,8 @@ function CreateFeedbackAdmin({ userFromDB }) {
       </div>
       <NavigationAdmin pagNav={'recommendation'} />
     </div>
+    </CacheProvider>
+
   );
 }
 

@@ -16,7 +16,15 @@ import { storageService } from '../../services/storage.service';
 import yoman from '../../assets/yoman.png';
 import Swal from 'sweetalert2';
 
+import rtlPlugin from "stylis-plugin-rtl";
+import { prefixer } from "stylis";
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
 
+const cacheRtl = createCache({
+  key: "muirtl",
+  stylisPlugins: [prefixer,rtlPlugin],
+});
 function CreateEpisode(props) {
   const [form, setForm] = useState();
   const [time, setTime] = useState();
@@ -50,9 +58,7 @@ function CreateEpisode(props) {
     var hours = date.getHours();
     var minutes = date.getMinutes();
     console.log({ hours, minutes });
-    // var ampm = hours >= 12 ? 'pm' : 'am';
-    // hours = hours % 12;
-    // hours = hours ? hours : 12; // the hour '0' should be '12'
+
     minutes = minutes < 10 ? '0' + minutes : minutes;
     hours = hours < 10 ? '0' + hours : hours;
     var strTime = hours + ':' + minutes;
@@ -64,7 +70,6 @@ function CreateEpisode(props) {
     reader.readAsDataURL(file);
     reader.onload = async function () {
       await storageService.upload(reader.result)
-      // setForm({ ...form, 'ChapterPictures': reader.result });
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
@@ -113,12 +118,15 @@ function CreateEpisode(props) {
     setForm(data);
   };
   return ( //היצירה של הפרק מבחינה ויזואלית
-    <div className='create-episode' >
+  <CacheProvider value={cacheRtl}>
+
+    <div className='create-episode'>
       <div className='container center'>
         <div className='container center'>
           <TopOfAplication label='יצירה-עדכון פרק' UserType={props.userFromDB.UserType} />
           <br></br>
-          <img className='book-image3' src={yoman}></img>
+          {/* 'book-image3' */}
+          <img className='App-logo' src={yoman}></img>
           <form onSubmit={submit} >
             <FormControl className='sty' sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-email">שם הפרק</InputLabel>
@@ -130,16 +138,15 @@ function CreateEpisode(props) {
                 value={form?.NameOfChapter || ''}
               />
             </FormControl>
-            <FormControl className='sty'  sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
-              {/* <InputLabel htmlFor="outlined-adornment-email"> תאריך</InputLabel> */}
+            <FormControl style={{direction:'rtl'}} className='sty'  sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
               <DatePicker
                 label="תאריך"
                 value={dayjs(form?.ChapterDate)}
                 onChange={(ChapterDate) => setForm({ ...form, ChapterDate })}
+             
               />
             </FormControl>
-            <FormControl className='sty'  sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
-              {/* <InputLabel htmlFor="outlined-adornment-email"> שעה</InputLabel> */}
+            <FormControl style={{direction:'rtl'}} className='sty'  sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
               <TimePicker
                 label="שעה"
                 onChange={(ChapterTime) => setForm({ ...form, ChapterTime })}
@@ -161,8 +168,8 @@ function CreateEpisode(props) {
               />
             </FormControl>
             <br></br>
-            <p className='pp'>לחץ כאן להוספת תמונה</p>
             <div className='input-container'>
+              <b style={{fontSize:'13px'}}>תמונה-</b>
               <input className='imginput' type='file' name='ChapterPictures' onChange={handleChange}  ></input>
             </div>
           </form>
@@ -178,9 +185,11 @@ function CreateEpisode(props) {
           </div>
           <br></br>
         </div>
-        <Navigation></Navigation>
+        <Navigation pagNav={'diery'}/>
       </div>
     </div>
+    </CacheProvider>
+
   );
 };
 

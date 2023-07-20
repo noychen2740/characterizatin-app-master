@@ -60,13 +60,11 @@ export default function Budget(props) {
     setValue(newValue);
   }
 
-  //const [FirstExpense, setFirstExpense]=useState(props.allExpenes);
   const [expensesInApp, setExpensesInApp] = useState([]);/// הבאה בצורה אסינכורית את כל ההוצאות של המשתמש
 
   const [userInApp, setUserInApp] = useState('');// בתאכלס, משתמש ישלח כבר מעטר, עד החיבור מביא אותו בגט לפי מיקום
 
         useEffect(()=>{
-        // const apiUrl= getEnv() + '/users/getemail/?email=Benda669@gmail.com'    
         const apiUrl= getEnv() + '/users/getemail/?email='    
         fetch(apiUrl+props.userFromDB.UserEmail, 
           {
@@ -102,7 +100,6 @@ export default function Budget(props) {
      },[])
  
 useEffect(()=>{
-  // const apiUrl= getEnv() + '/expenses/?email=Benda669@gmail.com'
   const apiUrl= getEnv() + '/expenses/?email='
   fetch(apiUrl+props.userFromDB.UserEmail, 
      {
@@ -136,7 +133,6 @@ useEffect(()=>{
     
 
  const budgetChange=()=>{
-  // const apiUrl= getEnv() + '/users/putemail/budget/?email=Benda669@gmail.com'
   const apiUrl= getEnv() + '/users/putemail/budget/?email='
   fetch(apiUrl+props.userEmailFromDB, 
     {
@@ -192,11 +188,9 @@ useEffect(()=>{
         </Typography>
       </CardContent>
       <CardActions >
-      {/* <Button style={{marginLeft:'auto', marginRight:'auto',backgroundColor:'#598e89'}} size="small" onClick={() => {nav('/Analysis')}} variant="contained">בוא נצלול פנימה</Button> */}
       <Button style={{marginLeft:'auto', marginRight:'auto',backgroundColor:'#598e89'}} size="small" onClick={budgetChange} variant="contained">בוא נצלול פנימה</Button>
       </CardActions>
     </Card>
-    {/* <DataTable allExpenes={props.allExpenes} navTo={(page)=>props.continueClicked(page)} navToChange={(exNum)=>props.navToChange(exNum) }/> */}
     {expensesInApp[0] !==undefined?<DataTable allExpenes={expensesInApp}/>:''}
       <Navigation pagNav={'budget'}/>
     </>

@@ -30,11 +30,7 @@ export default function OptionsCom(props) {
         <Tab label="אטרקציות" onClick={() => { renderCard("אטרקציות") }} />
       </Tabs>
       <Box>
-        {/* <h3>  {dataCard} ב{props.countryName}</h3>
-        <h3 style={{color:'red'}}>  {dataCard} ב{props.countryName}</h3>
-        <h3 style={{color:'green'}}> {dataCard} ב{props.countryName}</h3>
-        <h3 style={{color:'blue'}}>  {dataCard} ב{props.countryName}</h3>
-        <h3 style={{color:'pink'}}>  {dataCard} ב{props.countryName}</h3> */}
+
         {props.data[props.value].map((item, index) => {
           return (<div className="mapCard" key={'card' + index} onClick={() => {
             console.log({ item })

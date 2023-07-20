@@ -13,6 +13,15 @@ import { Snackbar } from './Snackbar';
 import { login } from '../utils/api'
 import { useNavigate } from 'react-router-dom';
 import { AlternateEmail } from '@mui/icons-material';
+import rtlPlugin from "stylis-plugin-rtl";
+import { prefixer } from "stylis";
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
+
+const cacheRtl = createCache({
+  key: "muirtl",
+  stylisPlugins: [prefixer,rtlPlugin],
+});
 
 function Login(props) {
 
@@ -42,6 +51,8 @@ function Login(props) {
       }, [])
     return (
         <>
+        <CacheProvider value={cacheRtl}>
+
             <div className="App-login" style={{direction:'rtl'}}>
                 <img className="App-logo" src="logo.png" alt="sad" />
                 <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
@@ -132,11 +143,12 @@ function Login(props) {
                 }
                 } variant="contained">התחברות</Button>
             </div>
-            {/* <Link onClick={() => { props.signupClicked() }}>Signup</Link> */}
             <Link onClick={() => { nav('signup') }}>עדיין לא נרשמתי</Link>
             <br />
             <Link onClick={() => { nav('ChangePassword') }}>שכחתי סיסמא</Link>
             <Snackbar snackbar={snackbar}></Snackbar>
+            </CacheProvider>
+
         </>
     );
 }

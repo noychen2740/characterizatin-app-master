@@ -17,7 +17,6 @@ import { db } from '../../firebase'
 import NavigationAdmin from '../NavigationAdmin'
 function ChatsPage({ userFromDB }) {
   const nav = useNavigate()
-  // const [chats, setChats] = useState([])
   const [users, setUsers] = useState([])
 
   useEffect(() => {
@@ -28,11 +27,7 @@ function ChatsPage({ userFromDB }) {
     }
   }, [userFromDB])
 
-  // async function loadChats() {
-  //     const res = await chatService.getAllChats()
-  //     console.log(res);
-  //     setChats(res)
-  // }
+
 
   async function loadUsers() {
     const res = await userService.getAll()
@@ -98,10 +93,8 @@ function ChatsPage({ userFromDB }) {
           <Divider variant="inset" />
         </div>
       })}
-      {/* <NavigationAdmin/> */}
       {userFromDB.UserEmail==="admin@gmail.com"?<NavigationAdmin/>:<Navigation/>}
 
-      {/* <Navigation></Navigation> */}
     </div>
   )
 }

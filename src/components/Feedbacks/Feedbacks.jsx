@@ -24,12 +24,6 @@ function Feedbacks(props) {
     loadFeedbacks();
   }, []);
 
-  // const remove = async (id) => {
-  //   console.log({ id });
-  //   await feedbackService.remove(id);
-  //   loadFeedbacks();
-  // };
-
   const getById = (FeedbackKey) => { //תצוגה של כל הפיידבק לפי לחיצה על הכתפור והצגתו במסך הבא לפי הקיי
     console.log({ FeedbackKey });
     navigate(`/FeedbackPage/${FeedbackKey}`);
@@ -68,7 +62,6 @@ function Feedbacks(props) {
                   </CardContent>
                   <CardActions>
                     <Button onClick={() => getById(f.FeedbackKey)} size="small">הצגת הצעה </Button>
-                    {/* <Button onClick={() => remove(f.FeedbackKey)} size="small">מחיקת פידבק </Button> */}
                   </CardActions>
                 </Card>
                 <br></br>
@@ -78,7 +71,6 @@ function Feedbacks(props) {
       </div>
       <br></br>
       <br></br>
-      {/* <Navigation></Navigation> */}
       <NavigationAdmin pagNav={'toAdd'}/>
     </div>
   );

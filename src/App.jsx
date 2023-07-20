@@ -159,7 +159,6 @@ function App() {
         chat.isRead = !unreadMsgs.length
         chat.username = `${currentUser?.UserFirstName} ${currentUser?.UserLastName}`
         console.log('added chat');
-        // chats.push(chat);
         return chat
       });
 
@@ -174,7 +173,6 @@ function App() {
 
       console.log('here after x');
     })
-    //const querySnapshot = await chatService.loadFullChats()
 
   }
 
@@ -282,7 +280,7 @@ function App() {
             <Route path="UserProfileAdmin" element={userFromDB?<UserProfileAdmin userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />:<div>loading...</div>} />
             <Route path='CreateFeedbackAdmin/:FeedbackKey' element={<CreateFeedbackAdmin userFromDB={userFromDB} />} />
             <Route path='CreateFeedbackAdmin' element={<CreateFeedbackAdmin userFromDB={userFromDB} />} />
-                <Route path="mapAdmin" element={<MapAdmin userFromDB={userFromDB} />} />
+            <Route path="mapAdmin" element={<MapAdmin userFromDB={userFromDB} />} />
             <Route path='ChangePasswordComAdmin' element={<ChangePasswordComAdmin userFromDB={userFromDB} userEmailFromDB={userEmailFromDB} />} />
             <Route path='EditFeedbackAdmin/:FeedbackKey' element={<EditFeedbackAdmin userFromDB={userFromDB} />} />
 

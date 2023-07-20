@@ -16,8 +16,6 @@ const GeographyChart =()=>{
         valueFormat=".2s"
         projectionTranslation={[ 0.5, 0.5 ]}
         projectionRotation={[ 0, 0, 0 ]}
-        // enableGraticule={true}
-        // graticuleLineColor="#dddddd"
         borderWidth={1.5}
         borderColor="#152538"
         defs={[

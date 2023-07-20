@@ -17,7 +17,6 @@ function ChatPage({ userFromDB }) {
     const { userEmail2 } = useParams()
     const [chat, setChat] = useState()
     const [txt, setTxt] = useState('')
-    // const Email=props.userEmailFromDB;
     useEffect(() => {
         loadChat()
     }, [])
@@ -52,11 +51,7 @@ function ChatPage({ userFromDB }) {
                         const docRef = doc(db, "messages", messageId);
                         const docSnap = await getDoc(docRef);
                         const meesage = { ...docSnap.data(), id: messageId }
-                        // if (!meesage.isRead) {
-                        //     console.log(res.userEmail, meesage.userEmail,meesage.txt);
-                        //     if (userFromDB.UserEmail !== meesage.userEmail)
-                        //         chatService.updateMsg(messageId, userFromDB.UserEmail)
-                        // }
+
 
                         return meesage
                     })
@@ -109,23 +104,6 @@ function ChatPage({ userFromDB }) {
                 })}
             </div>
 
-            {/* <div className="bottom">
-                <Box onClick={submit} className="send-btn" >
-                    <Fab variant="extended">
-                        <NavigationIcon  />
-                    </Fab>
-                </Box>
-                <FormControl  className='txt-input-chat' variant="outlined">
-                    <OutlinedInput
-                        onInput={handleChange}
-                        multiline={true}
-                        name='txt'
-                        label=""
-                        dir='rtl'
-                        value={txt}
-                    />
-                </FormControl>
-            </div> */}
 
             <div style={{ zIndex: 2, backgroundColor: 'white' }}>
                 <Box onClick={submit} style={{ zIndex: 10, position: 'fixed', alignItems: 'center', bottom: 55, left: 280, right: 0, backgroundColor: 'white' }} sx={{ '& > :not(style)': { m: 1 } }}>
@@ -148,8 +126,7 @@ function ChatPage({ userFromDB }) {
             <br></br>
             <br></br>
 {userFromDB.UserEmail==="admin@gmail.com"?<NavigationAdmin/>:<Navigation/>}
-            {/* <Navigation></Navigation> */}
-            {/* <NavigationAdmin/> */}
+
         </div>
     )
 }

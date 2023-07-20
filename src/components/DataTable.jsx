@@ -38,7 +38,6 @@ const columns = [
     minWidth: 1,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
-    // format: (value) => value.toFixed(2),
   },
 ];
 
@@ -79,7 +78,6 @@ export default function DataTable(props) {
 
                                 
       const deleteOrUpdateExpens=(ketToGET)=>{
-      // alert(ketToGET);
      
   const apiUrl= getEnv() + '/expenses/'
   fetch(apiUrl+ketToGET, 
@@ -100,8 +98,7 @@ export default function DataTable(props) {
         .then(
           (result)=>{
             console.log("fetch expense user by key=", result);
-            // setExpensesToChange(result); // השמה של המשתמש שהגיע מהדאטה בייס להמשך עבודה בצד שרת
-            //  {props.navToChange(result)}
+
             console.log('UserEmail', result.UserEmail)
             console.log('ExpensesTitle=', result.ExpensesTitle)
             console.log('ExpensesKey=', result.ExpensesKey)
@@ -110,7 +107,6 @@ export default function DataTable(props) {
         (error) => {
         console.log("err post=", error);
         });     
-        // {props.navTo("NewExpense")}
     
       }//// להוציא את ההוצאה הספציפית על פי המפתח הוצאה והצגתה בדף של הוצאה חדשה
       
@@ -118,20 +114,12 @@ export default function DataTable(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  // const [age, setAge] = React.useState('');
 
   const handleChange = (event) => {
     setRowsPerPage(event.target.value);
   };
   
-  // const handleChangePage = (event, newPage) => {
-  //   setPage(newPage);
-  // };
 
-  // const handleChangeRowsPerPage = (event) => {
-  //   setRowsPerPage(+event.target.value);
-  //   setPage(0);
-  // };
 
   return (
     <Paper sx={{maxWidth:'350px', width: '110%', overflow: 'hidden',direction:'rtl',height:'100%',marginBottom:'30px',margin:'30px'}}>
@@ -140,7 +128,6 @@ export default function DataTable(props) {
 </h4>
 <Alert sx={{direction:'rtl'}} icon={<Edit fontSize="inherit" />} >לחיצה על הוצאה תוביל לאפשרות עריכה ומחיקה</Alert>
       <TableContainer sx={{ maxHeight: 440, maxWidth:350, width: '100%'}} >
-      {/* <Table stickyHeader aria-label="sticky table" > */}
         <Table>
           <TableHead >
             <TableRow>
@@ -177,18 +164,6 @@ export default function DataTable(props) {
           </TableBody>
         </Table>
       </TableContainer>
-      {/* {תפריט ניווט למטה של מעבר בין עמודים} */} 
-
-       {/* <TablePagination
-        rowsPerPageOptions={[5,50,100]}
-        component="div"
-        // count={parseInt(expensesInApp.length/rowsPerPage)+1}
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />  */}
 
     <NativeSelect
     defaultValue={rowsPerPage}
@@ -205,7 +180,6 @@ export default function DataTable(props) {
     <option value={1000}>הכל</option>
   </NativeSelect>
    
-      {/* <Button style={{color:'black'}}onClick={() => {props.navTo("NewExpense")}}> הוצאה חדשה<PostAdd style={{marginRight:'10px'}}/></Button> */}
       <Button style={{color:'black'}}onClick={() => {nav('/NewExpense')}}>הוסף הוצאה<PostAdd style={{marginRight:'10px'}}/></Button>
     </Paper>
   );
