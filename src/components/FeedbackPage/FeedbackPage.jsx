@@ -52,7 +52,7 @@ function FeedbackPage(props) {
   //PutUpdateFeed
   const submit = async () => { //הוספה של הפיידבק הספציפי לפי הקיי
     console.log();
-    const res = await feedbackService.create(feedback)
+    const res = await feedbackService.create(feedback,props.feedback)
     await feedbackService.remove(feedback.FeedbackKey)
     navigate('/feedbacks')
   }

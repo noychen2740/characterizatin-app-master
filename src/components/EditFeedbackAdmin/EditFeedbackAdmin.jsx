@@ -148,7 +148,7 @@ function EditFeedbackAdmin({ userFromDB }) {
             <Select className='grydiv'
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={form?.FeedbackPersona||''}
+              value={form?.FeedbackPersona.trim()||''}
               label="Age"
               name='FeedbackPersona'
               fullWidth
