@@ -128,7 +128,7 @@ function CreateEpisode(props) {
           {/* 'book-image3' */}
           <img className='App-logo' src={yoman}></img>
           <form onSubmit={submit} >
-            <FormControl className='sty' sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
+            <FormControl style={{direction:'rtl'}} className='sty' sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-email">שם הפרק</InputLabel>
               <OutlinedInput
                 onInput={handleChange}
