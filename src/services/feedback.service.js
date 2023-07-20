@@ -10,8 +10,7 @@ export const feedbackService = {
     PostFeedfromadmin
 }
 
-
-
+///
 const base_url = 'https://proj.ruppin.ac.il/cgroup99/prod/api'
 const module = 'Feedback'
 const userEmail = 'Benda669@gmail.com'
@@ -39,11 +38,11 @@ async function getById(FeedbackKey) {
     }
 }
 
-// post: https://localhost:44300/api/Feedback/2/PostNew
+// post: https://localhost:44300/api/Feedback/{feedbackINTindb}/PostNew/
 async function create(feedback) {
-    console.log({ feedback });
+    console.log( feedback.FeedbackPersona );
     try {
-        const res = await axios.post(`${base_url}/${module}/${feedback.FeedbackKey}/PostNew`)
+        const res = await axios.post(`${base_url}/${module}/${feedback.FeedbackKey}/PostNew/`,{FeedbackPersona:feedback.FeedbackPersona.trim()})
         console.log({ res });
         return res.data
     } catch (err) {
