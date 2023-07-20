@@ -29,7 +29,6 @@ export default function UserProfile(props) {
     '& .MuiBadge-badge': {
       backgroundColor: '#44b700',
       color: '#44b700',
-      // boxShadow:'0 0 0 20px',
       boxShadow: '0 0 0 2px ${theme.palette.background.paper}',
       '&::after': {
         position: 'absolute',
@@ -57,10 +56,7 @@ export default function UserProfile(props) {
   const [changeP, setChangeP] = useState('')
 
   const [checkType, setCheckType] = useState('')
-// const saveChange=async() => {
-//   const newName = await userService.updateIMG(file.name)
-//   console.log(newName)
-// }
+
   const [userInApp, setUserInApp] = useState('');// בתאכלס, משתמש ישלח כבר מעטר, עד החיבור מביא אותו בגט לפי מיקום
   const [form, setForm] = useState();
   const handleChange = async (ev) => { //לוקח את הפרמטרים ש/מזינים בפורם
@@ -90,7 +86,6 @@ export default function UserProfile(props) {
   useEffect(() => {
     const email = props.userEmailFromDB;
     const apiUrl = getEnv() + '/users/getemail/?email='
-    // const apiUrl='http://localhost:58583/api/users/1'
 
     fetch(apiUrl + props.userFromDB.UserEmail,
       {
@@ -130,17 +125,14 @@ export default function UserProfile(props) {
   useEffect(() => {
 
     if (userInApp.UserType == 'מוצילר') {
-      // setCheckType(<HikingIcon onClick={() => { nav('/Questionnaire') }}  />)
       setCheckType(<HikingIcon onClick={() => { nav('/NewQuestion') }}  />)
 
     }
     
     if (userInApp.UserType == 'בליין') {
-      // setCheckType(<Celebration onClick={() => { nav('/Questionnaire') }}  />)
       setCheckType(<Celebration onClick={() => { nav('/NewQuestion') }}  />)
     }
     if (userInApp.UserType == 'ציל') {
-      // setCheckType(<SelfImprovement onClick={() => { nav('/Questionnaire') }}  />)
       setCheckType(<SelfImprovement onClick={() => { nav('/NewQuestion') }}  />)
     }
 
@@ -166,8 +158,6 @@ export default function UserProfile(props) {
             {/* <Avatar sx={{ width: 64, height: 64 }} src= {props.userFromDB.UserImg} style={{ display: 'flex' }}/>  */}
             <Avatar sx={{ width: 64, height: 64 }} src= {userInApp.UserImg} style={{ display: 'flex' }}/> 
 
-            {/* <Avatar sx={{ width: 64, height: 64 }} src= {props.userFromDB.UserImg} style={{ display: 'flex' }} onClick={() => {alert('bdike')}} /> */}
-
           </StyledBadge>
 
           {/* <p style={{ color: 'black' }}>שלום {props.userFromDB.UserFirstName} <br /> {props.userEmailFromDB}  </p> */}
@@ -176,9 +166,7 @@ export default function UserProfile(props) {
         </Stack>
 
       </Box>
-      {/* <div>
-            <input className='imginput' type='file' name='UserImg' onChange={handleChange} ></input>
-      </div> */}
+
       <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
         <ListItem alignItems="flex-start">
           <ListItemAvatar style={{
@@ -216,7 +204,6 @@ export default function UserProfile(props) {
           }}>
             <Avatar>
               {checkType}
-              {/* <HikingIcon/> */}
               {/* שליחת האייקון המתאים לפי הפרסונה שהתקבלה */}
             </Avatar>
           </ListItemAvatar>
@@ -236,7 +223,6 @@ export default function UserProfile(props) {
                   <br />
                 </Typography>
                 {"חושב שהאפיון שקיבלת לא מתאים לך? לחץ על האייקון למענה חוזר עליו"}
-                {/* {"לחץ על האייקון על מנת ללמוד עוד אודות איפיון המערכת והמשמעות עבורך"} */}
               </React.Fragment>
             }
           />

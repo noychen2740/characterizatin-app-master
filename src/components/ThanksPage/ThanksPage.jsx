@@ -11,9 +11,7 @@ function ThanksPage() {
   return ( //דף תודה רבה לאחר הוספת פיידבק מהמשתמש
     <div>
         <div className='thanks center'>
-        <TopOfAplication label='תודה רבה!'  />
-      {/* <div className='title'>יומן המסע שלי</div> */}
-      
+        <TopOfAplication label='תודה רבה!'  />      
       <br></br>
       <br></br>
       <img className='book-image' src={manthanks}></img>

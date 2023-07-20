@@ -113,12 +113,13 @@ function CreateEpisode(props) {
     setForm(data);
   };
   return ( //היצירה של הפרק מבחינה ויזואלית
-    <div className='create-episode' >
+    <div className='create-episode'>
       <div className='container center'>
         <div className='container center'>
           <TopOfAplication label='יצירה-עדכון פרק' UserType={props.userFromDB.UserType} />
           <br></br>
-          <img className='book-image3' src={yoman}></img>
+          {/* 'book-image3' */}
+          <img className='App-logo' src={yoman}></img>
           <form onSubmit={submit} >
             <FormControl className='sty' sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-email">שם הפרק</InputLabel>
@@ -161,9 +162,10 @@ function CreateEpisode(props) {
               />
             </FormControl>
             <br></br>
-            <p className='pp'>לחץ כאן להוספת תמונה</p>
+            {/* <p className='pp'>לחץ להוספת תמונה</p> */}
             <div className='input-container'>
-              <input className='imginput' type='file' name='ChapterPictures' onChange={handleChange}  ></input>
+              <b style={{fontSize:'13px'}}>תמונה-</b>
+              <input style={{color:'white'}} className='imginput' type='file' name='ChapterPictures' onChange={handleChange}  ></input>
             </div>
           </form>
           <div className='input-container-button'>
@@ -178,7 +180,7 @@ function CreateEpisode(props) {
           </div>
           <br></br>
         </div>
-        <Navigation></Navigation>
+        <Navigation pagNav={'diery'}/>
       </div>
     </div>
   );

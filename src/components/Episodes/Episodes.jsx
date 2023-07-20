@@ -28,13 +28,7 @@ function Episodes(props) {
   const remove = async (id) => { //אפשרות למחיקת פרק לפי האי די שלו
     console.log({ id });
     await chapterService.remove(id,props.userEmailFromDB);
-    // Swal.fire({
-    //   position: 'center',
-    //   icon: 'success',
-    //   title: 'פרק נמחק בהצלחה',
-    //   showConfirmButton: false,
-    //   timer: 2000
-    // })
+
     loadEpisodes();
   };
   
@@ -53,7 +47,6 @@ function Episodes(props) {
   return ( //תצוגת הפרקים במסך
     <div className='episodes-page center'>
       <TopOfAplication label='הפרקים שלי' UserType={props.userFromDB.UserType}  />
-      {/* <div className='title'>יומן המסע שלי</div> */}
       <br></br>
       <br></br>
       <div className='episodes'>
@@ -68,7 +61,6 @@ function Episodes(props) {
                       src={e.ChapterPictures} />
                       <div className='episode-time'>
                   <div className='episode-date'> {new Date(e.ChapterDate).toLocaleDateString('en-GB')} </div>
-                  {/* <div className='episode-hour'>{e.ChapterTime}</div> */}
                 </div>
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">

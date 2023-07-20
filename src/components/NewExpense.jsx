@@ -3,11 +3,22 @@ import React, { useEffect } from 'react'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import TopOfAplication from './TopOfAplication';
-import { Button, FormControl, InputLabel, MenuItem, Paper, Select } from '@mui/material';
+import { Button, FormControl, IconButton, InputAdornment, InputLabel, MenuItem, Paper, Select } from '@mui/material';
 import Navigation from './Navigation';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getEnv } from '../utils/env';
 import Swal from 'sweetalert2';
+import { Extension } from '@mui/icons-material';
+
+import rtlPlugin from "stylis-plugin-rtl";
+import { prefixer } from "stylis";
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
+
+const cacheRtl = createCache({
+  key: "muirtl",
+  stylisPlugins: [prefixer,rtlPlugin],
+});
 
 export default function NewExpense(props) {
 
@@ -18,18 +29,6 @@ export default function NewExpense(props) {
   const numToDel = 0;/// החזקת המפתח שעתיד להמחק/ להערך
   const [key, setKey] = React.useState(0);
 
-  // const handleChange = (event) => {
-  //   setCategory(event.target.value);
-  // };
-  // const handleChange1 = (event) => {
-  //   setTitle(event.target.value);
-  // };
-  // const handleChange2 = (event) => {
-  //   setPrice(event.target.value);
-  // };
-  // const handleChange3 = (event) => {
-  //   setAmount(event.target.value);
-  // };
   const { state } = useLocation();
   const nav = useNavigate();
 
@@ -47,14 +46,12 @@ export default function NewExpense(props) {
 
   const postNewExpenseToDB = () => {
     const apiUrl = getEnv() + '/expenses/post'
-    // const apiUrl='http://localhost:58583/api/users/1'
     const expense = {
       UserEmail: props.userFromDB.UserEmail,// שונה
-      // UserEmail: "Benda669@gmail.com",// ישתנה בהמשך יועבר דרך פרופס
       PricePerOne: price,
       NumberOfRepeatExpenses: amount,
       ExpensesTitle: title,
-      KindOfExpenses: category,// בעקבות בעיה בדאטה בייס כרגע הערך ישאר קבוע, אחרי סידור של נוי ילקח מהסלקט בהתאמה
+      KindOfExpenses: category,// 
       ExpensesKey: 4,
       TotalPriceToPay: price * amount
     };
@@ -72,7 +69,6 @@ export default function NewExpense(props) {
         console.log('response= ', response);
         console.log('response statuse=', response.status);
         console.log('response.ok=', response.ok)
-        //  props.continueClicked('budget')
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -122,7 +118,6 @@ export default function NewExpense(props) {
           console.log('num of key delete=', state.ExpensesKey)
         }
         nav('/budget')
-        //  props.continueClicked('budget')
       },
         (error) => {
           console.log("err post=", error);
@@ -135,9 +130,7 @@ export default function NewExpense(props) {
 
   const putExpense = () => {
     const apiUrl = getEnv() + '/expenses/put/'
-    // const apiUrl='http://localhost:58583/api/users/1'
     const expense = {
-      // UserEmail: "Benda669@gmail.com",// ישתנה בהמשך יועבר דרך פרופס
       UserEmail: props.userFromDB.UserEmail,// שונה
       PricePerOne: price,
       NumberOfRepeatExpenses: amount,
@@ -171,7 +164,6 @@ export default function NewExpense(props) {
             console.log('response= ', response);
             console.log('response statuse=', response.status);
             console.log('response.ok=', response.ok)
-            //  props.continueClicked('budget')
             nav('/budget')
     
           },
@@ -188,8 +180,10 @@ export default function NewExpense(props) {
 
   return (
     <>
+      <CacheProvider value={cacheRtl}>
+
       <TopOfAplication label='הוצאה חדשה' UserType={props.userFromDB.UserType} />
-      <Paper sx={{ maxWidth: '300' }} style={{ direction: 'rtl', backgroundColor: '#eeeeee' }}>
+      <Paper sx={{ maxWidth: '300' }} style={{ direction: 'rtl'}} >
         <img className="App-logo" src="expense-logo.png" style={{ marginTop: '5px' }} />
 
         <Box
@@ -210,6 +204,8 @@ export default function NewExpense(props) {
               label="קטגוריה"
               color="success"
               onChange={(event) => { setCategory(event.target.value) }}
+              style={{backgroundColor:'#eeeeee'}}
+ 
             >
               <MenuItem value={""}>
                 <em>אחר</em>
@@ -223,14 +219,10 @@ export default function NewExpense(props) {
             </Select>
           </FormControl>
 
-          {/* <TextField label={"תיאור קצר"} color="success"  size="small" onChange={(event)=>{setTitle(event.target.value)}} /> */}
-          {/* <TextField type={'number'} label={'מחיר בש"ח ליחידה'} color="success" size="small" onChange={(event)=>{setPrice(event.target.value)}}/> */}
-          {/* <TextField type={'number'} label={"מספר פעמים"} color="success" size="small" onChange={(event)=>{setAmount(event.target.value)}}/> */}
-
-          <TextField label={title} color="success" size="small" onChange={(event) => { setTitle(event.target.value) }} />
-          <TextField type={'number'} label={price} color="success" size="small" onChange={(event) => { setPrice(event.target.value) }} />
-          <TextField type={'number'} label={amount} color="success" size="small" onChange={(event) => { setAmount(event.target.value) }} />
-          {/* onClick={() => {props.continueClicked('budget')}} */}
+          <TextField label={title} color="success" size="small" onChange={(event) => { setTitle(event.target.value) }} style={{backgroundColor:'#eeeeee'}} />
+          <TextField type={'number'} label={price} color="success" size="small" onChange={(event) => { setPrice(event.target.value) }} style={{backgroundColor:'#eeeeee'}} />
+          <TextField type={'number'} label={amount} color="success" size="small" onChange={(event) => { setAmount(event.target.value) }} style={{backgroundColor:'#eeeeee'}} />
+          
         </Box>
         {key === 0 && <Button style={{ marginLeft: 'auto', marginRight: 'auto', margin: '5px', backgroundColor: '#598e89' }} size="small" onClick={postNewExpenseToDB} variant="contained"> הוסף הוצאה</Button>}
         {key !== 0 && <Button style={{ marginLeft: 'auto', marginRight: 'auto', margin: '5px', backgroundColor: '#598e89' }} size="small" onClick={deleteExpense} variant="contained"> לחץ למחיקה</Button>}
@@ -238,6 +230,7 @@ export default function NewExpense(props) {
 
       </Paper>
       <Navigation pagNav={'budget'} />
+      </CacheProvider>
 
     </>
   )

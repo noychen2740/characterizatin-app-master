@@ -59,7 +59,6 @@ function FeedbackPage(props) {
   return feedback ? ( //תצוגה של הפידבק הספציפי על המסך
     <div className='feedbackpage'>
       <TopOfAplication label="הוספת המלצה" UserType={props.userFromDB.UserType} />
-      {/* <div className='title'>יומן המסע שלי</div> */}
       <br></br>
       <br></br>
       <br></br>

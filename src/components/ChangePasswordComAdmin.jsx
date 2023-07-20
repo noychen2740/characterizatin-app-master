@@ -56,7 +56,6 @@ function ChangePasswordComAdmin(props) {
         <>
               <TopOfAplication label='שינוי פרטים אישיים' UserType={props.userFromDB.UserType}/>
 
-            {/* <img className="App-logo" src="logo.png" style={{ marginTop: '5px', width: '120px' }} /> */}
         <div className="App-login" style={{direction:'rtl'}}>
             <img className="App-logo" src="changeDetels.png" />
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
@@ -71,7 +70,6 @@ function ChangePasswordComAdmin(props) {
                     startAdornment={
                         <InputAdornment position="end">
                             <IconButton
-                                // aria-label="toggle password visibility"
                                 edge="end"
                             >
                                 {<AccountCircle/>}
@@ -92,7 +90,6 @@ function ChangePasswordComAdmin(props) {
                     startAdornment={
                         <InputAdornment position="end">
                             <IconButton
-                                // aria-label="toggle password visibility"
                                 edge="end"
                             >
                                 {<AccountCircle/>}

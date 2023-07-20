@@ -6,11 +6,7 @@ import { useRef } from 'react';
 export default function SingelQuestion(props) {
   
   const [totalScore, setTotalScore]=useState(0);
-  // const color=useRef(1);
-  // const changColor =()=>{
-  //   alert(color.current.value);
-  //   setTotalScore(color.current.value);
-  // }
+
   return (
     <div>
   <Paper style={{border:'solid black 1px',padding:'5px', margin:'25px',backgroundColor:'#eeeeee',padding:'15px'}}>
@@ -22,7 +18,6 @@ export default function SingelQuestion(props) {
     defaultValue="1"
     // name="row-radio-buttons-group"
     name="radio-buttons-group"
-    // onChange={changColor}
   >
 
   <FormControlLabel  value="1" control={<Radio />} label={props.f}  />

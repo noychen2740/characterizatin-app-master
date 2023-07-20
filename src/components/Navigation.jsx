@@ -21,14 +21,7 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 
 export default function Navigation(props) {
   
-  // const [pageNav, setPageNav] = useState('');
- 
-  //  const navigate = useNavigate('')
-
-  //  const navTo =()=>{
-  //    alert('./Budget')
-  //  }
-  const nav=useNavigate();
+const nav=useNavigate();
 const [value, setValue] = useState(props.pagNav);
 const handleChange = (event, newValue) => {
   setValue(newValue);
@@ -42,15 +35,12 @@ const handleChange = (event, newValue) => {
             label="פרופיל"
             value="profile"
             icon={<AccountCircle />}
-            // onClick={() => {props.navTo("profile")}}
             onClick={() => {nav('/profile')}}
           />
           <BottomNavigationAction
             label="תקציב"
             value="budget"
             icon={<CurrencyExchange />}
-            //  onClick={navTo}
-            //  onClick={() => {props.navTo("budget")}}
              onClick={() => {nav('/budget')}}
           />
           
@@ -62,8 +52,7 @@ const handleChange = (event, newValue) => {
 
           />
 
-          {/* <BottomNavigationAction label="בית" value="Home" icon={<Home />} onClick={() => {props.navTo("profile")}} /> */}
-          <BottomNavigationAction label="בית" value="Home" icon={<MenuBookIcon/>} onClick={() => {nav('/create-episode')}} />
+          <BottomNavigationAction label="יומן" value="diery" icon={<MenuBookIcon/>} onClick={() => {nav('/create-episode')}} />
         </BottomNavigation>
     
         </Paper>

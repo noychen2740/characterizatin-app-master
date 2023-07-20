@@ -33,7 +33,6 @@ function EpisodePage(props) {
   return episode ? ( //תצוגת הפרק עצמו
     <div className='episode-page  center'>
       <TopOfAplication label={NameOfChapter} UserType={props.userFromDB.UserType}  />
-      {/* <div className='title'>יומן המסע שלי</div> */}
       <br></br>
       <br></br>
 <div className="container ">
@@ -46,7 +45,6 @@ function EpisodePage(props) {
       />
       <div className='episode-time'>
 <div className='episode-date'> {new Date(episode.ChapterDate).toLocaleDateString('en-us')} </div>
-{/* <div className='episode-hour'>{episode.ChapterTime}</div> */}
 </div>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">

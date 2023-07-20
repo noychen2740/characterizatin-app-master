@@ -21,8 +21,7 @@ export default function Question(props) {
       const randomNumber = Math.ceil((Math.random() * 100));
       if (randomNumber <= 33) {
         const apiUrl = getEnv() + '/users/putemail/type/?email='
-        // const apiUrl='http://localhost:58583/api/users/1'
-        // const apiUrl = getEnv() + '/users/putemail/type/?email=Benda669@gmail.com'
+
         fetch(apiUrl + props.userEmailFromDB,
           {
             method: 'PUT',
@@ -47,8 +46,7 @@ export default function Question(props) {
       }
       else if (randomNumber <= 66) {
         const apiUrl = getEnv() + '/users/putemail/type/?email='
-        // const apiUrl='http://localhost:65095/api/users/putid/6'
-        // const apiUrl = getEnv() + '/users/putemail/type/?email=Benda669@gmail.com'
+
         fetch(apiUrl+props.userEmailFromDB,
           {
             method: 'PUT',
@@ -73,9 +71,7 @@ export default function Question(props) {
 
       }
       else if (randomNumber <= 100) {
-       // const apiUrl = getEnv() + '/users/putemail/type/?email=Benda669@gmail.com'
         const apiUrl = getEnv() + '/users/putemail/type/?email='
-        // const apiUrl='http://localhost:65095/api/users/putid/6'
         fetch(apiUrl+props.userEmailFromDB,
           {
             method: 'PUT',
@@ -150,7 +146,6 @@ export default function Question(props) {
 
       </div> : ""}
 
-      {/* <Button style={{backgroundColor:'#598e89'}} onClick={() => {props.continueClicked(onLoad) }} variant="contained">{props.pageNum=='first'? 'הבא': 'לחץ לסיום'}</Button> */}
       <Button style={{ backgroundColor: '#598e89' }} onClick={onLoad} variant="contained">{props.pageNum == 'first' ? 'הבא' : 'לחץ לסיום'}</Button>
 
     </>

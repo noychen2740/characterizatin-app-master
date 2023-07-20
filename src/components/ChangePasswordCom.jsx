@@ -20,6 +20,15 @@ import TopOfAplication from './TopOfAplication';
 import Navigation from './Navigation';
 import { AccountCircle } from '@mui/icons-material';
 import Swal from 'sweetalert2';
+import rtlPlugin from "stylis-plugin-rtl";
+import { prefixer } from "stylis";
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
+
+const cacheRtl = createCache({
+  key: "muirtl",
+  stylisPlugins: [prefixer,rtlPlugin],
+});
 
 function ChangePasswordCom(props) {
     const nav=useNavigate();
@@ -53,9 +62,9 @@ function ChangePasswordCom(props) {
 
     return (
         <>
-              <TopOfAplication label='שינוי פרטים אישיים' UserType={props.userFromDB.UserType}/>
+        <CacheProvider value={cacheRtl}>
+        <TopOfAplication label='שינוי פרטים אישיים' UserType={props.userFromDB.UserType}/>
 
-            {/* <img className="App-logo" src="logo.png" style={{ marginTop: '5px', width: '120px' }} /> */}
         <div className="App-login" style={{direction:'rtl'}}>
             <img className="App-logo" src="changeDetels.png" />
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
@@ -100,16 +109,7 @@ function ChangePasswordCom(props) {
                     }
                 />
             </FormControl>
-            {/* <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-email">Email</InputLabel>
-                <OutlinedInput
-                    error={!!loginFields.email && !validateEmail(loginFields.email)}
-                    onBlur={ev => { setLoginFields({ ...loginFields, email: ev.target.value }) }}
-                    id="outlined-adornment-email"
-                    type="email"
-                    label="Email"
-                />
-            </FormControl> */}
+
             <FormControl sx={{ m: 1, width: 'calc(100% - 16px)' }} variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-password1">סיסמא חדשה</InputLabel>
                 <OutlinedInput
@@ -187,6 +187,7 @@ function ChangePasswordCom(props) {
             <Snackbar snackbar={snackbar}></Snackbar>
         </div>
         <Navigation pagNav={'profile'} />
+        </CacheProvider>
 
         </>
 

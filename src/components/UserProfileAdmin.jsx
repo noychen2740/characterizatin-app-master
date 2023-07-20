@@ -57,10 +57,7 @@ export default function UserProfileAdmin(props) {
   }));
 
   const [checkType, setCheckType] = useState('')
-// const saveChange=async() => {
-//   const newName = await userService.updateIMG(file.name)
-//   console.log(newName)
-// }
+
   const [userInApp, setUserInApp] = useState('');// בתאכלס, משתמש ישלח כבר מעטר, עד החיבור מביא אותו בגט לפי מיקום
   const [form, setForm] = useState();
   const handleChange = async (ev) => { //לוקח את הפרמטרים ש/מזינים בפורם
@@ -89,7 +86,6 @@ export default function UserProfileAdmin(props) {
     console.log(props.userFromDB,"uesrprofileadmin");
     const email = props.userFromDB.UserEmail;
     const apiUrl = getEnv() + '/users/getemail/?email='
-    // const apiUrl='http://localhost:58583/api/users/1'
 
     fetch(apiUrl + email,
       {
@@ -149,7 +145,6 @@ export default function UserProfileAdmin(props) {
 
       <img className="App-logo" src="logo.png" style={{ marginTop: '5px', width: '120px' }} />
       <Box style={{ marginBottom: '0px', backgroundColor: '#eeeeee', margin: '1px',paddingBottom:'0px',paddingBottom:10,paddingTop:0, paddingLeft:20, paddingRight:20, borderRadius: '5%' }}>
-      {/* <Box style={{ marginBottom: '5px', backgroundColor: '#eeeeee', margin: '1px', padding: '25px', borderRadius: '5%' }}> */}
       <input  style={{marginRight:'235px', color:'#eeeeee', backgroundColor:'#eeeeee', fontSize:'0px'}} className='imginput' type='file' name='UserImg' onChange={handleChange} />
 
         <Stack direction={"row"} spacing={5} justifyContent={'space-around'} >
@@ -165,9 +160,7 @@ export default function UserProfileAdmin(props) {
           <p style={{ color: 'black' }}> {props.userFromDB.UserFirstName} שלום <br /> {props.userFromDB.UserEmail} </p>
         </Stack>
       </Box>
-      {/* <div>
-            <input className='imginput' type='file' name='UserImg' onChange={handleChange}  ></input>
-      </div> */}
+
       <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
         <ListItem alignItems="flex-start">
           <ListItemAvatar style={{
@@ -199,34 +192,7 @@ export default function UserProfileAdmin(props) {
         </ListItem>
 
         <Divider variant="inset" component="li" />
-        {/* <ListItem alignItems="flex-start">
-          <ListItemAvatar style={{
-            marginTop: '20px', marginBottom: '15px'
-          }}>
-            <Avatar>
-              <ManageAccounts/>
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText
-            style={{ textAlign: 'right' }}
-            primary=" "
-            secondary={
-              <React.Fragment>
-                <Typography
-                  sx={{ display: 'inline' }}
-                  component="span"
-                  variant="body2"
-                  color="text.primary"
-                >
 
-                  <b> {"אהלן אדמין"}</b>
-                  <br />
-                </Typography>
-                {"שמחים שהתחברת למערכת, יש הרבה עבודה ועדכונים לעשות"}
-              </React.Fragment>
-            }
-          />
-        </ListItem> */}
 
         <Divider variant="inset" component="li" />
         <ListItem alignItems="flex-start">

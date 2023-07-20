@@ -8,7 +8,6 @@ import TopOfAplication from './TopOfAplication'
 import { ArrowDropDown, ArrowDropUp, LocalFireDepartment, Percent, PointOfSale, QueryStats, Savings } from '@mui/icons-material'
 import GraphsBar from './GraphsBar';
 import { getEnv } from '../utils/env'
-import { Kpi } from './Kpi'
 import KpiChart from './KpiChart'
 import GeographyChart from './GeographyChart'
 import KpiCard from './KpiCard'
@@ -74,7 +73,6 @@ return response.json()
    .then(
  (result)=>{
  console.log("fetch get  sumOfExpense =", result);
-                        // console.log("result=", result.UserFirstName);
 setSumOfExpenseAtraction(result.SumOfExpenseAtraction); // השמה של המשתמש שהגיע מהדאטה בייס להמשך עבודה בצד שרת
 setSumOfExpenseSleep(result.SumOfExpenseSleep)
 setSumOfExpenseDrugs(result.SumOfExpenseDrugs)
@@ -125,37 +123,31 @@ setAvgOfExpense(result.SumOfExpense)
     id: 1,
     KindOfExpenses: 'אטרקציות',
     sumOfExpense: SumOfExpenseAtraction,
-    // userLost: 8230
   },
   {
     id: 2,
     KindOfExpenses: 'לינה',
     sumOfExpense: SumOfExpenseSleep,
-    // userLost: 345
   },
   {
     id: 3,
     KindOfExpenses: 'מזון',
     sumOfExpense: SumOfExpenseFood,
-    // userLost: 555
   },
   {
     id: 4,
     KindOfExpenses: 'בילויים',
     sumOfExpense: SumOfExpenseParty,
-    // userLost: 4555
   },
   {
     id: 5,
     KindOfExpenses: 'התארגנות',
     sumOfExpense: SumOfExpenseDrugs,
-    // userLost: 234
   },
   {
     id: 6,
     KindOfExpenses: 'הימורים',
     sumOfExpense: SumOfExpenseCasino,
-    // userLost: 234
   }
 ];
 const DataPrecent = [
@@ -163,37 +155,31 @@ const DataPrecent = [
     id: 1,
     KindOfExpenses: 'אטרקציות',
     sumOfExpense: parseInt(SumOfExpenseAtraction/sumExpense*100),
-    // userLost: 8230
   },
   {
     id: 2,
     KindOfExpenses: 'לינה',
     sumOfExpense: parseInt(SumOfExpenseSleep/sumExpense*100),
-    // userLost: 345
   },
   {
     id: 3,
     KindOfExpenses: 'מזון',
     sumOfExpense: parseInt(SumOfExpenseFood/sumExpense*100),
-    // userLost: 555
   },
   {
     id: 4,
     KindOfExpenses: 'בילויים',
     sumOfExpense: parseInt(SumOfExpenseParty/sumExpense*100),
-    // userLost: 4555
   },
   {
     id: 5,
     KindOfExpenses: 'התארגנות',
     sumOfExpense: parseInt(SumOfExpenseDrugs/sumExpense*100),
-    // userLost: 234
   },
   {
     id: 6,
     KindOfExpenses: 'הימורים',
     sumOfExpense: parseInt(SumOfExpenseCasino/sumExpense*100),
-    // userLost: 234
   }
 ];
     return (
@@ -218,7 +204,6 @@ const DataPrecent = [
         <Avatar style={{marginLeft:'auto', marginRight:'auto',backgroundColor:'#598e89',borderRadius:'90%'}} size='small' onClick={() => {booleanop(boolean)}} variant="contained" >
             <QueryStats/>
         </Avatar>
-      {/* <Button style={{marginLeft:'auto', marginRight:'auto',backgroundColor:'#598e89',borderRadius:'90%'}} size='small' onClick={() => {booleanop(boolean)}} variant="contained" > {<QueryStats/>}</Button> */}
       </CardActions>
     </Card>
 
@@ -230,93 +215,6 @@ const DataPrecent = [
     SumOfExpenseDrugs={SumOfExpenseDrugs} AvgOfExpenseDrugs={AvgOfExpenseDrugs}
     SumOfExpenseCasino={SumOfExpenseCasino} AvgOfExpenseCasino={AvgOfExpenseCasino}/>}
           
-
-        {/* גרף המשווה ביחסים בין ההוצאות   */}
-    {/* {boolean==true&&<Card>
-  <KpiChart AvgOfExpenseDrugs={AvgOfExpenseDrugs} AvgOfExpenseFood={AvgOfExpenseFood}
-  AvgOfExpenseAtraction={AvgOfExpenseAtraction} AvgOfExpenseSleep={AvgOfExpenseSleep}
-  AvgOfExpenseCasino={AvgOfExpenseCasino} AvgOfExpenseParty={AvgOfExpenseParty} SumOfExpenseAtraction={SumOfExpenseAtraction}
-  SumOfExpenseSleep={SumOfExpenseSleep } SumOfExpenseDrugs={SumOfExpenseDrugs} SumOfExpenseFood={SumOfExpenseFood}
-  SumOfExpenseCasino={SumOfExpenseCasino} SumOfExpenseParty={SumOfExpenseParty}/>
-</Card>}
-     */}
-       {/* גרף המשווה ביחסים בין ההוצאות   */}
-
-
-
-
-    {/* <Card sx={{ minWidth: 275  }} style={{marginTop:'60px'}} >
-      <CardContent >
-      <h4>צריכת משתמשים דומים לי</h4>
-
-      <h5>אטרקציות</h5>
-      {SumOfExpenseAtraction>AvgOfExpenseAtraction ?
-        <Stack direction="column" spacing={2} style={{marginTop:'-25px'}}>
-          <Chip label={` % ${parseInt(((SumOfExpenseAtraction-AvgOfExpenseAtraction))/AvgOfExpenseAtraction*100)} אטרקציות`} icon={<ArrowDropUp style={{color:'red'}} />}  color="error" variant="outlined" />
-          
-          </Stack>
-          : <Stack direction="column" spacing={2} style={{marginTop:'-25px'}}>
-          <Chip label={` % ${parseInt(((SumOfExpenseAtraction-AvgOfExpenseAtraction))/AvgOfExpenseAtraction*100)} אטרקציות`} icon={<ArrowDropDown style={{color:'green'}} />}  color="success" variant="outlined" />
-          </Stack>}
-
-          <h5>לינה</h5>
-          {SumOfExpenseSleep>AvgOfExpenseSleep ?
-          <Stack direction="column" spacing={2} style={{marginTop:'-25px'}}>
-          <Chip icon={<ArrowDropUp style={{color:'red'}} />} label={` % ${parseInt(((SumOfExpenseSleep-AvgOfExpenseSleep))/AvgOfExpenseSleep*100)} `} color="error" variant="outlined" />
-          </Stack>
-          :<Stack direction="column" spacing={2} style={{marginTop:'-25px'}}>
-          <Chip icon={<ArrowDropDown style={{color:'green'}} />} label={` % ${parseInt(((SumOfExpenseSleep-AvgOfExpenseSleep))/AvgOfExpenseSleep*100)} `} color="success" variant="outlined" />
-          </Stack>}
-
-          <h5>מזון</h5>
-          {SumOfExpenseFood>AvgOfExpenseFood? 
-          <Stack direction="column" spacing={2} style={{marginTop:'-25px'}}>
-          <Chip icon={<ArrowDropUp style={{color:'red'}} />} label={` % ${parseInt((SumOfExpenseFood-AvgOfExpenseFood)/AvgOfExpenseFood*100)} `} color="error" variant="outlined" />
-          </Stack>
-          :<Stack direction="column" spacing={2} style={{marginTop:'-25px'}}>
-          <Chip icon={<ArrowDropDown style={{color:'green'}} />} label={` % ${parseInt((SumOfExpenseFood-AvgOfExpenseFood)/AvgOfExpenseFood*100)} `} color="success" variant="outlined" />
-          </Stack>}
-
-          <h5>בילויים</h5>
-          {SumOfExpenseParty>AvgOfExpenseParty? 
-          <Stack direction="column" spacing={2} style={{marginTop:'-25px'}}>
-          <Chip icon={<ArrowDropUp style={{color:'red'}} />} label={` % ${parseInt((SumOfExpenseParty-AvgOfExpenseParty)/AvgOfExpenseParty*100)} `} color="error" variant="outlined" />
-          </Stack>
-          :<Stack direction="column" spacing={2} style={{marginTop:'-25px'}}>
-          <Chip icon={<ArrowDropDown style={{color:'green'}} />} label={` % ${parseInt((SumOfExpenseParty-AvgOfExpenseParty)/AvgOfExpenseParty*100)} `} color="success" variant="outlined" />
-          </Stack>}
-
-          <h5>סמים</h5>
-          {SumOfExpenseDrugs>AvgOfExpenseDrugs ?
-          <Stack direction="column" spacing={2} style={{marginTop:'-25px'}}>
-          <Chip icon={<ArrowDropUp style={{color:'red'}} />} label={` % ${parseInt((SumOfExpenseDrugs-AvgOfExpenseDrugs)/AvgOfExpenseDrugs*100)} `} color="error" variant="outlined" />
-          </Stack>
-          :<Stack direction="column" spacing={2} style={{marginTop:'-25px'}}>
-          <Chip icon={<ArrowDropDown style={{color:'green'}} />} label={` % ${parseInt((SumOfExpenseDrugs-AvgOfExpenseDrugs)/AvgOfExpenseDrugs*100)} `} color="success" variant="outlined" />
-          </Stack>}
-
-          <h5>הימורים</h5>
-          {SumOfExpenseCasino-AvgOfExpenseCasino ? 
-          <Stack direction="column" spacing={2} style={{marginTop:'-25px'}}>
-          <Chip icon={<ArrowDropUp style={{color:'red'}} />} label={` % ${parseInt((SumOfExpenseCasino-AvgOfExpenseCasino)/AvgOfExpenseCasino*100)} `} color="error" variant="outlined" />
-          </Stack>
-          :<Stack direction="column" spacing={2} style={{marginTop:'-25px'}}>
-          <Chip icon={<ArrowDropDown style={{color:'green'}} />} label={` % ${parseInt((SumOfExpenseCasino-AvgOfExpenseCasino)/AvgOfExpenseCasino*100)} `} color="success" variant="outlined" />
-          </Stack>}
-
-      </CardContent>
-    </Card> */}
-
-
-
-
-{/* <Card>
-  <KpiChart AvgOfExpenseDrugs={AvgOfExpenseDrugs} AvgOfExpenseFood={AvgOfExpenseFood}
-  AvgOfExpenseAtraction={AvgOfExpenseAtraction} AvgOfExpenseSleep={AvgOfExpenseSleep}
-  AvgOfExpenseCasino={AvgOfExpenseCasino} AvgOfExpenseParty={AvgOfExpenseParty} SumOfExpenseAtraction={SumOfExpenseAtraction}
-  SumOfExpenseSleep={SumOfExpenseSleep } SumOfExpenseDrugs={SumOfExpenseDrugs} SumOfExpenseFood={SumOfExpenseFood}
-  SumOfExpenseCasino={SumOfExpenseCasino} SumOfExpenseParty={SumOfExpenseParty}/>
-</Card> */}
 
 
     {boolean==true&&<GraphsBar Data={Data} DataPrecent={DataPrecent}/>}

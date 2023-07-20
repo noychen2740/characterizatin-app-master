@@ -98,26 +98,6 @@ function Favorites(props) {
                   </CardContent>
                 </Collapse>
               </Card>
-              {/* <Card sx={{ maxWidth: 345 }}>
-                  <CardMedia
-                    component="img"
-                    alt="green iguana"
-                    height="140"
-                    src={favorites.FphotoDTO} />
-                  <CardContent className='card1'>
-                    <Typography gutterBottom variant="h5" component="div">
-                    <div className='Fav-title'>{favorites.FnameDTO} </div>
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                    <div className='FAv-desc'>
-                    <p>{favorites.FdescriptionDTO} </p>
-                    </div>
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                  <Button onClick={() => navigate(`/favorites/${favorites.FavouritesKey}`)} size="small"> תצוגה</Button>
-                </CardActions>
-                </Card> */}
               <br></br>
               <br></br>
             </div>

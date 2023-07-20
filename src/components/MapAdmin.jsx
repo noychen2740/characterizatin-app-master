@@ -152,9 +152,7 @@ function MapAdmin(props) {
                     'Content-Type': 'application/json; charset=UTF-8',
                     'Accept': 'application/json; charset=UTF-8'
                 })
-                // body: JSON.stringify({
-                //     country: value
-                // })
+
             })
                 .then(response => {
                     console.log('response= ', response);
@@ -346,13 +344,6 @@ function MapAdmin(props) {
                         </InfoWindow>
                     }
 
-                    {/* <MarkerClusterer options={optionTrip}>
-                        {(clusterer) =>
-                            tripList.map((location) => (
-                                <Marker key={createKey(location)} position={location} clusterer={clusterer} onClick={() => { locationClick(createKey(location)) }} />
-                            ))
-                        }
-                    </MarkerClusterer> */}
 
                 </GoogleMap>
                 <Box>

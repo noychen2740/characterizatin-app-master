@@ -24,7 +24,6 @@ const nav=useNavigate();
             textAlign:'center', marginLeft:'auto', marginRight:'auto'}}> לפנייך שאלות שיעזרו לנו 
             להכיר אותך טוב יותר, וכך להתאים עבורך את ההמלצות המדוייקות עבורך </h5>
 
-            {/* <Button style={{backgroundColor:'#598e89'}} onClick={() => {nav('/firstQues')}} variant="contained">לחץ להתחלה</Button> */}
             <Button style={{backgroundColor:'#598e89'}} onClick={() => {nav('/NewQuestion')}} variant="contained">לחץ להתחלה</Button>
 
           </Box>
